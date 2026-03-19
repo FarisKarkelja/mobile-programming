@@ -23,6 +23,9 @@ import com.example.mobile_programming.presentation.ui.components.BottomBar
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.R
+import com.example.mobile_programming.presentation.ui.screens.profile.components.LogoutButton
+import com.example.mobile_programming.presentation.ui.screens.profile.components.ProfileAvatar
+import com.example.mobile_programming.presentation.ui.screens.profile.components.ProfileTextField
 
 @Composable
 fun ProfileScreen() {
@@ -39,20 +42,7 @@ fun ProfileScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             VerticalSpace(32.dp)
-            Box(
-                modifier = Modifier
-                    .size(100.dp)
-                    .clip(CircleShape)
-                    .background(SunsetTangerine),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Person,
-                    contentDescription = "Profile Picture",
-                    modifier = Modifier.size(60.dp),
-                    tint = WarmCream
-                )
-            }
+            ProfileAvatar()
 
             VerticalSpace(16.dp)
             Text(
@@ -63,77 +53,29 @@ fun ProfileScreen() {
             )
 
             VerticalSpace(32.dp)
-            OutlinedTextField(
+            ProfileTextField(
                 value = stringResource(R.string.email_placeholder),
-                onValueChange = {},
-                readOnly = true,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text("Email") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Email,
-                        contentDescription = "Email Icon",
-                        tint = TextPrimary
-                    )
-                },
-                singleLine = true,
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = SunsetTangerine,
-                    unfocusedBorderColor = TextPrimary,
-                    focusedLabelColor = SunsetTangerine,
-                    unfocusedLabelColor = TextPrimary,
-                    focusedTextColor = TextPrimary,
-                    unfocusedTextColor = TextPrimary
-                )
+                label = "Email",
+                leadingIcon = Icons.Default.Email,
+                readOnly = true
             )
 
             VerticalSpace(16.dp)
-            OutlinedTextField(
+
+            ProfileTextField(
                 value = stringResource(R.string.password_placeholder),
-                onValueChange = {},
+                label = "Password",
+                leadingIcon = Icons.Default.Lock,
                 readOnly = true,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text("Password") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Lock,
-                        contentDescription = "Password Icon",
-                        tint = TextPrimary
-                    )
-                },
-                visualTransformation = PasswordVisualTransformation(),
-                singleLine = true,
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = SunsetTangerine,
-                    unfocusedBorderColor = TextPrimary,
-                    focusedLabelColor = SunsetTangerine,
-                    unfocusedLabelColor = TextPrimary,
-                    focusedTextColor = TextPrimary,
-                    unfocusedTextColor = TextPrimary
-                )
+                visualTransformation = PasswordVisualTransformation()
             )
 
             Spacer(modifier = Modifier.weight(1f))
-            Button(
+            LogoutButton(
+                text = stringResource(R.string.logout_button),
                 onClick = { /* TODO: Add logout logic */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 24.dp)
-                    .height(50.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = SunsetTangerine
-                )
-            ) {
-                Text(
-                    text = stringResource(R.string.logout_button),
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = WarmCream
-                )
-            }
+                modifier = Modifier.padding(bottom = 24.dp)
+            )
         }
     }
 }
