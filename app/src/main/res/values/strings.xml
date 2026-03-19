@@ -8,4 +8,24 @@
     <string name="healthy_title">Healthy</string>
     <string name="global_title">Global</string>
     <string name="sweets_title">Sweets</string>
+
+    <string name="restaurant_title">Mala kuhinja</string>
+    <string name="restaurant_cuisine">Asian fusion • Internatonal</string>
+    <string name="restaurant_location">Tina Ujevića 13</string>
+    <string name="restaurant_description">
+        Mala Kuhinja Mala Kuhinja is a unique restaurant with an open-kitchen
+        concept where guests interact directly with the chef,
+        and dishes are created without a traditional menu, based on fresh, seasonal ingredients of the day.
+        The focus is on creative fusion cuisine with an emphasis on
+        Asian flavors and locally sourced organic ingredients.</string>
+    <string name="about_title">About</string>
+    <string name="recommended_title">Recommended</string>
+    <string name="restaurant_rating">4.5</string>
+
+    <string name="pasta_title">Pasta</string>
+    <string name="salad_title">Salad</string>
+    <string name="tortilla_title">Tortilla</string>
+    <string name="risotto_title">Risotto</string>
+    <string name="taco_title">Taco</string>
+    <string name="pizza_title">Pizza</string>
 </resources>

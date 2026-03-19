@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -56,6 +57,7 @@ fun RestaurantDetailsScreen() {
                     .clip(RoundedCornerShape(12.dp)),
                 contentScale = ContentScale.Crop
             )
+
             VerticalSpace(20.dp)
             Box(
                 modifier = Modifier.fillMaxWidth()
@@ -66,17 +68,19 @@ fun RestaurantDetailsScreen() {
                         .fillMaxWidth(0.8f)
                 ) {
                     Text(
-                        text = "Restaurant Name",
+                        text = stringResource(R.string.restaurant_title),
                         fontSize = 26.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
                     )
+
                     VerticalSpace(2.dp)
                     Text(
-                        text = "Cuisine Type • Cuisine Type",
+                        text = stringResource(R.string.restaurant_cuisine),
                         fontSize = 16.sp,
                         color = Color.Gray
                     )
+
                     VerticalSpace(8.dp)
                     Row(
                         verticalAlignment = Alignment.CenterVertically
@@ -87,9 +91,10 @@ fun RestaurantDetailsScreen() {
                             tint = SunsetTangerine,
                             modifier = Modifier.size(18.dp)
                         )
+
                         HorizontalSpace(4.dp)
                         Text(
-                            text = "Address Street XY",
+                            text = stringResource(R.string.restaurant_location),
                             fontSize = 14.sp,
                             color = TextPrimary
                         )
@@ -112,40 +117,40 @@ fun RestaurantDetailsScreen() {
                         tint = Color(0xFFFFC107),
                         modifier = Modifier.size(16.dp)
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
+                    HorizontalSpace(4.dp)
                     Text(
-                        text = "4.5",
+                        text = stringResource(R.string.restaurant_rating),
                         fontWeight = FontWeight.Bold,
                         color = White
                     )
                 }
             }
             VerticalSpace(24.dp)
-            RestaurantDetailsTitle("About")
+            RestaurantDetailsTitle(stringResource(R.string.about_title))
 
             VerticalSpace(8.dp)
             Text(
-                text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                text = stringResource(R.string.restaurant_description),
                 fontSize = 15.sp,
                 color = TextPrimary,
                 lineHeight = 22.sp
             )
 
             VerticalSpace(24.dp)
-            RestaurantDetailsTitle("Recommended")
+            RestaurantDetailsTitle(stringResource(R.string.recommended_title))
 
             VerticalSpace(12.dp)
             FoodDishRow(
-                name1 = "Tortilla", image1 = R.drawable.meal,
-                name2 = "Burrito", image2 = R.drawable.meal,
-                name3 = "Salad", image3 = R.drawable.meal
+                name1 = stringResource(R.string.pasta_title), image1 = R.drawable.meal_1,
+                name2 = stringResource(R.string.salad_title), image2 = R.drawable.meal_2,
+                name3 = stringResource(R.string.tortilla_title), image3 = R.drawable.meal_3
             )
 
             VerticalSpace(12.dp)
             FoodDishRow(
-                name1 = "Tortilla", image1 = R.drawable.meal,
-                name2 = "Burrito", image2 = R.drawable.meal,
-                name3 = "Salad", image3 = R.drawable.meal
+                name1 = stringResource(R.string.risotto_title), image1 = R.drawable.meal_4,
+                name2 = stringResource(R.string.taco_title), image2 = R.drawable.meal_5,
+                name3 = stringResource(R.string.pizza_title), image3 = R.drawable.meal_6
             )
 
             VerticalSpace(16.dp)
