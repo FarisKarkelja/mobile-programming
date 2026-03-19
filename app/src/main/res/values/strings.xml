@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Gric</string>
+
+    <string name="local_title">Local</string>
+    <string name="quick_title">Quick</string>
+    <string name="bbq_title">BBQ</string>
+    <string name="pie_title">Pie</string>
+    <string name="healthy_title">Healthy</string>
+    <string name="global_title">Global</string>
+    <string name="sweets_title">Sweets</string>
 </resources>

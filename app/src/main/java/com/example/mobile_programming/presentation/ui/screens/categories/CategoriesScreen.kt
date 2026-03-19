@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mobile_programming.R
@@ -32,7 +33,7 @@ fun CategoriesScreen() {
         ) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "logo",
+                contentDescription = "Logo",
                 modifier = Modifier.size(420.dp)
             )
         }
@@ -40,7 +41,7 @@ fun CategoriesScreen() {
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            CategoryCircle(title = "Local", iconResource = R.drawable.bosnia)
+            CategoryCircle(title = stringResource(R.string.local_title), iconResource = R.drawable.bosnia)
         }
         VerticalSpace()
         Row(
@@ -49,17 +50,17 @@ fun CategoriesScreen() {
             modifier = Modifier.fillMaxWidth()
         ) {
             CategoryCircle(
-                title = "Quick",
+                stringResource(R.string.quick_title),
                 iconResource = R.drawable.kebab
             )
             HorizontalSpace()
             CategoryCircle(
-                title = "BBQ",
+                stringResource(R.string.bbq_title),
                 iconResource = R.drawable.steak
             )
             HorizontalSpace()
             CategoryCircle(
-                title = "Pie",
+                stringResource(R.string.pie_title),
                 iconResource = R.drawable.pie
             )
         }
@@ -68,16 +69,16 @@ fun CategoriesScreen() {
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            CategoryCircle(title = "Healthy", iconResource = R.drawable.salad)
+            CategoryCircle(stringResource(R.string.healthy_title), iconResource = R.drawable.salad)
             HorizontalSpace()
-            CategoryCircle(title = "Global", iconResource = R.drawable.worldwide)
+            CategoryCircle(stringResource(R.string.global_title), iconResource = R.drawable.worldwide)
         }
         VerticalSpace()
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            CategoryCircle(title = "Sweets", iconResource = R.drawable.cake)
+            CategoryCircle(stringResource(R.string.sweets_title), iconResource = R.drawable.cake)
         }
     }
 }
