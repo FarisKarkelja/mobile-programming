@@ -45,4 +45,9 @@
     <string name="register_button">Register</string>
     <string name="login_redirect">Already have an account?</string>
     <string name="login_action">Login</string>
+
+    <string name="full_name">John Doe</string>
+    <string name="email_placeholder">john.doe@example.com</string>
+    <string name="password_placeholder">SuperSecretPassword!!321</string>
+    <string name="logout_button">Logout</string>
 </resources>
