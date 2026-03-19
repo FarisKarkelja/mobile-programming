@@ -13,18 +13,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
+import com.example.mobile_programming.presentation.theme.Gold
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.theme.White
 import com.example.mobile_programming.presentation.ui.components.HorizontalSpace
+import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 
 @Composable
 fun RestaurantCard() {
@@ -49,8 +51,7 @@ fun RestaurantCard() {
                 contentScale = ContentScale.Crop
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
-
+            HorizontalSpace()
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -60,12 +61,12 @@ fun RestaurantCard() {
                     modifier = Modifier.align(Alignment.TopStart)
                 ) {
                     Text(
-                        text = "Restaurant Name",
+                        text = stringResource(R.string.restaurant_title),
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = White
                     )
-                    Spacer(modifier = Modifier.height(2.dp))
+                    VerticalSpace(2.dp)
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically
@@ -76,9 +77,10 @@ fun RestaurantCard() {
                             tint = White,
                             modifier = Modifier.size(18.dp)
                         )
-                        Spacer(modifier = Modifier.width(4.dp))
+
+                        HorizontalSpace(4.dp)
                         Text(
-                            text = "Address Street xy",
+                            text = stringResource(R.string.restaurant_location),
                             fontSize = 12.sp,
                             color = White
                         )
@@ -97,13 +99,14 @@ fun RestaurantCard() {
                 ) {
                     Icon(
                         imageVector = Icons.Default.Star,
-                        contentDescription = "Rating",
-                        tint = Color(0xFFFFC107),
+                        contentDescription = "Restaurant Rating",
+                        tint = Gold,
                         modifier = Modifier.size(16.dp)
                     )
+
                     HorizontalSpace(4.dp)
                     Text(
-                        text = "4.5",
+                        text = stringResource(R.string.restaurant_rating),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary

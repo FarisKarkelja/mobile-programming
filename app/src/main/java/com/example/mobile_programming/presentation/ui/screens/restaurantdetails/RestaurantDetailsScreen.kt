@@ -113,8 +113,8 @@ fun RestaurantDetailsScreen() {
                 ) {
                     Icon(
                         imageVector = Icons.Default.Star,
-                        contentDescription = "Rating",
-                        tint = Color(0xFFFFC107),
+                        contentDescription = "Restaurant Rating",
+                        tint = Gold,
                         modifier = Modifier.size(16.dp)
                     )
                     HorizontalSpace(4.dp)
