@@ -28,14 +28,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.mobile_programming.R
+import com.example.mobile_programming.presentation.theme.ErrorColor
+import com.example.mobile_programming.presentation.theme.SunsetTangerine
+import com.example.mobile_programming.presentation.theme.TextPrimary
+import com.example.mobile_programming.presentation.theme.WarmCream
 
 @Composable
 fun AuthHeader(title: String, subtitle: String, modifier: Modifier = Modifier) {
@@ -43,13 +47,14 @@ fun AuthHeader(title: String, subtitle: String, modifier: Modifier = Modifier) {
         Text(
             text = title,
             style = MaterialTheme.typography.headlineLarge,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = TextPrimary
         )
         VerticalSpace(8.dp)
         Text(
             text = subtitle,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = TextPrimary
         )
     }
 }
@@ -77,15 +82,20 @@ fun AuthTextField(
             singleLine = true,
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-                errorBorderColor = MaterialTheme.colorScheme.error
+                focusedBorderColor = SunsetTangerine,
+                unfocusedBorderColor = TextPrimary,
+                errorBorderColor = TextPrimary,
+                focusedLabelColor = SunsetTangerine,
+                errorLabelColor = TextPrimary,
+                focusedTextColor = TextPrimary,
+                unfocusedTextColor = TextPrimary,
+                errorTextColor = TextPrimary
             )
         )
         if (isError && !errorMessage.isNullOrEmpty()) {
             Text(
                 text = errorMessage,
-                color = MaterialTheme.colorScheme.error,
+                color = ErrorColor,
                 style = MaterialTheme.typography.bodySmall
             )
         }
@@ -108,14 +118,22 @@ fun PasswordTextField(
             value = value,
             onValueChange = onValueChange,
             label = { Text(label) },
-            leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
+            leadingIcon = {
+                Icon(
+                    Icons.Default.Lock,
+                    contentDescription = null,
+                    tint = TextPrimary
+                )
+            },
             trailingIcon = {
                 Text(
-                    text = if (passwordVisible) "Hide" else "Show",
+                    text = if (passwordVisible) stringResource(R.string.hide) else stringResource(
+                        R.string.show
+                    ),
                     modifier = Modifier
                         .clickable { passwordVisible = !passwordVisible }
                         .padding(end = 14.dp),
-                    color = MaterialTheme.colorScheme.primary
+                    color = TextPrimary
                 )
             },
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -123,12 +141,22 @@ fun PasswordTextField(
             isError = isError,
             singleLine = true,
             shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = SunsetTangerine,
+                unfocusedBorderColor = TextPrimary,
+                errorBorderColor = TextPrimary,
+                focusedLabelColor = SunsetTangerine,
+                errorLabelColor = TextPrimary,
+                focusedTextColor = TextPrimary,
+                unfocusedTextColor = TextPrimary,
+                errorTextColor = TextPrimary
+            ),
             modifier = Modifier.fillMaxWidth()
         )
         if (isError && !errorMessage.isNullOrEmpty()) {
             Text(
                 text = errorMessage,
-                color = MaterialTheme.colorScheme.error,
+                color = ErrorColor,
                 style = MaterialTheme.typography.bodySmall
             )
         }
@@ -147,8 +175,10 @@ fun AuthPrimaryButton(
         enabled = enabled,
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+            contentColor = WarmCream,
+            containerColor = SunsetTangerine,
+            disabledContentColor = WarmCream.copy(alpha = 0.5f),
+            disabledContainerColor = SunsetTangerine.copy(alpha = 0.5f)
         ),
         modifier = modifier
             .fillMaxWidth()
@@ -162,7 +192,7 @@ fun AuthPrimaryButton(
 fun AuthDivider() {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
         HorizontalDivider(modifier = Modifier.weight(1f))
-        Text(" OR ", color = Color.Gray, modifier = Modifier.padding(horizontal = 8.dp))
+        Text(stringResource(R.string.or), color = TextPrimary, modifier = Modifier.padding(horizontal = 8.dp))
         HorizontalDivider(modifier = Modifier.weight(1f))
     }
 }
@@ -177,6 +207,9 @@ fun SocialSignInButton(
     OutlinedButton(
         onClick = onClick,
         shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.outlinedButtonColors(
+            contentColor = TextPrimary
+        ),
         modifier = modifier
             .fillMaxWidth()
             .height(50.dp)
@@ -194,7 +227,8 @@ fun GoogleIcon() {
     Icon(
         painter = painterResource(id = R.drawable.google_icon),
         contentDescription = "Google Icon",
-        modifier = Modifier.size(24.dp)
+        modifier = Modifier.size(24.dp),
+        tint = TextPrimary
     )
 }
 
@@ -203,7 +237,8 @@ fun AppleIcon() {
     Icon(
         painter = painterResource(id = R.drawable.apple_icon),
         contentDescription = "Apple Icon",
-        modifier = Modifier.size(24.dp)
+        modifier = Modifier.size(24.dp),
+        tint = TextPrimary
     )
 }
 
@@ -215,11 +250,11 @@ fun AuthFooterText(
     modifier: Modifier = Modifier
 ) {
     Row(horizontalArrangement = Arrangement.Center, modifier = modifier.fillMaxWidth()) {
-        Text(text = normalText)
+        Text(text = normalText, color = TextPrimary)
         HorizontalSpace(4.dp)
         Text(
             text = actionText,
-            color = MaterialTheme.colorScheme.primary,
+            color = SunsetTangerine,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.clickable { onActionClick() }
         )

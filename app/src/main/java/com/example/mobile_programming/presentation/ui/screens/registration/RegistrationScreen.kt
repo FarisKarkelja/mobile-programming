@@ -1,5 +1,6 @@
 package com.example.mobile_programming.presentation.ui.screens.registration
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -7,9 +8,13 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.mobile_programming.R
+import com.example.mobile_programming.presentation.theme.TextPrimary
+import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.components.*
 import com.example.mobile_programming.presentation.ui.util.AuthValidators
 
@@ -38,17 +43,27 @@ fun RegistrationScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(WarmCream)
             .padding(24.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        AuthHeader(title = "Create Account", subtitle = "Sign up to get started.")
+        AuthHeader(
+            title = stringResource(R.string.register_title),
+            subtitle = stringResource(R.string.register_subtitle)
+        )
         VerticalSpace(24.dp)
 
         AuthTextField(
             value = fullName,
             onValueChange = { fullName = it },
             label = "Full Name",
-            leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
+            leadingIcon = {
+                Icon(
+                    Icons.Default.Person,
+                    contentDescription = null,
+                    tint = TextPrimary
+                )
+            },
             isError = nameError != null,
             errorMessage = nameError
         )
@@ -58,7 +73,13 @@ fun RegistrationScreen(
             value = email,
             onValueChange = { email = it },
             label = "Email",
-            leadingIcon = { Icon(Icons.Default.Email, contentDescription = null) },
+            leadingIcon = {
+                Icon(
+                    Icons.Default.Email,
+                    contentDescription = null,
+                    tint = TextPrimary
+                )
+            },
             keyboardType = KeyboardType.Email,
             isError = emailError != null,
             errorMessage = emailError
@@ -84,7 +105,7 @@ fun RegistrationScreen(
         VerticalSpace(24.dp)
 
         AuthPrimaryButton(
-            text = "Register",
+            text = stringResource(R.string.register_button),
             onClick = {
                 hasTriedSubmit = true
                 if (
@@ -103,20 +124,20 @@ fun RegistrationScreen(
         VerticalSpace(24.dp)
 
         SocialSignInButton(
-            text = "Sign up with Google",
+            text = stringResource(R.string.google_sign_in),
             onClick = onGoogleSignInClick,
             icon = { GoogleIcon() })
         VerticalSpace(16.dp)
 
         SocialSignInButton(
-            text = "Sign up with Apple",
+            text = stringResource(R.string.apple_sign_in),
             onClick = onAppleSignInClick,
             icon = { AppleIcon() })
         VerticalSpace(24.dp)
 
         AuthFooterText(
-            normalText = "Already have an account?",
-            actionText = "Login",
+            normalText = stringResource(R.string.login_redirect),
+            actionText = stringResource(R.string.login_action),
             onActionClick = onNavigateToLogin
         )
     }

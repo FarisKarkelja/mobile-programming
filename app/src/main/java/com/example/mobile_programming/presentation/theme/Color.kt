@@ -14,5 +14,6 @@ val SunsetTangerine = Color(0xFFFF7043)
 val WarmCream = Color(0xFFFFF4E8)
 val TextPrimary = Color(0xFF2D2A26)
 val Gold = Color(0xFFFFC107)
+val ErrorColor = Color.Red
 val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF000000)

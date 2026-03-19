@@ -28,4 +28,21 @@
     <string name="risotto_title">Risotto</string>
     <string name="taco_title">Taco</string>
     <string name="pizza_title">Pizza</string>
+
+    <string name="hide">Hide</string>
+    <string name="show">Show</string>
+    <string name="or"> OR </string>
+    <string name="login_title">Welcome Back</string>
+    <string name="login_subtitle">Log in to your account to continue.</string>
+    <string name="login_button">Login</string>
+    <string name="google_sign_in">Sign in with Google</string>
+    <string name="apple_sign_in">Sign in with Apple</string>
+    <string name="register_redirect">Don\'t have an account?</string>
+    <string name="register_action">Register</string>
+
+    <string name="register_title">Create Account</string>
+    <string name="register_subtitle">Sign up to get started.</string>
+    <string name="register_button">Register</string>
+    <string name="login_redirect">Already have an account?</string>
+    <string name="login_action">Login</string>
 </resources>
