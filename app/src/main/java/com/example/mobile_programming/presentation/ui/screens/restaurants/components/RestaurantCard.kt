@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
@@ -113,16 +114,31 @@ fun RestaurantCard() {
                     )
                 }
 
-                IconButton(
-                    onClick = { /* TODO: Add redirection logic */ },
-                    modifier = Modifier.align(Alignment.BottomEnd)
+                Row(
+                    modifier = Modifier.align(Alignment.BottomEnd),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "Details",
-                        tint = WarmCream,
-                        modifier = Modifier.size(24.dp)
-                    )
+                    IconButton(
+                        onClick = { /* TODO: Add favorite logic */ }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.FavoriteBorder,
+                            contentDescription = "Favorite",
+                            tint = WarmCream,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+
+                    IconButton(
+                        onClick = { /* TODO: Add redirection logic */ }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Details",
+                            tint = WarmCream,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
                 }
             }
         }

@@ -30,7 +30,7 @@ fun RestaurantsScreen() {
             contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(20) {
+            items(10) {
                 RestaurantCard()
             }
         }
