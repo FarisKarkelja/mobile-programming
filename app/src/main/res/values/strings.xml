@@ -50,4 +50,6 @@
     <string name="email_placeholder">john.doe@example.com</string>
     <string name="password_placeholder">SuperSecretPassword!!321</string>
     <string name="logout_button">Logout</string>
+
+    <string name="favorite_restaurants_message">No favorite restaurants yet.</string>
 </resources>
