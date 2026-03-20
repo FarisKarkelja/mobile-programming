@@ -56,7 +56,6 @@ fun ProfileScreen() {
             )
 
             VerticalSpace(16.dp)
-
             ProfileTextField(
                 value = stringResource(R.string.password_placeholder),
                 label = "Password",

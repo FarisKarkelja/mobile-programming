@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import com.example.mobile_programming.presentation.theme.MobileprogrammingTheme
 import androidx.compose.material3.Surface
+import com.example.mobile_programming.presentation.ui.screens.categories.CategoriesScreen
 import com.example.mobile_programming.presentation.ui.screens.filters.FiltersScreen
 import com.example.mobile_programming.presentation.ui.screens.login.LoginScreen
 import com.example.mobile_programming.presentation.ui.screens.profile.ProfileScreen
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MobileprogrammingTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    FiltersScreen()
+                    CategoriesScreen()
                 }
             }
         }

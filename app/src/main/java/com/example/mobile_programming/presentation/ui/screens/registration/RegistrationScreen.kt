@@ -51,8 +51,8 @@ fun RegistrationScreen(
             title = stringResource(R.string.register_title),
             subtitle = stringResource(R.string.register_subtitle)
         )
-        VerticalSpace(24.dp)
 
+        VerticalSpace(24.dp)
         AuthTextField(
             value = fullName,
             onValueChange = { fullName = it },
@@ -67,8 +67,8 @@ fun RegistrationScreen(
             isError = nameError != null,
             errorMessage = nameError
         )
-        VerticalSpace(16.dp)
 
+        VerticalSpace(16.dp)
         AuthTextField(
             value = email,
             onValueChange = { email = it },
@@ -84,8 +84,8 @@ fun RegistrationScreen(
             isError = emailError != null,
             errorMessage = emailError
         )
-        VerticalSpace(16.dp)
 
+        VerticalSpace(16.dp)
         PasswordTextField(
             value = password,
             onValueChange = { password = it },
@@ -93,8 +93,8 @@ fun RegistrationScreen(
             isError = passwordError != null,
             errorMessage = passwordError
         )
-        VerticalSpace(16.dp)
 
+        VerticalSpace(16.dp)
         PasswordTextField(
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
@@ -102,8 +102,8 @@ fun RegistrationScreen(
             isError = confirmPasswordError != null,
             errorMessage = confirmPasswordError
         )
-        VerticalSpace(24.dp)
 
+        VerticalSpace(24.dp)
         AuthPrimaryButton(
             text = stringResource(R.string.register_button),
             onClick = {
@@ -118,8 +118,8 @@ fun RegistrationScreen(
                 }
             }
         )
-        VerticalSpace(24.dp)
 
+        VerticalSpace(24.dp)
         AuthDivider()
         VerticalSpace(24.dp)
 

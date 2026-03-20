@@ -114,7 +114,7 @@ fun RestaurantCard() {
                 }
 
                 IconButton(
-                    onClick = { },
+                    onClick = { /* TODO: Add redirection logic */ },
                     modifier = Modifier.align(Alignment.BottomEnd)
                 ) {
                     Icon(

@@ -43,8 +43,8 @@ fun LoginScreen(
             title = stringResource(R.string.login_title),
             subtitle = stringResource(R.string.login_subtitle)
         )
-        VerticalSpace(24.dp)
 
+        VerticalSpace(24.dp)
         AuthTextField(
             value = email,
             onValueChange = { email = it },
@@ -60,16 +60,16 @@ fun LoginScreen(
             isError = emailError != null,
             errorMessage = emailError
         )
-        VerticalSpace(16.dp)
 
+        VerticalSpace(16.dp)
         PasswordTextField(
             value = password,
             onValueChange = { password = it },
             isError = passwordError != null,
             errorMessage = passwordError
         )
-        VerticalSpace(24.dp)
 
+        VerticalSpace(24.dp)
         AuthPrimaryButton(
             text = stringResource(R.string.login_button),
             onClick = {
@@ -82,8 +82,8 @@ fun LoginScreen(
                 }
             }
         )
-        VerticalSpace(24.dp)
 
+        VerticalSpace(24.dp)
         AuthDivider()
         VerticalSpace(24.dp)
 
