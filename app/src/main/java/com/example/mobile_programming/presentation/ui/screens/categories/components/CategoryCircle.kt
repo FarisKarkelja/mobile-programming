@@ -15,11 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.White
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
@@ -34,12 +36,12 @@ fun CategoryCircle(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .size(100.dp)
+            .size(dimensionResource(id = R.dimen.size_100))
             .shadow(8.dp, CircleShape)
             .clip(CircleShape)
             .background(SunsetTangerine)
             .clickable { onClick() }
-            .padding(8.dp)
+            .padding(dimensionResource(id = R.dimen.padding_8))
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -49,9 +51,9 @@ fun CategoryCircle(
                 painter = painterResource(id = iconResource),
                 contentDescription = title,
                 tint = White,
-                modifier = Modifier.size(32.dp)
+                modifier = Modifier.size(dimensionResource(id = R.dimen.size_32))
             )
-            VerticalSpace(6.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_6))
             Text(
                 text = title.uppercase(),
                 textAlign = TextAlign.Center,

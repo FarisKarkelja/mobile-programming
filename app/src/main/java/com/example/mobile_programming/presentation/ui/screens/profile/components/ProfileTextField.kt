@@ -9,8 +9,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
 
@@ -39,7 +41,7 @@ fun ProfileTextField(
         },
         visualTransformation = visualTransformation,
         singleLine = true,
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = SunsetTangerine,
             unfocusedBorderColor = TextPrimary,

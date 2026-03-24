@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,19 +40,19 @@ fun FiltersScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(WarmCream)
-            .padding(16.dp)
+            .padding(dimensionResource(id = R.dimen.padding_16))
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(dimensionResource(id = R.dimen.height_200))
                 .align(Alignment.TopCenter),
             contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Logo",
-                modifier = Modifier.size(420.dp)
+                modifier = Modifier.size(dimensionResource(id = R.dimen.size_420))
             )
         }
 
@@ -74,7 +75,7 @@ fun FiltersScreen() {
                 onOptionSelected = { selectedBudget = it }
             )
 
-            VerticalSpace(8.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_8))
             Column(
                 modifier = Modifier.fillMaxWidth(0.7f),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -105,8 +106,8 @@ fun FiltersScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 8.dp),
-            shape = RoundedCornerShape(12.dp),
+                .padding(bottom = dimensionResource(id = R.dimen.padding_8)),
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
             colors = ButtonDefaults.buttonColors(
                 containerColor = SunsetTangerine,
                 contentColor = Color.White
@@ -114,7 +115,7 @@ fun FiltersScreen() {
         ) {
             Text(
                 "Apply and Continue",
-                modifier = Modifier.padding(vertical = 8.dp),
+                modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_8)),
                 color = WarmCream
             )
         }

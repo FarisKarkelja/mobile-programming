@@ -28,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -80,7 +81,7 @@ fun AuthTextField(
             isError = isError,
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = SunsetTangerine,
                 unfocusedBorderColor = TextPrimary,
@@ -132,7 +133,7 @@ fun PasswordTextField(
                     ),
                     modifier = Modifier
                         .clickable { passwordVisible = !passwordVisible }
-                        .padding(end = 14.dp),
+                        .padding(end = dimensionResource(id = R.dimen.padding_14)),
                     color = TextPrimary
                 )
             },
@@ -140,7 +141,7 @@ fun PasswordTextField(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             isError = isError,
             singleLine = true,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = SunsetTangerine,
                 unfocusedBorderColor = TextPrimary,
@@ -173,7 +174,7 @@ fun AuthPrimaryButton(
     Button(
         onClick = onClick,
         enabled = enabled,
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
         colors = ButtonDefaults.buttonColors(
             contentColor = WarmCream,
             containerColor = SunsetTangerine,
@@ -182,7 +183,7 @@ fun AuthPrimaryButton(
         ),
         modifier = modifier
             .fillMaxWidth()
-            .height(50.dp)
+            .height(dimensionResource(id = R.dimen.height_50))
     ) {
         Text(text = text)
     }
@@ -192,7 +193,11 @@ fun AuthPrimaryButton(
 fun AuthDivider() {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
         HorizontalDivider(modifier = Modifier.weight(1f))
-        Text(stringResource(R.string.or), color = TextPrimary, modifier = Modifier.padding(horizontal = 8.dp))
+        Text(
+            stringResource(R.string.or),
+            color = TextPrimary,
+            modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_8))
+        )
         HorizontalDivider(modifier = Modifier.weight(1f))
     }
 }
@@ -206,17 +211,17 @@ fun SocialSignInButton(
 ) {
     OutlinedButton(
         onClick = onClick,
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = TextPrimary
         ),
         modifier = modifier
             .fillMaxWidth()
-            .height(50.dp)
+            .height(dimensionResource(id = R.dimen.height_50))
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             icon()
-            HorizontalSpace(8.dp)
+            HorizontalSpace(dimensionResource(id = R.dimen.width_8))
             Text(text)
         }
     }
@@ -227,7 +232,7 @@ fun GoogleIcon() {
     Icon(
         painter = painterResource(id = R.drawable.google_icon),
         contentDescription = "Google Icon",
-        modifier = Modifier.size(24.dp),
+        modifier = Modifier.size(dimensionResource(id = R.dimen.size_24)),
         tint = TextPrimary
     )
 }
@@ -237,7 +242,7 @@ fun AppleIcon() {
     Icon(
         painter = painterResource(id = R.drawable.apple_icon),
         contentDescription = "Apple Icon",
-        modifier = Modifier.size(24.dp),
+        modifier = Modifier.size(dimensionResource(id = R.dimen.size_24)),
         tint = TextPrimary
     )
 }
@@ -251,7 +256,7 @@ fun AuthFooterText(
 ) {
     Row(horizontalArrangement = Arrangement.Center, modifier = modifier.fillMaxWidth()) {
         Text(text = normalText, color = TextPrimary)
-        HorizontalSpace(4.dp)
+        HorizontalSpace(dimensionResource(id = R.dimen.width_4))
         Text(
             text = actionText,
             color = SunsetTangerine,

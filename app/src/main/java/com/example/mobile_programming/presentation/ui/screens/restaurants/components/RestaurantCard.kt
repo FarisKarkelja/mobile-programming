@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,21 +35,21 @@ fun RestaurantCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        shape = RoundedCornerShape(12.dp),
+            .padding(dimensionResource(id = R.dimen.padding_8)),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Row(
             modifier = Modifier
                 .background(SunsetTangerine)
-                .padding(10.dp)
+                .padding(dimensionResource(id = R.dimen.padding_10))
         ) {
             Image(
                 painter = painterResource(id = R.drawable.restaurant_placeholder),
                 contentDescription = "Restaurant Image",
                 modifier = Modifier
-                    .size(100.dp)
-                    .clip(RoundedCornerShape(12.dp)),
+                    .size(dimensionResource(id = R.dimen.size_100))
+                    .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))),
                 contentScale = ContentScale.Crop
             )
 
@@ -56,7 +57,7 @@ fun RestaurantCard() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(dimensionResource(id = R.dimen.height_100))
             ) {
                 Column(
                     modifier = Modifier.align(Alignment.TopStart)
@@ -67,7 +68,7 @@ fun RestaurantCard() {
                         fontWeight = FontWeight.Bold,
                         color = White
                     )
-                    VerticalSpace(2.dp)
+                    VerticalSpace(dimensionResource(id = R.dimen.height_2))
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically
@@ -76,10 +77,10 @@ fun RestaurantCard() {
                             imageVector = Icons.Default.LocationOn,
                             contentDescription = "Restaurant Location",
                             tint = White,
-                            modifier = Modifier.size(18.dp)
+                            modifier = Modifier.size(dimensionResource(id = R.dimen.size_18))
                         )
 
-                        HorizontalSpace(4.dp)
+                        HorizontalSpace(dimensionResource(id = R.dimen.width_4))
                         Text(
                             text = stringResource(R.string.restaurant_location),
                             fontSize = 12.sp,
@@ -93,19 +94,22 @@ fun RestaurantCard() {
                         .align(Alignment.TopEnd)
                         .background(
                             WarmCream,
-                            shape = RoundedCornerShape(12.dp)
+                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))
                         )
-                        .padding(horizontal = 8.dp, vertical = 2.dp),
+                        .padding(
+                            horizontal = dimensionResource(id = R.dimen.padding_8),
+                            vertical = dimensionResource(id = R.dimen.padding_2)
+                        ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
                         imageVector = Icons.Default.Star,
                         contentDescription = "Restaurant Rating",
                         tint = Gold,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(dimensionResource(id = R.dimen.size_16))
                     )
 
-                    HorizontalSpace(4.dp)
+                    HorizontalSpace(dimensionResource(id = R.dimen.width_4))
                     Text(
                         text = stringResource(R.string.restaurant_rating),
                         fontSize = 12.sp,
@@ -125,7 +129,7 @@ fun RestaurantCard() {
                             imageVector = Icons.Default.FavoriteBorder,
                             contentDescription = "Favorite",
                             tint = WarmCream,
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(dimensionResource(id = R.dimen.size_24))
                         )
                     }
 
@@ -136,7 +140,7 @@ fun RestaurantCard() {
                             imageVector = Icons.Default.Search,
                             contentDescription = "Details",
                             tint = WarmCream,
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(dimensionResource(id = R.dimen.size_24))
                         )
                     }
                 }

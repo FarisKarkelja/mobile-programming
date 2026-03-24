@@ -8,10 +8,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.presentation.theme.*
 import com.example.mobile_programming.presentation.ui.components.BottomBar
@@ -33,13 +34,13 @@ fun ProfileScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = dimensionResource(id = R.dimen.padding_16)),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            VerticalSpace(32.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_32))
             ProfileAvatar()
 
-            VerticalSpace(16.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_16))
             Text(
                 text = stringResource(R.string.full_name),
                 fontSize = 24.sp,
@@ -47,7 +48,7 @@ fun ProfileScreen() {
                 color = TextPrimary
             )
 
-            VerticalSpace(32.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_32))
             ProfileTextField(
                 value = stringResource(R.string.email_placeholder),
                 label = "Email",
@@ -55,7 +56,7 @@ fun ProfileScreen() {
                 readOnly = true
             )
 
-            VerticalSpace(16.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_16))
             ProfileTextField(
                 value = stringResource(R.string.password_placeholder),
                 label = "Password",
@@ -68,8 +69,14 @@ fun ProfileScreen() {
             LogoutButton(
                 text = stringResource(R.string.logout_button),
                 onClick = { /* TODO: Add logout logic */ },
-                modifier = Modifier.padding(bottom = 24.dp)
+                modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_24))
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewProfileScreen() {
+    ProfileScreen()
 }

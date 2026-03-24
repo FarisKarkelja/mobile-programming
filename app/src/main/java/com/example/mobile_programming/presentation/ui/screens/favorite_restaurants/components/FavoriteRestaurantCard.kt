@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,7 +41,7 @@ fun FavoriteRestaurantCard() {
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
         colors = CardDefaults.cardColors(containerColor = SunsetTangerine)
     ) {
         Column(
@@ -70,7 +71,7 @@ fun FavoriteRestaurantCard() {
                     text = stringResource(R.string.restaurant_title),
                     fontWeight = FontWeight.Bold,
                     color = White,
-                    modifier = Modifier.padding(horizontal = 8.dp),
+                    modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_8)),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -79,7 +80,10 @@ fun FavoriteRestaurantCard() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 8.dp, top = 8.dp),
+                    .padding(
+                        bottom = dimensionResource(id = R.dimen.padding_8),
+                        top = dimensionResource(id = R.dimen.padding_8)
+                    ),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -87,7 +91,7 @@ fun FavoriteRestaurantCard() {
                     onClick = { /* TODO: Add logic for restaurant unfavorite */ },
                     modifier = Modifier.background(
                         color = White,
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))
                     )
                 ) {
                     Icon(
@@ -101,7 +105,7 @@ fun FavoriteRestaurantCard() {
                     onClick = { /* TODO: Add screen redirection */ },
                     modifier = Modifier.background(
                         color = White,
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))
                     )
                 ) {
                     Icon(

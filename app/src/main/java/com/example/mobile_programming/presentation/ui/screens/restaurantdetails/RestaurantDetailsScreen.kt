@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -44,21 +45,21 @@ fun RestaurantDetailsScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = dimensionResource(id = R.dimen.padding_16))
                 .verticalScroll(rememberScrollState())
         ) {
-            VerticalSpace(16.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_16))
             Image(
                 painter = painterResource(id = R.drawable.restaurant_placeholder),
                 contentDescription = "Restaurant Image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp)
-                    .clip(RoundedCornerShape(12.dp)),
+                    .height(dimensionResource(id = R.dimen.height_250))
+                    .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))),
                 contentScale = ContentScale.Crop
             )
 
-            VerticalSpace(20.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_20))
             Box(
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -74,14 +75,14 @@ fun RestaurantDetailsScreen() {
                         color = TextPrimary
                     )
 
-                    VerticalSpace(2.dp)
+                    VerticalSpace(dimensionResource(id = R.dimen.height_2))
                     Text(
                         text = stringResource(R.string.restaurant_cuisine),
                         fontSize = 16.sp,
                         color = Color.Gray
                     )
 
-                    VerticalSpace(8.dp)
+                    VerticalSpace(dimensionResource(id = R.dimen.height_8))
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -89,7 +90,7 @@ fun RestaurantDetailsScreen() {
                             imageVector = Icons.Default.LocationOn,
                             contentDescription = "Restaurant Location",
                             tint = SunsetTangerine,
-                            modifier = Modifier.size(18.dp)
+                            modifier = Modifier.size(dimensionResource(id = R.dimen.size_18))
                         )
 
                         HorizontalSpace(4.dp)
@@ -106,18 +107,21 @@ fun RestaurantDetailsScreen() {
                         .align(Alignment.TopEnd)
                         .background(
                             color = TextPrimary,
-                            shape = RoundedCornerShape(12.dp)
+                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))
                         )
-                        .padding(horizontal = 10.dp, vertical = 6.dp),
+                        .padding(
+                            horizontal = dimensionResource(id = R.dimen.padding_10),
+                            vertical = dimensionResource(id = R.dimen.padding_6)
+                        ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
                         imageVector = Icons.Default.Star,
                         contentDescription = "Restaurant Rating",
                         tint = Gold,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(dimensionResource(id = R.dimen.padding_16))
                     )
-                    HorizontalSpace(4.dp)
+                    HorizontalSpace(dimensionResource(id = R.dimen.width_4))
                     Text(
                         text = stringResource(R.string.restaurant_rating),
                         fontWeight = FontWeight.Bold,
@@ -125,10 +129,10 @@ fun RestaurantDetailsScreen() {
                     )
                 }
             }
-            VerticalSpace(24.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_24))
             RestaurantDetailsTitle(stringResource(R.string.about_title))
 
-            VerticalSpace(8.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_8))
             Text(
                 text = stringResource(R.string.restaurant_description),
                 fontSize = 15.sp,
@@ -136,24 +140,24 @@ fun RestaurantDetailsScreen() {
                 lineHeight = 22.sp
             )
 
-            VerticalSpace(24.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_24))
             RestaurantDetailsTitle(stringResource(R.string.recommended_title))
 
-            VerticalSpace(12.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_12))
             FoodDishRow(
                 name1 = stringResource(R.string.pasta_title), image1 = R.drawable.meal_1,
                 name2 = stringResource(R.string.salad_title), image2 = R.drawable.meal_2,
                 name3 = stringResource(R.string.tortilla_title), image3 = R.drawable.meal_3
             )
 
-            VerticalSpace(12.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_12))
             FoodDishRow(
                 name1 = stringResource(R.string.risotto_title), image1 = R.drawable.meal_4,
                 name2 = stringResource(R.string.taco_title), image2 = R.drawable.meal_5,
                 name3 = stringResource(R.string.pizza_title), image3 = R.drawable.meal_6
             )
 
-            VerticalSpace(16.dp)
+            VerticalSpace(dimensionResource(id = R.dimen.height_16))
         }
     }
 }

@@ -11,16 +11,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.WarmCream
 
 @Composable
 fun ProfileAvatar(
     modifier: Modifier = Modifier,
-    iconSize: Dp = 60.dp,
-    containerSize: Dp = 100.dp
+    iconSize: Dp = dimensionResource(id = R.dimen.size_60),
+    containerSize: Dp = dimensionResource(id = R.dimen.size_100)
 ) {
     Box(
         modifier = modifier

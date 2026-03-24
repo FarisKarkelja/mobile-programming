@@ -16,11 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.White
 
 @Composable
@@ -29,7 +31,7 @@ fun FoodDishCard(dishName: String, imageResource: Int) {
         modifier = Modifier
             .fillMaxWidth()
             .height(140.dp),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
         Box(
@@ -55,7 +57,7 @@ fun FoodDishCard(dishName: String, imageResource: Int) {
                 color = White,
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .padding(horizontal = 4.dp),
+                    .padding(horizontal = dimensionResource(id = R.dimen.padding_4)),
                 textAlign = TextAlign.Center,
                 maxLines = 2
             )

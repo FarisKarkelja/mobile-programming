@@ -10,7 +10,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.White
 
@@ -19,7 +21,7 @@ fun BottomBar() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(56.dp)
+            .height(dimensionResource(id = R.dimen.height_56))
             .background(TextPrimary),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
