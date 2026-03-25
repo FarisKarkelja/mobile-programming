@@ -20,7 +20,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.White
@@ -30,9 +29,9 @@ fun FoodDishCard(dishName: String, imageResource: Int) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(140.dp),
+            .height(dimensionResource(id = R.dimen.height_140)),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
-        elevation = CardDefaults.cardElevation(2.dp)
+        elevation = CardDefaults.cardElevation(dimensionResource(id = R.dimen.elevation_2))
     ) {
         Box(
             modifier = Modifier.fillMaxSize()

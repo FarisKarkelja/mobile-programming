@@ -35,7 +35,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.unit.dp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.ErrorColor
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
@@ -51,7 +50,7 @@ fun AuthHeader(title: String, subtitle: String, modifier: Modifier = Modifier) {
             fontWeight = FontWeight.Bold,
             color = TextPrimary
         )
-        VerticalSpace(8.dp)
+        VerticalSpace(dimensionResource(id = R.dimen.height_8))
         Text(
             text = subtitle,
             style = MaterialTheme.typography.bodyMedium,

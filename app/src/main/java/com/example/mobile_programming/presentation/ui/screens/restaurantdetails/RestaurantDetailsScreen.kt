@@ -23,7 +23,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.*
@@ -93,7 +92,7 @@ fun RestaurantDetailsScreen() {
                             modifier = Modifier.size(dimensionResource(id = R.dimen.size_18))
                         )
 
-                        HorizontalSpace(4.dp)
+                        HorizontalSpace(dimensionResource(id = R.dimen.width_4))
                         Text(
                             text = stringResource(R.string.restaurant_location),
                             fontSize = 14.sp,

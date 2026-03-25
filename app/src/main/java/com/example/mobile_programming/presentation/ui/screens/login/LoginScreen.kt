@@ -7,10 +7,10 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.components.*
@@ -36,7 +36,7 @@ fun LoginScreen(
         modifier = modifier
             .fillMaxSize()
             .background(WarmCream)
-            .padding(24.dp),
+            .padding(dimensionResource(id = R.dimen.padding_24)),
         verticalArrangement = Arrangement.Center
     ) {
         AuthHeader(
@@ -44,7 +44,7 @@ fun LoginScreen(
             subtitle = stringResource(R.string.login_subtitle)
         )
 
-        VerticalSpace(24.dp)
+        VerticalSpace(dimensionResource(id = R.dimen.height_24))
         AuthTextField(
             value = email,
             onValueChange = { email = it },
@@ -61,7 +61,7 @@ fun LoginScreen(
             errorMessage = emailError
         )
 
-        VerticalSpace(16.dp)
+        VerticalSpace(dimensionResource(id = R.dimen.height_16))
         PasswordTextField(
             value = password,
             onValueChange = { password = it },
@@ -69,7 +69,7 @@ fun LoginScreen(
             errorMessage = passwordError
         )
 
-        VerticalSpace(24.dp)
+        VerticalSpace(dimensionResource(id = R.dimen.height_24))
         AuthPrimaryButton(
             text = stringResource(R.string.login_button),
             onClick = {
@@ -83,21 +83,21 @@ fun LoginScreen(
             }
         )
 
-        VerticalSpace(24.dp)
+        VerticalSpace(dimensionResource(id = R.dimen.height_24))
         AuthDivider()
-        VerticalSpace(24.dp)
+        VerticalSpace(dimensionResource(id = R.dimen.height_24))
 
         SocialSignInButton(
             text = stringResource(R.string.google_sign_in),
             onClick = onGoogleSignInClick,
             icon = { GoogleIcon() })
-        VerticalSpace(16.dp)
+        VerticalSpace(dimensionResource(id = R.dimen.height_16))
 
         SocialSignInButton(
             text = stringResource(R.string.apple_sign_in),
             onClick = onAppleSignInClick,
             icon = { AppleIcon() })
-        VerticalSpace(24.dp)
+        VerticalSpace(dimensionResource(id = R.dimen.height_24))
 
         AuthFooterText(
             normalText = stringResource(R.string.register_redirect),

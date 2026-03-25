@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.ui.components.BottomBar
@@ -56,13 +55,13 @@ fun FavoriteRestaurantsScreen() {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .padding(horizontal = 8.dp),
+                    .padding(horizontal = dimensionResource(id = R.dimen.padding_8)),
                 contentPadding = PaddingValues(
                     top = dimensionResource(id = R.dimen.padding_16),
                     bottom = dimensionResource(id = R.dimen.padding_16)
                 ),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_12)),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_12))
             ) {
                 items(favoriteCounter) {
                     FavoriteRestaurantCard()

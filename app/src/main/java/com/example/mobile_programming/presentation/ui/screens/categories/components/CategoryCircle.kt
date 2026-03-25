@@ -19,7 +19,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
@@ -37,7 +36,7 @@ fun CategoryCircle(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .size(dimensionResource(id = R.dimen.size_100))
-            .shadow(8.dp, CircleShape)
+            .shadow(dimensionResource(id = R.dimen.elevation_8), CircleShape)
             .clip(CircleShape)
             .background(SunsetTangerine)
             .clickable { onClick() }
