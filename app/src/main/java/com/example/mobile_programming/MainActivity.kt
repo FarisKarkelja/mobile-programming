@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MobileprogrammingTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    ProfileScreen()
+                    FiltersScreen()
                 }
             }
         }

@@ -1,17 +1,16 @@
 package com.example.mobile_programming.presentation.ui.screens.categories
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.WarmCream
+import com.example.mobile_programming.presentation.ui.components.ApplicationLogo
 import com.example.mobile_programming.presentation.ui.screens.categories.components.CategoryCircle
 import com.example.mobile_programming.presentation.ui.components.HorizontalSpace
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
@@ -31,11 +30,7 @@ fun CategoriesScreen() {
                 .height(dimensionResource(id = R.dimen.height_200)),
             contentAlignment = Alignment.Center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Logo",
-                modifier = Modifier.size(dimensionResource(id = R.dimen.size_420))
-            )
+            ApplicationLogo()
         }
         Row(
             horizontalArrangement = Arrangement.Center,

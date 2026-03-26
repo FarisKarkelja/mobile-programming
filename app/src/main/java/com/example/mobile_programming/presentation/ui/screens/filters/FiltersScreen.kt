@@ -1,6 +1,5 @@
 package com.example.mobile_programming.presentation.ui.screens.filters
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
@@ -20,6 +18,7 @@ import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.presentation.ui.screens.filters.components.FilterDropdownMenu
 import kotlin.math.roundToInt
 import com.example.mobile_programming.R
+import com.example.mobile_programming.presentation.ui.components.ApplicationLogo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,11 +47,7 @@ fun FiltersScreen() {
                 .align(Alignment.TopCenter),
             contentAlignment = Alignment.Center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Logo",
-                modifier = Modifier.size(dimensionResource(id = R.dimen.size_420))
-            )
+            ApplicationLogo()
         }
 
         Column(
