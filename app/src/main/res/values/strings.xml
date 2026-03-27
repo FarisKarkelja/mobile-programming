@@ -1,3 +1,55 @@
 <resources>
-    <string name="app_name">mobile-programming</string>
+    <string name="app_name">Gric</string>
+
+    <string name="local_title">Local</string>
+    <string name="quick_title">Quick</string>
+    <string name="bbq_title">BBQ</string>
+    <string name="pie_title">Pie</string>
+    <string name="healthy_title">Healthy</string>
+    <string name="global_title">Global</string>
+    <string name="sweets_title">Sweets</string>
+
+    <string name="restaurant_title">Mala kuhinja</string>
+    <string name="restaurant_cuisine">Asian fusion • Internatonal</string>
+    <string name="restaurant_location">Tina Ujevića 13</string>
+    <string name="restaurant_description">
+        Mala Kuhinja Mala Kuhinja is a unique restaurant with an open-kitchen
+        concept where guests interact directly with the chef,
+        and dishes are created without a traditional menu, based on fresh, seasonal ingredients of the day.
+        The focus is on creative fusion cuisine with an emphasis on
+        Asian flavors and locally sourced organic ingredients.</string>
+    <string name="about_title">About</string>
+    <string name="recommended_title">Recommended</string>
+    <string name="restaurant_rating">4.5</string>
+
+    <string name="pasta_title">Pasta</string>
+    <string name="salad_title">Salad</string>
+    <string name="tortilla_title">Tortilla</string>
+    <string name="risotto_title">Risotto</string>
+    <string name="taco_title">Taco</string>
+    <string name="pizza_title">Pizza</string>
+
+    <string name="hide">Hide</string>
+    <string name="show">Show</string>
+    <string name="or"> OR </string>
+    <string name="login_title">Welcome Back</string>
+    <string name="login_subtitle">Log in to your account to continue.</string>
+    <string name="login_button">Login</string>
+    <string name="google_sign_in">Sign in with Google</string>
+    <string name="apple_sign_in">Sign in with Apple</string>
+    <string name="register_redirect">Don\'t have an account?</string>
+    <string name="register_action">Register</string>
+
+    <string name="register_title">Create Account</string>
+    <string name="register_subtitle">Sign up to get started.</string>
+    <string name="register_button">Register</string>
+    <string name="login_redirect">Already have an account?</string>
+    <string name="login_action">Login</string>
+
+    <string name="full_name">John Doe</string>
+    <string name="email_placeholder">john.doe@example.com</string>
+    <string name="password_placeholder">SuperSecretPassword!!321</string>
+    <string name="logout_button">Logout</string>
+
+    <string name="favorite_restaurants_message">No favorite restaurants yet.</string>
 </resources>
