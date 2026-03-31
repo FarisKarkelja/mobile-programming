@@ -22,10 +22,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -109,10 +105,10 @@ fun PasswordTextField(
     modifier: Modifier = Modifier,
     label: String = "Password",
     isError: Boolean = false,
-    errorMessage: String? = null
+    errorMessage: String? = null,
+    passwordVisible: Boolean,
+    onPasswordVisibilityChange: () -> Unit
 ) {
-    var passwordVisible by remember { mutableStateOf(false) }
-
     Column(modifier = modifier) {
         OutlinedTextField(
             value = value,
@@ -131,7 +127,7 @@ fun PasswordTextField(
                         R.string.show
                     ),
                     modifier = Modifier
-                        .clickable { passwordVisible = !passwordVisible }
+                        .clickable { onPasswordVisibilityChange() }
                         .padding(end = dimensionResource(id = R.dimen.padding_14)),
                     color = TextPrimary
                 )

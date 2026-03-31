@@ -20,7 +20,7 @@ import com.example.mobile_programming.presentation.ui.util.AuthValidators
 
 @Composable
 fun RegistrationScreen(
-    onRegisterClick: () -> Unit,
+    onRegisterSuccess: () -> Unit,
     onGoogleSignInClick: () -> Unit,
     onAppleSignInClick: () -> Unit,
     onNavigateToLogin: () -> Unit,
@@ -31,6 +31,8 @@ fun RegistrationScreen(
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var hasTriedSubmit by remember { mutableStateOf(false) }
+    var passwordVisible by remember { mutableStateOf(false) }
+    var confirmPasswordVisible by remember { mutableStateOf(false) }
 
     val nameError = if (hasTriedSubmit) AuthValidators.validateFullName(fullName) else null
     val emailError = if (hasTriedSubmit) AuthValidators.validateEmail(email) else null
@@ -40,6 +42,67 @@ fun RegistrationScreen(
         confirmPassword
     ) else null
 
+    RegistrationScreenContent(
+        fullName = fullName,
+        email = email,
+        password = password,
+        confirmPassword = confirmPassword,
+        passwordVisible = passwordVisible,
+        confirmPasswordVisible = confirmPasswordVisible,
+        fullNameError = nameError,
+        emailError = emailError,
+        passwordError = passwordError,
+        confirmPasswordError = confirmPasswordError,
+        isRegisterEnabled = true,
+        onFullNameChange = { fullName = it },
+        onEmailChange = { email = it },
+        onPasswordChange = { password = it },
+        onConfirmPasswordChange = { confirmPassword = it },
+        onPasswordVisibilityChange = { passwordVisible = !passwordVisible },
+        onConfirmPasswordVisibilityChange = { confirmPasswordVisible = !confirmPasswordVisible },
+        onRegisterClick = {
+            hasTriedSubmit = true
+            if (
+                AuthValidators.validateFullName(fullName) == null &&
+                AuthValidators.validateEmail(email) == null &&
+                AuthValidators.validatePassword(password) == null &&
+                AuthValidators.validateConfirmPassword(password, confirmPassword) == null
+            ) {
+                onRegisterSuccess()
+            }
+        },
+        onLoginClick = onNavigateToLogin,
+        onGoogleClick = onGoogleSignInClick,
+        onAppleClick = onAppleSignInClick,
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun RegistrationScreenContent(
+    fullName: String,
+    email: String,
+    password: String,
+    confirmPassword: String,
+    passwordVisible: Boolean,
+    confirmPasswordVisible: Boolean,
+    fullNameError: String?,
+    emailError: String?,
+    passwordError: String?,
+    confirmPasswordError: String?,
+    isRegisterEnabled: Boolean,
+    onFullNameChange: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onConfirmPasswordChange: (String) -> Unit,
+    onPasswordVisibilityChange: () -> Unit,
+    onConfirmPasswordVisibilityChange: () -> Unit,
+    onRegisterClick: () -> Unit,
+    onGoogleClick: () -> Unit,
+    onAppleClick: () -> Unit,
+    onLoginClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -55,7 +118,7 @@ fun RegistrationScreen(
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
         AuthTextField(
             value = fullName,
-            onValueChange = { fullName = it },
+            onValueChange = onFullNameChange,
             label = "Full Name",
             leadingIcon = {
                 Icon(
@@ -64,14 +127,14 @@ fun RegistrationScreen(
                     tint = TextPrimary
                 )
             },
-            isError = nameError != null,
-            errorMessage = nameError
+            isError = fullNameError != null,
+            errorMessage = fullNameError
         )
 
         VerticalSpace(dimensionResource(id = R.dimen.height_16))
         AuthTextField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = onEmailChange,
             label = "Email",
             leadingIcon = {
                 Icon(
@@ -88,35 +151,30 @@ fun RegistrationScreen(
         VerticalSpace(dimensionResource(id = R.dimen.height_16))
         PasswordTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = onPasswordChange,
             label = "Password",
             isError = passwordError != null,
-            errorMessage = passwordError
+            errorMessage = passwordError,
+            passwordVisible = passwordVisible,
+            onPasswordVisibilityChange = onPasswordVisibilityChange
         )
 
         VerticalSpace(dimensionResource(id = R.dimen.height_16))
         PasswordTextField(
             value = confirmPassword,
-            onValueChange = { confirmPassword = it },
+            onValueChange = onConfirmPasswordChange,
             label = "Confirm Password",
             isError = confirmPasswordError != null,
-            errorMessage = confirmPasswordError
+            errorMessage = confirmPasswordError,
+            passwordVisible = confirmPasswordVisible,
+            onPasswordVisibilityChange = onConfirmPasswordVisibilityChange
         )
 
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
         AuthPrimaryButton(
             text = stringResource(R.string.register_button),
-            onClick = {
-                hasTriedSubmit = true
-                if (
-                    AuthValidators.validateFullName(fullName) == null &&
-                    AuthValidators.validateEmail(email) == null &&
-                    AuthValidators.validatePassword(password) == null &&
-                    AuthValidators.validateConfirmPassword(password, confirmPassword) == null
-                ) {
-                    onRegisterClick()
-                }
-            }
+            onClick = onRegisterClick,
+            enabled = isRegisterEnabled
         )
 
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
@@ -125,20 +183,20 @@ fun RegistrationScreen(
 
         SocialSignInButton(
             text = stringResource(R.string.google_sign_in),
-            onClick = onGoogleSignInClick,
+            onClick = onGoogleClick,
             icon = { GoogleIcon() })
         VerticalSpace(dimensionResource(id = R.dimen.height_16))
 
         SocialSignInButton(
             text = stringResource(R.string.apple_sign_in),
-            onClick = onAppleSignInClick,
+            onClick = onAppleClick,
             icon = { AppleIcon() })
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
 
         AuthFooterText(
             normalText = stringResource(R.string.login_redirect),
             actionText = stringResource(R.string.login_action),
-            onActionClick = onNavigateToLogin
+            onActionClick = onLoginClick
         )
     }
 }
@@ -146,5 +204,27 @@ fun RegistrationScreen(
 @Preview(showBackground = true)
 @Composable
 fun RegistrationScreenPreview() {
-    RegistrationScreen({}, {}, {}, {})
+    RegistrationScreenContent(
+        fullName = "",
+        email = "",
+        password = "",
+        confirmPassword = "",
+        passwordVisible = false,
+        confirmPasswordVisible = false,
+        fullNameError = null,
+        emailError = null,
+        passwordError = null,
+        confirmPasswordError = null,
+        isRegisterEnabled = true,
+        onPasswordVisibilityChange = {},
+        onConfirmPasswordVisibilityChange = {},
+        onFullNameChange = {},
+        onEmailChange = {},
+        onPasswordChange = {},
+        onConfirmPasswordChange = {},
+        onLoginClick = {},
+        onRegisterClick = {},
+        onGoogleClick = {},
+        onAppleClick = {}
+    )
 }
