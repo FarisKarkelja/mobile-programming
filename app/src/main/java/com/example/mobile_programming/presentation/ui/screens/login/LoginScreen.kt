@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.components.*
-import com.example.mobile_programming.presentation.ui.util.AuthValidators
+import com.example.mobile_programming.presentation.util.AuthValidators
 import com.example.mobile_programming.R
 
 @Composable

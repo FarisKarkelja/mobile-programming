@@ -1,4 +1,4 @@
-package com.example.mobile_programming.presentation.ui.util
+package com.example.mobile_programming.presentation.util
 
 import android.util.Patterns
 
