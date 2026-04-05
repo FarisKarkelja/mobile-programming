@@ -17,6 +17,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
+import com.example.mobile_programming.data.Restaurant
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.theme.White
@@ -27,7 +28,11 @@ import com.example.mobile_programming.presentation.ui.components.RestaurantTitle
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 
 @Composable
-fun RestaurantCard() {
+fun RestaurantCard(
+    restaurant: Restaurant,
+    onFavoriteClick: () -> Unit,
+    onDetailsClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
