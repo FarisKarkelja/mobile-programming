@@ -19,13 +19,7 @@ import com.example.mobile_programming.presentation.ui.components.*
 import com.example.mobile_programming.presentation.util.AuthValidators
 
 @Composable
-fun RegistrationScreen(
-    onRegisterSuccess: () -> Unit,
-    onGoogleSignInClick: () -> Unit,
-    onAppleSignInClick: () -> Unit,
-    onNavigateToLogin: () -> Unit,
-    modifier: Modifier = Modifier
-) {
+fun RegistrationScreen() {
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -33,6 +27,11 @@ fun RegistrationScreen(
     var hasTriedSubmit by remember { mutableStateOf(false) }
     var passwordVisible by remember { mutableStateOf(false) }
     var confirmPasswordVisible by remember { mutableStateOf(false) }
+
+    val onRegisterSuccess = { println("Register Success") }
+    val onGoogleSignInClick = { println("Google Click") }
+    val onAppleSignInClick = { println("Apple Click") }
+    val onNavigateToLogin = { println("Navigate to Login") }
 
     val nameError = if (hasTriedSubmit) AuthValidators.validateFullName(fullName) else null
     val emailError = if (hasTriedSubmit) AuthValidators.validateEmail(email) else null
@@ -42,7 +41,7 @@ fun RegistrationScreen(
         confirmPassword
     ) else null
 
-    RegistrationScreenContent(
+    RegistrationScreen(
         fullName = fullName,
         email = email,
         password = password,
@@ -72,14 +71,14 @@ fun RegistrationScreen(
             }
         },
         onLoginClick = onNavigateToLogin,
-        onGoogleClick = onGoogleSignInClick,
-        onAppleClick = onAppleSignInClick,
-        modifier = modifier
+        onGoogleSignInClick = onGoogleSignInClick,
+        onAppleSignInClick = onAppleSignInClick,
+        modifier = Modifier
     )
 }
 
 @Composable
-private fun RegistrationScreenContent(
+private fun RegistrationScreen(
     fullName: String,
     email: String,
     password: String,
@@ -98,8 +97,8 @@ private fun RegistrationScreenContent(
     onPasswordVisibilityChange: () -> Unit,
     onConfirmPasswordVisibilityChange: () -> Unit,
     onRegisterClick: () -> Unit,
-    onGoogleClick: () -> Unit,
-    onAppleClick: () -> Unit,
+    onGoogleSignInClick: () -> Unit,
+    onAppleSignInClick: () -> Unit,
     onLoginClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -183,13 +182,13 @@ private fun RegistrationScreenContent(
 
         SocialSignInButton(
             text = stringResource(R.string.google_sign_in),
-            onClick = onGoogleClick,
+            onClick = onGoogleSignInClick,
             icon = { GoogleIcon() })
         VerticalSpace(dimensionResource(id = R.dimen.height_16))
 
         SocialSignInButton(
             text = stringResource(R.string.apple_sign_in),
-            onClick = onAppleClick,
+            onClick = onAppleSignInClick,
             icon = { AppleIcon() })
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
 
@@ -204,7 +203,7 @@ private fun RegistrationScreenContent(
 @Preview(showBackground = true)
 @Composable
 fun RegistrationScreenPreview() {
-    RegistrationScreenContent(
+    RegistrationScreen(
         fullName = "",
         email = "",
         password = "",
@@ -224,7 +223,7 @@ fun RegistrationScreenPreview() {
         onConfirmPasswordChange = {},
         onLoginClick = {},
         onRegisterClick = {},
-        onGoogleClick = {},
-        onAppleClick = {}
+        onGoogleSignInClick = {},
+        onAppleSignInClick = {}
     )
 }
