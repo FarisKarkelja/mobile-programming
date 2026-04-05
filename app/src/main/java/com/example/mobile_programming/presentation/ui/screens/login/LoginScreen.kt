@@ -18,22 +18,21 @@ import com.example.mobile_programming.presentation.util.AuthValidators
 import com.example.mobile_programming.R
 
 @Composable
-fun LoginScreen(
-    onLoginSuccess: () -> Unit,
-    onGoogleSignInClick: () -> Unit,
-    onAppleSignInClick: () -> Unit,
-    onNavigateToRegister: () -> Unit,
-    modifier: Modifier = Modifier
-) {
+fun LoginScreen() {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var hasTriedSubmit by remember { mutableStateOf(false) }
     var passwordVisible by remember { mutableStateOf(false) }
 
+    val onLoginSuccess = { println("Login Success") }
+    val onNavigateToRegister = { println("Navigate to Register") }
+    val onGoogleSignInClick = { println("Google Click") }
+    val onAppleSignInClick = { println("Apple Click") }
+
     val emailError = if (hasTriedSubmit) AuthValidators.validateEmail(email) else null
     val passwordError = if (hasTriedSubmit) AuthValidators.validatePassword(password) else null
 
-    LoginScreenContent(
+    LoginScreen(
         email = email,
         password = password,
         emailError = emailError,
@@ -55,12 +54,12 @@ fun LoginScreen(
         onRegisterClick = onNavigateToRegister,
         onGoogleSignInClick = onGoogleSignInClick,
         onAppleSignInClick = onAppleSignInClick,
-        modifier = modifier
+        modifier = Modifier
     )
 }
 
 @Composable
-private fun LoginScreenContent(
+private fun LoginScreen(
     email: String,
     password: String,
     emailError: String?,
@@ -149,7 +148,7 @@ private fun LoginScreenContent(
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreenContent(
+    LoginScreen(
         email = "",
         password = "",
         emailError = null,
@@ -162,6 +161,6 @@ fun LoginScreenPreview() {
         onLoginClick = {},
         onRegisterClick = {},
         onGoogleSignInClick = {},
-        onAppleSignInClick = {}
+        onAppleSignInClick = {},
     )
 }

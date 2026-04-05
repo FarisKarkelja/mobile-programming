@@ -109,7 +109,7 @@ fun PasswordTextField(
     passwordVisible: Boolean,
     onPasswordVisibilityChange: () -> Unit
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.fillMaxWidth()) {
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
