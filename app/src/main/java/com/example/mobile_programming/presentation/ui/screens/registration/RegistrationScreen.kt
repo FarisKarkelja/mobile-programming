@@ -29,9 +29,14 @@ fun RegistrationScreen() {
     var confirmPasswordVisible by remember { mutableStateOf(false) }
 
     val onRegisterSuccess = { println("Register Success") }
-    val onGoogleSignInClick = { println("Google Click") }
-    val onAppleSignInClick = { println("Apple Click") }
+    val onGoogleClick = { println("Google Click") }
+    val onAppleClick = { println("Apple Click") }
     val onNavigateToLogin = { println("Navigate to Login") }
+
+    val isRegisterEnabled = fullName.isNotBlank() &&
+            email.isNotBlank() &&
+            password.isNotBlank() &&
+            confirmPassword.isNotBlank()
 
     val nameError = if (hasTriedSubmit) AuthValidators.validateFullName(fullName) else null
     val emailError = if (hasTriedSubmit) AuthValidators.validateEmail(email) else null
@@ -52,7 +57,7 @@ fun RegistrationScreen() {
         emailError = emailError,
         passwordError = passwordError,
         confirmPasswordError = confirmPasswordError,
-        isRegisterEnabled = true,
+        isRegisterEnabled = isRegisterEnabled,
         onFullNameChange = { fullName = it },
         onEmailChange = { email = it },
         onPasswordChange = { password = it },
@@ -71,8 +76,8 @@ fun RegistrationScreen() {
             }
         },
         onLoginClick = onNavigateToLogin,
-        onGoogleSignInClick = onGoogleSignInClick,
-        onAppleSignInClick = onAppleSignInClick,
+        onGoogleClick = onGoogleClick,
+        onAppleClick = onAppleClick,
         modifier = Modifier
     )
 }
@@ -97,8 +102,8 @@ private fun RegistrationScreen(
     onPasswordVisibilityChange: () -> Unit,
     onConfirmPasswordVisibilityChange: () -> Unit,
     onRegisterClick: () -> Unit,
-    onGoogleSignInClick: () -> Unit,
-    onAppleSignInClick: () -> Unit,
+    onGoogleClick: () -> Unit,
+    onAppleClick: () -> Unit,
     onLoginClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -182,13 +187,13 @@ private fun RegistrationScreen(
 
         SocialSignInButton(
             text = stringResource(R.string.google_sign_in),
-            onClick = onGoogleSignInClick,
+            onClick = onGoogleClick,
             icon = { GoogleIcon() })
         VerticalSpace(dimensionResource(id = R.dimen.height_16))
 
         SocialSignInButton(
             text = stringResource(R.string.apple_sign_in),
-            onClick = onAppleSignInClick,
+            onClick = onAppleClick,
             icon = { AppleIcon() })
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
 
@@ -223,7 +228,7 @@ fun RegistrationScreenPreview() {
         onConfirmPasswordChange = {},
         onLoginClick = {},
         onRegisterClick = {},
-        onGoogleSignInClick = {},
-        onAppleSignInClick = {}
+        onGoogleClick = {},
+        onAppleClick = {}
     )
 }

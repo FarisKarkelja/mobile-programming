@@ -26,8 +26,10 @@ fun LoginScreen() {
 
     val onLoginSuccess = { println("Login Success") }
     val onNavigateToRegister = { println("Navigate to Register") }
-    val onGoogleSignInClick = { println("Google Click") }
-    val onAppleSignInClick = { println("Apple Click") }
+    val onGoogleClick = { println("Google Click") }
+    val onAppleClick = { println("Apple Click") }
+
+    val isLoginEnabled = email.isNotBlank() && password.isNotBlank();
 
     val emailError = if (hasTriedSubmit) AuthValidators.validateEmail(email) else null
     val passwordError = if (hasTriedSubmit) AuthValidators.validatePassword(password) else null
@@ -37,7 +39,7 @@ fun LoginScreen() {
         password = password,
         emailError = emailError,
         passwordError = passwordError,
-        isLoginEnabled = true,
+        isLoginEnabled = isLoginEnabled,
         passwordVisible = passwordVisible,
         onPasswordVisibilityChange = { passwordVisible = !passwordVisible },
         onEmailChange = { email = it },
@@ -52,8 +54,8 @@ fun LoginScreen() {
             }
         },
         onRegisterClick = onNavigateToRegister,
-        onGoogleSignInClick = onGoogleSignInClick,
-        onAppleSignInClick = onAppleSignInClick,
+        onGoogleClick = onGoogleClick,
+        onAppleClick = onAppleClick,
         modifier = Modifier
     )
 }
@@ -71,8 +73,8 @@ private fun LoginScreen(
     onPasswordChange: (String) -> Unit,
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit,
-    onGoogleSignInClick: () -> Unit,
-    onAppleSignInClick: () -> Unit,
+    onGoogleClick: () -> Unit,
+    onAppleClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -127,13 +129,13 @@ private fun LoginScreen(
 
         SocialSignInButton(
             text = stringResource(R.string.google_sign_in),
-            onClick = onGoogleSignInClick,
+            onClick = onGoogleClick,
             icon = { GoogleIcon() })
         VerticalSpace(dimensionResource(id = R.dimen.height_16))
 
         SocialSignInButton(
             text = stringResource(R.string.apple_sign_in),
-            onClick = onAppleSignInClick,
+            onClick = onAppleClick,
             icon = { AppleIcon() })
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
 
@@ -160,7 +162,7 @@ fun LoginScreenPreview() {
         onPasswordChange = {},
         onLoginClick = {},
         onRegisterClick = {},
-        onGoogleSignInClick = {},
-        onAppleSignInClick = {},
+        onGoogleClick = {},
+        onAppleClick = {},
     )
 }
