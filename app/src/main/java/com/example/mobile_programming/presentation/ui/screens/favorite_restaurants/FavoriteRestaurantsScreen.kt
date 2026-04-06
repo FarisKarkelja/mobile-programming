@@ -104,8 +104,26 @@ private fun FavoriteRestaurantsScreen(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Favorite restaurants")
 @Composable
-fun PreviewFavoriteRestaurantsScreen() {
-    FavoriteRestaurantsScreen()
+fun PreviewFavoriteRestaurantsScreenWithData() {
+    val favorites = HardcodedData.restaurants.filter { it.isFavorite }
+
+    FavoriteRestaurantsScreen(
+        favorites = favorites,
+        favoriteCounter = favorites.size,
+        onUnfavoriteClick = {},
+        onDetailsClick = {}
+    )
+}
+
+@Preview(showBackground = true, name = "No favorite restaurants")
+@Composable
+fun PreviewEmptyFavoriteRestaurantsScreen() {
+    FavoriteRestaurantsScreen(
+        favorites = emptyList(),
+        favoriteCounter = 0,
+        onUnfavoriteClick = {},
+        onDetailsClick = {}
+    )
 }

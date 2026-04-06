@@ -144,8 +144,18 @@ private fun RestaurantDetailsScreen(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "With recommended food dishes")
 @Composable
-fun PreviewDetailsScreen() {
-    RestaurantDetailsScreen()
+fun PreviewDetailsScreenWithDishes() {
+    RestaurantDetailsScreen(
+        restaurant = HardcodedData.restaurants[0]
+    )
+}
+
+@Preview(showBackground = true, name = "Without recommended food dishes")
+@Composable
+fun PreviewDetailsScreenWithoutDishes() {
+    RestaurantDetailsScreen(
+        restaurant = HardcodedData.restaurants[5]
+    )
 }

@@ -100,43 +100,18 @@ private fun RestaurantsScreen(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "All restaurants")
 @Composable
 fun PreviewRestaurantsScreen() {
-    val dummyRestaurants = listOf(
-        Restaurant(
-            id = "1",
-            name = "Test Restoran 1",
-            cuisine = "Italijanska",
-            description = "Odličan restoran za preview",
-            imageResId = R.drawable.restaurant_placeholder,
-            isFavorite = true,
-            rating = 4.8,
-            location = "Centar",
-            topDishes = emptyList()
-        ),
-        Restaurant(
-            id = "2",
-            name = "Test Restoran 2",
-            cuisine = "Meksička",
-            description = "Pikantna hrana",
-            imageResId = R.drawable.restaurant_placeholder,
-            isFavorite = false,
-            rating = 4.2,
-            location = "Stari Grad",
-            topDishes = emptyList()
-        )
-    )
-
     RestaurantsScreen(
-        restaurants = dummyRestaurants,
+        restaurants = HardcodedData.restaurants,
         isRestaurantListEmpty = false,
         onFavoriteClick = {},
         onDetailsClick = {}
     )
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Empty list")
 @Composable
 fun PreviewEmptyRestaurantsScreen() {
     RestaurantsScreen(
