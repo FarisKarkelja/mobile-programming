@@ -23,9 +23,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.White
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.FoodDish
 
 @Composable
-fun FoodDishCard(dishName: String, imageResource: Int) {
+fun FoodDishCard(dish: FoodDish) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -37,8 +38,8 @@ fun FoodDishCard(dishName: String, imageResource: Int) {
             modifier = Modifier.fillMaxSize()
         ) {
             Image(
-                painter = painterResource(id = imageResource),
-                contentDescription = dishName,
+                painter = painterResource(id = dish.imageResId),
+                contentDescription = dish.name,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
@@ -50,7 +51,7 @@ fun FoodDishCard(dishName: String, imageResource: Int) {
             )
 
             Text(
-                text = dishName,
+                text = dish.name,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
                 color = White,

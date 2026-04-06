@@ -125,22 +125,19 @@ private fun RestaurantDetailsScreen(
                 lineHeight = 22.sp
             )
 
-            VerticalSpace(dimensionResource(id = R.dimen.height_24))
-            RestaurantDetailsTitle(stringResource(R.string.recommended_title))
+            if (restaurant.topDishes.isNotEmpty()) {
+                VerticalSpace(dimensionResource(id = R.dimen.height_24))
+                RestaurantDetailsTitle(stringResource(R.string.recommended_title))
+                VerticalSpace(dimensionResource(id = R.dimen.height_12))
 
-            VerticalSpace(dimensionResource(id = R.dimen.height_12))
-            FoodDishRow(
-                name1 = stringResource(R.string.pasta_title), image1 = R.drawable.meal_1,
-                name2 = stringResource(R.string.salad_title), image2 = R.drawable.meal_2,
-                name3 = stringResource(R.string.tortilla_title), image3 = R.drawable.meal_3
-            )
-
-            VerticalSpace(dimensionResource(id = R.dimen.height_12))
-            FoodDishRow(
-                name1 = stringResource(R.string.risotto_title), image1 = R.drawable.meal_4,
-                name2 = stringResource(R.string.taco_title), image2 = R.drawable.meal_5,
-                name3 = stringResource(R.string.pizza_title), image3 = R.drawable.meal_6
-            )
+                restaurant.topDishes.chunked(3).forEach { rowDishes ->
+                    FoodDishRow(dishes = rowDishes)
+                    VerticalSpace(dimensionResource(id = R.dimen.height_12))
+                }
+            } else {
+                VerticalSpace(dimensionResource(id = R.dimen.height_24))
+                Text("No recommendations available.", color = Color.Gray)
+            }
 
             VerticalSpace(dimensionResource(id = R.dimen.height_16))
         }

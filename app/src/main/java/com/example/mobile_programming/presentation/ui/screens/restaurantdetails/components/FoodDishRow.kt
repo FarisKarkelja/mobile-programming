@@ -8,25 +8,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.example.mobile_programming.R
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.FoodDish
 
 @Composable
-fun FoodDishRow(
-    name1: String, image1: Int,
-    name2: String, image2: Int,
-    name3: String, image3: Int
-) {
+fun FoodDishRow(dishes: List<FoodDish>) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_8))
     ) {
-        Box(modifier = Modifier.weight(1f)) {
-            FoodDishCard(dishName = name1, imageResource = image1)
-        }
-        Box(modifier = Modifier.weight(1f)) {
-            FoodDishCard(dishName = name2, imageResource = image2)
-        }
-        Box(modifier = Modifier.weight(1f)) {
-            FoodDishCard(dishName = name3, imageResource = image3)
+        for (i in 0 until 3) {
+            Box(modifier = Modifier.weight(1f)) {
+                if (i < dishes.size) {
+                    FoodDishCard(dish = dishes[i])
+                }
+            }
         }
     }
 }
