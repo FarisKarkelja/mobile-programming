@@ -78,7 +78,7 @@ fun RestaurantCard(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .background(
-                            SunsetTangerine,
+                            TextPrimary,
                             shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))
                         )
                         .padding(

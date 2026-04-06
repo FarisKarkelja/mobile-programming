@@ -31,7 +31,7 @@ import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 
 @Composable
-fun RestaurantScreen() {
+fun RestaurantsScreen() {
     var restaurants by remember { mutableStateOf(HardcodedData.restaurants) }
     val isRestaurantListEmpty by remember { derivedStateOf { restaurants.isEmpty() } }
 
