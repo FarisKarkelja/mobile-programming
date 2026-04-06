@@ -1,5 +1,6 @@
 package com.example.mobile_programming.presentation.ui.screens.restaurants.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
+import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.theme.White
 import com.example.mobile_programming.presentation.ui.components.HorizontalSpace
@@ -38,12 +40,12 @@ fun RestaurantCard(
             .fillMaxWidth()
             .padding(dimensionResource(id = R.dimen.padding_8)),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
-        elevation = CardDefaults.cardElevation(dimensionResource(id = R.dimen.elevation_8))
+        elevation = CardDefaults.cardElevation(dimensionResource(id = R.dimen.elevation_4)),
+        colors = CardDefaults.cardColors(containerColor = WarmCream),
+        border = BorderStroke(dimensionResource(id = R.dimen.width_2), SunsetTangerine)
     ) {
         Row(
-            modifier = Modifier
-                .background(SunsetTangerine)
-                .padding(dimensionResource(id = R.dimen.padding_10))
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_10))
         ) {
             Image(
                 painter = painterResource(id = restaurant.imageResId),
@@ -63,16 +65,20 @@ fun RestaurantCard(
                 Column(
                     modifier = Modifier.align(Alignment.TopStart)
                 ) {
-                    RestaurantTitle(title = restaurant.name, fontSize = 18.sp, color = White)
+                    RestaurantTitle(title = restaurant.name, fontSize = 18.sp, color = TextPrimary)
                     VerticalSpace(dimensionResource(id = R.dimen.height_2))
-                    RestaurantLocation(location = restaurant.location)
+                    RestaurantLocation(
+                        location = restaurant.location,
+                        iconTint = TextPrimary,
+                        textColor = TextPrimary
+                    )
                 }
 
                 Row(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .background(
-                            WarmCream,
+                            SunsetTangerine,
                             shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))
                         )
                         .padding(
@@ -81,7 +87,11 @@ fun RestaurantCard(
                         ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    RestaurantRating(rating = restaurant.rating, fontSize = 12.sp)
+                    RestaurantRating(
+                        rating = restaurant.rating,
+                        fontSize = 12.sp,
+                        textColor = White
+                    )
                 }
 
                 Row(
@@ -92,7 +102,7 @@ fun RestaurantCard(
                         Icon(
                             imageVector = Icons.Default.FavoriteBorder,
                             contentDescription = "Favorite",
-                            tint = WarmCream,
+                            tint = SunsetTangerine,
                             modifier = Modifier.size(dimensionResource(id = R.dimen.size_24))
                         )
                     }
@@ -101,7 +111,7 @@ fun RestaurantCard(
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = "Details",
-                            tint = WarmCream,
+                            tint = SunsetTangerine,
                             modifier = Modifier.size(dimensionResource(id = R.dimen.size_24))
                         )
                     }
