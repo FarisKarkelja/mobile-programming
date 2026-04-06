@@ -17,7 +17,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.Restaurant
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.theme.White
@@ -26,6 +25,7 @@ import com.example.mobile_programming.presentation.ui.components.RestaurantLocat
 import com.example.mobile_programming.presentation.ui.components.RestaurantRating
 import com.example.mobile_programming.presentation.ui.components.RestaurantTitle
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
+import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 
 @Composable
 fun RestaurantCard(
@@ -46,8 +46,8 @@ fun RestaurantCard(
                 .padding(dimensionResource(id = R.dimen.padding_10))
         ) {
             Image(
-                painter = painterResource(id = R.drawable.restaurant_placeholder),
-                contentDescription = "Restaurant Image",
+                painter = painterResource(id = restaurant.imageResId),
+                contentDescription = restaurant.name,
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.size_100))
                     .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))),
@@ -63,9 +63,9 @@ fun RestaurantCard(
                 Column(
                     modifier = Modifier.align(Alignment.TopStart)
                 ) {
-                    RestaurantTitle(fontSize = 18.sp, color = White)
+                    RestaurantTitle(title = restaurant.name, fontSize = 18.sp, color = White)
                     VerticalSpace(dimensionResource(id = R.dimen.height_2))
-                    RestaurantLocation()
+                    RestaurantLocation(location = restaurant.location)
                 }
 
                 Row(
@@ -81,16 +81,14 @@ fun RestaurantCard(
                         ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    RestaurantRating(fontSize = 12.sp)
+                    RestaurantRating(rating = restaurant.rating, fontSize = 12.sp)
                 }
 
                 Row(
                     modifier = Modifier.align(Alignment.BottomEnd),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    IconButton(
-                        onClick = { /* TODO: Add favorite logic */ }
-                    ) {
+                    IconButton(onClick = onFavoriteClick) {
                         Icon(
                             imageVector = Icons.Default.FavoriteBorder,
                             contentDescription = "Favorite",
@@ -99,9 +97,7 @@ fun RestaurantCard(
                         )
                     }
 
-                    IconButton(
-                        onClick = { /* TODO: Add redirection logic */ }
-                    ) {
+                    IconButton(onClick = onDetailsClick) {
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = "Details",

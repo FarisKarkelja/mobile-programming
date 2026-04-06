@@ -26,16 +26,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.White
+import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 
 @Composable
-fun FavoriteRestaurantCard() {
+fun FavoriteRestaurantCard(
+    restaurant: Restaurant,
+    onUnfavoriteClick: () -> Unit,
+    onDetailsClick: () -> Unit,
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -54,8 +58,8 @@ fun FavoriteRestaurantCard() {
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.restaurant_placeholder),
-                    contentDescription = "Restaurant Image",
+                    painter = painterResource(id = restaurant.imageResId),
+                    contentDescription = restaurant.name,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
@@ -67,7 +71,7 @@ fun FavoriteRestaurantCard() {
                 )
 
                 Text(
-                    text = stringResource(R.string.restaurant_title),
+                    text = restaurant.name,
                     fontWeight = FontWeight.Bold,
                     color = White,
                     modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_8)),
@@ -87,7 +91,7 @@ fun FavoriteRestaurantCard() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
-                    onClick = { /* TODO: Add logic for restaurant unfavorite */ },
+                    onClick = onUnfavoriteClick,
                     modifier = Modifier.background(
                         color = White,
                         shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))
@@ -101,7 +105,7 @@ fun FavoriteRestaurantCard() {
                 }
 
                 IconButton(
-                    onClick = { /* TODO: Add screen redirection */ },
+                    onClick = onDetailsClick,
                     modifier = Modifier.background(
                         color = White,
                         shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))

@@ -19,6 +19,7 @@ import com.example.mobile_programming.presentation.theme.White
 
 @Composable
 fun RestaurantLocation(
+    location: String,
     modifier: Modifier = Modifier,
     iconTint: Color = White,
     textColor: Color = White,
@@ -36,7 +37,7 @@ fun RestaurantLocation(
         )
         HorizontalSpace(dimensionResource(id = R.dimen.width_4))
         Text(
-            text = stringResource(R.string.restaurant_location),
+            text = location,
             fontSize = fontSize,
             color = textColor
         )

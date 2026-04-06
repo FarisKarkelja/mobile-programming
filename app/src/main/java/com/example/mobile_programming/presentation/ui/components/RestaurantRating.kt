@@ -18,6 +18,7 @@ import com.example.mobile_programming.presentation.theme.TextPrimary
 
 @Composable
 fun RestaurantRating(
+    rating: Double,
     textColor: Color = TextPrimary,
     fontSize: TextUnit = TextUnit.Unspecified,
 ) {
@@ -29,7 +30,7 @@ fun RestaurantRating(
     )
     HorizontalSpace(dimensionResource(id = R.dimen.width_4))
     Text(
-        text = stringResource(R.string.restaurant_rating),
+        text = rating.toString(),
         fontSize = fontSize,
         fontWeight = FontWeight.Bold,
         color = textColor

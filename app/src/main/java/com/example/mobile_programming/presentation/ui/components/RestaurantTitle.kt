@@ -11,9 +11,9 @@ import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.TextPrimary
 
 @Composable
-fun RestaurantTitle(fontSize: TextUnit = 26.sp, color: Color = TextPrimary) {
+fun RestaurantTitle(title: String, fontSize: TextUnit = 26.sp, color: Color = TextPrimary) {
     Text(
-        text = stringResource(R.string.restaurant_title),
+        text = title,
         fontSize = fontSize,
         fontWeight = FontWeight.Bold,
         color = color

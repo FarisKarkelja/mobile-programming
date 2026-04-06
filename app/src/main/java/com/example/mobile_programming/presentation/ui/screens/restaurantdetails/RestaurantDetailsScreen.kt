@@ -9,6 +9,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
+import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.theme.*
 import com.example.mobile_programming.presentation.ui.components.BottomBar
 import com.example.mobile_programming.presentation.ui.components.RestaurantLocation
@@ -29,9 +34,21 @@ import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.FoodDishRow
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.RestaurantDetailsTitle
+import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 
 @Composable
 fun RestaurantDetailsScreen() {
+    var restaurant by remember { mutableStateOf(HardcodedData.restaurants.first()) }
+
+    RestaurantDetailsScreen(
+        restaurant = restaurant
+    )
+}
+
+@Composable
+private fun RestaurantDetailsScreen(
+    restaurant: Restaurant
+) {
     Scaffold(
         topBar = { TopBar() },
         bottomBar = { BottomBar() },
@@ -46,8 +63,8 @@ fun RestaurantDetailsScreen() {
         ) {
             VerticalSpace(dimensionResource(id = R.dimen.height_16))
             Image(
-                painter = painterResource(id = R.drawable.restaurant_placeholder),
-                contentDescription = "Restaurant Image",
+                painter = painterResource(id = restaurant.imageResId),
+                contentDescription = restaurant.name,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(dimensionResource(id = R.dimen.height_250))
@@ -64,16 +81,17 @@ fun RestaurantDetailsScreen() {
                         .align(Alignment.CenterStart)
                         .fillMaxWidth(0.8f)
                 ) {
-                    RestaurantTitle()
+                    RestaurantTitle(title = restaurant.name)
                     VerticalSpace(dimensionResource(id = R.dimen.height_2))
                     Text(
-                        text = stringResource(R.string.restaurant_cuisine),
+                        text = restaurant.cuisine,
                         fontSize = 16.sp,
                         color = Color.Gray
                     )
 
                     VerticalSpace(dimensionResource(id = R.dimen.height_8))
                     RestaurantLocation(
+                        location = restaurant.location,
                         iconTint = SunsetTangerine,
                         textColor = TextPrimary,
                         fontSize = 14.sp
@@ -93,7 +111,7 @@ fun RestaurantDetailsScreen() {
                         ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    RestaurantRating(textColor = White)
+                    RestaurantRating(rating = restaurant.rating, textColor = White)
                 }
             }
             VerticalSpace(dimensionResource(id = R.dimen.height_24))
@@ -101,7 +119,7 @@ fun RestaurantDetailsScreen() {
 
             VerticalSpace(dimensionResource(id = R.dimen.height_8))
             Text(
-                text = stringResource(R.string.restaurant_description),
+                text = restaurant.description,
                 fontSize = 15.sp,
                 color = TextPrimary,
                 lineHeight = 22.sp

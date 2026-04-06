@@ -8,7 +8,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.mobile_programming.presentation.theme.MobileprogrammingTheme
 import com.example.mobile_programming.presentation.ui.screens.profile.ProfileScreen
-import com.example.mobile_programming.presentation.ui.screens.restaurants.RestaurantsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +15,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MobileprogrammingTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    RestaurantsScreen()
+                    ProfileScreen()
                 }
             }
         }
