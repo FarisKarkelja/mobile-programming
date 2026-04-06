@@ -9,6 +9,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,15 +40,18 @@ import com.example.mobile_programming.presentation.ui.screens.restaurants.util.R
 @Composable
 fun RestaurantDetailsScreen() {
     var restaurant by remember { mutableStateOf(HardcodedData.restaurants.first()) }
+    val hasTopDishes by remember { derivedStateOf { restaurant.topDishes.isNotEmpty() } }
 
     RestaurantDetailsScreen(
-        restaurant = restaurant
+        restaurant = restaurant,
+        hasTopDishes = hasTopDishes
     )
 }
 
 @Composable
 private fun RestaurantDetailsScreen(
-    restaurant: Restaurant
+    restaurant: Restaurant,
+    hasTopDishes: Boolean
 ) {
     Scaffold(
         topBar = { TopBar() },
@@ -125,7 +129,7 @@ private fun RestaurantDetailsScreen(
                 lineHeight = 22.sp
             )
 
-            if (restaurant.topDishes.isNotEmpty()) {
+            if (hasTopDishes) {
                 VerticalSpace(dimensionResource(id = R.dimen.height_24))
                 RestaurantDetailsTitle(stringResource(R.string.recommended_title))
                 VerticalSpace(dimensionResource(id = R.dimen.height_12))
@@ -147,15 +151,19 @@ private fun RestaurantDetailsScreen(
 @Preview(showBackground = true, name = "With recommended food dishes")
 @Composable
 fun PreviewDetailsScreenWithDishes() {
+    val restaurant = HardcodedData.restaurants[0]
     RestaurantDetailsScreen(
-        restaurant = HardcodedData.restaurants[0]
+        restaurant = restaurant,
+        hasTopDishes = restaurant.topDishes.isNotEmpty()
     )
 }
 
 @Preview(showBackground = true, name = "Without recommended food dishes")
 @Composable
 fun PreviewDetailsScreenWithoutDishes() {
+    val restaurant = HardcodedData.restaurants[5]
     RestaurantDetailsScreen(
-        restaurant = HardcodedData.restaurants[5]
+        restaurant = restaurant,
+        hasTopDishes = restaurant.topDishes.isNotEmpty()
     )
 }
