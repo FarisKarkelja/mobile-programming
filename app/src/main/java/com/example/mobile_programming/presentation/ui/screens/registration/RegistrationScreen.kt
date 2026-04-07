@@ -29,8 +29,6 @@ fun RegistrationScreen() {
     var confirmPasswordVisible by remember { mutableStateOf(false) }
 
     val onRegisterSuccess = { println("Register Success") }
-    val onGoogleClick = { println("Google Click") }
-    val onAppleClick = { println("Apple Click") }
     val onNavigateToLogin = { println("Navigate to Login") }
 
     val isRegisterEnabled = fullName.isNotBlank() &&
@@ -76,8 +74,6 @@ fun RegistrationScreen() {
             }
         },
         onLoginClick = onNavigateToLogin,
-        onGoogleClick = onGoogleClick,
-        onAppleClick = onAppleClick,
         modifier = Modifier
     )
 }
@@ -102,8 +98,6 @@ private fun RegistrationScreen(
     onPasswordVisibilityChange: () -> Unit,
     onConfirmPasswordVisibilityChange: () -> Unit,
     onRegisterClick: () -> Unit,
-    onGoogleClick: () -> Unit,
-    onAppleClick: () -> Unit,
     onLoginClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -182,21 +176,6 @@ private fun RegistrationScreen(
         )
 
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
-        AuthDivider()
-        VerticalSpace(dimensionResource(id = R.dimen.height_24))
-
-        SocialSignInButton(
-            text = stringResource(R.string.google_sign_in),
-            onClick = onGoogleClick,
-            icon = { GoogleIcon() })
-        VerticalSpace(dimensionResource(id = R.dimen.height_16))
-
-        SocialSignInButton(
-            text = stringResource(R.string.apple_sign_in),
-            onClick = onAppleClick,
-            icon = { AppleIcon() })
-        VerticalSpace(dimensionResource(id = R.dimen.height_24))
-
         AuthFooterText(
             normalText = stringResource(R.string.login_redirect),
             actionText = stringResource(R.string.login_action),
@@ -228,7 +207,5 @@ fun RegistrationScreenPreview() {
         onConfirmPasswordChange = {},
         onLoginClick = {},
         onRegisterClick = {},
-        onGoogleClick = {},
-        onAppleClick = {}
     )
 }

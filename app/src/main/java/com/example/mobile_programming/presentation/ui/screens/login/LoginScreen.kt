@@ -26,8 +26,6 @@ fun LoginScreen() {
 
     val onLoginSuccess = { println("Login Success") }
     val onNavigateToRegister = { println("Navigate to Register") }
-    val onGoogleClick = { println("Google Click") }
-    val onAppleClick = { println("Apple Click") }
 
     val isLoginEnabled = email.isNotBlank() && password.isNotBlank();
 
@@ -54,8 +52,6 @@ fun LoginScreen() {
             }
         },
         onRegisterClick = onNavigateToRegister,
-        onGoogleClick = onGoogleClick,
-        onAppleClick = onAppleClick,
         modifier = Modifier
     )
 }
@@ -73,8 +69,6 @@ private fun LoginScreen(
     onPasswordChange: (String) -> Unit,
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit,
-    onGoogleClick: () -> Unit,
-    onAppleClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -124,21 +118,6 @@ private fun LoginScreen(
         )
 
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
-        AuthDivider()
-        VerticalSpace(dimensionResource(id = R.dimen.height_24))
-
-        SocialSignInButton(
-            text = stringResource(R.string.google_sign_in),
-            onClick = onGoogleClick,
-            icon = { GoogleIcon() })
-        VerticalSpace(dimensionResource(id = R.dimen.height_16))
-
-        SocialSignInButton(
-            text = stringResource(R.string.apple_sign_in),
-            onClick = onAppleClick,
-            icon = { AppleIcon() })
-        VerticalSpace(dimensionResource(id = R.dimen.height_24))
-
         AuthFooterText(
             normalText = stringResource(R.string.register_redirect),
             actionText = stringResource(R.string.register_action),
@@ -162,7 +141,5 @@ fun LoginScreenPreview() {
         onPasswordChange = {},
         onLoginClick = {},
         onRegisterClick = {},
-        onGoogleClick = {},
-        onAppleClick = {},
     )
 }
