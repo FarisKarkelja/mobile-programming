@@ -18,22 +18,48 @@ import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.presentation.ui.screens.filters.components.FilterDropdownMenu
 import kotlin.math.roundToInt
 import com.example.mobile_programming.R
+import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.ui.components.ApplicationLogo
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FiltersScreen() {
-    val locations = listOf(
-        "Dobrinja", "Nedžarići", "Alipašino Polje", "Otoka",
-        "Čengić Vila", "Malta", "Pofalići", "Marijin Dvor",
-        "Skenderija", "Baščaršija", "Vijećnica"
-    )
-    val budgets = listOf("Under 20 BAM", "20 - 50 BAM", "50 - 100 BAM", "100+ BAM")
+    val locations = HardcodedData.locations
+    val budgets = HardcodedData.budgets
 
     var selectedLocation by remember { mutableStateOf("Location") }
     var selectedBudget by remember { mutableStateOf("Budget") }
     var sliderPosition by remember { mutableFloatStateOf(3f) }
 
+    val isApplyEnabled = selectedLocation != "Location" && selectedBudget != "Budget"
+
+    FiltersScreen(
+        locations = locations,
+        budgets = budgets,
+        selectedLocation = selectedLocation,
+        onLocationChange = { selectedLocation = it },
+        selectedBudget = selectedBudget,
+        onBudgetChange = { selectedBudget = it },
+        sliderPosition = sliderPosition,
+        onSliderChange = { sliderPosition = it },
+        isApplyEnabled = isApplyEnabled,
+        onApplyClick = { /* TODO: Navigate to restaurants activity */ }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun FiltersScreen(
+    locations: List<String>,
+    budgets: List<String>,
+    selectedLocation: String,
+    onLocationChange: (String) -> Unit,
+    selectedBudget: String,
+    onBudgetChange: (String) -> Unit,
+    sliderPosition: Float,
+    onSliderChange: (Float) -> Unit,
+    isApplyEnabled: Boolean,
+    onApplyClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -59,14 +85,14 @@ fun FiltersScreen() {
                 label = "Location",
                 options = locations,
                 selectedOption = selectedLocation,
-                onOptionSelected = { selectedLocation = it }
+                onOptionSelected = onLocationChange
             )
 
             FilterDropdownMenu(
                 label = "Budget",
                 options = budgets,
                 selectedOption = selectedBudget,
-                onOptionSelected = { selectedBudget = it }
+                onOptionSelected = onBudgetChange
             )
 
             VerticalSpace(dimensionResource(id = R.dimen.height_8))
@@ -81,7 +107,7 @@ fun FiltersScreen() {
                 )
                 Slider(
                     value = sliderPosition,
-                    onValueChange = { sliderPosition = it },
+                    onValueChange = onSliderChange,
                     valueRange = 1f..5f,
                     steps = 3,
                     colors = SliderDefaults.colors(
@@ -96,7 +122,8 @@ fun FiltersScreen() {
         }
 
         Button(
-            onClick = { },
+            onClick = onApplyClick,
+            enabled = isApplyEnabled,
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
@@ -119,5 +146,16 @@ fun FiltersScreen() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewFiltersScreen() {
-    FiltersScreen()
+    FiltersScreen(
+        locations = listOf("Sample Location"),
+        budgets = listOf("Sample Budget"),
+        selectedLocation = "Location",
+        onLocationChange = {},
+        selectedBudget = "Budget",
+        onBudgetChange = {},
+        sliderPosition = 3f,
+        onSliderChange = {},
+        isApplyEnabled = false,
+        onApplyClick = {}
+    )
 }
