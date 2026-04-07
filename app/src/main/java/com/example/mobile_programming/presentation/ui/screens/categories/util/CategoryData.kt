@@ -1,4 +1,7 @@
 package com.example.mobile_programming.presentation.ui.screens.categories.util
 
-class CategoryData {
-}
+data class Category(
+    val id: String,
+    val name: String,
+    val iconResId: Int
+)

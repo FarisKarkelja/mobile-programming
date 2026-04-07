@@ -3,8 +3,47 @@ package com.example.mobile_programming.data
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.FoodDish
 import com.example.mobile_programming.R
+import com.example.mobile_programming.presentation.ui.screens.categories.util.Category
 
 object HardcodedData {
+    val categories = listOf(
+        Category(
+            id = "1",
+            name = "Local",
+            iconResId = R.drawable.bosnia
+        ),
+        Category(
+            id = "2",
+            name = "Quick",
+            iconResId = R.drawable.kebab
+        ),
+        Category(
+            id = "3",
+            name = "BBQ",
+            iconResId = R.drawable.steak
+        ),
+        Category(
+            id = "4",
+            name = "Pie",
+            iconResId = R.drawable.pie
+        ),
+        Category(
+            id = "5",
+            name = "Healthy",
+            iconResId = R.drawable.salad
+        ),
+        Category(
+            id = "6",
+            name = "Global",
+            iconResId = R.drawable.worldwide
+        ),
+        Category(
+            id = "7",
+            name = "Sweets",
+            iconResId = R.drawable.cake
+        ),
+    )
+
     val restaurants = listOf(
         Restaurant(
             id = "1",
