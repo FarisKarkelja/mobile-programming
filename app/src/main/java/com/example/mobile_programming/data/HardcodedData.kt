@@ -7,11 +7,11 @@ import com.example.mobile_programming.presentation.ui.screens.categories.util.Ca
 
 object HardcodedData {
     val locations = listOf(
-        "Dobrinja", "Nedžarići", "Alipašino Polje", "Otoka",
+        "Location", "Dobrinja", "Nedžarići", "Alipašino Polje", "Otoka",
         "Čengić Vila", "Malta", "Pofalići", "Marijin Dvor",
         "Skenderija", "Baščaršija", "Vijećnica"
     )
-    val budgets = listOf("Under 20 BAM", "20 - 50 BAM", "50 - 100 BAM", "100+ BAM")
+    val budgets = listOf("Budget", "Under 20 BAM", "20 - 50 BAM", "50 - 100 BAM", "100+ BAM")
 
     val categories = listOf(
         Category(

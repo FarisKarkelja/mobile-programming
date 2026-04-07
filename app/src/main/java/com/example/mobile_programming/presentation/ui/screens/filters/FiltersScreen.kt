@@ -26,8 +26,8 @@ fun FiltersScreen() {
     val locations = HardcodedData.locations
     val budgets = HardcodedData.budgets
 
-    var selectedLocation by remember { mutableStateOf("Location") }
-    var selectedBudget by remember { mutableStateOf("Budget") }
+    var selectedLocation by remember { mutableStateOf(HardcodedData.locations.first()) }
+    var selectedBudget by remember { mutableStateOf(HardcodedData.budgets.first()) }
     var sliderPosition by remember { mutableFloatStateOf(3f) }
 
     val isApplyEnabled = selectedLocation != "Location" && selectedBudget != "Budget"
