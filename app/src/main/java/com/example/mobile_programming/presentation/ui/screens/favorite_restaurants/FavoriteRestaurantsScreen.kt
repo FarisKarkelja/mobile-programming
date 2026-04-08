@@ -1,12 +1,12 @@
 package com.example.mobile_programming.presentation.ui.screens.favorite_restaurants
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -20,22 +20,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
 import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.ui.components.BottomBar
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.theme.WarmCream
-import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.components.FavoriteRestaurantCard
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
-import androidx.compose.foundation.lazy.grid.items
+import com.example.mobile_programming.presentation.ui.screens.categories.util.Category
+import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.components.FavoriteRestaurantsCategoryTitle
+import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.components.FavoriteRestaurantsRow
 
 @Composable
 fun FavoriteRestaurantsScreen() {
     var restaurants by remember { mutableStateOf(HardcodedData.restaurants) }
     val favorites by remember { derivedStateOf { restaurants.filter { it.isFavorite } } }
     val favoriteCounter by remember { derivedStateOf { favorites.size } }
+
+    val categories by remember { mutableStateOf(HardcodedData.categories) }
+
+    val groupedFavorites by remember {
+        derivedStateOf { favorites.groupBy { it.categoryId } }
+    }
 
     val onUnfavoriteClick: (String) -> Unit = { id ->
         // TODO: onUnfavorite logic
@@ -46,17 +52,20 @@ fun FavoriteRestaurantsScreen() {
     }
 
     FavoriteRestaurantsScreen(
-        favorites = favorites,
+        categories = categories,
         favoriteCounter = favoriteCounter,
+        groupedFavorites = groupedFavorites,
         onUnfavoriteClick = onUnfavoriteClick,
         onDetailsClick = onDetailsClick
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun FavoriteRestaurantsScreen(
-    favorites: List<Restaurant>,
+    categories: List<Category>,
     favoriteCounter: Int,
+    groupedFavorites: Map<String, List<Restaurant>>,
     onUnfavoriteClick: (String) -> Unit,
     onDetailsClick: (String) -> Unit
 ) {
@@ -79,51 +88,44 @@ private fun FavoriteRestaurantsScreen(
                 )
             }
         } else {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = dimensionResource(id = R.dimen.padding_8)),
-                contentPadding = PaddingValues(
-                    top = dimensionResource(id = R.dimen.padding_16),
-                    bottom = dimensionResource(id = R.dimen.padding_16)
-                ),
-                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_12)),
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_12))
+                    .padding(innerPadding),
+                contentPadding = PaddingValues(bottom = dimensionResource(id = R.dimen.padding_16))
             ) {
-                items(favorites, key = { it.id }) { restaurant ->
-                    FavoriteRestaurantCard(
-                        restaurant = restaurant,
-                        onUnfavoriteClick = { onUnfavoriteClick(restaurant.id) },
-                        onDetailsClick = { onDetailsClick(restaurant.id) }
-                    )
+                categories.forEach { category ->
+                    stickyHeader {
+                        FavoriteRestaurantsCategoryTitle(categoryName = category.name)
+                    }
+                    item {
+                        val restaurantsInThatCategory =
+                            groupedFavorites.getOrDefault(category.id, emptyList())
+                        if (restaurantsInThatCategory.isEmpty()) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = dimensionResource(id = R.dimen.padding_24)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = stringResource(id = R.string.no_category_favorites),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = TextPrimary.copy(alpha = 0.5f)
+                                )
+                            }
+                        } else {
+                            FavoriteRestaurantsRow(
+                                restaurants = restaurantsInThatCategory,
+                                onUnfavoriteClick = onUnfavoriteClick,
+                                onDetailsClick = onDetailsClick,
+                                modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_24))
+                            )
+                        }
+                    }
                 }
             }
         }
     }
 }
 
-@Preview(showBackground = true, name = "Favorite restaurants")
-@Composable
-fun PreviewFavoriteRestaurantsScreenWithData() {
-    val favorites = HardcodedData.restaurants.filter { it.isFavorite }
-
-    FavoriteRestaurantsScreen(
-        favorites = favorites,
-        favoriteCounter = favorites.size,
-        onUnfavoriteClick = {},
-        onDetailsClick = {}
-    )
-}
-
-@Preview(showBackground = true, name = "No favorite restaurants")
-@Composable
-fun PreviewEmptyFavoriteRestaurantsScreen() {
-    FavoriteRestaurantsScreen(
-        favorites = emptyList(),
-        favoriteCounter = 0,
-        onUnfavoriteClick = {},
-        onDetailsClick = {}
-    )
-}

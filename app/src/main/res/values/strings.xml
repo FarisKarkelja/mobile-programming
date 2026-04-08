@@ -53,4 +53,5 @@
 
     <string name="favorite_restaurants_message">No favorite restaurants yet.</string>
     <string name="no_restaurants_message">No restaurants available.</string>
+    <string name="no_category_favorites">No favorites in this category.</string>
 </resources>
