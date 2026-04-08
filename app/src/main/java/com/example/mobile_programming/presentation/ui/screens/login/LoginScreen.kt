@@ -24,10 +24,10 @@ fun LoginScreen() {
     var hasTriedSubmit by remember { mutableStateOf(false) }
     var passwordVisible by remember { mutableStateOf(false) }
 
-    val onLoginSuccess = { println("Login Success") }
-    val onNavigateToRegister = { println("Navigate to Register") }
+    val onLoginSuccess = { /* TODO: Navigate to restaurants activity */ }
+    val onNavigateToRegister = { /* TODO: Navigate to registration activity */ }
 
-    val isLoginEnabled = email.isNotBlank() && password.isNotBlank();
+    val isLoginEnabled = email.isNotBlank() && password.isNotBlank()
 
     val emailError = if (hasTriedSubmit) AuthValidators.validateEmail(email) else null
     val passwordError = if (hasTriedSubmit) AuthValidators.validatePassword(password) else null

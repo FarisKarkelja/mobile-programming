@@ -28,8 +28,8 @@ fun RegistrationScreen() {
     var passwordVisible by remember { mutableStateOf(false) }
     var confirmPasswordVisible by remember { mutableStateOf(false) }
 
-    val onRegisterSuccess = { println("Register Success") }
-    val onNavigateToLogin = { println("Navigate to Login") }
+    val onRegisterSuccess = { /* TODO: Navigate to login activity */ }
+    val onNavigateToLogin = { /* TODO: Navigate to login activity */ }
 
     val isRegisterEnabled = fullName.isNotBlank() &&
             email.isNotBlank() &&

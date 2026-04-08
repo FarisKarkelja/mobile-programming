@@ -4,6 +4,7 @@ import com.example.mobile_programming.presentation.ui.screens.restaurants.util.R
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.FoodDish
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.ui.screens.categories.util.Category
+import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 
 object HardcodedData {
     val locations = listOf(
@@ -13,6 +14,20 @@ object HardcodedData {
     )
     val budgets = listOf("Budget", "Under 20 BAM", "20 - 50 BAM", "50 - 100 BAM", "100+ BAM")
 
+    val users = listOf(
+        User(
+            id = "1",
+            fullName = "John Doe",
+            email = "john.doe@example.com",
+            password = "SuperSecretPassword!!123"
+        ),
+        User(
+            id = "2",
+            fullName = "Alice Johnson",
+            email = "alice.johnson@example.com",
+            password = "pass321"
+        )
+    )
     val categories = listOf(
         Category(
             id = "1",
@@ -62,12 +77,12 @@ object HardcodedData {
             rating = 4.8,
             isFavorite = false,
             topDishes = listOf(
-                FoodDish("Pasta", R.drawable.meal_1),
-                FoodDish("Salad", R.drawable.meal_2),
-                FoodDish("Tortilla", R.drawable.meal_3),
-                FoodDish("Risotto", R.drawable.meal_4),
-                FoodDish("Taco", R.drawable.meal_5),
-                FoodDish("Pizza", R.drawable.meal_6)
+                FoodDish("1", "Pasta", R.drawable.meal_1),
+                FoodDish("2", "Salad", R.drawable.meal_2),
+                FoodDish("3", "Tortilla", R.drawable.meal_3),
+                FoodDish("4", "Risotto", R.drawable.meal_4),
+                FoodDish("5", "Taco", R.drawable.meal_5),
+                FoodDish("6", "Pizza", R.drawable.meal_6)
             )
         ),
         Restaurant(
@@ -91,8 +106,8 @@ object HardcodedData {
             rating = 4.5,
             isFavorite = true,
             topDishes = listOf(
-                FoodDish("Taco", R.drawable.meal_5),
-                FoodDish("Tortilla", R.drawable.meal_3)
+                FoodDish("1", "Taco", R.drawable.meal_5),
+                FoodDish("2", "Tortilla", R.drawable.meal_3)
             )
         ),
         Restaurant(
@@ -105,9 +120,9 @@ object HardcodedData {
             rating = 4.2,
             isFavorite = false,
             topDishes = listOf(
-                FoodDish("Pizza", R.drawable.meal_6),
-                FoodDish("Salad", R.drawable.meal_2),
-                FoodDish("Taco", R.drawable.meal_5)
+                FoodDish("1", "Pizza", R.drawable.meal_6),
+                FoodDish("2", "Salad", R.drawable.meal_2),
+                FoodDish("3", "Taco", R.drawable.meal_5)
             )
         ),
         Restaurant(
@@ -120,8 +135,8 @@ object HardcodedData {
             rating = 4.6,
             isFavorite = true,
             topDishes = listOf(
-                FoodDish("Risotto", R.drawable.meal_4),
-                FoodDish("Salad", R.drawable.meal_2)
+                FoodDish("1", "Risotto", R.drawable.meal_4),
+                FoodDish("2", "Salad", R.drawable.meal_2)
             )
         ),
         Restaurant(
@@ -145,10 +160,10 @@ object HardcodedData {
             rating = 4.9,
             isFavorite = true,
             topDishes = listOf(
-                FoodDish("Meat Plate", R.drawable.meal_1),
-                FoodDish("Fresh Salad", R.drawable.meal_2),
-                FoodDish("Bread", R.drawable.meal_3),
-                FoodDish("Dessert", R.drawable.meal_4)
+                FoodDish("1", "Meat Plate", R.drawable.meal_1),
+                FoodDish("2", "Fresh Salad", R.drawable.meal_2),
+                FoodDish("3", "Bread", R.drawable.meal_3),
+                FoodDish("4", "Dessert", R.drawable.meal_4)
             )
         ),
         Restaurant(
@@ -161,8 +176,8 @@ object HardcodedData {
             rating = 4.3,
             isFavorite = false,
             topDishes = listOf(
-                FoodDish("Green Salad", R.drawable.meal_2),
-                FoodDish("Vegan Taco", R.drawable.meal_5)
+                FoodDish("1", "Green Salad", R.drawable.meal_2),
+                FoodDish("2", "Vegan Taco", R.drawable.meal_5)
             )
         ),
         Restaurant(
@@ -175,9 +190,9 @@ object HardcodedData {
             rating = 4.8,
             isFavorite = true,
             topDishes = listOf(
-                FoodDish("Curry Bowl", R.drawable.meal_4),
-                FoodDish("Naan", R.drawable.meal_3),
-                FoodDish("Spicy Salad", R.drawable.meal_2)
+                FoodDish("1", "Curry Bowl", R.drawable.meal_4),
+                FoodDish("2", "Naan", R.drawable.meal_3),
+                FoodDish("3", "Spicy Salad", R.drawable.meal_2)
             )
         ),
         Restaurant(
@@ -190,10 +205,10 @@ object HardcodedData {
             rating = 4.4,
             isFavorite = false,
             topDishes = listOf(
-                FoodDish("Ribeye", R.drawable.meal_1),
-                FoodDish("Caesar Salad", R.drawable.meal_2),
-                FoodDish("Risotto Side", R.drawable.meal_4),
-                FoodDish("Pizza Bread", R.drawable.meal_6)
+                FoodDish("1", "Ribeye", R.drawable.meal_1),
+                FoodDish("2", "Caesar Salad", R.drawable.meal_2),
+                FoodDish("3", "Risotto Side", R.drawable.meal_4),
+                FoodDish("4", "Pizza Bread", R.drawable.meal_6)
             )
         )
     )

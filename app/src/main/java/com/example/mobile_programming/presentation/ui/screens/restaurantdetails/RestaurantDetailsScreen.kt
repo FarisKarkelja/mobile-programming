@@ -129,6 +129,7 @@ private fun RestaurantDetailsScreen(
                 lineHeight = 22.sp
             )
 
+            // Add here lazy row for recommended food dishes, recommended drinks optional
             if (hasTopDishes) {
                 VerticalSpace(dimensionResource(id = R.dimen.height_24))
                 RestaurantDetailsTitle(stringResource(R.string.recommended_title))
