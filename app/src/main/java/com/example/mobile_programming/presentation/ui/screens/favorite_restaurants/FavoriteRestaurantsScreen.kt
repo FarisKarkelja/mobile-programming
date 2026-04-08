@@ -1,12 +1,16 @@
 package com.example.mobile_programming.presentation.ui.screens.favorite_restaurants
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -28,8 +32,8 @@ import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import com.example.mobile_programming.presentation.ui.screens.categories.util.Category
+import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.components.FavoriteRestaurantCard
 import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.components.FavoriteRestaurantsCategoryTitle
-import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.components.FavoriteRestaurantsRow
 
 @Composable
 fun FavoriteRestaurantsScreen() {
@@ -115,12 +119,23 @@ private fun FavoriteRestaurantsScreen(
                                 )
                             }
                         } else {
-                            FavoriteRestaurantsRow(
-                                restaurants = restaurantsInThatCategory,
-                                onUnfavoriteClick = onUnfavoriteClick,
-                                onDetailsClick = onDetailsClick,
-                                modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_24))
-                            )
+                            LazyRow(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = dimensionResource(id = R.dimen.padding_24)),
+                                contentPadding = PaddingValues(horizontal = dimensionResource(id = R.dimen.padding_8)),
+                                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_12))
+                            ) {
+                                items(restaurantsInThatCategory, key = { it.id }) { restaurant ->
+                                    Box(modifier = Modifier.width(dimensionResource(id = R.dimen.width_160))) {
+                                        FavoriteRestaurantCard(
+                                            restaurant = restaurant,
+                                            onUnfavoriteClick = { onUnfavoriteClick(restaurant.id) },
+                                            onDetailsClick = { onDetailsClick(restaurant.id) }
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }
