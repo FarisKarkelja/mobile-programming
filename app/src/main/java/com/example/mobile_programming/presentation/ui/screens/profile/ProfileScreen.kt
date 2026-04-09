@@ -33,7 +33,7 @@ fun ProfileScreen() {
     val user by remember { mutableStateOf(HardcodedData.users.first()) }
 
     val onLogoutClick: () -> Unit = {
-        // TODO: onLogout logic
+        // TODO: Navigate to login activity
     }
 
     ProfileScreen(

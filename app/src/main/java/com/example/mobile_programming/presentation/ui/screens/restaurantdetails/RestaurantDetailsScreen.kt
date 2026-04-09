@@ -3,6 +3,7 @@ package com.example.mobile_programming.presentation.ui.screens.restaurantdetails
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -33,25 +34,56 @@ import com.example.mobile_programming.presentation.ui.components.RestaurantRatin
 import com.example.mobile_programming.presentation.ui.components.RestaurantTitle
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
-import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.FoodDishRow
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.FoodDishCard
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.RestaurantDetailsTitle
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Drink
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.FoodDish
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
+import androidx.compose.foundation.lazy.items
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.DrinkCard
 
 @Composable
 fun RestaurantDetailsScreen() {
     var restaurant by remember { mutableStateOf(HardcodedData.restaurants.first()) }
-    val hasTopDishes by remember { derivedStateOf { restaurant.topDishes.isNotEmpty() } }
+
+    val topDishes by remember {
+        mutableStateOf(HardcodedData.foodDishes.filter { it.restaurantId == restaurant.id })
+    }
+    val topDrinks by remember {
+        mutableStateOf(HardcodedData.drinks.filter { it.restaurantId == restaurant.id })
+    }
+
+    val hasTopDishes by remember { derivedStateOf { topDishes.isNotEmpty() } }
+    val hasTopDrinks by remember { derivedStateOf { topDrinks.isNotEmpty() } }
+
+    val onDishClick: (FoodDish) -> Unit = { dish ->
+        // TODO: Show food dish details
+    }
+
+    val onDrinkClick: (Drink) -> Unit = { drink ->
+        // TODO: Show drink details
+    }
 
     RestaurantDetailsScreen(
         restaurant = restaurant,
-        hasTopDishes = hasTopDishes
+        topDishes = topDishes,
+        topDrinks = topDrinks,
+        hasTopDishes = hasTopDishes,
+        hasTopDrinks = hasTopDrinks,
+        onDishClick = onDishClick,
+        onDrinkClick = onDrinkClick
     )
 }
 
 @Composable
 private fun RestaurantDetailsScreen(
     restaurant: Restaurant,
-    hasTopDishes: Boolean
+    topDishes: List<FoodDish>,
+    topDrinks: List<Drink>,
+    hasTopDishes: Boolean,
+    hasTopDrinks: Boolean,
+    onDishClick: (FoodDish) -> Unit,
+    onDrinkClick: (Drink) -> Unit
 ) {
     Scaffold(
         topBar = { TopBar() },
@@ -129,42 +161,79 @@ private fun RestaurantDetailsScreen(
                 lineHeight = 22.sp
             )
 
-            // Add here lazy row for recommended food dishes, recommended drinks optional
             if (hasTopDishes) {
                 VerticalSpace(dimensionResource(id = R.dimen.height_24))
-                RestaurantDetailsTitle(stringResource(R.string.recommended_title))
+                RestaurantDetailsTitle(stringResource(R.string.house_specialties))
                 VerticalSpace(dimensionResource(id = R.dimen.height_12))
 
-                restaurant.topDishes.chunked(3).forEach { rowDishes ->
-                    FoodDishRow(dishes = rowDishes)
-                    VerticalSpace(dimensionResource(id = R.dimen.height_12))
+                LazyRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_8))
+                ) {
+                    items(topDishes) { dish ->
+                        FoodDishCard(dish = dish) {
+                            onDishClick(dish)
+                        }
+                    }
                 }
             } else {
                 VerticalSpace(dimensionResource(id = R.dimen.height_24))
                 Text("No recommendations available.", color = Color.Gray)
             }
 
+            if (hasTopDrinks) {
+                VerticalSpace(dimensionResource(id = R.dimen.height_24))
+                RestaurantDetailsTitle(stringResource(R.string.curated_drinks))
+                VerticalSpace(dimensionResource(id = R.dimen.height_12))
+
+                LazyRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_8))
+                ) {
+                    items(topDrinks) { drink ->
+                        DrinkCard(drink = drink) {
+                            onDrinkClick(drink)
+                        }
+                    }
+                }
+            }
             VerticalSpace(dimensionResource(id = R.dimen.height_16))
         }
     }
 }
 
-@Preview(showBackground = true, name = "With recommended food dishes")
+@Preview(showBackground = true, name = "With items")
 @Composable
 fun PreviewDetailsScreenWithDishes() {
     val restaurant = HardcodedData.restaurants[0]
+    val topDishes = HardcodedData.foodDishes.filter { it.restaurantId == restaurant.id }
+    val topDrinks = HardcodedData.drinks.filter { it.restaurantId == restaurant.id }
+
     RestaurantDetailsScreen(
         restaurant = restaurant,
-        hasTopDishes = restaurant.topDishes.isNotEmpty()
+        topDishes = topDishes,
+        topDrinks = topDrinks,
+        hasTopDishes = topDishes.isNotEmpty(),
+        hasTopDrinks = topDrinks.isNotEmpty(),
+        onDishClick = {},
+        onDrinkClick = {}
     )
 }
 
-@Preview(showBackground = true, name = "Without recommended food dishes")
+@Preview(showBackground = true, name = "Without items")
 @Composable
 fun PreviewDetailsScreenWithoutDishes() {
     val restaurant = HardcodedData.restaurants[5]
+    val topDishes = HardcodedData.foodDishes.filter { it.restaurantId == restaurant.id }
+    val topDrinks = HardcodedData.drinks.filter { it.restaurantId == restaurant.id }
+
     RestaurantDetailsScreen(
         restaurant = restaurant,
-        hasTopDishes = restaurant.topDishes.isNotEmpty()
+        topDishes = topDishes,
+        topDrinks = topDrinks,
+        hasTopDishes = topDishes.isNotEmpty(),
+        hasTopDrinks = topDrinks.isNotEmpty(),
+        onDishClick = {},
+        onDrinkClick = {}
     )
 }

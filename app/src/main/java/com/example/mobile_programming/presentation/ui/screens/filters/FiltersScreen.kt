@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
@@ -32,6 +33,10 @@ fun FiltersScreen() {
 
     val isApplyEnabled = selectedLocation != "Location" && selectedBudget != "Budget"
 
+    val onApplyClick: () -> Unit = {
+        /* TODO: Navigate to restaurants activity */
+    }
+
     FiltersScreen(
         locations = locations,
         budgets = budgets,
@@ -42,7 +47,7 @@ fun FiltersScreen() {
         sliderPosition = sliderPosition,
         onSliderChange = { sliderPosition = it },
         isApplyEnabled = isApplyEnabled,
-        onApplyClick = { /* TODO: Navigate to restaurants activity */ }
+        onApplyClick = onApplyClick
     )
 }
 
@@ -135,7 +140,7 @@ private fun FiltersScreen(
             )
         ) {
             Text(
-                "Apply and Continue",
+                stringResource(id = R.string.apply_and_continue),
                 modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_8)),
                 color = WarmCream
             )

@@ -5,6 +5,7 @@ import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.ui.screens.categories.util.Category
 import com.example.mobile_programming.presentation.ui.screens.profile.util.User
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Drink
 
 object HardcodedData {
     val locations = listOf(
@@ -76,15 +77,7 @@ object HardcodedData {
             imageResId = R.drawable.restaurant_placeholder,
             location = "Downtown",
             rating = 4.8,
-            isFavorite = false,
-            topDishes = listOf(
-                FoodDish("1", "Pasta", R.drawable.meal_1),
-                FoodDish("2", "Salad", R.drawable.meal_2),
-                FoodDish("3", "Tortilla", R.drawable.meal_3),
-                FoodDish("4", "Risotto", R.drawable.meal_4),
-                FoodDish("5", "Taco", R.drawable.meal_5),
-                FoodDish("6", "Pizza", R.drawable.meal_6)
-            )
+            isFavorite = false
         ),
         Restaurant(
             id = "2",
@@ -95,8 +88,7 @@ object HardcodedData {
             imageResId = R.drawable.restaurant_placeholder_2,
             location = "Uptown",
             rating = 4.9,
-            isFavorite = true,
-            topDishes = emptyList()
+            isFavorite = true
         ),
         Restaurant(
             id = "3",
@@ -107,11 +99,7 @@ object HardcodedData {
             imageResId = R.drawable.restaurant_placeholder_3,
             location = "City Center",
             rating = 4.5,
-            isFavorite = true,
-            topDishes = listOf(
-                FoodDish("1", "Taco", R.drawable.meal_5),
-                FoodDish("2", "Tortilla", R.drawable.meal_3)
-            )
+            isFavorite = true
         ),
         Restaurant(
             id = "4",
@@ -122,12 +110,7 @@ object HardcodedData {
             imageResId = R.drawable.restaurant_placeholder_4,
             location = "Westside",
             rating = 4.2,
-            isFavorite = false,
-            topDishes = listOf(
-                FoodDish("1", "Pizza", R.drawable.meal_6),
-                FoodDish("2", "Salad", R.drawable.meal_2),
-                FoodDish("3", "Taco", R.drawable.meal_5)
-            )
+            isFavorite = false
         ),
         Restaurant(
             id = "5",
@@ -138,11 +121,7 @@ object HardcodedData {
             imageResId = R.drawable.restaurant_placeholder_5,
             location = "East End",
             rating = 4.6,
-            isFavorite = true,
-            topDishes = listOf(
-                FoodDish("1", "Risotto", R.drawable.meal_4),
-                FoodDish("2", "Salad", R.drawable.meal_2)
-            )
+            isFavorite = true
         ),
         Restaurant(
             id = "6",
@@ -152,9 +131,8 @@ object HardcodedData {
             description = "Experience fine dining with our exquisite French menu and carefully selected wine pairings.",
             imageResId = R.drawable.restaurant_placeholder_6,
             location = "Riverside",
-            rating = 4.7,
-            isFavorite = false,
-            topDishes = emptyList()
+            rating = 4.6,
+            isFavorite = false
         ),
         Restaurant(
             id = "7",
@@ -165,13 +143,7 @@ object HardcodedData {
             imageResId = R.drawable.restaurant_placeholder_2,
             location = "Old Town",
             rating = 4.9,
-            isFavorite = true,
-            topDishes = listOf(
-                FoodDish("1", "Meat Plate", R.drawable.meal_1),
-                FoodDish("2", "Fresh Salad", R.drawable.meal_2),
-                FoodDish("3", "Bread", R.drawable.meal_3),
-                FoodDish("4", "Dessert", R.drawable.meal_4)
-            )
+            isFavorite = true
         ),
         Restaurant(
             id = "8",
@@ -181,12 +153,7 @@ object HardcodedData {
             description = "100% plant-based restaurant focusing on organic ingredients and superfoods.",
             imageResId = R.drawable.restaurant_placeholder_3,
             location = "North Park",
-            rating = 4.3,
-            isFavorite = false,
-            topDishes = listOf(
-                FoodDish("1", "Green Salad", R.drawable.meal_2),
-                FoodDish("2", "Vegan Taco", R.drawable.meal_5)
-            )
+            rating = 4.3
         ),
         Restaurant(
             id = "9",
@@ -197,12 +164,7 @@ object HardcodedData {
             imageResId = R.drawable.restaurant_placeholder_4,
             location = "Downtown",
             rating = 4.8,
-            isFavorite = true,
-            topDishes = listOf(
-                FoodDish("1", "Curry Bowl", R.drawable.meal_4),
-                FoodDish("2", "Naan", R.drawable.meal_3),
-                FoodDish("3", "Spicy Salad", R.drawable.meal_2)
-            )
+            isFavorite = true
         ),
         Restaurant(
             id = "10",
@@ -213,13 +175,53 @@ object HardcodedData {
             imageResId = R.drawable.restaurant_placeholder_5,
             location = "Financial District",
             rating = 4.4,
-            isFavorite = false,
-            topDishes = listOf(
-                FoodDish("1", "Ribeye", R.drawable.meal_1),
-                FoodDish("2", "Caesar Salad", R.drawable.meal_2),
-                FoodDish("3", "Risotto Side", R.drawable.meal_4),
-                FoodDish("4", "Pizza Bread", R.drawable.meal_6)
-            )
+            isFavorite = false
         )
+    )
+
+    val foodDishes = listOf(
+        FoodDish("1", "1", "Spaghetti Carbonara", R.drawable.meal_1),
+        FoodDish("2", "1", "Margherita Pizza", R.drawable.meal_6),
+        FoodDish("3", "1", "Bruschetta", R.drawable.meal_3),
+        FoodDish("4", "2", "Spicy Tuna Roll", R.drawable.meal_2),
+        FoodDish("5", "2", "Salmon Sashimi", R.drawable.meal_1),
+        FoodDish("6", "3", "Beef Tacos", R.drawable.meal_5),
+        FoodDish("7", "3", "Chicken Burrito", R.drawable.meal_3),
+        FoodDish("8", "3", "Nachos Supreme", R.drawable.meal_4),
+        FoodDish("9", "4", "Double Smash Burger", R.drawable.meal_1),
+        FoodDish("10", "4", "Loaded Fries", R.drawable.meal_2),
+        FoodDish("11", "5", "Kung Pao Chicken", R.drawable.meal_4),
+        FoodDish("12", "5", "Spring Rolls", R.drawable.meal_3),
+        FoodDish("13", "6", "Ratatouille", R.drawable.meal_2),
+        FoodDish("14", "6", "Croissant", R.drawable.meal_6),
+        FoodDish("15", "7", "Ćevapi (10)", R.drawable.meal_1),
+        FoodDish("16", "7", "Teleća Čorba", R.drawable.meal_4),
+        FoodDish("17", "8", "Quinoa Salad", R.drawable.meal_2),
+        FoodDish("18", "8", "Avocado Toast", R.drawable.meal_3),
+        FoodDish("19", "9", "Chicken Tikka", R.drawable.meal_1),
+        FoodDish("20", "10", "Ribeye Steak", R.drawable.meal_1)
+    )
+
+    val drinks = listOf(
+        Drink("1", "1", "House Red Wine", R.drawable.drink_1),
+        Drink("2", "1", "Espresso", R.drawable.drink_2),
+        Drink("3", "1", "Lemonade", R.drawable.drink_3),
+        Drink("4", "2", "Matcha Tea", R.drawable.drink_2),
+        Drink("5", "2", "Asahi Beer", R.drawable.drink_4),
+        Drink("6", "3", "Margarita", R.drawable.drink_5),
+        Drink("7", "3", "Corona Extra", R.drawable.drink_6),
+        Drink("8", "4", "Vanilla Milkshake", R.drawable.drink_1),
+        Drink("9", "4", "Coca Cola", R.drawable.drink_3),
+        Drink("10", "5", "Jasmine Tea", R.drawable.drink_2),
+        Drink("11", "6", "Champagne", R.drawable.drink_4),
+        Drink("12", "6", "Sparkling Water", R.drawable.drink_5),
+        Drink("13", "7", "Ayran", R.drawable.drink_1),
+        Drink("14", "7", "Bosnian Coffee", R.drawable.drink_2),
+        Drink("15", "8", "Green Smoothie", R.drawable.drink_3),
+        Drink("16", "8", "Kombucha", R.drawable.drink_4),
+        Drink("17", "9", "Mango Lassi", R.drawable.drink_5),
+        Drink("18", "9", "Masala Chai", R.drawable.drink_2),
+        Drink("19", "10", "Craft Beer", R.drawable.drink_6),
+        Drink("20", "10", "Whiskey Sour", R.drawable.drink_1)
     )
 }

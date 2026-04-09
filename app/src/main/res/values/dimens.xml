@@ -48,6 +48,7 @@
     <dimen name="width_14">14dp</dimen>
     <dimen name="width_16">16dp</dimen>
     <dimen name="width_24">24dp</dimen>
+    <dimen name="width_140">140dp</dimen>
     <dimen name="width_160">160dp</dimen>
 
     <dimen name="size_2">2dp</dimen>

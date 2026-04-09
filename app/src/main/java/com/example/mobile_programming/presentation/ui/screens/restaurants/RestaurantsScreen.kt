@@ -103,7 +103,7 @@ private fun RestaurantsScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.KeyboardArrowUp,
-                        contentDescription = "Scroll to top"
+                        contentDescription = stringResource(R.string.scroll_to_top)
                     )
                 }
             }
