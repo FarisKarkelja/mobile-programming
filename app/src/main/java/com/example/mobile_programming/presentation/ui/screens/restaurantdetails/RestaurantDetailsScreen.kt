@@ -178,7 +178,7 @@ private fun RestaurantDetailsScreen(
                 }
             } else {
                 VerticalSpace(dimensionResource(id = R.dimen.height_24))
-                Text("No recommendations available.", color = Color.Gray)
+                Text(stringResource(R.string.no_recommendations), color = Color.Gray)
             }
 
             if (hasTopDrinks) {
@@ -223,7 +223,7 @@ fun PreviewDetailsScreenWithDishes() {
 @Preview(showBackground = true, name = "Without items")
 @Composable
 fun PreviewDetailsScreenWithoutDishes() {
-    val restaurant = HardcodedData.restaurants[5]
+    val restaurant = HardcodedData.restaurants[2]
     val topDishes = HardcodedData.foodDishes.filter { it.restaurantId == restaurant.id }
     val topDrinks = HardcodedData.drinks.filter { it.restaurantId == restaurant.id }
 

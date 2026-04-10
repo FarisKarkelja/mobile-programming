@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
 import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.theme.TextPrimary
@@ -142,5 +143,35 @@ private fun FavoriteRestaurantsScreen(
             }
         }
     }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun FavoriteRestaurantsScreenPreview() {
+    val restaurants = HardcodedData.restaurants
+    val categories = HardcodedData.categories
+
+    val favorites = restaurants.filter { it.isFavorite }
+    val groupedFavorites = favorites.groupBy { it.categoryId }
+
+    FavoriteRestaurantsScreen(
+        categories = categories,
+        favoriteCounter = favorites.size,
+        groupedFavorites = groupedFavorites,
+        onUnfavoriteClick = {},
+        onDetailsClick = {}
+    )
+}
+
+@Preview(showBackground = true, name = "Empty State")
+@Composable
+fun FavoriteRestaurantsScreenEmptyPreview() {
+    FavoriteRestaurantsScreen(
+        categories = emptyList(),
+        favoriteCounter = 0,
+        groupedFavorites = emptyMap(),
+        onUnfavoriteClick = {},
+        onDetailsClick = {}
+    )
 }
 
