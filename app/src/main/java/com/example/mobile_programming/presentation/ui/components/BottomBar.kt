@@ -3,9 +3,9 @@ package com.example.mobile_programming.presentation.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Restaurant
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,19 +26,19 @@ fun BottomBar() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            imageVector = Icons.Default.Home,
-            contentDescription = "Dashboard",
+            imageVector = Icons.Outlined.Restaurant,
+            contentDescription = "Restaurants",
             tint = White
         )
 
         Icon(
-            imageVector = Icons.Default.Favorite,
+            imageVector = Icons.Outlined.FavoriteBorder,
             contentDescription = "Favorite Restaurants",
             tint = White
         )
 
         Icon(
-            imageVector = Icons.Default.Person,
+            imageVector = Icons.Outlined.AccountCircle,
             contentDescription = "Profile",
             tint = White
         )
