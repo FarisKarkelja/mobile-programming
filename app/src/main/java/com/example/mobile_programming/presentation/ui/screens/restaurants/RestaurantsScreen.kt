@@ -143,6 +143,8 @@ private fun RestaurantsScreen(
                 searchQuery = searchQuery,
                 onSearchQueryChange = onSearchQueryChange
             )
+            /* add two dropdowns -> one for lexicographic sorting/filtering
+            and one for rating sorting/filtering */
             if (isRestaurantListEmpty) {
                 Box(
                     modifier = Modifier

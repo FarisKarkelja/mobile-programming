@@ -13,6 +13,7 @@ import com.example.mobile_programming.presentation.theme.TextPrimary
 
 @Composable
 fun TopBar() {
+    // potentially use material 3 topappbar and bottomappbar with modern icons and hamburger menu
     Box(
         modifier = Modifier
             .fillMaxWidth()

@@ -8,6 +8,8 @@ data class Restaurant(
     val description: String,
     val imageResId: Int,
     val location: String,
+    val address: String,
+    val avgPrice: Double,
     val rating: Double,
     val isFavorite: Boolean = false
 )

@@ -68,7 +68,7 @@ fun RestaurantCard(
                     RestaurantTitle(title = restaurant.name, fontSize = 18.sp, color = TextPrimary)
                     VerticalSpace(dimensionResource(id = R.dimen.height_2))
                     RestaurantLocation(
-                        location = restaurant.location,
+                        location = restaurant.address,
                         iconTint = TextPrimary,
                         textColor = TextPrimary
                     )
