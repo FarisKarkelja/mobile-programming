@@ -59,4 +59,8 @@
 
     <string name="apply_and_continue">Apply and Continue</string>
     <string name="scroll_to_top">Scroll to top</string>
+
+    <string name="search">Search</string>
+    <string name="close">Close</string>
+    <string name="search_restaurants">Search restaurants</string>
 </resources>

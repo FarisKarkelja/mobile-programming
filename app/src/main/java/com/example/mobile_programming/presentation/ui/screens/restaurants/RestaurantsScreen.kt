@@ -5,6 +5,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -39,17 +40,37 @@ import com.example.mobile_programming.presentation.ui.components.BottomBar
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.screens.restaurants.components.RestaurantCard
 import com.example.mobile_programming.presentation.theme.WarmCream
+import com.example.mobile_programming.presentation.ui.screens.restaurants.components.RestaurantSearchBar
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import kotlinx.coroutines.launch
 
 @Composable
 fun RestaurantsScreen() {
     var restaurants by remember { mutableStateOf(HardcodedData.restaurants) }
-    val isRestaurantListEmpty by remember { derivedStateOf { restaurants.isEmpty() } }
+    var searchQuery by remember { mutableStateOf("") }
+
+    val queryRestaurants by remember {
+        derivedStateOf {
+            if (searchQuery.isBlank()) {
+                restaurants
+            } else {
+                restaurants.filter { restaurant ->
+                    restaurant.name.contains(
+                        searchQuery,
+                        ignoreCase = true
+                    )
+                }
+            }
+        }
+    }
+
+    val isRestaurantListEmpty by remember { derivedStateOf { queryRestaurants.isEmpty() } }
 
     val listState = rememberLazyListState()
     val showScrollToTop by remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
     val coroutineScope = rememberCoroutineScope()
+
+    val onSearchQueryChange: (String) -> Unit = { searchQuery = it }
 
     val onFavoriteClick: (String) -> Unit = { id ->
         // TODO: onFavorite logic
@@ -66,8 +87,10 @@ fun RestaurantsScreen() {
     }
 
     RestaurantsScreen(
-        restaurants = restaurants,
+        restaurants = queryRestaurants,
         isRestaurantListEmpty = isRestaurantListEmpty,
+        searchQuery = searchQuery,
+        onSearchQueryChange = onSearchQueryChange,
         listState = listState,
         showScrollToTop = showScrollToTop,
         onFavoriteClick = onFavoriteClick,
@@ -80,6 +103,8 @@ fun RestaurantsScreen() {
 private fun RestaurantsScreen(
     restaurants: List<Restaurant>,
     isRestaurantListEmpty: Boolean,
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit,
     listState: LazyListState,
     showScrollToTop: Boolean,
     onFavoriteClick: (String) -> Unit,
@@ -109,38 +134,46 @@ private fun RestaurantsScreen(
             }
         }
     ) { innerPadding ->
-        if (isRestaurantListEmpty) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = stringResource(R.string.no_restaurants_message),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = TextPrimary
-                )
-            }
-        } else {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = dimensionResource(id = R.dimen.padding_8)),
-                state = listState,
-                contentPadding = PaddingValues(
-                    top = dimensionResource(id = R.dimen.padding_16),
-                    bottom = dimensionResource(id = R.dimen.padding_16)
-                ),
-                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.height_12))
-            ) {
-                items(restaurants, key = { it.id }) { restaurant ->
-                    RestaurantCard(
-                        restaurant = restaurant,
-                        onFavoriteClick = { onFavoriteClick(restaurant.id) },
-                        onDetailsClick = { onDetailsClick(restaurant.id) }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            RestaurantSearchBar(
+                searchQuery = searchQuery,
+                onSearchQueryChange = onSearchQueryChange
+            )
+            if (isRestaurantListEmpty) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = stringResource(R.string.no_restaurants_message),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = TextPrimary
                     )
+                }
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = dimensionResource(id = R.dimen.padding_8)),
+                    state = listState,
+                    contentPadding = PaddingValues(
+                        top = dimensionResource(id = R.dimen.padding_16),
+                        bottom = dimensionResource(id = R.dimen.padding_16)
+                    ),
+                    verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.height_12))
+                ) {
+                    items(restaurants, key = { it.id }) { restaurant ->
+                        RestaurantCard(
+                            restaurant = restaurant,
+                            onFavoriteClick = { onFavoriteClick(restaurant.id) },
+                            onDetailsClick = { onDetailsClick(restaurant.id) }
+                        )
+                    }
                 }
             }
         }
@@ -153,6 +186,8 @@ fun PreviewRestaurantsScreen() {
     RestaurantsScreen(
         restaurants = HardcodedData.restaurants,
         isRestaurantListEmpty = false,
+        searchQuery = "",
+        onSearchQueryChange = {},
         listState = rememberLazyListState(),
         showScrollToTop = false,
         onFavoriteClick = {},
@@ -167,6 +202,8 @@ fun PreviewEmptyRestaurantsScreen() {
     RestaurantsScreen(
         restaurants = emptyList(),
         isRestaurantListEmpty = true,
+        searchQuery = "Nepostojeci",
+        onSearchQueryChange = {},
         listState = rememberLazyListState(),
         showScrollToTop = false,
         onFavoriteClick = {},

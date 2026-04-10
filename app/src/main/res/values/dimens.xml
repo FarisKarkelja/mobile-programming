@@ -20,6 +20,7 @@
     <dimen name="corner_14">14dp</dimen>
     <dimen name="corner_16">16dp</dimen>
     <dimen name="corner_24">24dp</dimen>
+    <dimen name="corner_50">50dp</dimen>
 
     <dimen name="height_2">2dp</dimen>
     <dimen name="height_4">4dp</dimen>
