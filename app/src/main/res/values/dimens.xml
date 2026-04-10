@@ -61,7 +61,7 @@
     <dimen name="size_16">16dp</dimen>
     <dimen name="size_18">18dp</dimen>
     <dimen name="size_24">24dp</dimen>
-    <dimen name="size_32">32dp</dimen>
+    <dimen name="size_36">36dp</dimen>
     <dimen name="size_60">60dp</dimen>
     <dimen name="size_100">100dp</dimen>
     <dimen name="size_420">420dp</dimen>

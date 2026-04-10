@@ -33,37 +33,37 @@ object HardcodedData {
         Category(
             id = "1",
             name = "Local",
-            iconResId = R.drawable.bosnia
+            iconResId = R.drawable.category_1
         ),
         Category(
             id = "2",
             name = "Quick",
-            iconResId = R.drawable.kebab
+            iconResId = R.drawable.category_2
         ),
         Category(
             id = "3",
             name = "BBQ",
-            iconResId = R.drawable.steak
+            iconResId = R.drawable.category_3
         ),
         Category(
             id = "4",
             name = "Pie",
-            iconResId = R.drawable.pie
+            iconResId = R.drawable.category_4
         ),
         Category(
             id = "5",
             name = "Healthy",
-            iconResId = R.drawable.salad
+            iconResId = R.drawable.category_5
         ),
         Category(
             id = "6",
             name = "Global",
-            iconResId = R.drawable.worldwide
+            iconResId = R.drawable.category_6
         ),
         Category(
             id = "7",
             name = "Sweets",
-            iconResId = R.drawable.cake
+            iconResId = R.drawable.category_7
         ),
     )
 

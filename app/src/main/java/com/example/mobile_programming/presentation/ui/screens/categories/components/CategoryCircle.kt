@@ -1,5 +1,6 @@
 package com.example.mobile_programming.presentation.ui.screens.categories.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -46,11 +46,10 @@ fun CategoryCircle(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Icon(
+            Image(
                 painter = painterResource(id = iconResource),
                 contentDescription = title,
-                tint = White,
-                modifier = Modifier.size(dimensionResource(id = R.dimen.size_32))
+                modifier = Modifier.size(dimensionResource(id = R.dimen.size_36))
             )
             VerticalSpace(dimensionResource(id = R.dimen.height_6))
             Text(
