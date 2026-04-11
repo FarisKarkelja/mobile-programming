@@ -41,6 +41,7 @@ import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.screens.restaurants.components.RestaurantCard
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.screens.restaurants.components.RestaurantSearchBar
+import com.example.mobile_programming.presentation.ui.screens.restaurants.components.SortOptionsRow
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import kotlinx.coroutines.launch
 
@@ -80,6 +81,19 @@ fun RestaurantsScreen() {
         // TODO: Navigation to restaurant details activity
     }
 
+    val onSortAZClick: () -> Unit = {
+        // TODO: Sort list A-Z
+    }
+    val onSortZAClick: () -> Unit = {
+        // TODO: Sort list Z-A
+    }
+    val onSortRatingLowClick: () -> Unit = {
+        // TODO: Sort list by rating Low-High
+    }
+    val onSortRatingHighClick: () -> Unit = {
+        // TODO: Sort list by rating High-Low
+    }
+
     val onScrollToTopClick: () -> Unit = {
         coroutineScope.launch {
             listState.animateScrollToItem(index = 0)
@@ -95,7 +109,11 @@ fun RestaurantsScreen() {
         showScrollToTop = showScrollToTop,
         onFavoriteClick = onFavoriteClick,
         onDetailsClick = onDetailsClick,
-        onScrollToTopClick = onScrollToTopClick
+        onScrollToTopClick = onScrollToTopClick,
+        onSortAZClick = onSortAZClick,
+        onSortZAClick = onSortZAClick,
+        onSortRatingLowClick = onSortRatingLowClick,
+        onSortRatingHighClick = onSortRatingHighClick
     )
 }
 
@@ -109,7 +127,11 @@ private fun RestaurantsScreen(
     showScrollToTop: Boolean,
     onFavoriteClick: (String) -> Unit,
     onDetailsClick: (String) -> Unit,
-    onScrollToTopClick: () -> Unit
+    onScrollToTopClick: () -> Unit,
+    onSortAZClick: () -> Unit,
+    onSortZAClick: () -> Unit,
+    onSortRatingLowClick: () -> Unit,
+    onSortRatingHighClick: () -> Unit
 ) {
     Scaffold(
         topBar = { TopBar() },
@@ -143,8 +165,12 @@ private fun RestaurantsScreen(
                 searchQuery = searchQuery,
                 onSearchQueryChange = onSearchQueryChange
             )
-            /* add two dropdowns -> one for lexicographic sorting/filtering
-            and one for rating sorting/filtering */
+            SortOptionsRow(
+                onSortAZClick = onSortAZClick,
+                onSortZAClick = onSortZAClick,
+                onSortRatingLowClick = onSortRatingLowClick,
+                onSortRatingHighClick = onSortRatingHighClick
+            )
             if (isRestaurantListEmpty) {
                 Box(
                     modifier = Modifier
@@ -194,7 +220,11 @@ fun PreviewRestaurantsScreen() {
         showScrollToTop = false,
         onFavoriteClick = {},
         onDetailsClick = {},
-        onScrollToTopClick = {}
+        onScrollToTopClick = {},
+        onSortAZClick = {},
+        onSortZAClick = {},
+        onSortRatingLowClick = {},
+        onSortRatingHighClick = {}
     )
 }
 
@@ -210,6 +240,10 @@ fun PreviewEmptyRestaurantsScreen() {
         showScrollToTop = false,
         onFavoriteClick = {},
         onDetailsClick = {},
-        onScrollToTopClick = {}
+        onScrollToTopClick = {},
+        onSortAZClick = {},
+        onSortZAClick = {},
+        onSortRatingLowClick = {},
+        onSortRatingHighClick = {}
     )
 }
