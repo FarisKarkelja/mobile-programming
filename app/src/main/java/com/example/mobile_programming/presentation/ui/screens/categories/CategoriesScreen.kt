@@ -32,7 +32,7 @@ fun CategoriesScreen() {
     }
 
     val onCategoryClick: (String) -> Unit = { id ->
-        // TODO: Navigate to restaurants activity via specific categoryId
+        // TODO: Navigate to filters activity while passing chosen categoryId
     }
 
     CategoriesScreen(

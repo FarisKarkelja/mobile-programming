@@ -53,7 +53,7 @@ fun FavoriteRestaurantsScreen() {
     }
 
     val onDetailsClick: (String) -> Unit = { id ->
-        // TODO: Navigation to restaurant details activity
+        // TODO: Navigation to restaurant details activity via specific restaurantId
     }
 
     FavoriteRestaurantsScreen(

@@ -34,7 +34,7 @@ fun FiltersScreen() {
     val isApplyEnabled = selectedLocation != "Location" && selectedBudget != "Budget"
 
     val onApplyClick: () -> Unit = {
-        /* TODO: Navigate to restaurants activity */
+        /* TODO: Navigate to restaurants activity via already chosen categoryId and applied filters */
     }
 
     FiltersScreen(

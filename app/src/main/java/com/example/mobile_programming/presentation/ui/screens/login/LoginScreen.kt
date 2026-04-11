@@ -24,7 +24,7 @@ fun LoginScreen() {
     var hasTriedSubmit by remember { mutableStateOf(false) }
     var passwordVisible by remember { mutableStateOf(false) }
 
-    val onLoginSuccess = { /* TODO: Navigate to restaurants activity */ }
+    val onLoginSuccess = { /* TODO: Navigate to categories activity */ }
     val onNavigateToRegister = { /* TODO: Navigate to registration activity */ }
 
     val isLoginEnabled = email.isNotBlank() && password.isNotBlank()

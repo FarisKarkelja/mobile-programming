@@ -78,20 +78,23 @@ fun RestaurantsScreen() {
     }
 
     val onDetailsClick: (String) -> Unit = { id ->
-        // TODO: Navigation to restaurant details activity
+        // TODO: Navigation to restaurant details activity via specific restaurantId
     }
 
     val onSortAZClick: () -> Unit = {
-        // TODO: Sort list A-Z
+        restaurants = restaurants.sortedBy { it.name }
     }
+
     val onSortZAClick: () -> Unit = {
-        // TODO: Sort list Z-A
+        restaurants = restaurants.sortedByDescending { it.name }
     }
+
     val onSortRatingLowClick: () -> Unit = {
-        // TODO: Sort list by rating Low-High
+        restaurants = restaurants.sortedBy { it.rating }
     }
+
     val onSortRatingHighClick: () -> Unit = {
-        // TODO: Sort list by rating High-Low
+        restaurants = restaurants.sortedByDescending { it.rating }
     }
 
     val onScrollToTopClick: () -> Unit = {

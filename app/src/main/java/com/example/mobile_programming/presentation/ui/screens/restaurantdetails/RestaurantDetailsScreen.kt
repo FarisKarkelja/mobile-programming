@@ -49,6 +49,7 @@ fun RestaurantDetailsScreen() {
     val topDishes by remember {
         mutableStateOf(HardcodedData.foodDishes.filter { it.restaurantId == restaurant.id })
     }
+
     val topDrinks by remember {
         mutableStateOf(HardcodedData.drinks.filter { it.restaurantId == restaurant.id })
     }
