@@ -2,9 +2,7 @@ package com.example.mobile_programming.presentation.ui.screens.restaurants.compo
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.ButtonDefaults
@@ -20,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.Gold
 import com.example.mobile_programming.presentation.theme.TextPrimary
+import com.example.mobile_programming.presentation.ui.components.HorizontalSpace
 
 @Composable
 fun RatingSortButton(
@@ -43,7 +42,7 @@ fun RatingSortButton(
             tint = Gold,
             modifier = Modifier.size(dimensionResource(id = R.dimen.size_14))
         )
-        Spacer(modifier = Modifier.width(dimensionResource(R.dimen.width_4)))
+        HorizontalSpace(dimensionResource(R.dimen.width_4))
         Text(
             text = text,
             fontSize = 12.sp,
