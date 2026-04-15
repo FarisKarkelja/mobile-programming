@@ -201,164 +201,104 @@ object HardcodedData {
 
     val foodDishes = listOf(
         FoodDish(
-            "1",
-            "1",
-            "Spaghetti Carbonara",
-            R.drawable.meal_1,
-            14.50,
-            "Classic Italian pasta with creamy eggs, hard cheese, cured pork, and black pepper."
+            "1", "1", "Spaghetti Carbonara", R.drawable.meal_1, 14.50,
+            "Classic Italian pasta with creamy eggs, hard cheese, cured pork, and black pepper.",
+            "20 min", "Medium", "650 kcal"
         ),
         FoodDish(
-            "2",
-            "1",
-            "Margherita Pizza",
-            R.drawable.meal_6,
-            12.00,
-            "Traditional pizza with tomato sauce, fresh mozzarella, basil, and extra virgin olive oil."
+            "2", "1", "Margherita Pizza", R.drawable.meal_6, 12.00,
+            "Traditional pizza with tomato sauce, fresh mozzarella, basil, and extra virgin olive oil.",
+            "15 min", "Large", "800 kcal"
         ),
         FoodDish(
-            "3",
-            "1",
-            "Bruschetta",
-            R.drawable.meal_3,
-            8.50,
-            "Toasted bread rubbed with garlic and topped with tomatoes, olive oil, and salt."
+            "3", "1", "Bruschetta", R.drawable.meal_3, 8.50,
+            "Toasted bread rubbed with garlic and topped with tomatoes, olive oil, and salt.",
+            "10 min", "Small", "250 kcal"
         ),
         FoodDish(
-            "4",
-            "2",
-            "Spicy Tuna Roll",
-            R.drawable.meal_2,
-            16.00,
-            "Fresh tuna mixed with spicy mayo and cucumber, wrapped in seaweed and rice."
+            "4", "2", "Spicy Tuna Roll", R.drawable.meal_2, 16.00,
+            "Fresh tuna mixed with spicy mayo and cucumber, wrapped in seaweed and rice.",
+            "25 min", "8 pieces", "320 kcal"
         ),
         FoodDish(
-            "5",
-            "2",
-            "Salmon Sashimi",
-            R.drawable.meal_1,
-            18.00,
-            "Thinly sliced raw salmon served with wasabi, ginger, and soy sauce."
+            "5", "2", "Salmon Sashimi", R.drawable.meal_1, 18.00,
+            "Thinly sliced raw salmon served with wasabi, ginger, and soy sauce.",
+            "15 min", "6 pieces", "200 kcal"
         ),
         FoodDish(
-            "6",
-            "2",
-            "Beef Tacos",
-            R.drawable.meal_5,
-            11.00,
-            "Three corn tortillas filled with seasoned beef, onions, cilantro, and fresh salsa."
+            "6", "2", "Beef Tacos", R.drawable.meal_5, 11.00,
+            "Three corn tortillas filled with seasoned beef, onions, cilantro, and fresh salsa.",
+            "15 min", "3 pieces", "450 kcal"
         ),
         FoodDish(
-            "7",
-            "2",
-            "Chicken Burrito",
-            R.drawable.meal_3,
-            13.50,
-            "Large flour tortilla stuffed with grilled chicken, rice, beans, cheese, and guacamole."
+            "7", "2", "Chicken Burrito", R.drawable.meal_3, 13.50,
+            "Large flour tortilla stuffed with grilled chicken, rice, beans, cheese, and guacamole.",
+            "20 min", "Large", "750 kcal"
         ),
         FoodDish(
-            "8",
-            "2",
-            "Nachos Supreme",
-            R.drawable.meal_4,
-            10.00,
-            "Crispy tortilla chips topped with melted cheese, jalapeños, sour cream, and olives."
+            "8", "2", "Nachos Supreme", R.drawable.meal_4, 10.00,
+            "Crispy tortilla chips topped with melted cheese, jalapeños, sour cream, and olives.",
+            "10 min", "Shared", "600 kcal"
         ),
         FoodDish(
-            "9",
-            "4",
-            "Double Smash Burger",
-            R.drawable.meal_1,
-            15.00,
-            "Two juicy beef patties with melted cheddar, secret sauce, and pickles on a brioche bun."
+            "9", "4", "Double Smash Burger", R.drawable.meal_1, 15.00,
+            "Two juicy beef patties with melted cheddar, secret sauce, and pickles on a brioche bun.",
+            "15 min", "Regular", "850 kcal"
         ),
         FoodDish(
-            "10",
-            "4",
-            "Loaded Fries",
-            R.drawable.meal_2,
-            7.50,
-            "Crispy fries smothered in cheese sauce, bacon bits, and chopped chives."
+            "10", "4", "Loaded Fries", R.drawable.meal_2, 7.50,
+            "Crispy fries smothered in cheese sauce, bacon bits, and chopped chives.",
+            "10 min", "Medium", "500 kcal"
         ),
         FoodDish(
-            "11",
-            "5",
-            "Kung Pao Chicken",
-            R.drawable.meal_4,
-            14.00,
-            "Spicy, stir-fried Chinese dish made with chicken, peanuts, vegetables, and chili peppers."
+            "11", "5", "Kung Pao Chicken", R.drawable.meal_4, 14.00,
+            "Spicy, stir-fried Chinese dish made with chicken, peanuts, vegetables, and chili peppers.",
+            "20 min", "Large", "550 kcal"
         ),
         FoodDish(
-            "12",
-            "5",
-            "Spring Rolls",
-            R.drawable.meal_3,
-            6.00,
-            "Crispy vegetable-filled rolls served with a sweet and sour dipping sauce."
+            "12", "5", "Spring Rolls", R.drawable.meal_3, 6.00,
+            "Crispy vegetable-filled rolls served with a sweet and sour dipping sauce.",
+            "12 min", "4 pieces", "280 kcal"
         ),
         FoodDish(
-            "13",
-            "6",
-            "Ratatouille",
-            R.drawable.meal_2,
-            13.00,
-            "Traditional French Provençal stewed vegetable dish originating from Nice."
+            "13", "6", "Ratatouille", R.drawable.meal_2, 13.00,
+            "Traditional French Provençal stewed vegetable dish originating from Nice.",
+            "35 min", "Medium", "320 kcal"
         ),
         FoodDish(
-            "14",
-            "6",
-            "Croissant",
-            R.drawable.meal_6,
-            4.50,
-            "Buttery, flaky, Viennoiserie pastry of Austrian origin, named for its historical crescent shape."
+            "14", "6", "Croissant", R.drawable.meal_6, 4.50,
+            "Buttery, flaky, Viennoiserie pastry of Austrian origin, named for its historical crescent shape.",
+            "5 min", "Small", "350 kcal"
         ),
         FoodDish(
-            "15",
-            "7",
-            "Ćevapi (10)",
-            R.drawable.meal_1,
-            12.00,
-            "Traditional grilled dish of minced meat served in lepinja bread with onions and ajvar."
+            "15", "7", "Ćevapi (10)", R.drawable.meal_1, 12.00,
+            "Traditional grilled dish of minced meat served in lepinja bread with onions and ajvar.",
+            "15 min", "10 pieces", "900 kcal"
         ),
         FoodDish(
-            "16",
-            "7",
-            "Teleća Čorba",
-            R.drawable.meal_4,
-            6.00,
-            "Hearty and traditional Bosnian veal cream soup with vegetables."
+            "16", "7", "Teleća Čorba", R.drawable.meal_4, 6.00,
+            "Hearty and traditional Bosnian veal cream soup with vegetables.",
+            "15 min", "Bowl", "300 kcal"
         ),
         FoodDish(
-            "17",
-            "8",
-            "Quinoa Salad",
-            R.drawable.meal_2,
-            11.50,
-            "Nutritious mix of quinoa, cherry tomatoes, cucumbers, spinach, and lemon dressing."
+            "17", "8", "Quinoa Salad", R.drawable.meal_2, 11.50,
+            "Nutritious mix of quinoa, cherry tomatoes, cucumbers, spinach, and lemon dressing.",
+            "15 min", "Medium", "380 kcal"
         ),
         FoodDish(
-            "18",
-            "8",
-            "Avocado Toast",
-            R.drawable.meal_3,
-            9.50,
-            "Sliced avocado on toasted sourdough, topped with chili flakes and a poached egg."
+            "18", "8", "Avocado Toast", R.drawable.meal_3, 9.50,
+            "Sliced avocado on toasted sourdough, topped with chili flakes and a poached egg.",
+            "10 min", "1 slice", "420 kcal"
         ),
         FoodDish(
-            "19",
-            "9",
-            "Chicken Tikka",
-            R.drawable.meal_1,
-            15.50,
-            "Boneless chicken pieces marinated in spices and yogurt, grilled in a tandoor."
+            "19", "9", "Chicken Tikka", R.drawable.meal_1, 15.50,
+            "Boneless chicken pieces marinated in spices and yogurt, grilled in a tandoor.",
+            "25 min", "Large", "480 kcal"
         ),
         FoodDish(
-            "20",
-            "10",
-            "Ribeye Steak",
-            R.drawable.meal_1,
-            32.00,
-            "Premium grilled ribeye steak served with garlic butter and roasted potatoes."
+            "20", "10", "Ribeye Steak", R.drawable.meal_1, 32.00,
+            "Premium grilled ribeye steak served with garlic butter and roasted potatoes.",
+            "30 min", "Large", "950 kcal"
         )
     )
 

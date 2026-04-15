@@ -7,4 +7,7 @@ data class FoodDish(
     val imageResId: Int,
     val price: Double,
     val description: String,
+    val cookingTime: String,
+    val servingSize: String,
+    val calories: String
 )

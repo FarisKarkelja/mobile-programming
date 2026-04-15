@@ -72,4 +72,14 @@
     <string name="restaurant_details">Restaurant</string>
     <string name="food_dish">Food Dish</string>
     <string name="drink">Drink</string>
+
+    <string name="navigate_back">Navigate back</string>
+    <string name="drink_not_found">Drink not found</string>
+    <string name="food_dish_not_found">Food dish not found</string>
+
+    <string name="about_drink">About this drink</string>
+    <string name="about_dish">About this dish</string>
+
+    <string name="dish_tag_one">Chef\'s Choice</string>
+    <string name="dish_tag_two">Premium Quality</string>
 </resources>
