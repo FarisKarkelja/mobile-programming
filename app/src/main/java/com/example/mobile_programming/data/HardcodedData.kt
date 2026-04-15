@@ -9,9 +9,9 @@ import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 
 object HardcodedData {
     val locations = listOf(
-        "Location", "Dobrinja", "Nedžarići", "Alipašino Polje", "Otoka",
+        "Location", "Dobrinja", "Ilidža", "Nedžarići", "Alipašino Polje", "Otoka",
         "Čengić Vila", "Malta", "Pofalići", "Marijin Dvor",
-        "Skenderija", "Baščaršija", "Vijećnica"
+        "Skenderija", "Baščaršija", "Vijećnica", "Vogošća"
     )
     val budgets = listOf("Budget", "Under 20 BAM", "20 - 50 BAM", "50 - 100 BAM", "100+ BAM")
 
