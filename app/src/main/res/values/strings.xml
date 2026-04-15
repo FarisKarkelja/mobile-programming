@@ -76,6 +76,7 @@
     <string name="navigate_back">Navigate back</string>
     <string name="drink_not_found">Drink not found</string>
     <string name="food_dish_not_found">Food dish not found</string>
+    <string name="restaurant_not_found">Restaurant not found</string>
 
     <string name="about_drink">About this drink</string>
     <string name="about_dish">About this dish</string>

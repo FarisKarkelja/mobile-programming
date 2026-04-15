@@ -48,37 +48,43 @@ fun RestaurantDetailsScreen(
     onNavigateToDish: (String) -> Unit,
     onNavigateToDrink: (String) -> Unit
 ) {
-    val restaurant = allRestaurants.find { it.id == restaurantId } ?: return
+    val restaurant = allRestaurants.find { it.id == restaurantId }
 
-    val topDishes by remember {
-        mutableStateOf(HardcodedData.foodDishes.filter { it.restaurantId == restaurantId })
+    if (restaurant == null) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text(text = stringResource(R.string.restaurant_not_found))
+        }
+    } else {
+        val topDishes by remember {
+            mutableStateOf(HardcodedData.foodDishes.filter { it.restaurantId == restaurantId })
+        }
+
+        val topDrinks by remember {
+            mutableStateOf(HardcodedData.drinks.filter { it.restaurantId == restaurantId })
+        }
+
+        val hasTopDishes by remember { derivedStateOf { topDishes.isNotEmpty() } }
+        val hasTopDrinks by remember { derivedStateOf { topDrinks.isNotEmpty() } }
+
+        val onDishClick: (FoodDish) -> Unit = { dish ->
+            onNavigateToDish(dish.id)
+        }
+
+        val onDrinkClick: (Drink) -> Unit = { drink ->
+            onNavigateToDrink(drink.id)
+        }
+
+        RestaurantDetailsScreen(
+            restaurant = restaurant,
+            topDishes = topDishes,
+            topDrinks = topDrinks,
+            hasTopDishes = hasTopDishes,
+            hasTopDrinks = hasTopDrinks,
+            onDishClick = onDishClick,
+            onDrinkClick = onDrinkClick,
+            onBackClick = onBackClick
+        )
     }
-
-    val topDrinks by remember {
-        mutableStateOf(HardcodedData.drinks.filter { it.restaurantId == restaurantId })
-    }
-
-    val hasTopDishes by remember { derivedStateOf { topDishes.isNotEmpty() } }
-    val hasTopDrinks by remember { derivedStateOf { topDrinks.isNotEmpty() } }
-
-    val onDishClick: (FoodDish) -> Unit = { dish ->
-        onNavigateToDish(dish.id)
-    }
-
-    val onDrinkClick: (Drink) -> Unit = { drink ->
-        onNavigateToDrink(drink.id)
-    }
-
-    RestaurantDetailsScreen(
-        restaurant = restaurant,
-        topDishes = topDishes,
-        topDrinks = topDrinks,
-        hasTopDishes = hasTopDishes,
-        hasTopDrinks = hasTopDrinks,
-        onDishClick = onDishClick,
-        onDrinkClick = onDrinkClick,
-        onBackClick = onBackClick
-    )
 }
 
 @Composable

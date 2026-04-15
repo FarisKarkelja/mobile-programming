@@ -75,7 +75,6 @@ private fun FoodDishDetailsScreen(
                 )
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_20))
-
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -95,14 +94,12 @@ private fun FoodDishDetailsScreen(
                 }
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_12))
-
                 Row(horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_8))) {
                     DetailBadge(text = stringResource(R.string.dish_tag_one))
                     DetailBadge(text = stringResource(R.string.dish_tag_two))
                 }
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_24))
-
                 Row(modifier = Modifier.fillMaxWidth()) {
                     InfoTag(label = "Cooking Time", value = dish.cookingTime)
                     InfoTag(label = "Serving Size", value = dish.servingSize)
@@ -110,14 +107,12 @@ private fun FoodDishDetailsScreen(
                 }
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_24))
-
                 HorizontalDivider(
                     thickness = dimensionResource(R.dimen.thickness_half),
                     color = TextPrimary.copy(alpha = 0.1f)
                 )
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_20))
-
                 Text(
                     text = stringResource(R.string.about_dish),
                     fontSize = 18.sp,
@@ -126,7 +121,6 @@ private fun FoodDishDetailsScreen(
                 )
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_8))
-
                 Text(
                     text = dish.description,
                     fontSize = 15.sp,

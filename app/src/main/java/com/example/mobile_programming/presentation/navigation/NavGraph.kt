@@ -178,7 +178,7 @@ fun NavGraph(
                 onNavigateToDrink = { drinkId ->
                     navController.navigate(Screen.DrinkDetails.createRoute(drinkId))
                 },
-                onBackClick = { navController.popBackStack() })
+                onBackClick = { navController.navigateUp() })
         }
 
         composable(
@@ -220,7 +220,7 @@ fun NavGraph(
             arguments = listOf(navArgument("dishId") { type = NavType.StringType })
         ) { backStackEntry ->
             val dishId = backStackEntry.arguments?.getString("dishId").orEmpty()
-            FoodDishDetailsScreen(dishId = dishId, onBackClick = { navController.popBackStack() })
+            FoodDishDetailsScreen(dishId = dishId, onBackClick = { navController.navigateUp() })
         }
 
         composable(
@@ -232,7 +232,7 @@ fun NavGraph(
             arguments = listOf(navArgument("drinkId") { type = NavType.StringType })
         ) { backStackEntry ->
             val drinkId = backStackEntry.arguments?.getString("drinkId").orEmpty()
-            DrinkDetailsScreen(drinkId = drinkId, onBackClick = { navController.popBackStack() })
+            DrinkDetailsScreen(drinkId = drinkId, onBackClick = { navController.navigateUp() })
         }
     }
 }

@@ -73,7 +73,6 @@ private fun DrinkDetailsScreen(
                 )
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_20))
-
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
