@@ -1,11 +1,11 @@
 package com.example.mobile_programming.data
 
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
-import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.FoodDish
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.ui.screens.categories.util.Category
+import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
 import com.example.mobile_programming.presentation.ui.screens.profile.util.User
-import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Drink
 
 object HardcodedData {
     val locations = listOf(
@@ -200,48 +200,328 @@ object HardcodedData {
     )
 
     val foodDishes = listOf(
-        FoodDish("1", "1", "Spaghetti Carbonara", R.drawable.meal_1),
-        FoodDish("2", "1", "Margherita Pizza", R.drawable.meal_6),
-        FoodDish("3", "1", "Bruschetta", R.drawable.meal_3),
-        FoodDish("4", "2", "Spicy Tuna Roll", R.drawable.meal_2),
-        FoodDish("5", "2", "Salmon Sashimi", R.drawable.meal_1),
-        FoodDish("6", "2", "Beef Tacos", R.drawable.meal_5),
-        FoodDish("7", "2", "Chicken Burrito", R.drawable.meal_3),
-        FoodDish("8", "2", "Nachos Supreme", R.drawable.meal_4),
-        FoodDish("9", "4", "Double Smash Burger", R.drawable.meal_1),
-        FoodDish("10", "4", "Loaded Fries", R.drawable.meal_2),
-        FoodDish("11", "5", "Kung Pao Chicken", R.drawable.meal_4),
-        FoodDish("12", "5", "Spring Rolls", R.drawable.meal_3),
-        FoodDish("13", "6", "Ratatouille", R.drawable.meal_2),
-        FoodDish("14", "6", "Croissant", R.drawable.meal_6),
-        FoodDish("15", "7", "Ćevapi (10)", R.drawable.meal_1),
-        FoodDish("16", "7", "Teleća Čorba", R.drawable.meal_4),
-        FoodDish("17", "8", "Quinoa Salad", R.drawable.meal_2),
-        FoodDish("18", "8", "Avocado Toast", R.drawable.meal_3),
-        FoodDish("19", "9", "Chicken Tikka", R.drawable.meal_1),
-        FoodDish("20", "10", "Ribeye Steak", R.drawable.meal_1)
+        FoodDish(
+            "1",
+            "1",
+            "Spaghetti Carbonara",
+            R.drawable.meal_1,
+            14.50,
+            "Classic Italian pasta with creamy eggs, hard cheese, cured pork, and black pepper."
+        ),
+        FoodDish(
+            "2",
+            "1",
+            "Margherita Pizza",
+            R.drawable.meal_6,
+            12.00,
+            "Traditional pizza with tomato sauce, fresh mozzarella, basil, and extra virgin olive oil."
+        ),
+        FoodDish(
+            "3",
+            "1",
+            "Bruschetta",
+            R.drawable.meal_3,
+            8.50,
+            "Toasted bread rubbed with garlic and topped with tomatoes, olive oil, and salt."
+        ),
+        FoodDish(
+            "4",
+            "2",
+            "Spicy Tuna Roll",
+            R.drawable.meal_2,
+            16.00,
+            "Fresh tuna mixed with spicy mayo and cucumber, wrapped in seaweed and rice."
+        ),
+        FoodDish(
+            "5",
+            "2",
+            "Salmon Sashimi",
+            R.drawable.meal_1,
+            18.00,
+            "Thinly sliced raw salmon served with wasabi, ginger, and soy sauce."
+        ),
+        FoodDish(
+            "6",
+            "2",
+            "Beef Tacos",
+            R.drawable.meal_5,
+            11.00,
+            "Three corn tortillas filled with seasoned beef, onions, cilantro, and fresh salsa."
+        ),
+        FoodDish(
+            "7",
+            "2",
+            "Chicken Burrito",
+            R.drawable.meal_3,
+            13.50,
+            "Large flour tortilla stuffed with grilled chicken, rice, beans, cheese, and guacamole."
+        ),
+        FoodDish(
+            "8",
+            "2",
+            "Nachos Supreme",
+            R.drawable.meal_4,
+            10.00,
+            "Crispy tortilla chips topped with melted cheese, jalapeños, sour cream, and olives."
+        ),
+        FoodDish(
+            "9",
+            "4",
+            "Double Smash Burger",
+            R.drawable.meal_1,
+            15.00,
+            "Two juicy beef patties with melted cheddar, secret sauce, and pickles on a brioche bun."
+        ),
+        FoodDish(
+            "10",
+            "4",
+            "Loaded Fries",
+            R.drawable.meal_2,
+            7.50,
+            "Crispy fries smothered in cheese sauce, bacon bits, and chopped chives."
+        ),
+        FoodDish(
+            "11",
+            "5",
+            "Kung Pao Chicken",
+            R.drawable.meal_4,
+            14.00,
+            "Spicy, stir-fried Chinese dish made with chicken, peanuts, vegetables, and chili peppers."
+        ),
+        FoodDish(
+            "12",
+            "5",
+            "Spring Rolls",
+            R.drawable.meal_3,
+            6.00,
+            "Crispy vegetable-filled rolls served with a sweet and sour dipping sauce."
+        ),
+        FoodDish(
+            "13",
+            "6",
+            "Ratatouille",
+            R.drawable.meal_2,
+            13.00,
+            "Traditional French Provençal stewed vegetable dish originating from Nice."
+        ),
+        FoodDish(
+            "14",
+            "6",
+            "Croissant",
+            R.drawable.meal_6,
+            4.50,
+            "Buttery, flaky, Viennoiserie pastry of Austrian origin, named for its historical crescent shape."
+        ),
+        FoodDish(
+            "15",
+            "7",
+            "Ćevapi (10)",
+            R.drawable.meal_1,
+            12.00,
+            "Traditional grilled dish of minced meat served in lepinja bread with onions and ajvar."
+        ),
+        FoodDish(
+            "16",
+            "7",
+            "Teleća Čorba",
+            R.drawable.meal_4,
+            6.00,
+            "Hearty and traditional Bosnian veal cream soup with vegetables."
+        ),
+        FoodDish(
+            "17",
+            "8",
+            "Quinoa Salad",
+            R.drawable.meal_2,
+            11.50,
+            "Nutritious mix of quinoa, cherry tomatoes, cucumbers, spinach, and lemon dressing."
+        ),
+        FoodDish(
+            "18",
+            "8",
+            "Avocado Toast",
+            R.drawable.meal_3,
+            9.50,
+            "Sliced avocado on toasted sourdough, topped with chili flakes and a poached egg."
+        ),
+        FoodDish(
+            "19",
+            "9",
+            "Chicken Tikka",
+            R.drawable.meal_1,
+            15.50,
+            "Boneless chicken pieces marinated in spices and yogurt, grilled in a tandoor."
+        ),
+        FoodDish(
+            "20",
+            "10",
+            "Ribeye Steak",
+            R.drawable.meal_1,
+            32.00,
+            "Premium grilled ribeye steak served with garlic butter and roasted potatoes."
+        )
     )
 
     val drinks = listOf(
-        Drink("1", "1", "House Red Wine", R.drawable.drink_1),
-        Drink("2", "1", "Espresso", R.drawable.drink_2),
-        Drink("3", "1", "Lemonade", R.drawable.drink_3),
-        Drink("4", "2", "Matcha Tea", R.drawable.drink_2),
-        Drink("5", "2", "Asahi Beer", R.drawable.drink_4),
-        Drink("6", "2", "Margarita", R.drawable.drink_5),
-        Drink("7", "2", "Corona Extra", R.drawable.drink_6),
-        Drink("8", "4", "Vanilla Milkshake", R.drawable.drink_1),
-        Drink("9", "4", "Coca Cola", R.drawable.drink_3),
-        Drink("10", "5", "Jasmine Tea", R.drawable.drink_2),
-        Drink("11", "6", "Champagne", R.drawable.drink_4),
-        Drink("12", "6", "Sparkling Water", R.drawable.drink_5),
-        Drink("13", "7", "Ayran", R.drawable.drink_1),
-        Drink("14", "7", "Bosnian Coffee", R.drawable.drink_2),
-        Drink("15", "8", "Green Smoothie", R.drawable.drink_3),
-        Drink("16", "8", "Kombucha", R.drawable.drink_4),
-        Drink("17", "9", "Mango Lassi", R.drawable.drink_5),
-        Drink("18", "9", "Masala Chai", R.drawable.drink_2),
-        Drink("19", "10", "Craft Beer", R.drawable.drink_6),
-        Drink("20", "10", "Whiskey Sour", R.drawable.drink_1)
+        Drink(
+            "1",
+            "1",
+            "House Red Wine",
+            R.drawable.drink_1,
+            7.00,
+            "A fine selection of local red wine with deep berry notes."
+        ),
+        Drink(
+            "2",
+            "1",
+            "Espresso",
+            R.drawable.drink_2,
+            3.00,
+            "Rich and intense short coffee made with premium roasted beans."
+        ),
+        Drink(
+            "3",
+            "1",
+            "Lemonade",
+            R.drawable.drink_3,
+            4.50,
+            "Freshly squeezed lemons with a touch of mint and honey."
+        ),
+        Drink(
+            "4",
+            "2",
+            "Matcha Tea",
+            R.drawable.drink_2,
+            5.50,
+            "Authentic Japanese powdered green tea with a smooth, earthy taste."
+        ),
+        Drink(
+            "5",
+            "2",
+            "Asahi Beer",
+            R.drawable.drink_4,
+            6.00,
+            "Japan's most popular dry, crisp, and refreshing lager."
+        ),
+        Drink(
+            "6",
+            "2",
+            "Margarita",
+            R.drawable.drink_5,
+            9.00,
+            "Classic cocktail with tequila, lime juice, and triple sec, served with a salted rim."
+        ),
+        Drink(
+            "7",
+            "2",
+            "Corona Extra",
+            R.drawable.drink_6,
+            5.50,
+            "Light and crisp Mexican pale lager served with a slice of lime."
+        ),
+        Drink(
+            "8",
+            "4",
+            "Vanilla Milkshake",
+            R.drawable.drink_1,
+            6.50,
+            "Creamy vanilla bean ice cream blended with fresh milk and whipped cream."
+        ),
+        Drink(
+            "9",
+            "4",
+            "Coca Cola",
+            R.drawable.drink_3,
+            3.50,
+            "Classic carbonated soft drink served chilled with ice."
+        ),
+        Drink(
+            "10",
+            "5",
+            "Jasmine Tea",
+            R.drawable.drink_2,
+            4.00,
+            "Fragrant green tea scented with real jasmine blossoms."
+        ),
+        Drink(
+            "11",
+            "6",
+            "Champagne",
+            R.drawable.drink_4,
+            15.00,
+            "Elegant French sparkling wine for special celebrations."
+        ),
+        Drink(
+            "12",
+            "6",
+            "Sparkling Water",
+            R.drawable.drink_5,
+            3.00,
+            "Refreshing carbonated natural mineral water."
+        ),
+        Drink(
+            "13",
+            "7",
+            "Ayran",
+            R.drawable.drink_1,
+            2.50,
+            "Traditional salty yogurt-based beverage, perfect with grilled meat."
+        ),
+        Drink(
+            "14",
+            "7",
+            "Bosnian Coffee",
+            R.drawable.drink_2,
+            3.50,
+            "Strong, unfiltered coffee served in a traditional dzezva with rahat lokum."
+        ),
+        Drink(
+            "15",
+            "8",
+            "Green Smoothie",
+            R.drawable.drink_3,
+            7.50,
+            "Healthy blend of kale, apple, ginger, and spirulina."
+        ),
+        Drink(
+            "16",
+            "8",
+            "Kombucha",
+            R.drawable.drink_4,
+            6.50,
+            "Fermented, slightly effervescent, sweetened black or green tea drink."
+        ),
+        Drink(
+            "17",
+            "9",
+            "Mango Lassi",
+            R.drawable.drink_5,
+            5.00,
+            "Creamy Indian yogurt drink blended with sweet ripe mangoes."
+        ),
+        Drink(
+            "18",
+            "9",
+            "Masala Chai",
+            R.drawable.drink_2,
+            4.50,
+            "Black tea brewed with aromatic Indian spices and milk."
+        ),
+        Drink(
+            "19",
+            "10",
+            "Craft Beer",
+            R.drawable.drink_6,
+            7.00,
+            "Locally brewed IPA with citrus and pine hop notes."
+        ),
+        Drink(
+            "20",
+            "10",
+            "Whiskey Sour",
+            R.drawable.drink_1,
+            10.00,
+            "Classic mix of bourbon, lemon juice, and a dash of sugar syrup."
+        )
     )
 }

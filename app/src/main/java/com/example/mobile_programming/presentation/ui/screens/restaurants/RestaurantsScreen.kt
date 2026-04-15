@@ -36,7 +36,6 @@ import com.example.mobile_programming.R
 import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
-import com.example.mobile_programming.presentation.ui.components.BottomBar
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.screens.restaurants.components.RestaurantCard
 import com.example.mobile_programming.presentation.theme.WarmCream
@@ -52,11 +51,13 @@ fun RestaurantsScreen(
     location: String,
     budget: String,
     minRating: Float,
+    allRestaurants: List<Restaurant>,
+    onToggleFavorite: (String) -> Unit,
     onNavigateToDetails: (String) -> Unit
 ) {
     var restaurants by remember {
         mutableStateOf(
-            HardcodedData.restaurants.filter { restaurant ->
+            allRestaurants.filter { restaurant ->
                 restaurant.categoryId == categoryId &&
                         restaurant.location == location &&
                         restaurant.rating >= minRating &&
@@ -90,7 +91,7 @@ fun RestaurantsScreen(
     val onSearchQueryChange: (String) -> Unit = { searchQuery = it }
 
     val onFavoriteClick: (String) -> Unit = { id ->
-        // TODO: onFavorite logic
+        onToggleFavorite(id)
     }
 
     val onDetailsClick: (String) -> Unit = { id ->
@@ -153,7 +154,11 @@ private fun RestaurantsScreen(
     onSortRatingHighClick: () -> Unit
 ) {
     Scaffold(
-        topBar = { TopBar() },
+        topBar = {
+            TopBar(
+                title = stringResource(id = R.string.restaurants)
+            )
+        },
         bottomBar = {},
         containerColor = WarmCream,
         floatingActionButton = {

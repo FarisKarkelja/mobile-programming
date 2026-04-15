@@ -26,17 +26,25 @@ class MainActivity : ComponentActivity() {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
 
-                val showBottomBar = currentRoute in Screen.getBottomBarNavigationRoutes()
+                val showBottomBar =
+                    currentRoute != null && Screen.getBottomBarNavigationRoutes().any { route ->
+                        currentRoute == route || currentRoute.startsWith("$route/")
+                    }
 
                 Scaffold(
                     bottomBar = {
                         if (showBottomBar) {
                             val items = BottomBarNavigationItems.items
-                            val selectedIndex = items.indexOfFirst { it.route == currentRoute }
+                            val selectedIndex = when {
+                                currentRoute.startsWith("restaurants_screen") -> 0
+                                currentRoute == Screen.FavoriteRestaurants.route -> 1
+                                currentRoute == Screen.Profile.route -> 2
+                                else -> 0
+                            }
 
                             BottomBarNavigationComponent(
                                 items = items,
-                                selectedItemIndex = if (selectedIndex != -1) selectedIndex else 0,
+                                selectedItemIndex = selectedIndex,
                                 onItemSelected = { index ->
                                     val destination = items[index].route
 

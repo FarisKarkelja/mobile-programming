@@ -12,7 +12,7 @@ object BottomBarNavigationItems {
         BottomBarNavigationItem(
             titleId = R.string.restaurants,
             icon = Icons.Outlined.Restaurant,
-            route = Screen.Restaurants.route
+            route = Screen.Categories.route
         ),
         BottomBarNavigationItem(
             titleId = R.string.favorites,

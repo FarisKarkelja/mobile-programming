@@ -24,7 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.White
-import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Drink
+import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
 
 @Composable
 fun DrinkCard(drink: Drink, onClick: () -> Unit) {

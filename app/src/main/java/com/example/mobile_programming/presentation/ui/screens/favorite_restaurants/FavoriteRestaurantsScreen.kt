@@ -28,7 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
 import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.theme.TextPrimary
-import com.example.mobile_programming.presentation.ui.components.BottomBar
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
@@ -38,10 +37,11 @@ import com.example.mobile_programming.presentation.ui.screens.favorite_restauran
 
 @Composable
 fun FavoriteRestaurantsScreen(
+    allRestaurants: List<Restaurant>,
+    onToggleFavorite: (String) -> Unit,
     onNavigateToDetails: (String) -> Unit
 ) {
-    var restaurants by remember { mutableStateOf(HardcodedData.restaurants) }
-    val favorites by remember { derivedStateOf { restaurants.filter { it.isFavorite } } }
+    val favorites by remember { derivedStateOf { allRestaurants.filter { it.isFavorite } } }
     val favoriteCounter by remember { derivedStateOf { favorites.size } }
 
     val categories by remember { mutableStateOf(HardcodedData.categories) }
@@ -51,7 +51,7 @@ fun FavoriteRestaurantsScreen(
     }
 
     val onUnfavoriteClick: (String) -> Unit = { id ->
-        // TODO: onUnfavorite logic
+        onToggleFavorite(id)
     }
 
     val onDetailsClick: (String) -> Unit = { id ->
@@ -77,7 +77,11 @@ private fun FavoriteRestaurantsScreen(
     onDetailsClick: (String) -> Unit
 ) {
     Scaffold(
-        topBar = { TopBar() },
+        topBar = {
+            TopBar(
+                title = stringResource(id = R.string.favorites)
+            )
+        },
         bottomBar = {},
         containerColor = WarmCream
     ) { innerPadding ->

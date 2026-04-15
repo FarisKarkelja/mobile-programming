@@ -18,7 +18,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.presentation.theme.*
-import com.example.mobile_programming.presentation.ui.components.BottomBar
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.R
@@ -46,7 +45,11 @@ private fun ProfileScreen(
     onLogoutClick: () -> Unit
 ) {
     Scaffold(
-        topBar = { TopBar() },
+        topBar = {
+            TopBar(
+                title = stringResource(id = R.string.profile)
+            )
+        },
         bottomBar = {},
         containerColor = WarmCream
     ) { innerPadding ->

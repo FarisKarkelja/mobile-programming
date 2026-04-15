@@ -1,5 +1,6 @@
 package com.example.mobile_programming.presentation.navigation.bottomBar
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentSize
@@ -20,8 +21,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
+import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.White
-import com.example.mobile_programming.presentation.theme.TextPrimary
 
 @Composable
 fun BottomBarNavigationComponent(
@@ -34,7 +35,10 @@ fun BottomBarNavigationComponent(
             topStart = dimensionResource(id = R.dimen.size_4),
             topEnd = dimensionResource(id = R.dimen.size_4)
         ),
-        color = TextPrimary
+        border = BorderStroke(
+            width = dimensionResource(id = R.dimen.width_4),
+            color = SunsetTangerine
+        )
     ) {
         NavigationBar(
             containerColor = Color.Transparent
@@ -54,7 +58,7 @@ fun BottomBarNavigationComponent(
                             Text(
                                 text = stringResource(id = item.titleId),
                                 style = MaterialTheme.typography.bodyMedium.copy(
-                                    color = if (selected) White else Color.Gray,
+                                    color = if (selected) SunsetTangerine else Color.Gray,
                                     fontSize = 12.sp,
                                     fontWeight = if (selected) FontWeight.W400 else FontWeight.W300
                                 )
@@ -69,6 +73,10 @@ fun BottomBarNavigationComponent(
                         )
                     },
                     colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = SunsetTangerine,
+                        unselectedIconColor = SunsetTangerine,
+                        selectedTextColor = if (selected) SunsetTangerine else White,
+                        unselectedTextColor = SunsetTangerine,
                         indicatorColor = Color.Transparent
                     )
                 )

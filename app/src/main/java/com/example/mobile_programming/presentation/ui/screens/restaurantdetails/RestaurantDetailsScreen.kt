@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -14,7 +15,6 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,27 +28,27 @@ import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.theme.*
-import com.example.mobile_programming.presentation.ui.components.BottomBar
 import com.example.mobile_programming.presentation.ui.components.RestaurantLocation
 import com.example.mobile_programming.presentation.ui.components.RestaurantRating
 import com.example.mobile_programming.presentation.ui.components.RestaurantTitle
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
+import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.FoodDishCard
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.RestaurantDetailsTitle
-import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Drink
-import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.FoodDish
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
-import androidx.compose.foundation.lazy.items
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.DrinkCard
 
 @Composable
-fun RestaurantDetailsScreen(restaurantId: String) {
-    var restaurant by remember {
-        mutableStateOf(HardcodedData.restaurants.find {
-            it.id == restaurantId
-        } ?: HardcodedData.restaurants.first())
-    }
+fun RestaurantDetailsScreen(
+    restaurantId: String,
+    allRestaurants: List<Restaurant>,
+    onBackClick: () -> Unit,
+    onNavigateToDish: (String) -> Unit,
+    onNavigateToDrink: (String) -> Unit
+) {
+    val restaurant = allRestaurants.find { it.id == restaurantId } ?: return
 
     val topDishes by remember {
         mutableStateOf(HardcodedData.foodDishes.filter { it.restaurantId == restaurantId })
@@ -62,11 +62,11 @@ fun RestaurantDetailsScreen(restaurantId: String) {
     val hasTopDrinks by remember { derivedStateOf { topDrinks.isNotEmpty() } }
 
     val onDishClick: (FoodDish) -> Unit = { dish ->
-        // TODO: Show food dish details
+        onNavigateToDish(dish.id)
     }
 
     val onDrinkClick: (Drink) -> Unit = { drink ->
-        // TODO: Show drink details
+        onNavigateToDrink(drink.id)
     }
 
     RestaurantDetailsScreen(
@@ -76,7 +76,8 @@ fun RestaurantDetailsScreen(restaurantId: String) {
         hasTopDishes = hasTopDishes,
         hasTopDrinks = hasTopDrinks,
         onDishClick = onDishClick,
-        onDrinkClick = onDrinkClick
+        onDrinkClick = onDrinkClick,
+        onBackClick = onBackClick
     )
 }
 
@@ -88,10 +89,16 @@ private fun RestaurantDetailsScreen(
     hasTopDishes: Boolean,
     hasTopDrinks: Boolean,
     onDishClick: (FoodDish) -> Unit,
-    onDrinkClick: (Drink) -> Unit
+    onDrinkClick: (Drink) -> Unit,
+    onBackClick: () -> Unit
 ) {
     Scaffold(
-        topBar = { TopBar() },
+        topBar = {
+            TopBar(
+                title = stringResource(id = R.string.restaurant_details),
+                onBackClick = onBackClick
+            )
+        },
         bottomBar = {},
         containerColor = WarmCream
     ) { innerPadding ->
@@ -221,7 +228,8 @@ fun PreviewDetailsScreenWithDishes() {
         hasTopDishes = topDishes.isNotEmpty(),
         hasTopDrinks = topDrinks.isNotEmpty(),
         onDishClick = {},
-        onDrinkClick = {}
+        onDrinkClick = {},
+        onBackClick = {}
     )
 }
 
@@ -239,6 +247,7 @@ fun PreviewDetailsScreenWithoutDishes() {
         hasTopDishes = topDishes.isNotEmpty(),
         hasTopDrinks = topDrinks.isNotEmpty(),
         onDishClick = {},
-        onDrinkClick = {}
+        onDrinkClick = {},
+        onBackClick = {}
     )
 }

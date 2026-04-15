@@ -31,10 +31,22 @@ sealed class Screen(val route: String) {
     data object FavoriteRestaurants : Screen("favorite_restaurants_screen")
     data object Profile : Screen("profile_screen")
 
+    data object FoodDishDetails : Screen("food_dish_details_screen/{dishId}") {
+        fun createRoute(dishId: String): String {
+            return "food_dish_details_screen/$dishId"
+        }
+    }
+
+    data object DrinkDetails : Screen("drink_details_screen/{drinkId}") {
+        fun createRoute(drinkId: String): String {
+            return "drink_details_screen/$drinkId"
+        }
+    }
+
     companion object {
         fun getBottomBarNavigationRoutes(): List<String> {
             return listOf(
-                Restaurants.route,
+                "restaurants_screen",
                 FavoriteRestaurants.route,
                 Profile.route
             )
