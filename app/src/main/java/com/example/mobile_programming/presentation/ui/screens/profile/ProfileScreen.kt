@@ -29,16 +29,14 @@ import com.example.mobile_programming.presentation.ui.screens.profile.components
 import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(
+    onNavigateToLogin: () -> Unit
+) {
     val user by remember { mutableStateOf(HardcodedData.users.first()) }
-
-    val onLogoutClick: () -> Unit = {
-        // TODO: Navigate to login activity
-    }
 
     ProfileScreen(
         user = user,
-        onLogoutClick = onLogoutClick
+        onLogoutClick = onNavigateToLogin
     )
 }
 

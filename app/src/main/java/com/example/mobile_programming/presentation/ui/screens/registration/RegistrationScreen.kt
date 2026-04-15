@@ -19,7 +19,10 @@ import com.example.mobile_programming.presentation.ui.components.*
 import com.example.mobile_programming.presentation.util.AuthValidators
 
 @Composable
-fun RegistrationScreen() {
+fun RegistrationScreen(
+    onRegisterSuccess: () -> Unit,
+    onNavigateToLogin: () -> Unit
+) {
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -27,9 +30,6 @@ fun RegistrationScreen() {
     var hasTriedSubmit by remember { mutableStateOf(false) }
     var passwordVisible by remember { mutableStateOf(false) }
     var confirmPasswordVisible by remember { mutableStateOf(false) }
-
-    val onRegisterSuccess = { /* TODO: Navigate to login activity */ }
-    val onNavigateToLogin = { /* TODO: Navigate to login activity */ }
 
     val isRegisterEnabled = fullName.isNotBlank() &&
             email.isNotBlank() &&

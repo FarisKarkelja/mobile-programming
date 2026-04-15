@@ -37,7 +37,9 @@ import com.example.mobile_programming.presentation.ui.screens.favorite_restauran
 import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.components.FavoriteRestaurantsCategoryTitle
 
 @Composable
-fun FavoriteRestaurantsScreen() {
+fun FavoriteRestaurantsScreen(
+    onNavigateToDetails: (String) -> Unit
+) {
     var restaurants by remember { mutableStateOf(HardcodedData.restaurants) }
     val favorites by remember { derivedStateOf { restaurants.filter { it.isFavorite } } }
     val favoriteCounter by remember { derivedStateOf { favorites.size } }
@@ -53,7 +55,7 @@ fun FavoriteRestaurantsScreen() {
     }
 
     val onDetailsClick: (String) -> Unit = { id ->
-        // TODO: Navigation to restaurant details activity via specific restaurantId
+        onNavigateToDetails(id)
     }
 
     FavoriteRestaurantsScreen(

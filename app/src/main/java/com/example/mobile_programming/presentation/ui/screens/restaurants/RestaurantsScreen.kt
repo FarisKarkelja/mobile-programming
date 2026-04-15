@@ -46,7 +46,9 @@ import com.example.mobile_programming.presentation.ui.screens.restaurants.util.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun RestaurantsScreen() {
+fun RestaurantsScreen(
+    onNavigateToDetails: (String) -> Unit
+) {
     var restaurants by remember { mutableStateOf(HardcodedData.restaurants) }
     var searchQuery by remember { mutableStateOf("") }
 
@@ -78,7 +80,7 @@ fun RestaurantsScreen() {
     }
 
     val onDetailsClick: (String) -> Unit = { id ->
-        // TODO: Navigation to restaurant details activity via specific restaurantId
+        onNavigateToDetails(id)
     }
 
     val onSortAZClick: () -> Unit = {

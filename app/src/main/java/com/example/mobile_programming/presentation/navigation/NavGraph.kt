@@ -26,23 +26,49 @@ fun NavGraph(
         modifier = modifier
     ) {
         composable(route = Screen.Login.route) {
-            LoginScreen()
+            LoginScreen(
+                onLoginSuccess = {
+                    navController.navigate(Screen.Categories.route)
+                },
+                onNavigateToRegister = {
+                    navController.navigate(Screen.Registration.route)
+                }
+            )
         }
 
         composable(route = Screen.Registration.route) {
-            RegistrationScreen()
+            RegistrationScreen(
+                onRegisterSuccess = {
+                    navController.navigate(Screen.Login.route)
+                },
+                onNavigateToLogin = {
+                    navController.navigate(Screen.Login.route)
+                }
+            )
         }
 
         composable(route = Screen.Categories.route) {
-            CategoriesScreen()
+            CategoriesScreen(
+                onNavigateToFilters = { categoryId ->
+                    navController.navigate(Screen.Filters.route)
+                }
+            )
         }
 
         composable(route = Screen.Filters.route) {
-            FiltersScreen()
+            FiltersScreen(
+                onNavigateToRestaurants = {
+                    navController.navigate(Screen.Restaurants.route)
+                }
+            )
         }
 
         composable(route = Screen.Restaurants.route) {
-            RestaurantsScreen()
+            RestaurantsScreen(
+                onNavigateToDetails = { restaurantId ->
+                    navController.navigate(Screen.RestaurantDetails.route)
+                }
+            )
         }
 
         composable(route = Screen.RestaurantDetails.route) {
@@ -50,11 +76,19 @@ fun NavGraph(
         }
 
         composable(route = Screen.FavoriteRestaurants.route) {
-            FavoriteRestaurantsScreen()
+            FavoriteRestaurantsScreen(
+                onNavigateToDetails = { restaurantId ->
+                    navController.navigate(Screen.RestaurantDetails.route)
+                }
+            )
         }
 
         composable(route = Screen.Profile.route) {
-            ProfileScreen()
+            ProfileScreen(
+                onNavigateToLogin = {
+                    navController.navigate(Screen.Login.route)
+                }
+            )
         }
     }
 }

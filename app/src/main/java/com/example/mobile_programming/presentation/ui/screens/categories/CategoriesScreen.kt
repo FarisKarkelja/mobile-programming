@@ -23,7 +23,9 @@ import com.example.mobile_programming.presentation.ui.screens.categories.util.Ca
 import com.example.mobile_programming.presentation.ui.screens.categories.util.formatCategories
 
 @Composable
-fun CategoriesScreen() {
+fun CategoriesScreen(
+    onNavigateToFilters: (String) -> Unit
+) {
     var categories by remember { mutableStateOf(HardcodedData.categories) }
 
     val rowPattern = listOf(1, 3, 2, 1)
@@ -32,7 +34,7 @@ fun CategoriesScreen() {
     }
 
     val onCategoryClick: (String) -> Unit = { id ->
-        // TODO: Navigate to filters activity while passing chosen categoryId
+        onNavigateToFilters(id)
     }
 
     CategoriesScreen(
@@ -87,5 +89,5 @@ private fun CategoriesScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewCategoriesScreen() {
-    CategoriesScreen()
+    CategoriesScreen(onNavigateToFilters = {})
 }

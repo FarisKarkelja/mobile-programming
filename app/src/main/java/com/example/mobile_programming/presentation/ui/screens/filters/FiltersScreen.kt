@@ -23,7 +23,9 @@ import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.ui.components.ApplicationLogo
 
 @Composable
-fun FiltersScreen() {
+fun FiltersScreen(
+    onNavigateToRestaurants: () -> Unit
+) {
     val locations = HardcodedData.locations
     val budgets = HardcodedData.budgets
 
@@ -34,7 +36,7 @@ fun FiltersScreen() {
     val isApplyEnabled = selectedLocation != "Location" && selectedBudget != "Budget"
 
     val onApplyClick: () -> Unit = {
-        /* TODO: Navigate to restaurants activity via already chosen categoryId and applied filters */
+        onNavigateToRestaurants()
     }
 
     FiltersScreen(
