@@ -24,7 +24,8 @@ import com.example.mobile_programming.presentation.ui.components.ApplicationLogo
 
 @Composable
 fun FiltersScreen(
-    onNavigateToRestaurants: () -> Unit
+    categoryId: String,
+    onNavigateToRestaurants: (String, String, String, Float) -> Unit
 ) {
     val locations = HardcodedData.locations
     val budgets = HardcodedData.budgets
@@ -36,7 +37,7 @@ fun FiltersScreen(
     val isApplyEnabled = selectedLocation != "Location" && selectedBudget != "Budget"
 
     val onApplyClick: () -> Unit = {
-        onNavigateToRestaurants()
+        onNavigateToRestaurants(categoryId, selectedLocation, selectedBudget, sliderPosition)
     }
 
     FiltersScreen(

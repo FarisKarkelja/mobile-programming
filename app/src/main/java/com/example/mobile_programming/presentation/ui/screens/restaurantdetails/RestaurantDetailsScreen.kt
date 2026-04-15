@@ -43,15 +43,19 @@ import androidx.compose.foundation.lazy.items
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.DrinkCard
 
 @Composable
-fun RestaurantDetailsScreen() {
-    var restaurant by remember { mutableStateOf(HardcodedData.restaurants.first()) }
+fun RestaurantDetailsScreen(restaurantId: String) {
+    var restaurant by remember {
+        mutableStateOf(HardcodedData.restaurants.find {
+            it.id == restaurantId
+        } ?: HardcodedData.restaurants.first())
+    }
 
     val topDishes by remember {
-        mutableStateOf(HardcodedData.foodDishes.filter { it.restaurantId == restaurant.id })
+        mutableStateOf(HardcodedData.foodDishes.filter { it.restaurantId == restaurantId })
     }
 
     val topDrinks by remember {
-        mutableStateOf(HardcodedData.drinks.filter { it.restaurantId == restaurant.id })
+        mutableStateOf(HardcodedData.drinks.filter { it.restaurantId == restaurantId })
     }
 
     val hasTopDishes by remember { derivedStateOf { topDishes.isNotEmpty() } }

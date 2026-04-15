@@ -43,13 +43,27 @@ import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.screens.restaurants.components.RestaurantSearchBar
 import com.example.mobile_programming.presentation.ui.screens.restaurants.components.SortOptionsRow
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
+import com.example.mobile_programming.presentation.ui.screens.restaurants.util.isWithinBudget
 import kotlinx.coroutines.launch
 
 @Composable
 fun RestaurantsScreen(
+    categoryId: String,
+    location: String,
+    budget: String,
+    minRating: Float,
     onNavigateToDetails: (String) -> Unit
 ) {
-    var restaurants by remember { mutableStateOf(HardcodedData.restaurants) }
+    var restaurants by remember {
+        mutableStateOf(
+            HardcodedData.restaurants.filter { restaurant ->
+                restaurant.categoryId == categoryId &&
+                        restaurant.location == location &&
+                        restaurant.rating >= minRating &&
+                        isWithinBudget(restaurant.avgPrice, budget)
+            }
+        )
+    }
     var searchQuery by remember { mutableStateOf("") }
 
     val queryRestaurants by remember {
