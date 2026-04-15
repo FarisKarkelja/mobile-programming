@@ -92,7 +92,7 @@ private fun RestaurantDetailsScreen(
 ) {
     Scaffold(
         topBar = { TopBar() },
-        bottomBar = { BottomBar() },
+        bottomBar = {},
         containerColor = WarmCream
     ) { innerPadding ->
         Column(

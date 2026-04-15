@@ -47,7 +47,7 @@ private fun ProfileScreen(
 ) {
     Scaffold(
         topBar = { TopBar() },
-        bottomBar = { BottomBar() },
+        bottomBar = {},
         containerColor = WarmCream
     ) { innerPadding ->
         Column(

@@ -78,7 +78,7 @@ private fun FavoriteRestaurantsScreen(
 ) {
     Scaffold(
         topBar = { TopBar() },
-        bottomBar = { BottomBar() },
+        bottomBar = {},
         containerColor = WarmCream
     ) { innerPadding ->
         if (favoriteCounter == 0) {

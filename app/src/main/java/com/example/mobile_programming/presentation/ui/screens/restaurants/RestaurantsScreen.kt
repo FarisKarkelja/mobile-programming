@@ -154,7 +154,7 @@ private fun RestaurantsScreen(
 ) {
     Scaffold(
         topBar = { TopBar() },
-        bottomBar = { BottomBar() },
+        bottomBar = {},
         containerColor = WarmCream,
         floatingActionButton = {
             AnimatedVisibility(

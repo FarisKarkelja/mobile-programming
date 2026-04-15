@@ -65,4 +65,8 @@
     <string name="search_restaurants">Search restaurants</string>
 
     <string name="rating_sort">Rating sort</string>
+
+    <string name="restaurants">Restaurants</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
 </resources>
