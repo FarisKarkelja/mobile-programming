@@ -66,6 +66,13 @@
 
     <string name="rating_sort">Rating sort</string>
 
+    <string name="restaurants">Restaurants</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
+    <string name="restaurant_details">Restaurant</string>
+    <string name="food_dish">Food Dish</string>
+    <string name="drink">Drink</string>
+
     <string name="navigate_back">Navigate back</string>
     <string name="drink_not_found">Drink not found</string>
     <string name="food_dish_not_found">Food dish not found</string>
