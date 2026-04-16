@@ -76,12 +76,7 @@ private fun FavoriteRestaurantsScreen(
     onDetailsClick: (String) -> Unit
 ) {
     Scaffold(
-        topBar = {
-            TopBar(
-                title = stringResource(id = R.string.favorites)
-            )
-        },
-        bottomBar = {},
+        topBar = { TopBar() },
         containerColor = WarmCream
     ) { innerPadding ->
         if (favoriteCounter == 0) {

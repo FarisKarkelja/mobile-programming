@@ -101,11 +101,9 @@ private fun RestaurantDetailsScreen(
     Scaffold(
         topBar = {
             TopBar(
-                title = stringResource(id = R.string.restaurant_details),
                 onBackClick = onBackClick
             )
         },
-        bottomBar = {},
         containerColor = WarmCream
     ) { innerPadding ->
         Column(

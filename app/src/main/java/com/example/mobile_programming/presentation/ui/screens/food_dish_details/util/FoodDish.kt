@@ -3,7 +3,9 @@ package com.example.mobile_programming.presentation.ui.screens.food_dish_details
 enum class ALLERGENS {
     GLUTEN_FREE,
     LACTOSE_FREE,
-    VEGETARIAN
+    VEGETARIAN,
+    VEGAN,
+    HALAL
 }
 
 data class FoodDish(
@@ -16,5 +18,5 @@ data class FoodDish(
     val cookingTime: String,
     val servingSize: String,
     val calories: String,
-    val allergens: ALLERGENS
+    val allergens: List<ALLERGENS>
 )

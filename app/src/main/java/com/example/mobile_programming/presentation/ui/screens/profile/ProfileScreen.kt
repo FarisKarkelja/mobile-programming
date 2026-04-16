@@ -45,12 +45,7 @@ private fun ProfileScreen(
     onLogoutClick: () -> Unit
 ) {
     Scaffold(
-        topBar = {
-            TopBar(
-                title = stringResource(id = R.string.profile)
-            )
-        },
-        bottomBar = {},
+        topBar = { TopBar() },
         containerColor = WarmCream
     ) { innerPadding ->
         Column(

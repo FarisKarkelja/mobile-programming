@@ -154,12 +154,7 @@ private fun RestaurantsScreen(
     onSortRatingHighClick: () -> Unit
 ) {
     Scaffold(
-        topBar = {
-            TopBar(
-                title = stringResource(id = R.string.restaurants)
-            )
-        },
-        bottomBar = {},
+        topBar = { TopBar() },
         containerColor = WarmCream,
         floatingActionButton = {
             AnimatedVisibility(

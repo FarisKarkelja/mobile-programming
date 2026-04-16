@@ -52,7 +52,6 @@ private fun DrinkDetailsScreen(
         Scaffold(
             topBar = {
                 TopBar(
-                    title = stringResource(id = R.string.drink),
                     onBackClick = onBackClick
                 )
             },
@@ -75,15 +74,16 @@ private fun DrinkDetailsScreen(
                 )
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_20))
-                Row(
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_4))
                 ) {
                     Text(
                         text = drink.name,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
-                        color = TextPrimary
+                        color = TextPrimary,
+                        lineHeight = 28.sp
                     )
                     Text(
                         text = "${drink.price} BAM",

@@ -54,7 +54,6 @@ private fun FoodDishDetailsScreen(
         Scaffold(
             topBar = {
                 TopBar(
-                    title = stringResource(id = R.string.food_dish),
                     onBackClick = onBackClick
                 )
             },
@@ -77,15 +76,16 @@ private fun FoodDishDetailsScreen(
                 )
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_20))
-                Row(
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_4))
                 ) {
                     Text(
                         text = dish.name,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
-                        color = TextPrimary
+                        color = TextPrimary,
+                        lineHeight = 28.sp
                     )
                     Text(
                         text = "${dish.price} BAM",
@@ -97,12 +97,16 @@ private fun FoodDishDetailsScreen(
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_12))
                 Row(horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_8))) {
-                    val allergenLabel = when (dish.allergens) {
-                        ALLERGENS.GLUTEN_FREE -> "Gluten Free"
-                        ALLERGENS.LACTOSE_FREE -> "Lactose Free"
-                        ALLERGENS.VEGETARIAN -> "Vegetarian"
+                    dish.allergens.forEach { allergen ->
+                        val label = when (allergen) {
+                            ALLERGENS.GLUTEN_FREE -> "Gluten Free"
+                            ALLERGENS.LACTOSE_FREE -> "Lactose Free"
+                            ALLERGENS.VEGETARIAN -> "Vegetarian"
+                            ALLERGENS.VEGAN -> "Vegan"
+                            ALLERGENS.HALAL -> "Halal"
+                        }
+                        DetailBadge(text = label)
                     }
-                    DetailBadge(text = allergenLabel)
                 }
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_24))
