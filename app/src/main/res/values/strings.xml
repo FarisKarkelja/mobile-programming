@@ -80,7 +80,4 @@
 
     <string name="about_drink">About this drink</string>
     <string name="about_dish">About this dish</string>
-
-    <string name="dish_tag_one">Chef\'s Choice</string>
-    <string name="dish_tag_two">Premium Quality</string>
 </resources>
