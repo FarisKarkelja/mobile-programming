@@ -1,5 +1,11 @@
 package com.example.mobile_programming.presentation.ui.screens.food_dish_details.util
 
+enum class ALLERGENS {
+    GLUTEN_FREE,
+    LACTOSE_FREE,
+    VEGETARIAN
+}
+
 data class FoodDish(
     val id: String,
     val restaurantId: String,
@@ -9,5 +15,6 @@ data class FoodDish(
     val description: String,
     val cookingTime: String,
     val servingSize: String,
-    val calories: String
+    val calories: String,
+    val allergens: ALLERGENS
 )

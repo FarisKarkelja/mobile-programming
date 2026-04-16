@@ -15,6 +15,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.data.HardcodedData
@@ -24,6 +25,7 @@ import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.presentation.ui.screens.drink_details.components.DetailBadge
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.components.InfoTag
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.ALLERGENS
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
 
 @Composable
@@ -95,8 +97,12 @@ private fun FoodDishDetailsScreen(
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_12))
                 Row(horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_8))) {
-                    DetailBadge(text = stringResource(R.string.dish_tag_one))
-                    DetailBadge(text = stringResource(R.string.dish_tag_two))
+                    val allergenLabel = when (dish.allergens) {
+                        ALLERGENS.GLUTEN_FREE -> "Gluten Free"
+                        ALLERGENS.LACTOSE_FREE -> "Lactose Free"
+                        ALLERGENS.VEGETARIAN -> "Vegetarian"
+                    }
+                    DetailBadge(text = allergenLabel)
                 }
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_24))
@@ -132,7 +138,7 @@ private fun FoodDishDetailsScreen(
     }
 }
 
-@androidx.compose.ui.tooling.preview.Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun FoodDishDetailsPreview() {
     val sampleDish = HardcodedData.foodDishes[0]

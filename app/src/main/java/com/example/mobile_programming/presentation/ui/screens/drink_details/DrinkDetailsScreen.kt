@@ -3,6 +3,7 @@ package com.example.mobile_programming.presentation.ui.screens.drink_details
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.data.HardcodedData
@@ -93,12 +95,12 @@ private fun DrinkDetailsScreen(
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_12))
                 Row(horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.height_8))) {
-                    DetailBadge(text = "Freshly Prepared")
-                    DetailBadge(text = "Premium Quality")
+                    DetailBadge(text = if (drink.isAlcoholic) "Alcoholic" else "Non-Alcoholic")
+                    DetailBadge(text = if (drink.isSugarFree) "Sugar Free" else "Contains Sugar")
                 }
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_20))
-                androidx.compose.material3.HorizontalDivider(
+                HorizontalDivider(
                     thickness = dimensionResource(R.dimen.thickness_half),
                     color = TextPrimary.copy(alpha = 0.1f)
                 )
@@ -123,7 +125,7 @@ private fun DrinkDetailsScreen(
     }
 }
 
-@androidx.compose.ui.tooling.preview.Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun DrinkDetailsPreview() {
     val sampleDrink = HardcodedData.drinks[0]

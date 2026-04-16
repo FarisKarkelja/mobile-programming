@@ -7,4 +7,6 @@ data class Drink(
     val imageResId: Int,
     val price: Double,
     val description: String,
+    val isAlcoholic: Boolean,
+    val isSugarFree: Boolean
 )
