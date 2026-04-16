@@ -253,7 +253,7 @@ fun PreviewEmptyRestaurantsScreen() {
     RestaurantsScreen(
         restaurants = emptyList(),
         isRestaurantListEmpty = true,
-        searchQuery = "Nepostojeci",
+        searchQuery = "Unknown",
         onSearchQueryChange = {},
         listState = rememberLazyListState(),
         showScrollToTop = false,
