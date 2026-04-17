@@ -145,7 +145,7 @@ private fun FavoriteRestaurantsScreen(
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, name = "Non-empty State")
 @Composable
 fun FavoriteRestaurantsScreenPreview() {
     val restaurants = HardcodedData.restaurants

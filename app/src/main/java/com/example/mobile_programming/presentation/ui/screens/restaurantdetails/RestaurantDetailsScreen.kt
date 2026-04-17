@@ -192,7 +192,9 @@ private fun RestaurantDetailsScreen(
                         }
                     }
                 }
-            } else {
+            }
+
+            if (!hasTopDishes && !hasTopDrinks) {
                 VerticalSpace(dimensionResource(id = R.dimen.height_24))
                 Text(stringResource(R.string.no_recommendations), color = Color.Gray)
             }
@@ -240,16 +242,14 @@ fun PreviewDetailsScreenWithDishes() {
 @Preview(showBackground = true, name = "Without items")
 @Composable
 fun PreviewDetailsScreenWithoutDishes() {
-    val restaurant = HardcodedData.restaurants[2]
-    val topDishes = HardcodedData.foodDishes.filter { it.restaurantId == restaurant.id }
-    val topDrinks = HardcodedData.drinks.filter { it.restaurantId == restaurant.id }
+    val restaurant = HardcodedData.restaurants[0]
 
     RestaurantDetailsScreen(
         restaurant = restaurant,
-        topDishes = topDishes,
-        topDrinks = topDrinks,
-        hasTopDishes = topDishes.isNotEmpty(),
-        hasTopDrinks = topDrinks.isNotEmpty(),
+        topDishes = emptyList(),
+        topDrinks = emptyList(),
+        hasTopDishes = false,
+        hasTopDrinks = false,
         onDishClick = {},
         onDrinkClick = {},
         onBackClick = {}
