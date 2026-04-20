@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="thickness_half">0.5dp</dimen>
+
     <dimen name="padding_2">2dp</dimen>
     <dimen name="padding_4">4dp</dimen>
     <dimen name="padding_6">6dp</dimen>
@@ -20,6 +22,7 @@
     <dimen name="corner_14">14dp</dimen>
     <dimen name="corner_16">16dp</dimen>
     <dimen name="corner_24">24dp</dimen>
+    <dimen name="corner_50">50dp</dimen>
 
     <dimen name="height_2">2dp</dimen>
     <dimen name="height_4">4dp</dimen>
@@ -39,6 +42,7 @@
     <dimen name="height_200">200dp</dimen>
     <dimen name="height_250">250dp</dimen>
 
+    <dimen name="width_1">1dp</dimen>
     <dimen name="width_2">2dp</dimen>
     <dimen name="width_4">4dp</dimen>
     <dimen name="width_6">6dp</dimen>
@@ -48,6 +52,8 @@
     <dimen name="width_14">14dp</dimen>
     <dimen name="width_16">16dp</dimen>
     <dimen name="width_24">24dp</dimen>
+    <dimen name="width_140">140dp</dimen>
+    <dimen name="width_160">160dp</dimen>
 
     <dimen name="size_2">2dp</dimen>
     <dimen name="size_4">4dp</dimen>
@@ -59,7 +65,7 @@
     <dimen name="size_16">16dp</dimen>
     <dimen name="size_18">18dp</dimen>
     <dimen name="size_24">24dp</dimen>
-    <dimen name="size_32">32dp</dimen>
+    <dimen name="size_36">36dp</dimen>
     <dimen name="size_60">60dp</dimen>
     <dimen name="size_100">100dp</dimen>
     <dimen name="size_420">420dp</dimen>

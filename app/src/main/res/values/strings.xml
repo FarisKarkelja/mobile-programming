@@ -19,7 +19,8 @@
         The focus is on creative fusion cuisine with an emphasis on
         Asian flavors and locally sourced organic ingredients.</string>
     <string name="about_title">About</string>
-    <string name="recommended_title">Recommended</string>
+    <string name="house_specialties">House Specialties</string>
+    <string name="curated_drinks">Curated Drinks</string>
     <string name="restaurant_rating">4.5</string>
 
     <string name="pasta_title">Pasta</string>
@@ -52,4 +53,31 @@
     <string name="logout_button">Logout</string>
 
     <string name="favorite_restaurants_message">No favorite restaurants yet.</string>
+    <string name="no_restaurants_message">No restaurants available.</string>
+    <string name="no_category_favorites">No favorites in this category.</string>
+    <string name="no_recommendations">No recommendations available.</string>
+
+    <string name="apply_and_continue">Apply and Continue</string>
+    <string name="scroll_to_top">Scroll to top</string>
+
+    <string name="search">Search</string>
+    <string name="close">Close</string>
+    <string name="search_restaurants">Search restaurants</string>
+
+    <string name="rating_sort">Rating sort</string>
+
+    <string name="restaurants">Restaurants</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
+    <string name="restaurant_details">Restaurant</string>
+    <string name="food_dish">Food Dish</string>
+    <string name="drink">Drink</string>
+
+    <string name="navigate_back">Navigate back</string>
+    <string name="drink_not_found">Drink not found</string>
+    <string name="food_dish_not_found">Food dish not found</string>
+    <string name="restaurant_not_found">Restaurant not found</string>
+
+    <string name="about_drink">About this drink</string>
+    <string name="about_dish">About this dish</string>
 </resources>

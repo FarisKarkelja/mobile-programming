@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import com.example.mobile_programming.R
@@ -18,6 +17,7 @@ import com.example.mobile_programming.presentation.theme.TextPrimary
 
 @Composable
 fun RestaurantRating(
+    rating: Double,
     textColor: Color = TextPrimary,
     fontSize: TextUnit = TextUnit.Unspecified,
 ) {
@@ -29,7 +29,7 @@ fun RestaurantRating(
     )
     HorizontalSpace(dimensionResource(id = R.dimen.width_4))
     Text(
-        text = stringResource(R.string.restaurant_rating),
+        text = rating.toString(),
         fontSize = fontSize,
         fontWeight = FontWeight.Bold,
         color = textColor

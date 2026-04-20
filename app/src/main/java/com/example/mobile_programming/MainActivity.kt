@@ -3,28 +3,73 @@ package com.example.mobile_programming
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
-import com.example.mobile_programming.presentation.theme.MobileprogrammingTheme
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import com.example.mobile_programming.presentation.ui.screens.categories.CategoriesScreen
-import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.FavoriteRestaurantsScreen
-import com.example.mobile_programming.presentation.ui.screens.filters.FiltersScreen
-import com.example.mobile_programming.presentation.ui.screens.login.LoginScreen
-import com.example.mobile_programming.presentation.ui.screens.profile.ProfileScreen
-import com.example.mobile_programming.presentation.ui.screens.registration.RegistrationScreen
-import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.RestaurantDetailsScreen
-import com.example.mobile_programming.presentation.ui.screens.restaurants.RestaurantsScreen
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.example.mobile_programming.presentation.navigation.NavGraph
+import com.example.mobile_programming.presentation.navigation.Screen
+import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationComponent
+import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationItems
+import com.example.mobile_programming.presentation.theme.MobileprogrammingTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MobileprogrammingTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    ProfileScreen()
+                val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+
+                val showBottomBar =
+                    currentRoute != null && Screen.getBottomBarNavigationRoutes().any { route ->
+                        currentRoute == route || currentRoute.startsWith("$route/")
+                    }
+
+                Scaffold(
+                    bottomBar = {
+                        if (showBottomBar) {
+                            val items = BottomBarNavigationItems.items
+                            val selectedIndex = when {
+                                currentRoute.startsWith("restaurants_screen") -> 0
+                                currentRoute == Screen.FavoriteRestaurants.route -> 1
+                                currentRoute == Screen.Profile.route -> 2
+                                else -> 0
+                            }
+
+                            BottomBarNavigationComponent(
+                                items = items,
+                                selectedItemIndex = selectedIndex,
+                                onItemSelected = { index ->
+                                    val destination = items[index].route
+
+                                    navController.navigate(destination) {
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
+                                    }
+                                }
+                            )
+                        }
+                    }
+                ) { innerPadding ->
+                    Surface(modifier = Modifier.fillMaxSize()) {
+                        NavGraph(
+                            navController = navController,
+                            startDestination = Screen.Login.route,
+                            modifier = Modifier.padding(innerPadding)
+                        )
+                    }
                 }
             }
         }
     }
 }
+

@@ -2,11 +2,12 @@ package com.example.mobile_programming.presentation.ui.screens.restaurantdetails
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -23,13 +24,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.White
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
 
 @Composable
-fun FoodDishCard(dishName: String, imageResource: Int) {
+fun FoodDishCard(dish: FoodDish, onClick: () -> Unit) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(dimensionResource(id = R.dimen.height_140)),
+            .width(dimensionResource(id = R.dimen.width_140))
+            .height(dimensionResource(id = R.dimen.height_140))
+            .clickable { onClick() },
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
         elevation = CardDefaults.cardElevation(dimensionResource(id = R.dimen.elevation_2))
     ) {
@@ -37,8 +40,8 @@ fun FoodDishCard(dishName: String, imageResource: Int) {
             modifier = Modifier.fillMaxSize()
         ) {
             Image(
-                painter = painterResource(id = imageResource),
-                contentDescription = dishName,
+                painter = painterResource(id = dish.imageResId),
+                contentDescription = dish.name,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
@@ -50,7 +53,7 @@ fun FoodDishCard(dishName: String, imageResource: Int) {
             )
 
             Text(
-                text = dishName,
+                text = dish.name,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
                 color = White,

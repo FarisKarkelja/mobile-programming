@@ -1,5 +1,6 @@
 package com.example.mobile_programming.presentation.ui.screens.restaurants.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
+import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.theme.White
 import com.example.mobile_programming.presentation.ui.components.HorizontalSpace
@@ -25,24 +27,29 @@ import com.example.mobile_programming.presentation.ui.components.RestaurantLocat
 import com.example.mobile_programming.presentation.ui.components.RestaurantRating
 import com.example.mobile_programming.presentation.ui.components.RestaurantTitle
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
+import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 
 @Composable
-fun RestaurantCard() {
+fun RestaurantCard(
+    restaurant: Restaurant,
+    onFavoriteClick: () -> Unit,
+    onDetailsClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(id = R.dimen.padding_8)),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
-        elevation = CardDefaults.cardElevation(dimensionResource(id = R.dimen.elevation_8))
+        elevation = CardDefaults.cardElevation(dimensionResource(id = R.dimen.elevation_4)),
+        colors = CardDefaults.cardColors(containerColor = WarmCream),
+        border = BorderStroke(dimensionResource(id = R.dimen.width_2), SunsetTangerine)
     ) {
         Row(
-            modifier = Modifier
-                .background(SunsetTangerine)
-                .padding(dimensionResource(id = R.dimen.padding_10))
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_10))
         ) {
             Image(
-                painter = painterResource(id = R.drawable.restaurant_placeholder),
-                contentDescription = "Restaurant Image",
+                painter = painterResource(id = restaurant.imageResId),
+                contentDescription = restaurant.name,
                 modifier = Modifier
                     .size(dimensionResource(id = R.dimen.size_100))
                     .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))),
@@ -58,16 +65,20 @@ fun RestaurantCard() {
                 Column(
                     modifier = Modifier.align(Alignment.TopStart)
                 ) {
-                    RestaurantTitle(fontSize = 18.sp, color = White)
+                    RestaurantTitle(title = restaurant.name, fontSize = 18.sp, color = TextPrimary)
                     VerticalSpace(dimensionResource(id = R.dimen.height_2))
-                    RestaurantLocation()
+                    RestaurantLocation(
+                        location = restaurant.address,
+                        iconTint = TextPrimary,
+                        textColor = TextPrimary
+                    )
                 }
 
                 Row(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .background(
-                            WarmCream,
+                            TextPrimary,
                             shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))
                         )
                         .padding(
@@ -76,31 +87,31 @@ fun RestaurantCard() {
                         ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    RestaurantRating(fontSize = 12.sp)
+                    RestaurantRating(
+                        rating = restaurant.rating,
+                        fontSize = 12.sp,
+                        textColor = White
+                    )
                 }
 
                 Row(
                     modifier = Modifier.align(Alignment.BottomEnd),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    IconButton(
-                        onClick = { /* TODO: Add favorite logic */ }
-                    ) {
+                    IconButton(onClick = onFavoriteClick) {
                         Icon(
                             imageVector = Icons.Default.FavoriteBorder,
                             contentDescription = "Favorite",
-                            tint = WarmCream,
+                            tint = SunsetTangerine,
                             modifier = Modifier.size(dimensionResource(id = R.dimen.size_24))
                         )
                     }
 
-                    IconButton(
-                        onClick = { /* TODO: Add redirection logic */ }
-                    ) {
+                    IconButton(onClick = onDetailsClick) {
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = "Details",
-                            tint = WarmCream,
+                            tint = SunsetTangerine,
                             modifier = Modifier.size(dimensionResource(id = R.dimen.size_24))
                         )
                     }

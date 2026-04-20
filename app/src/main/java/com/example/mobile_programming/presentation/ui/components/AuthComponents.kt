@@ -7,29 +7,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -109,11 +100,11 @@ fun PasswordTextField(
     modifier: Modifier = Modifier,
     label: String = "Password",
     isError: Boolean = false,
-    errorMessage: String? = null
+    errorMessage: String? = null,
+    passwordVisible: Boolean,
+    onPasswordVisibilityChange: () -> Unit
 ) {
-    var passwordVisible by remember { mutableStateOf(false) }
-
-    Column(modifier = modifier) {
+    Column(modifier = modifier.fillMaxWidth()) {
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
@@ -131,7 +122,7 @@ fun PasswordTextField(
                         R.string.show
                     ),
                     modifier = Modifier
-                        .clickable { passwordVisible = !passwordVisible }
+                        .clickable { onPasswordVisibilityChange() }
                         .padding(end = dimensionResource(id = R.dimen.padding_14)),
                     color = TextPrimary
                 )
@@ -186,64 +177,6 @@ fun AuthPrimaryButton(
     ) {
         Text(text = text)
     }
-}
-
-@Composable
-fun AuthDivider() {
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-        HorizontalDivider(modifier = Modifier.weight(1f))
-        Text(
-            stringResource(R.string.or),
-            color = TextPrimary,
-            modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_8))
-        )
-        HorizontalDivider(modifier = Modifier.weight(1f))
-    }
-}
-
-@Composable
-fun SocialSignInButton(
-    text: String,
-    onClick: () -> Unit,
-    icon: @Composable () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    OutlinedButton(
-        onClick = onClick,
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
-        colors = ButtonDefaults.outlinedButtonColors(
-            contentColor = TextPrimary
-        ),
-        modifier = modifier
-            .fillMaxWidth()
-            .height(dimensionResource(id = R.dimen.height_50))
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            icon()
-            HorizontalSpace(dimensionResource(id = R.dimen.width_8))
-            Text(text)
-        }
-    }
-}
-
-@Composable
-fun GoogleIcon() {
-    Icon(
-        painter = painterResource(id = R.drawable.google_icon),
-        contentDescription = "Google Icon",
-        modifier = Modifier.size(dimensionResource(id = R.dimen.size_24)),
-        tint = TextPrimary
-    )
-}
-
-@Composable
-fun AppleIcon() {
-    Icon(
-        painter = painterResource(id = R.drawable.apple_icon),
-        contentDescription = "Apple Icon",
-        modifier = Modifier.size(dimensionResource(id = R.dimen.size_24)),
-        tint = TextPrimary
-    )
 }
 
 @Composable
