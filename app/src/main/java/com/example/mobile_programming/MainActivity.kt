@@ -16,7 +16,9 @@ import com.example.mobile_programming.presentation.navigation.Screen
 import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationComponent
 import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationItems
 import com.example.mobile_programming.presentation.theme.MobileprogrammingTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +27,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
-                // implement hilt view model
+
                 val showBottomBar =
                     currentRoute != null && Screen.getBottomBarNavigationRoutes().any { route ->
                         currentRoute == route || currentRoute.startsWith("$route/")
