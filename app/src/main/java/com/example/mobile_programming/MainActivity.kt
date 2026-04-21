@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
-
+                // implement hilt view model
                 val showBottomBar =
                     currentRoute != null && Screen.getBottomBarNavigationRoutes().any { route ->
                         currentRoute == route || currentRoute.startsWith("$route/")
