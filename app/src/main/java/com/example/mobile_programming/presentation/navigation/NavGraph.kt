@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -25,6 +26,7 @@ import com.example.mobile_programming.presentation.ui.screens.profile.ProfileScr
 import com.example.mobile_programming.presentation.ui.screens.registration.RegistrationScreen
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.RestaurantDetailsScreen
 import com.example.mobile_programming.presentation.ui.screens.restaurants.RestaurantsScreen
+import com.example.mobile_programming.presentation.view_model.auth.login.LoginViewModel
 
 @Composable
 fun NavGraph(
@@ -56,7 +58,9 @@ fun NavGraph(
             popEnterTransition = { fadeIn(animationSpec = tween(300)) },
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
+            val viewModel: LoginViewModel = hiltViewModel()
             LoginScreen(
+                viewModel = viewModel,
                 onLoginSuccess = {
                     navController.navigate(Screen.Categories.route) {
                         popUpTo(Screen.Login.route) { inclusive = true }
