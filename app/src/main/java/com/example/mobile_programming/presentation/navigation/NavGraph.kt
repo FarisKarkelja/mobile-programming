@@ -58,9 +58,8 @@ fun NavGraph(
             popEnterTransition = { fadeIn(animationSpec = tween(300)) },
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
-            val viewModel: LoginViewModel = hiltViewModel()
             LoginScreen(
-                viewModel = viewModel,
+                viewModel = hiltViewModel(),
                 onLoginSuccess = {
                     navController.navigate(Screen.Categories.route) {
                         popUpTo(Screen.Login.route) { inclusive = true }
@@ -80,6 +79,7 @@ fun NavGraph(
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
             RegistrationScreen(
+                viewModel = hiltViewModel(),
                 onRegisterSuccess = {
                     navController.navigate(Screen.Login.route) {
                         popUpTo(Screen.Registration.route) { inclusive = true }

@@ -7,75 +7,95 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.components.*
+import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
+import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.util.AuthValidators
+import com.example.mobile_programming.presentation.view_model.auth.registration.RegistrationNavigationEvent
+import com.example.mobile_programming.presentation.view_model.auth.registration.RegistrationUiState
+import com.example.mobile_programming.presentation.view_model.auth.registration.RegistrationViewModel
 
 @Composable
 fun RegistrationScreen(
+    viewModel: RegistrationViewModel,
     onRegisterSuccess: () -> Unit,
     onNavigateToLogin: () -> Unit
 ) {
-    var fullName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-    var hasTriedSubmit by remember { mutableStateOf(false) }
-    var passwordVisible by remember { mutableStateOf(false) }
-    var confirmPasswordVisible by remember { mutableStateOf(false) }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    var fullName by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var confirmPassword by rememberSaveable { mutableStateOf("") }
+
+    var passwordVisible by rememberSaveable { mutableStateOf(false) }
+    var confirmPasswordVisible by rememberSaveable { mutableStateOf(false) }
 
     val isRegisterEnabled = fullName.isNotBlank() &&
             email.isNotBlank() &&
             password.isNotBlank() &&
             confirmPassword.isNotBlank()
 
-    val nameError = if (hasTriedSubmit) AuthValidators.validateFullName(fullName) else null
-    val emailError = if (hasTriedSubmit) AuthValidators.validateEmail(email) else null
-    val passwordError = if (hasTriedSubmit) AuthValidators.validatePassword(password) else null
-    val confirmPasswordError = if (hasTriedSubmit) AuthValidators.validateConfirmPassword(
+    val nameError = AuthValidators.validateFullName(fullName)
+    val emailError = AuthValidators.validateEmail(email)
+    val passwordError = AuthValidators.validatePassword(password)
+    val confirmPasswordError = AuthValidators.validateConfirmPassword(
         password,
         confirmPassword
-    ) else null
-
-    RegistrationScreen(
-        fullName = fullName,
-        email = email,
-        password = password,
-        confirmPassword = confirmPassword,
-        passwordVisible = passwordVisible,
-        confirmPasswordVisible = confirmPasswordVisible,
-        fullNameError = nameError,
-        emailError = emailError,
-        passwordError = passwordError,
-        confirmPasswordError = confirmPasswordError,
-        isRegisterEnabled = isRegisterEnabled,
-        onFullNameChange = { fullName = it },
-        onEmailChange = { email = it },
-        onPasswordChange = { password = it },
-        onConfirmPasswordChange = { confirmPassword = it },
-        onPasswordVisibilityChange = { passwordVisible = !passwordVisible },
-        onConfirmPasswordVisibilityChange = { confirmPasswordVisible = !confirmPasswordVisible },
-        onRegisterClick = {
-            hasTriedSubmit = true
-            if (
-                AuthValidators.validateFullName(fullName) == null &&
-                AuthValidators.validateEmail(email) == null &&
-                AuthValidators.validatePassword(password) == null &&
-                AuthValidators.validateConfirmPassword(password, confirmPassword) == null
-            ) {
-                onRegisterSuccess()
-            }
-        },
-        onLoginClick = onNavigateToLogin,
-        modifier = Modifier
     )
+
+    LaunchedEffect(Unit) {
+        viewModel.navigationEvent.collect { event ->
+            when (event) {
+                RegistrationNavigationEvent.Navigate -> onRegisterSuccess()
+                RegistrationNavigationEvent.NavigateBack -> {}
+            }
+        }
+    }
+
+    when (uiState) {
+        is RegistrationUiState.Loading -> LoadingScreen()
+        is RegistrationUiState.Error -> ErrorScreen(
+            message = (uiState as RegistrationUiState.Error).message,
+            onRetry = { viewModel.resetUiState() }
+        )
+
+        else -> RegistrationScreen(
+            fullName = fullName,
+            email = email,
+            password = password,
+            confirmPassword = confirmPassword,
+            passwordVisible = passwordVisible,
+            confirmPasswordVisible = confirmPasswordVisible,
+            fullNameError = nameError,
+            emailError = emailError,
+            passwordError = passwordError,
+            confirmPasswordError = confirmPasswordError,
+            isRegisterEnabled = isRegisterEnabled,
+            onFullNameChange = { fullName = it },
+            onEmailChange = { email = it },
+            onPasswordChange = { password = it },
+            onConfirmPasswordChange = { confirmPassword = it },
+            onPasswordVisibilityChange = { passwordVisible = !passwordVisible },
+            onConfirmPasswordVisibilityChange = {
+                confirmPasswordVisible = !confirmPasswordVisible
+            },
+            onRegisterClick = { viewModel.onRegisterClick(fullName, email, password) },
+            onLoginClick = onNavigateToLogin,
+            modifier = Modifier
+        )
+    }
 }
 
 @Composable
