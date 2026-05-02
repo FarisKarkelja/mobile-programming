@@ -2,7 +2,7 @@ package com.example.mobile_programming.presentation.view_model.restaurant_detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

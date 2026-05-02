@@ -167,7 +167,7 @@ fun NavGraph(
                 },
                 onBackClick = { navController.popBackStack() })
         }
-
+/*
         composable(
             route = Screen.FavoriteRestaurants.route,
             enterTransition = { fadeIn(animationSpec = tween(300)) },
@@ -182,7 +182,7 @@ fun NavGraph(
                     navController.navigate(Screen.RestaurantDetails.createRoute(restaurantId))
                 }
             )
-        }
+        }*/
 
         composable(
             route = Screen.Profile.route,

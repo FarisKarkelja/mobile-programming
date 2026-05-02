@@ -25,7 +25,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.theme.WarmCream

@@ -10,7 +10,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.components.ApplicationLogo
 import com.example.mobile_programming.presentation.ui.screens.categories.components.CategoryCircle
@@ -42,7 +42,7 @@ fun CategoriesScreen(
             onCategoryClick = { id -> onNavigateToFilters(id) }
         )
 
-        is CategoryUiState.Init -> {}
+        else -> Unit
     }
 }
 

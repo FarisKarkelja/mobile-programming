@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.screens.drink_details.components.DetailBadge
@@ -56,7 +56,7 @@ fun DrinkDetailsScreen(
             onBackClick = onBackClick
         )
 
-        is DrinkDetailsUiState.Init -> {}
+        else -> Unit
     }
 }
 

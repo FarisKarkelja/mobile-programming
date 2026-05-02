@@ -1,4 +1,4 @@
-package com.example.mobile_programming.data
+package com.example.mobile_programming.model
 
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import com.example.mobile_programming.R

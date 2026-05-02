@@ -21,7 +21,7 @@ import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.presentation.ui.screens.filters.components.FilterDropdownMenu
 import kotlin.math.roundToInt
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import com.example.mobile_programming.presentation.ui.components.ApplicationLogo
 import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
@@ -69,7 +69,7 @@ fun FiltersScreen(
             }
         )
 
-        is FilterUiState.Init -> {}
+        else -> Unit
     }
 }
 

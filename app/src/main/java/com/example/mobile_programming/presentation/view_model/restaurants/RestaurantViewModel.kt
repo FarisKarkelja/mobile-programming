@@ -2,7 +2,7 @@ package com.example.mobile_programming.presentation.view_model.restaurants
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.isWithinBudget
 import dagger.hilt.android.lifecycle.HiltViewModel

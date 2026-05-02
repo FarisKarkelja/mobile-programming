@@ -20,7 +20,7 @@ import com.example.mobile_programming.presentation.theme.*
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.ui.screens.profile.components.LogoutButton
@@ -49,7 +49,7 @@ fun ProfileScreen(
             onLogoutClick = { onNavigateToLogin() }
         )
 
-        is ProfileUiState.Init -> {}
+        else -> Unit
     }
 }
 
