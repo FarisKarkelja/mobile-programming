@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 class FakeCategoryRepository {
     suspend fun getCategories(shouldFail: Boolean = false): List<List<Category>> =
         withContext(Dispatchers.IO) {
-            delay(2000)
+            delay(1500)
 
             if (shouldFail) {
                 throw IllegalStateException("Failed to load categories.")

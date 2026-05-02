@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 class FakeProfileRepository {
     suspend fun getProfile(shouldFail: Boolean = false): User = withContext(Dispatchers.IO) {
-        delay(2000)
+        delay(1500)
 
         if (shouldFail) {
             throw IllegalStateException("Failed to load profile.")
