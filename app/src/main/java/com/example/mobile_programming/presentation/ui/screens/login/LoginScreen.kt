@@ -51,10 +51,10 @@ fun LoginScreen(
         }
     }
 
-    when (uiState) {
+    when (val state = uiState) {
         is LoginUiState.Loading -> LoadingScreen()
         is LoginUiState.Error -> ErrorScreen(
-            message = (uiState as LoginUiState.Error).message,
+            message = state.message,
             onRetry = { viewModel.resetUiState() }
         )
 

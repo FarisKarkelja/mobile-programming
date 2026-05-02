@@ -3,15 +3,12 @@ package com.example.mobile_programming.presentation.ui.screens.categories
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
 import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.theme.WarmCream
@@ -21,26 +18,32 @@ import com.example.mobile_programming.presentation.ui.components.HorizontalSpace
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.presentation.ui.screens.categories.util.Category
 import com.example.mobile_programming.presentation.ui.screens.categories.util.formatCategories
+import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
+import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
+import com.example.mobile_programming.presentation.view_model.categories.CategoryUiState
+import com.example.mobile_programming.presentation.view_model.categories.CategoryViewModel
 
 @Composable
 fun CategoriesScreen(
+    viewModel: CategoryViewModel,
     onNavigateToFilters: (String) -> Unit
 ) {
-    var categories by remember { mutableStateOf(HardcodedData.categories) }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val rowPattern = listOf(1, 3, 2, 1)
-    val formattedCategories by remember(categories) {
-        derivedStateOf { formatCategories(categories, rowPattern) }
+    when (val state = uiState) {
+        is CategoryUiState.Loading -> LoadingScreen()
+        is CategoryUiState.Error -> ErrorScreen(
+            message = state.message,
+            onRetry = { viewModel.resetUiState() }
+        )
+
+        is CategoryUiState.Success -> CategoriesScreen(
+            categories = state.formattedCategories,
+            onCategoryClick = { id -> onNavigateToFilters(id) }
+        )
+
+        is CategoryUiState.Init -> {}
     }
-
-    val onCategoryClick: (String) -> Unit = { id ->
-        onNavigateToFilters(id)
-    }
-
-    CategoriesScreen(
-        categories = formattedCategories,
-        onCategoryClick = onCategoryClick
-    )
 }
 
 @Composable
@@ -89,5 +92,10 @@ private fun CategoriesScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewCategoriesScreen() {
-    CategoriesScreen(onNavigateToFilters = {})
+    val pattern = listOf(1, 3, 2, 1)
+    val preview = formatCategories(HardcodedData.categories, pattern)
+    CategoriesScreen(
+        categories = preview,
+        onCategoryClick = {}
+    )
 }

@@ -64,10 +64,10 @@ fun RegistrationScreen(
         }
     }
 
-    when (uiState) {
+    when (val state = uiState) {
         is RegistrationUiState.Loading -> LoadingScreen()
         is RegistrationUiState.Error -> ErrorScreen(
-            message = (uiState as RegistrationUiState.Error).message,
+            message = state.message,
             onRetry = { viewModel.resetUiState() }
         )
 

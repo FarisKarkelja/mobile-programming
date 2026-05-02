@@ -26,7 +26,6 @@ import com.example.mobile_programming.presentation.ui.screens.profile.ProfileScr
 import com.example.mobile_programming.presentation.ui.screens.registration.RegistrationScreen
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.RestaurantDetailsScreen
 import com.example.mobile_programming.presentation.ui.screens.restaurants.RestaurantsScreen
-import com.example.mobile_programming.presentation.view_model.auth.login.LoginViewModel
 
 @Composable
 fun NavGraph(
@@ -99,6 +98,7 @@ fun NavGraph(
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
             CategoriesScreen(
+                viewModel = hiltViewModel(),
                 onNavigateToFilters = { categoryId ->
                     navController.navigate(Screen.Filters.createRoute(categoryId))
                 }
