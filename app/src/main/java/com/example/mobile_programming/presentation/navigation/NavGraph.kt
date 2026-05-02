@@ -4,10 +4,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -15,7 +11,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.ui.screens.categories.CategoriesScreen
 import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.FavoriteRestaurantsScreen
 import com.example.mobile_programming.presentation.ui.screens.filters.FiltersScreen
@@ -215,7 +210,10 @@ fun NavGraph(
             arguments = listOf(navArgument("dishId") { type = NavType.StringType })
         ) { backStackEntry ->
             val dishId = backStackEntry.arguments?.getString("dishId").orEmpty()
-            FoodDishDetailsScreen(dishId = dishId, onBackClick = { navController.popBackStack() })
+            FoodDishDetailsScreen(
+                dishId = dishId,
+                viewModel = hiltViewModel(),
+                onBackClick = { navController.popBackStack() })
         }
 
         composable(
@@ -227,7 +225,10 @@ fun NavGraph(
             arguments = listOf(navArgument("drinkId") { type = NavType.StringType })
         ) { backStackEntry ->
             val drinkId = backStackEntry.arguments?.getString("drinkId").orEmpty()
-            DrinkDetailsScreen(drinkId = drinkId, onBackClick = { navController.popBackStack() })
+            DrinkDetailsScreen(
+                drinkId = drinkId,
+                viewModel = hiltViewModel(),
+                onBackClick = { navController.popBackStack() })
         }
     }
 }
