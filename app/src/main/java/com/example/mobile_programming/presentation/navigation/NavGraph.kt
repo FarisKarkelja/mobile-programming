@@ -33,18 +33,6 @@ fun NavGraph(
     startDestination: String,
     modifier: Modifier = Modifier
 ) {
-    var allRestaurants by remember { mutableStateOf(HardcodedData.restaurants) }
-
-    val onToggleFavorite: (String) -> Unit = { restaurantId ->
-        allRestaurants = allRestaurants.map { restaurant ->
-            if (restaurant.id == restaurantId) {
-                restaurant.copy(isFavorite = !restaurant.isFavorite)
-            } else {
-                restaurant
-            }
-        }
-    }
-
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -153,8 +141,7 @@ fun NavGraph(
                 location = location,
                 budget = budget,
                 minRating = minRating,
-                allRestaurants = allRestaurants,
-                onToggleFavorite = onToggleFavorite,
+                viewModel = hiltViewModel(),
                 onNavigateToDetails = { restaurantId ->
                     navController.navigate(Screen.RestaurantDetails.createRoute(restaurantId))
                 }
@@ -176,7 +163,7 @@ fun NavGraph(
             val restaurantId = backStackEntry.arguments?.getString("restaurantId").orEmpty()
             RestaurantDetailsScreen(
                 restaurantId = restaurantId,
-                allRestaurants = allRestaurants,
+                viewModel = hiltViewModel(),
                 onNavigateToDish = { dishId ->
                     navController.navigate(Screen.FoodDishDetails.createRoute(dishId))
                 },
