@@ -121,6 +121,7 @@ fun NavGraph(
 
             FiltersScreen(
                 categoryId = categoryId,
+                viewModel = hiltViewModel(),
                 onNavigateToRestaurants = { selectedCategoryId, location, budget, rating ->
                     navController.navigate(
                         Screen.Restaurants.createRoute(selectedCategoryId, location, budget, rating)
