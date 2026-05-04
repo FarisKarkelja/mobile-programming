@@ -3,6 +3,7 @@ package com.example.mobile_programming.presentation.view_model.categories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_programming.model.repository.FakeCategoryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
+@HiltViewModel
 class CategoryViewModel @Inject constructor() : ViewModel() {
     private val _uiState = MutableStateFlow<CategoryUiState>(CategoryUiState.Init)
     val uiState: StateFlow<CategoryUiState> = _uiState.asStateFlow()

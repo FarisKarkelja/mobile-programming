@@ -22,8 +22,10 @@ class FoodDishDetailsViewModel @Inject constructor() : ViewModel() {
     val navigationEvent = _navigationEvent.receiveAsFlow()
 
     private val repository = FakeFoodDishRepository()
+    private var currentDishId: String = ""
 
     fun loadDish(dishId: String) {
+        currentDishId = dishId
         viewModelScope.launch {
             _uiState.value = FoodDishDetailsUiState.Loading
             try {
@@ -43,6 +45,6 @@ class FoodDishDetailsViewModel @Inject constructor() : ViewModel() {
     }
 
     fun resetUiState() {
-        _uiState.value = FoodDishDetailsUiState.Init
+        loadDish(currentDishId)
     }
 }
