@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class FakeDrinkRepository {
+class DrinkRepository {
     suspend fun getDrink(drinkId: String, shouldFail: Boolean = false): Drink? =
         withContext(Dispatchers.IO) {
             delay(1500)

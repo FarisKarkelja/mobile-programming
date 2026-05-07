@@ -55,4 +55,10 @@ object DatabaseModule {
     fun provideFoodDishDao(database: GricDatabase): FoodDishDao {
         return database.foodDishDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideUserRestaurantDao(database: GricDatabase): UserRestaurantDao {
+        return database.userRestaurantDao()
+    }
 }

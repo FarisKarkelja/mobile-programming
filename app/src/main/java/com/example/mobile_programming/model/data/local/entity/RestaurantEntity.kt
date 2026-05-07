@@ -2,16 +2,27 @@ package com.example.mobile_programming.model.data.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "restaurants")
+@Entity(
+    tableName = "restaurants",
+    foreignKeys = [
+        ForeignKey(
+            entity = CategoryEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["category_id"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 data class RestaurantEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val name: String,
     val cuisine: String,
     @ColumnInfo(name = "category_id")
-    val categoryId: String,
+    val categoryId: Long,
     val description: String,
     @ColumnInfo(name = "image")
     val imageResId: Int,
@@ -19,7 +30,5 @@ data class RestaurantEntity(
     val address: String,
     @ColumnInfo(name = "average_price")
     val avgPrice: Double,
-    val rating: Double,
-    @ColumnInfo(name = "is_favorite")
-    val isFavorite: Boolean = false
+    val rating: Double
 )

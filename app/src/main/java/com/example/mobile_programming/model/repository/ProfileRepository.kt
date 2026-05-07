@@ -5,7 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class FakeProfileRepository {
+class ProfileRepository {
     suspend fun getProfile(shouldFail: Boolean = false): User = withContext(Dispatchers.IO) {
         delay(1500)
 

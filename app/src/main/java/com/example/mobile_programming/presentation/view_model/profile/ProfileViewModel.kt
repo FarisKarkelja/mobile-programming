@@ -2,7 +2,7 @@ package com.example.mobile_programming.presentation.view_model.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.repository.FakeProfileRepository
+import com.example.mobile_programming.model.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +21,7 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
     private val _navigationEvent = Channel<ProfileNavigationEvent>(Channel.BUFFERED)
     val navigationEvent = _navigationEvent.receiveAsFlow()
 
-    private val repository = FakeProfileRepository()
+    private val repository = ProfileRepository()
 
     init {
         loadProfile()

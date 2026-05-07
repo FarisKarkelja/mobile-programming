@@ -2,7 +2,7 @@ package com.example.mobile_programming.presentation.view_model.drink_details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.repository.FakeDrinkRepository
+import com.example.mobile_programming.model.repository.DrinkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +21,7 @@ class DrinkDetailsViewModel @Inject constructor() : ViewModel() {
     private val _navigationEvent = Channel<DrinkDetailsNavigationEvent>(Channel.BUFFERED)
     val navigationEvent = _navigationEvent.receiveAsFlow()
 
-    private val repository = FakeDrinkRepository()
+    private val repository = DrinkRepository()
     private var currentDrinkId: String = ""
 
     fun loadDrink(drinkId: String) {

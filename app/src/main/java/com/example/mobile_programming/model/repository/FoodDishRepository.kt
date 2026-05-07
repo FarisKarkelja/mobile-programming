@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class FakeFoodDishRepository {
+class FoodDishRepository {
     suspend fun getFoodDish(dishId: String, shouldFail: Boolean = false): FoodDish? = withContext(
         Dispatchers.IO
     ) {

@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class FakeCategoryRepository {
+class CategoryRepository {
     suspend fun getCategories(shouldFail: Boolean = false): List<List<Category>> =
         withContext(Dispatchers.IO) {
             delay(1500)

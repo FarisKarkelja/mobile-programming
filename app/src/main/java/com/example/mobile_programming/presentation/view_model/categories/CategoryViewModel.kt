@@ -2,7 +2,7 @@ package com.example.mobile_programming.presentation.view_model.categories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.repository.FakeCategoryRepository
+import com.example.mobile_programming.model.repository.CategoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +21,7 @@ class CategoryViewModel @Inject constructor() : ViewModel() {
     private val _navigationEvent = Channel<CategoryNavigationEvent>(Channel.BUFFERED)
     val navigationEvent = _navigationEvent.receiveAsFlow()
 
-    private val repository = FakeCategoryRepository()
+    private val repository = CategoryRepository()
 
     init {
         loadCategories()
