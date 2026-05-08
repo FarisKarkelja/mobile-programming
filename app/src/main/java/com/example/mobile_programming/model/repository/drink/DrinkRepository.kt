@@ -4,7 +4,7 @@ import com.example.mobile_programming.model.data.local.entity.DrinkEntity
 import kotlinx.coroutines.flow.Flow
 
 interface DrinkRepository {
-    fun getDrinksForRestaurant(restaurantId: Long): Flow<List<DrinkEntity>>
+    fun getTopDrinksByRestaurant(restaurantId: Long): Flow<List<DrinkEntity>>
     suspend fun getDrinkById(id: Long): DrinkEntity?
     suspend fun insertDrink(drink: DrinkEntity)
     suspend fun updateDrink(drink: DrinkEntity)

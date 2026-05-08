@@ -26,11 +26,9 @@ import androidx.room.PrimaryKey
 )
 data class UserRestaurantEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Long = 0,
     @ColumnInfo(name = "restaurant_id")
-    val restaurantId: Int,
+    val restaurantId: Long,
     @ColumnInfo(name = "user_id")
-    val userId: Int,
-    @ColumnInfo(name = "is_favorite")
-    val isFavorite: Boolean = false
+    val userId: Long
 )

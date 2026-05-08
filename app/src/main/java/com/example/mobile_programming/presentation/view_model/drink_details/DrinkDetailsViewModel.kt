@@ -2,7 +2,6 @@ package com.example.mobile_programming.presentation.view_model.drink_details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.data.local.util.DrinkSeed
 import com.example.mobile_programming.model.repository.drink.DrinkRepository
 import com.example.mobile_programming.model.repository.mappers.toDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -42,14 +41,8 @@ class DrinkDetailsViewModel @Inject constructor(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _uiState.value = DrinkDetailsUiState.Error(e.message ?: "Failed to load drink.")
+                _uiState.value = DrinkDetailsUiState.Error(e.message ?: "Failed to load drink")
             }
-        }
-    }
-
-    private fun seedDrinks() {
-        viewModelScope.launch {
-            DrinkSeed.defaultDrinks.forEach { repository.insertDrink(it) }
         }
     }
 

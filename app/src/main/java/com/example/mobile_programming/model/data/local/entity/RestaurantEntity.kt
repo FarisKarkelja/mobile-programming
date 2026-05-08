@@ -20,11 +20,11 @@ import androidx.room.PrimaryKey
 )
 data class RestaurantEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Long = 0,
     val name: String,
     val cuisine: String,
     @ColumnInfo(name = "category_id")
-    val categoryId: Int,
+    val categoryId: Long,
     val description: String,
     @ColumnInfo(name = "image")
     val imageResId: Int,

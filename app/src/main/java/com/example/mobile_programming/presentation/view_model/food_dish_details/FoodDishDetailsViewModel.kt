@@ -42,7 +42,7 @@ class FoodDishDetailsViewModel @Inject constructor(
                 throw e
             } catch (e: Exception) {
                 _uiState.value =
-                    FoodDishDetailsUiState.Error(e.message ?: "Failed to load dish details.")
+                    FoodDishDetailsUiState.Error(e.message ?: "Failed to load dish details")
             }
         }
     }

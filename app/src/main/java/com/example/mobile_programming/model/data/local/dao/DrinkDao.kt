@@ -6,13 +6,13 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DrinkDao {
-    @Query("SELECT * FROM drinks WHERE restaurant_id = :restaurantId")
-    fun getDrinksByRestaurant(restaurantId: Long): Flow<List<DrinkEntity>>
+    @Query("SELECT * FROM drinks WHERE restaurant_id = :restaurantId LIMIT 5")
+    fun getTopDrinksByRestaurant(restaurantId: Long): Flow<List<DrinkEntity>>
 
     @Query("SELECT * FROM drinks WHERE id = :id LIMIT 1")
     suspend fun getDrinkById(id: Long): DrinkEntity?
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDrink(drink: DrinkEntity)
 
     @Update

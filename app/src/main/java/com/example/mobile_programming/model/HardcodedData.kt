@@ -80,7 +80,6 @@ object HardcodedData {
             address = "Veliki Alifakovac 1",
             avgPrice = 28.5,
             rating = 4.8,
-            isFavorite = false
         ),
         Restaurant(
             id = "2",
@@ -93,7 +92,6 @@ object HardcodedData {
             address = "Brodac 1",
             avgPrice = 25.3,
             rating = 4.9,
-            isFavorite = true
         ),
         Restaurant(
             id = "3",
@@ -106,7 +104,6 @@ object HardcodedData {
             address = "Iza Hrida 7",
             avgPrice = 55.5,
             rating = 4.5,
-            isFavorite = true
         ),
         Restaurant(
             id = "4",
@@ -119,7 +116,6 @@ object HardcodedData {
             address = "Baščaršija 5",
             avgPrice = 30.5,
             rating = 4.7,
-            isFavorite = false
         ),
         Restaurant(
             id = "5",
@@ -132,7 +128,6 @@ object HardcodedData {
             address = "Bravadžiluk 15",
             avgPrice = 10.5,
             rating = 4.6,
-            isFavorite = true
         ),
         Restaurant(
             id = "6",
@@ -145,7 +140,6 @@ object HardcodedData {
             address = "Skenderija 5",
             avgPrice = 45.3,
             rating = 4.6,
-            isFavorite = false
         ),
         Restaurant(
             id = "7",
@@ -158,7 +152,6 @@ object HardcodedData {
             address = "Ferhadija 10",
             avgPrice = 35.8,
             rating = 4.9,
-            isFavorite = true
         ),
         Restaurant(
             id = "8",
@@ -183,7 +176,6 @@ object HardcodedData {
             address = "Saraći 77",
             avgPrice = 32.2,
             rating = 4.8,
-            isFavorite = true
         ),
         Restaurant(
             id = "10",
@@ -196,7 +188,6 @@ object HardcodedData {
             address = "Adema Buće 160",
             avgPrice = 50.0,
             rating = 4.4,
-            isFavorite = false
         )
     )
 

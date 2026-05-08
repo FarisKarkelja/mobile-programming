@@ -2,7 +2,6 @@ package com.example.mobile_programming.presentation.view_model.categories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.data.local.util.CategorySeed
 import com.example.mobile_programming.model.repository.category.CategoryRepository
 import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.presentation.ui.screens.categories.util.formatCategories
@@ -41,22 +40,10 @@ class CategoryViewModel @Inject constructor(
                     _uiState.value = CategoryUiState.Error(e.message ?: "Failed to load categories")
                 }
                 .collect { entities ->
-                    if (entities.isEmpty()) {
-                        seedDatabase()
-                    } else {
-                        val domainCategories = entities.map { it.toDomain() }
-                        val formatted = formatCategories(domainCategories, pattern)
-                        _uiState.value = CategoryUiState.Success(formatted)
-                    }
+                    val domainCategories = entities.map { it.toDomain() }
+                    val formatted = formatCategories(domainCategories, pattern)
+                    _uiState.value = CategoryUiState.Success(formatted)
                 }
-        }
-    }
-
-    private fun seedDatabase() {
-        viewModelScope.launch {
-            CategorySeed.defaultCategories.forEach { entity ->
-                repository.insertCategory(entity)
-            }
         }
     }
 

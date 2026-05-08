@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
-import kotlin.text.toLong
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
@@ -24,7 +23,6 @@ class ProfileViewModel @Inject constructor(
 
     private val _navigationEvent = Channel<ProfileNavigationEvent>(Channel.BUFFERED)
     val navigationEvent = _navigationEvent.receiveAsFlow()
-
 
     init {
         loadProfile(1)

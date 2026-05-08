@@ -8,8 +8,8 @@ import javax.inject.Inject
 class DrinkRepositoryImpl @Inject constructor(
     private val drinkDao: DrinkDao
 ) : DrinkRepository {
-    override fun getDrinksForRestaurant(restaurantId: Long): Flow<List<DrinkEntity>> {
-        return drinkDao.getDrinksByRestaurant(restaurantId)
+    override fun getTopDrinksByRestaurant(restaurantId: Long): Flow<List<DrinkEntity>> {
+        return drinkDao.getTopDrinksByRestaurant(restaurantId)
     }
 
     override suspend fun getDrinkById(id: Long): DrinkEntity? {

@@ -1,4 +1,42 @@
 package com.example.mobile_programming.model.repository.restaurant
 
-class RestaurantRepositoryImpl {
+import com.example.mobile_programming.model.data.local.dao.RestaurantDao
+import com.example.mobile_programming.model.data.local.entity.RestaurantEntity
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+
+class RestaurantRepositoryImpl @Inject constructor(
+    private val restaurantDao: RestaurantDao
+) : RestaurantRepository {
+    override fun getFilteredRestaurants(
+        categoryId: Long,
+        startValue: Int,
+        endValue: Int,
+        location: String,
+        minRating: Float
+    ): Flow<List<RestaurantEntity>> {
+        return restaurantDao.getFilteredRestaurants(
+            categoryId,
+            startValue,
+            endValue,
+            location,
+            minRating
+        )
+    }
+
+    override suspend fun getRestaurantById(restaurantId: Long): RestaurantEntity? {
+        return restaurantDao.getRestaurantById(restaurantId)
+    }
+
+    override suspend fun insertRestaurant(restaurant: RestaurantEntity) {
+        restaurantDao.insertRestaurant(restaurant)
+    }
+
+    override suspend fun updateRestaurant(restaurant: RestaurantEntity) {
+        restaurantDao.updateRestaurant(restaurant)
+    }
+
+    override suspend fun deleteRestaurant(restaurant: RestaurantEntity) {
+        restaurantDao.deleteRestaurant(restaurant)
+    }
 }
