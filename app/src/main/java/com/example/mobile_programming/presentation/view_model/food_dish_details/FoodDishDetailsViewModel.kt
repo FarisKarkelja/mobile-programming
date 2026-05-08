@@ -2,7 +2,8 @@ package com.example.mobile_programming.presentation.view_model.food_dish_details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.repository.FoodDishRepository
+import com.example.mobile_programming.model.repository.food_dish.FoodDishRepository
+import com.example.mobile_programming.model.repository.mappers.toDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,14 +15,15 @@ import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
-class FoodDishDetailsViewModel @Inject constructor() : ViewModel() {
+class FoodDishDetailsViewModel @Inject constructor(
+    private val repository: FoodDishRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow<FoodDishDetailsUiState>(FoodDishDetailsUiState.Init)
     val uiState: StateFlow<FoodDishDetailsUiState> = _uiState.asStateFlow()
 
     private val _navigationEvent = Channel<FoodDishDetailsNavigationEvent>(Channel.BUFFERED)
     val navigationEvent = _navigationEvent.receiveAsFlow()
 
-    private val repository = FoodDishRepository()
     private var currentDishId: String = ""
 
     fun loadDish(dishId: String) {
@@ -29,11 +31,12 @@ class FoodDishDetailsViewModel @Inject constructor() : ViewModel() {
         viewModelScope.launch {
             _uiState.value = FoodDishDetailsUiState.Loading
             try {
-                val dish = repository.getFoodDish(dishId)
-                if (dish == null) {
+                val dishEntity = repository.getDishById(dishId.toLong())
+
+                if (dishEntity == null) {
                     _uiState.value = FoodDishDetailsUiState.Error("Food dish not found")
                 } else {
-                    _uiState.value = FoodDishDetailsUiState.Success(dish)
+                    _uiState.value = FoodDishDetailsUiState.Success(dishEntity.toDomain())
                 }
             } catch (e: CancellationException) {
                 throw e

@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
 import com.example.mobile_programming.model.HardcodedData
+import com.example.mobile_programming.model.data.local.util.ALLERGENS
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.components.TopBar
@@ -29,7 +30,6 @@ import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.presentation.ui.screens.drink_details.components.DetailBadge
 import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.components.InfoTag
-import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.ALLERGENS
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
 import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.view_model.food_dish_details.FoodDishDetailsUiState

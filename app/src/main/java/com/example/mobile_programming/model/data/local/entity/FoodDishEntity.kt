@@ -3,6 +3,7 @@ package com.example.mobile_programming.model.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.example.mobile_programming.model.data.local.util.ALLERGENS
 
@@ -15,7 +16,8 @@ import com.example.mobile_programming.model.data.local.util.ALLERGENS
             childColumns = ["restaurant_id"],
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index(value = ["restaurant_id"])]
 )
 data class FoodDishEntity(
     @PrimaryKey(autoGenerate = true)

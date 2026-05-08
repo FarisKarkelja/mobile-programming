@@ -2,9 +2,9 @@ package com.example.mobile_programming.model
 
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import com.example.mobile_programming.R
+import com.example.mobile_programming.model.data.local.util.ALLERGENS
 import com.example.mobile_programming.presentation.ui.screens.categories.util.Category
 import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
-import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.ALLERGENS
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
 import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 

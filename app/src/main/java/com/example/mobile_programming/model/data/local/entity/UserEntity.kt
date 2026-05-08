@@ -11,5 +11,7 @@ data class UserEntity(
     @ColumnInfo(name = "full_name")
     val fullName: String,
     val email: String,
-    val password: String
+    val password: String,
+    @ColumnInfo(name = "created_at")
+    val createdAt: Long = System.currentTimeMillis()
 )

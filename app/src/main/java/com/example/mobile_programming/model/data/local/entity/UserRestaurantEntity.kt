@@ -3,6 +3,7 @@ package com.example.mobile_programming.model.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
@@ -20,15 +21,16 @@ import androidx.room.PrimaryKey
             childColumns = ["user_id"],
             onDelete = ForeignKey.CASCADE
         ),
-    ]
+    ],
+    indices = [Index(value = ["user_id"]), Index(value = ["restaurant_id"])]
 )
 data class UserRestaurantEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    val id: Int = 0,
     @ColumnInfo(name = "restaurant_id")
-    val restaurantId: Long,
+    val restaurantId: Int,
     @ColumnInfo(name = "user_id")
-    val userId: Long,
+    val userId: Int,
     @ColumnInfo(name = "is_favorite")
     val isFavorite: Boolean = false
 )
