@@ -8,10 +8,18 @@ import com.example.mobile_programming.model.repository.category.CategoryReposito
 import com.example.mobile_programming.model.repository.category.CategoryRepositoryImpl
 import com.example.mobile_programming.model.repository.drink.DrinkRepository
 import com.example.mobile_programming.model.repository.drink.DrinkRepositoryImpl
+import com.example.mobile_programming.model.repository.filter.FilterRepository
+import com.example.mobile_programming.model.repository.filter.FilterRepositoryImpl
 import com.example.mobile_programming.model.repository.food_dish.FoodDishRepository
 import com.example.mobile_programming.model.repository.food_dish.FoodDishRepositoryImpl
+import com.example.mobile_programming.model.repository.restaurant.RestaurantRepository
+import com.example.mobile_programming.model.repository.restaurant.RestaurantRepositoryImpl
+import com.example.mobile_programming.model.repository.user.SessionRepository
+import com.example.mobile_programming.model.repository.user.SessionRepositoryImpl
 import com.example.mobile_programming.model.repository.user.UserRepository
 import com.example.mobile_programming.model.repository.user.UserRepositoryImpl
+import com.example.mobile_programming.model.repository.user_restaurant.UserRestaurantRepository
+import com.example.mobile_programming.model.repository.user_restaurant.UserRestaurantRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,7 +46,13 @@ object DatabaseModule {
     @Singleton
     fun provideRestaurantDao(database: GricDatabase): RestaurantDao {
         return database.restaurantDao()
-    } // missing restaurant impl
+    }
+
+    @Provides
+    @Singleton
+    fun provideRestaurantRepository(restaurantDao: RestaurantDao): RestaurantRepository {
+        return RestaurantRepositoryImpl(restaurantDao)
+    }
 
     @Provides
     @Singleton
@@ -92,13 +106,25 @@ object DatabaseModule {
     @Singleton
     fun provideUserRestaurantDao(database: GricDatabase): UserRestaurantDao {
         return database.userRestaurantDao()
-    } // missing userRestaurant impl
+    }
 
-    /*@Provides
+    @Provides
+    @Singleton
+    fun provideUserRestaurantRepository(userRestaurantDao: UserRestaurantDao): UserRestaurantRepository {
+        return UserRestaurantRepositoryImpl(userRestaurantDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFilterRepository(): FilterRepository {
+        return FilterRepositoryImpl()
+    }
+
+    @Provides
     @Singleton
     fun provideSessionRepository(
         @ApplicationContext context: Context
     ): SessionRepository {
         return SessionRepositoryImpl(context)
-    }*/
+    }
 }

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DrinkDao {
     @Query("SELECT * FROM drinks WHERE restaurant_id = :restaurantId LIMIT 5")
-    fun getTopDrinksByRestaurant(restaurantId: Long): Flow<List<DrinkEntity>>
+    suspend fun getTopDrinksByRestaurant(restaurantId: Long): List<DrinkEntity>
 
     @Query("SELECT * FROM drinks WHERE id = :id LIMIT 1")
     suspend fun getDrinkById(id: Long): DrinkEntity?

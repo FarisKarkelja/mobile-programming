@@ -9,7 +9,7 @@ import com.example.mobile_programming.model.data.local.util.Converters
 
 @Database(
     entities = [RestaurantEntity::class, CategoryEntity::class, DrinkEntity::class, FoodDishEntity::class, UserEntity::class, UserRestaurantEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

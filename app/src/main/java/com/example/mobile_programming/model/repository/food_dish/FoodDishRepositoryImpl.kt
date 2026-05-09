@@ -8,7 +8,7 @@ import javax.inject.Inject
 class FoodDishRepositoryImpl @Inject constructor(
     private val foodDishDao: FoodDishDao
 ) : FoodDishRepository {
-    override fun getTopDishesByRestaurant(restaurantId: Long): Flow<List<FoodDishEntity>> {
+    override suspend fun getTopDishesByRestaurant(restaurantId: Long): List<FoodDishEntity> {
         return foodDishDao.getTopDishesByRestaurant(restaurantId)
     }
 

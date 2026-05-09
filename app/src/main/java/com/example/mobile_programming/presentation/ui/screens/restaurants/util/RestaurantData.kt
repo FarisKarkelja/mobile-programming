@@ -11,4 +11,5 @@ data class Restaurant(
     val address: String,
     val avgPrice: Double,
     val rating: Double,
+    val isFavorite: Boolean = false
 )

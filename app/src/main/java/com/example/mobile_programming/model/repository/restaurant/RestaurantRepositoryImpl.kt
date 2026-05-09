@@ -2,6 +2,7 @@ package com.example.mobile_programming.model.repository.restaurant
 
 import com.example.mobile_programming.model.data.local.dao.RestaurantDao
 import com.example.mobile_programming.model.data.local.entity.RestaurantEntity
+import com.example.mobile_programming.model.data.local.entity.RestaurantWithFavorite
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -9,13 +10,15 @@ class RestaurantRepositoryImpl @Inject constructor(
     private val restaurantDao: RestaurantDao
 ) : RestaurantRepository {
     override fun getFilteredRestaurants(
+        userId: Long,
         categoryId: Long,
         startValue: Int,
         endValue: Int,
         location: String,
         minRating: Float
-    ): Flow<List<RestaurantEntity>> {
+    ): Flow<List<RestaurantWithFavorite>> {
         return restaurantDao.getFilteredRestaurants(
+            userId,
             categoryId,
             startValue,
             endValue,
