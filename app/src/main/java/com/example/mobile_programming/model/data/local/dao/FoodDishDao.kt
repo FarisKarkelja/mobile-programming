@@ -2,7 +2,6 @@ package com.example.mobile_programming.model.data.local.dao
 
 import androidx.room.*
 import com.example.mobile_programming.model.data.local.entity.FoodDishEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FoodDishDao {

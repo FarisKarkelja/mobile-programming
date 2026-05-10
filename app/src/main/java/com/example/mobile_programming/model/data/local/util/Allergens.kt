@@ -1,6 +1,6 @@
 package com.example.mobile_programming.model.data.local.util
 
-enum class ALLERGENS {
+enum class Allergens {
     GLUTEN_FREE,
     LACTOSE_FREE,
     VEGETARIAN,

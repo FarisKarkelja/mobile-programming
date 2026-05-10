@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.example.mobile_programming.model.data.local.util.ALLERGENS
+import com.example.mobile_programming.model.data.local.util.Allergens
 
 @Entity(
     tableName = "food_dishes",
@@ -34,5 +34,5 @@ data class FoodDishEntity(
     @ColumnInfo(name = "serving_size")
     val servingSize: String,
     val calories: String,
-    val allergens: List<ALLERGENS>
+    val allergens: List<Allergens>
 )

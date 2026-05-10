@@ -1,6 +1,7 @@
 package com.example.mobile_programming.model.repository.mappers
 
 import com.example.mobile_programming.model.data.local.entity.FoodDishEntity
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.Allergen
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
 
 fun FoodDishEntity.toDomain(): FoodDish {
@@ -14,6 +15,6 @@ fun FoodDishEntity.toDomain(): FoodDish {
         cookingTime = this.cookingTime,
         servingSize = this.servingSize,
         calories = this.calories,
-        allergens = this.allergens
+        allergens = this.allergens.map { Allergen.valueOf(it.name) }
     )
 }

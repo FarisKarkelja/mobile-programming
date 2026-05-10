@@ -15,7 +15,7 @@ object FoodDishSeed {
             cookingTime = "20 min",
             servingSize = "Bowl",
             calories = "320 kcal",
-            allergens = listOf(ALLERGENS.HALAL)
+            allergens = listOf(Allergens.HALAL)
         ),
         FoodDishEntity(
             id = 2,
@@ -27,7 +27,7 @@ object FoodDishSeed {
             cookingTime = "25 min",
             servingSize = "Large",
             calories = "680 kcal",
-            allergens = listOf(ALLERGENS.HALAL)
+            allergens = listOf(Allergens.HALAL)
         ),
         FoodDishEntity(
             id = 3,
@@ -39,7 +39,7 @@ object FoodDishSeed {
             cookingTime = "15 min",
             servingSize = "10 pieces",
             calories = "850 kcal",
-            allergens = listOf(ALLERGENS.HALAL, ALLERGENS.LACTOSE_FREE)
+            allergens = listOf(Allergens.HALAL, Allergens.LACTOSE_FREE)
         ),
         FoodDishEntity(
             id = 4,
@@ -51,7 +51,7 @@ object FoodDishSeed {
             cookingTime = "45 min",
             servingSize = "Large",
             calories = "920 kcal",
-            allergens = listOf(ALLERGENS.GLUTEN_FREE, ALLERGENS.HALAL)
+            allergens = listOf(Allergens.GLUTEN_FREE, Allergens.HALAL)
         ),
         FoodDishEntity(
             id = 5,
@@ -63,7 +63,7 @@ object FoodDishSeed {
             cookingTime = "15 min",
             servingSize = "Medium",
             calories = "410 kcal",
-            allergens = listOf(ALLERGENS.VEGAN, ALLERGENS.VEGETARIAN, ALLERGENS.GLUTEN_FREE)
+            allergens = listOf(Allergens.VEGAN, Allergens.VEGETARIAN, Allergens.GLUTEN_FREE)
         ),
         FoodDishEntity(
             id = 6,
@@ -75,7 +75,7 @@ object FoodDishSeed {
             cookingTime = "20 min",
             servingSize = "Regular",
             calories = "720 kcal",
-            allergens = listOf(ALLERGENS.VEGETARIAN)
+            allergens = listOf(Allergens.VEGETARIAN)
         ),
         FoodDishEntity(
             id = 7,
@@ -87,7 +87,7 @@ object FoodDishSeed {
             cookingTime = "35 min",
             servingSize = "Extra Large",
             calories = "1200 kcal",
-            allergens = listOf(ALLERGENS.GLUTEN_FREE, ALLERGENS.HALAL)
+            allergens = listOf(Allergens.GLUTEN_FREE, Allergens.HALAL)
         ),
         FoodDishEntity(
             id = 8,
@@ -99,7 +99,7 @@ object FoodDishSeed {
             cookingTime = "30 min",
             servingSize = "2 pieces",
             calories = "540 kcal",
-            allergens = listOf(ALLERGENS.HALAL, ALLERGENS.GLUTEN_FREE)
+            allergens = listOf(Allergens.HALAL, Allergens.GLUTEN_FREE)
         ),
         FoodDishEntity(
             id = 9,
@@ -111,7 +111,7 @@ object FoodDishSeed {
             cookingTime = "20 min",
             servingSize = "Medium",
             calories = "480 kcal",
-            allergens = listOf(ALLERGENS.GLUTEN_FREE, ALLERGENS.LACTOSE_FREE)
+            allergens = listOf(Allergens.GLUTEN_FREE, Allergens.LACTOSE_FREE)
         ),
         FoodDishEntity(
             id = 10,
@@ -123,7 +123,7 @@ object FoodDishSeed {
             cookingTime = "40 min",
             servingSize = "Medium",
             calories = "460 kcal",
-            allergens = listOf(ALLERGENS.HALAL)
+            allergens = listOf(Allergens.HALAL)
         ),
         FoodDishEntity(
             id = 11,
@@ -135,7 +135,7 @@ object FoodDishSeed {
             cookingTime = "25 min",
             servingSize = "Shared",
             calories = "1800 kcal",
-            allergens = listOf(ALLERGENS.HALAL)
+            allergens = listOf(Allergens.HALAL)
         ),
         FoodDishEntity(
             id = 12,
@@ -147,7 +147,7 @@ object FoodDishSeed {
             cookingTime = "20 min",
             servingSize = "Medium",
             calories = "390 kcal",
-            allergens = listOf(ALLERGENS.VEGAN, ALLERGENS.VEGETARIAN, ALLERGENS.GLUTEN_FREE)
+            allergens = listOf(Allergens.VEGAN, Allergens.VEGETARIAN, Allergens.GLUTEN_FREE)
         ),
         FoodDishEntity(
             id = 13,
@@ -159,7 +159,7 @@ object FoodDishSeed {
             cookingTime = "15 min",
             servingSize = "Large",
             calories = "950 kcal",
-            allergens = listOf(ALLERGENS.HALAL)
+            allergens = listOf(Allergens.HALAL)
         ),
         FoodDishEntity(
             id = 14,
@@ -171,7 +171,7 @@ object FoodDishSeed {
             cookingTime = "40 min",
             servingSize = "Medium",
             calories = "820 kcal",
-            allergens = listOf(ALLERGENS.GLUTEN_FREE)
+            allergens = listOf(Allergens.GLUTEN_FREE)
         ),
         FoodDishEntity(
             id = 15,
@@ -183,7 +183,7 @@ object FoodDishSeed {
             cookingTime = "10 min",
             servingSize = "5 pieces",
             calories = "710 kcal",
-            allergens = listOf(ALLERGENS.HALAL, ALLERGENS.LACTOSE_FREE)
+            allergens = listOf(Allergens.HALAL, Allergens.LACTOSE_FREE)
         ),
         FoodDishEntity(
             id = 16,
@@ -195,7 +195,7 @@ object FoodDishSeed {
             cookingTime = "60 min",
             servingSize = "Large",
             calories = "600 kcal",
-            allergens = listOf(ALLERGENS.HALAL, ALLERGENS.GLUTEN_FREE)
+            allergens = listOf(Allergens.HALAL, Allergens.GLUTEN_FREE)
         ),
         FoodDishEntity(
             id = 17,
@@ -207,7 +207,7 @@ object FoodDishSeed {
             cookingTime = "30 min",
             servingSize = "6 pieces",
             calories = "430 kcal",
-            allergens = listOf(ALLERGENS.HALAL, ALLERGENS.GLUTEN_FREE)
+            allergens = listOf(Allergens.HALAL, Allergens.GLUTEN_FREE)
         ),
         FoodDishEntity(
             id = 18,
@@ -219,7 +219,7 @@ object FoodDishSeed {
             cookingTime = "25 min",
             servingSize = "Medium",
             calories = "520 kcal",
-            allergens = listOf(ALLERGENS.VEGETARIAN, ALLERGENS.GLUTEN_FREE)
+            allergens = listOf(Allergens.VEGETARIAN, Allergens.GLUTEN_FREE)
         ),
         FoodDishEntity(
             id = 19,
@@ -231,7 +231,7 @@ object FoodDishSeed {
             cookingTime = "25 min",
             servingSize = "Regular",
             calories = "780 kcal",
-            allergens = listOf(ALLERGENS.HALAL, ALLERGENS.GLUTEN_FREE)
+            allergens = listOf(Allergens.HALAL, Allergens.GLUTEN_FREE)
         ),
         FoodDishEntity(
             id = 20,
@@ -243,7 +243,7 @@ object FoodDishSeed {
             cookingTime = "5 min",
             servingSize = "Small",
             calories = "550 kcal",
-            allergens = listOf(ALLERGENS.VEGETARIAN)
+            allergens = listOf(Allergens.VEGETARIAN)
         )
     )
 }

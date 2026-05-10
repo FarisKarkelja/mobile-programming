@@ -1,7 +1,6 @@
 package com.example.mobile_programming.model.repository.food_dish
 
 import com.example.mobile_programming.model.data.local.entity.FoodDishEntity
-import kotlinx.coroutines.flow.Flow
 
 interface FoodDishRepository {
     suspend fun getTopDishesByRestaurant(restaurantId: Long): List<FoodDishEntity>
