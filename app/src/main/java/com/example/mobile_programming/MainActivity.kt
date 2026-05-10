@@ -8,20 +8,29 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.mobile_programming.model.data.local.util.DatabaseSeed
 import com.example.mobile_programming.presentation.navigation.NavGraph
 import com.example.mobile_programming.presentation.navigation.Screen
 import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationComponent
 import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationItems
 import com.example.mobile_programming.presentation.theme.MobileprogrammingTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var databaseSeed: DatabaseSeed
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lifecycleScope.launch {
+            databaseSeed.seed()
+        }
         setContent {
             MobileprogrammingTheme {
                 val navController = rememberNavController()

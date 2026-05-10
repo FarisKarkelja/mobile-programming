@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.mobile_programming.model.data.local.dao.*
 import com.example.mobile_programming.model.data.local.db.GricDatabase
+import com.example.mobile_programming.model.data.local.util.DatabaseSeed
 import com.example.mobile_programming.model.repository.category.CategoryRepository
 import com.example.mobile_programming.model.repository.category.CategoryRepositoryImpl
 import com.example.mobile_programming.model.repository.drink.DrinkRepository
@@ -118,6 +119,17 @@ object DatabaseModule {
     @Singleton
     fun provideFilterRepository(): FilterRepository {
         return FilterRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabaseSeeder(
+        categoryDao: CategoryDao,
+        restaurantDao: RestaurantDao,
+        drinkDao: DrinkDao,
+        foodDishDao: FoodDishDao
+    ): DatabaseSeed {
+        return DatabaseSeed(categoryDao, restaurantDao, drinkDao, foodDishDao)
     }
 
     @Provides
