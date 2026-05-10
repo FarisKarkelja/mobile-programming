@@ -1,15 +1,19 @@
 package com.example.mobile_programming.presentation.ui.screens.restaurants.components
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -98,11 +102,20 @@ fun RestaurantCard(
                     modifier = Modifier.align(Alignment.BottomEnd),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    val tint by animateColorAsState(
+                        targetValue = if (restaurant.isFavorite) SunsetTangerine else SunsetTangerine,
+                        animationSpec = tween(durationMillis = 300),
+                        label = "favoriteColor"
+                    )
+
                     IconButton(onClick = onFavoriteClick) {
                         Icon(
-                            imageVector = Icons.Default.FavoriteBorder,
+                            imageVector = if (restaurant.isFavorite)
+                                Icons.Filled.Favorite
+                            else
+                                Icons.Outlined.FavoriteBorder,
                             contentDescription = "Favorite",
-                            tint = SunsetTangerine,
+                            tint = tint,
                             modifier = Modifier.size(dimensionResource(id = R.dimen.size_24))
                         )
                     }
