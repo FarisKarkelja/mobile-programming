@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,22 +32,13 @@ class RestaurantViewModel @Inject constructor(
 
     private var filteredRestaurants = emptyList<Restaurant>()
 
-    private var currentUserId: Long = 0L
-
-    init {
-        viewModelScope.launch {
-            sessionRepository.observeLoggedInUserId().collect { userId ->
-                currentUserId = userId ?: 0L
-            }
-        }
-    }
-
     fun loadRestaurants(categoryId: String, location: String, budget: String, minRating: Float) {
         viewModelScope.launch {
             _uiState.value = RestaurantUiState.Loading
+            val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
             val (start, end) = parseBudget(budget)
             restaurantRepository.getFilteredRestaurants(
-                userId = currentUserId,
+                userId = userId,
                 categoryId = categoryId.toLong(),
                 startValue = start,
                 endValue = end,
@@ -119,18 +111,26 @@ class RestaurantViewModel @Inject constructor(
 
     fun toggleFavorite(restaurantId: String) {
         viewModelScope.launch {
-            val current = _uiState.value as? RestaurantUiState.Success ?: return@launch
-            val restaurant = current.restaurants.find { it.id == restaurantId } ?: return@launch
-            if (restaurant.isFavorite) {
-                userRestaurantRepository.deleteFavoriteRestaurant(
-                    userId = currentUserId,
-                    restaurantId = restaurantId.toLong()
-                )
-            } else {
-                userRestaurantRepository.insertFavoriteRestaurant(
-                    restaurantId = restaurantId.toLong(),
-                    userId = currentUserId
-                )
+            val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
+            when (val current = _uiState.value) {
+                is RestaurantUiState.Success -> {
+                    val restaurant = current.restaurants.find { it.id == restaurantId }
+                    if (restaurant != null) {
+                        if (restaurant.isFavorite) {
+                            userRestaurantRepository.deleteFavoriteRestaurant(
+                                userId = userId,
+                                restaurantId = restaurantId.toLong()
+                            )
+                        } else {
+                            userRestaurantRepository.insertFavoriteRestaurant(
+                                restaurantId = restaurantId.toLong(),
+                                userId = userId
+                            )
+                        }
+                    }
+                }
+
+                else -> Unit
             }
         }
     }

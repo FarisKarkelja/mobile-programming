@@ -32,28 +32,31 @@ class FavoriteRestaurantsViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = FavoriteRestaurantsUiState.Loading
             sessionRepository.observeLoggedInUserId().collect { userId ->
-                val id = userId ?: return@collect
-                userRestaurantRepository.getFavoriteRestaurantsByUserId(userId = id)
-                    .catch { e ->
-                        _uiState.value = FavoriteRestaurantsUiState.Error(
-                            e.message ?: "Failed to load favorites"
-                        )
-                    }
-                    .collect { restaurantsWithFavorite ->
-                        val restaurants = restaurantsWithFavorite.map { it.toDomain() }
-                        _uiState.value = FavoriteRestaurantsUiState.Success(restaurants)
-                    }
+                if (userId != null) {
+                    userRestaurantRepository.getFavoriteRestaurantsByUserId(userId = userId)
+                        .catch { e ->
+                            _uiState.value = FavoriteRestaurantsUiState.Error(
+                                e.message ?: "Failed to load favorites"
+                            )
+                        }
+                        .collect { restaurantsWithFavorite ->
+                            val restaurants = restaurantsWithFavorite.map { it.toDomain() }
+                            _uiState.value = FavoriteRestaurantsUiState.Success(restaurants)
+                        }
+                }
             }
         }
     }
 
     fun unfavoriteRestaurant(restaurantId: String) {
         viewModelScope.launch {
-            val userId = sessionRepository.observeLoggedInUserId().first() ?: return@launch
-            userRestaurantRepository.deleteFavoriteRestaurant(
-                userId = userId,
-                restaurantId = restaurantId.toLong()
-            )
+            val userId = sessionRepository.observeLoggedInUserId().first()
+            if (userId != null) {
+                userRestaurantRepository.deleteFavoriteRestaurant(
+                    userId = userId,
+                    restaurantId = restaurantId.toLong()
+                )
+            }
         }
     }
 

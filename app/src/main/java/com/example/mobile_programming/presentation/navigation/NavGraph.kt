@@ -167,7 +167,7 @@ fun NavGraph(
                 },
                 onBackClick = { navController.popBackStack() })
         }
-/*
+
         composable(
             route = Screen.FavoriteRestaurants.route,
             enterTransition = { fadeIn(animationSpec = tween(300)) },
@@ -176,13 +176,12 @@ fun NavGraph(
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
             FavoriteRestaurantsScreen(
-                allRestaurants = allRestaurants,
-                onToggleFavorite = onToggleFavorite,
+                viewModel = hiltViewModel(),
                 onNavigateToDetails = { restaurantId ->
                     navController.navigate(Screen.RestaurantDetails.createRoute(restaurantId))
                 }
             )
-        }*/
+        }
 
         composable(
             route = Screen.Profile.route,

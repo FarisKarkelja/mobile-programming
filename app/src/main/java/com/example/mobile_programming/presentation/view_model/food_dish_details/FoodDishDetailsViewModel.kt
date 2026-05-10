@@ -16,7 +16,7 @@ import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
 class FoodDishDetailsViewModel @Inject constructor(
-    private val repository: FoodDishRepository
+    private val foodDishRepository: FoodDishRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<FoodDishDetailsUiState>(FoodDishDetailsUiState.Init)
     val uiState: StateFlow<FoodDishDetailsUiState> = _uiState.asStateFlow()
@@ -31,7 +31,7 @@ class FoodDishDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = FoodDishDetailsUiState.Loading
             try {
-                val dishEntity = repository.getDishById(dishId.toLong())
+                val dishEntity = foodDishRepository.getDishById(dishId.toLong())
 
                 if (dishEntity == null) {
                     _uiState.value = FoodDishDetailsUiState.Error("Food dish not found")

@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
 class RestaurantDetailsViewModel @Inject constructor(
@@ -34,17 +35,20 @@ class RestaurantDetailsViewModel @Inject constructor(
                 val restaurant = restaurantRepository.getRestaurantById(restaurantId.toLong())
                 if (restaurant == null) {
                     _uiState.value = RestaurantDetailsUiState.Error("Restaurant not found")
-                    return@launch
+                } else {
+                    val topDishes =
+                        foodDishRepository.getTopDishesByRestaurant(restaurantId.toLong())
+                            .map { it.toDomain() }
+                    val topDrinks = drinkRepository.getTopDrinksByRestaurant(restaurantId.toLong())
+                        .map { it.toDomain() }
+                    _uiState.value = RestaurantDetailsUiState.Success(
+                        restaurant = restaurant.toDomain(),
+                        topDishes = topDishes,
+                        topDrinks = topDrinks
+                    )
                 }
-                val topDishes = foodDishRepository.getTopDishesByRestaurant(restaurantId.toLong())
-                    .map { it.toDomain() }
-                val topDrinks = drinkRepository.getTopDrinksByRestaurant(restaurantId.toLong())
-                    .map { it.toDomain() }
-                _uiState.value = RestaurantDetailsUiState.Success(
-                    restaurant = restaurant.toDomain(),
-                    topDishes = topDishes,
-                    topDrinks = topDrinks
-                )
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 _uiState.value = RestaurantDetailsUiState.Error(e.message ?: "Failed to load")
             }

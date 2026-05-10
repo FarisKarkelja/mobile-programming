@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +28,7 @@ import com.example.mobile_programming.presentation.ui.screens.profile.components
 import com.example.mobile_programming.presentation.ui.screens.profile.components.ProfileAvatar
 import com.example.mobile_programming.presentation.ui.screens.profile.components.ProfileTextField
 import com.example.mobile_programming.presentation.ui.screens.profile.util.User
+import com.example.mobile_programming.presentation.view_model.profile.ProfileNavigationEvent
 import com.example.mobile_programming.presentation.view_model.profile.ProfileUiState
 import com.example.mobile_programming.presentation.view_model.profile.ProfileViewModel
 
@@ -37,6 +39,15 @@ fun ProfileScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    LaunchedEffect(Unit) {
+        viewModel.navigationEvent.collect { event ->
+            when (event) {
+                is ProfileNavigationEvent.NavigateBack -> onNavigateToLogin()
+                else -> Unit
+            }
+        }
+    }
+
     when (val state = uiState) {
         is ProfileUiState.Loading -> LoadingScreen()
         is ProfileUiState.Error -> ErrorScreen(
@@ -46,7 +57,7 @@ fun ProfileScreen(
 
         is ProfileUiState.Success -> ProfileScreen(
             user = state.profileData,
-            onLogoutClick = { onNavigateToLogin() }
+            onLogoutClick = { viewModel.logout() }
         )
 
         else -> Unit

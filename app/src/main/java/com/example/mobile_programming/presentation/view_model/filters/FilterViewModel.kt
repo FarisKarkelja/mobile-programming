@@ -15,7 +15,7 @@ import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
 class FilterViewModel @Inject constructor(
-    private val repository: FilterRepository
+    private val filterRepository: FilterRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<FilterUiState>(FilterUiState.Init)
     val uiState: StateFlow<FilterUiState> = _uiState.asStateFlow()
@@ -31,14 +31,14 @@ class FilterViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = FilterUiState.Loading
             try {
-                val filters = repository.getFilters()
+                val filters = filterRepository.getFilters()
                 _uiState.value = FilterUiState.Success(
                     locations = filters.locations,
                     budgets = filters.budgets
                 )
             } catch (e: CancellationException) {
                 throw e
-            } catch (e: IllegalStateException) {
+            } catch (e: Exception) {
                 _uiState.value = FilterUiState.Error(
                     e.message ?: "Failed to load filters"
                 )

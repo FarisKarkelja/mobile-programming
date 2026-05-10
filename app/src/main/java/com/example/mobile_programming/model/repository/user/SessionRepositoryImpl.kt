@@ -12,17 +12,23 @@ val Context.dataStore by preferencesDataStore(name = "session")
 class SessionRepositoryImpl(
     private val context: Context
 ) : SessionRepository {
-    private val USER_ID_KEY = longPreferencesKey("logged_in_user_id")
+    private val loggedInUserId = longPreferencesKey("logged_in_user_id")
 
     override suspend fun saveLoggedInUserId(userId: Long) {
-        context.dataStore.edit { it[USER_ID_KEY] = userId }
+        context.dataStore.edit { preferences ->
+            preferences[loggedInUserId] = userId
+        }
     }
 
     override fun observeLoggedInUserId(): Flow<Long?> {
-        return context.dataStore.data.map { it[USER_ID_KEY] }
+        return context.dataStore.data.map { preferences ->
+            preferences[loggedInUserId]
+        }
     }
 
     override suspend fun clearSession() {
-        context.dataStore.edit { it.remove(USER_ID_KEY) }
+        context.dataStore.edit { preferences ->
+            preferences.remove(loggedInUserId)
+        }
     }
 }

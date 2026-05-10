@@ -31,16 +31,16 @@ class LoginViewModel @Inject constructor(
             try {
                 if (email.isBlank() || password.isBlank()) {
                     _uiState.value = LoginUiState.Error("Please fill in all fields")
-                    return@launch
+                } else {
+                    val user = userRepository.getUserByEmailAndPassword(email, password)
+                    if (user == null) {
+                        _uiState.value = LoginUiState.Error("Invalid credentials")
+                    } else {
+                        sessionRepository.saveLoggedInUserId(user.id)
+                        _uiState.value = LoginUiState.Success(isLoggedIn = true)
+                        _navigationEvent.send(LoginNavigationEvent.Navigate)
+                    }
                 }
-                val user = userRepository.getUserByEmailAndPassword(email, password)
-                if (user == null) {
-                    _uiState.value = LoginUiState.Error("Invalid credentials")
-                    return@launch
-                }
-                sessionRepository.saveLoggedInUserId(user.id)
-                _uiState.value = LoginUiState.Success(isLoggedIn = true)
-                _navigationEvent.send(LoginNavigationEvent.Navigate)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
