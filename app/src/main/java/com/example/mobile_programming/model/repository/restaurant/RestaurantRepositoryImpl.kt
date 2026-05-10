@@ -2,7 +2,7 @@ package com.example.mobile_programming.model.repository.restaurant
 
 import com.example.mobile_programming.model.data.local.dao.RestaurantDao
 import com.example.mobile_programming.model.data.local.entity.RestaurantEntity
-import com.example.mobile_programming.model.data.local.entity.RestaurantWithFavorite
+import com.example.mobile_programming.model.data.local.util.RestaurantWithFavorite
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

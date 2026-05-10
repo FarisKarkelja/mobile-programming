@@ -53,7 +53,7 @@ class RestaurantViewModel @Inject constructor(
                 location = location,
                 minRating = minRating
             ).catch { e ->
-                _uiState.value = RestaurantUiState.Error(e.message ?: "Failed to load")
+                _uiState.value = RestaurantUiState.Error(e.message ?: "Failed to load restaurants")
             }.collect { restaurantsWithFavorite ->
                 val restaurants = restaurantsWithFavorite.map { it.toDomain() }
                 filteredRestaurants = restaurants

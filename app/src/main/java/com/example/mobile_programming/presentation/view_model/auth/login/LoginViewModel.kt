@@ -6,7 +6,6 @@ import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,7 +35,7 @@ class LoginViewModel @Inject constructor(
                 }
                 val user = userRepository.getUserByEmailAndPassword(email, password)
                 if (user == null) {
-                    _uiState.value = LoginUiState.Error("Invalid email or password")
+                    _uiState.value = LoginUiState.Error("Invalid credentials")
                     return@launch
                 }
                 sessionRepository.saveLoggedInUserId(user.id)

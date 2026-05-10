@@ -40,7 +40,7 @@ class FilterViewModel @Inject constructor(
                 throw e
             } catch (e: IllegalStateException) {
                 _uiState.value = FilterUiState.Error(
-                    e.message ?: "Could not load filters."
+                    e.message ?: "Failed to load filters"
                 )
             }
         }

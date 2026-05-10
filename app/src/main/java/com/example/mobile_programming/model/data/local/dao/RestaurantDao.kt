@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.mobile_programming.model.data.local.entity.RestaurantEntity
-import com.example.mobile_programming.model.data.local.entity.RestaurantWithFavorite
+import com.example.mobile_programming.model.data.local.util.RestaurantWithFavorite
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -23,7 +23,7 @@ interface RestaurantDao {
     AND r.average_price BETWEEN :startValue AND :endValue
     AND r.location = :location
     AND r.rating >= :minRating
-"""
+    """
     )
     fun getFilteredRestaurants(
         userId: Long,

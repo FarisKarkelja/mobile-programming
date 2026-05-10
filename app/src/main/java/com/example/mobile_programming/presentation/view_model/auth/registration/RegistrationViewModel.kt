@@ -6,7 +6,6 @@ import com.example.mobile_programming.model.repository.mappers.mapRegisterInputT
 import com.example.mobile_programming.model.repository.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
