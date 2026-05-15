@@ -2,6 +2,7 @@ package com.example.mobile_programming.presentation.view_model.favorite_restaura
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mobile_programming.model.repository.category.CategoryRepository
 import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user_restaurant.UserRestaurantRepository
@@ -19,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteRestaurantsViewModel @Inject constructor(
     private val userRestaurantRepository: UserRestaurantRepository,
-    private val sessionRepository: SessionRepository
+    private val sessionRepository: SessionRepository,
+    private val categoryRepository: CategoryRepository
 ) : ViewModel() {
 
     private val _uiState =
@@ -36,6 +38,7 @@ class FavoriteRestaurantsViewModel @Inject constructor(
     private fun loadFavorites() {
         viewModelScope.launch {
             _uiState.value = FavoriteRestaurantsUiState.Loading
+            val categories = categoryRepository.getAllCategories().first().map { it.toDomain() }
             sessionRepository.observeLoggedInUserId().collect { userId ->
                 if (userId != null) {
                     userRestaurantRepository.getFavoriteRestaurantsByUserId(userId = userId)
@@ -46,7 +49,8 @@ class FavoriteRestaurantsViewModel @Inject constructor(
                         }
                         .collect { restaurantsWithFavorite ->
                             val restaurants = restaurantsWithFavorite.map { it.toDomain() }
-                            _uiState.value = FavoriteRestaurantsUiState.Success(restaurants)
+                            _uiState.value =
+                                FavoriteRestaurantsUiState.Success(restaurants, categories)
                         }
                 }
             }

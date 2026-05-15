@@ -51,7 +51,7 @@ fun FavoriteRestaurantsScreen(
         )
 
         is FavoriteRestaurantsUiState.Success -> FavoriteRestaurantsScreen(
-            categories = HardcodedData.categories,
+            categories = state.categories,
             favoriteCounter = state.restaurants.size,
             groupedFavorites = state.restaurants.groupBy { it.categoryId },
             onUnfavoriteClick = { viewModel.unfavoriteRestaurant(it) },
