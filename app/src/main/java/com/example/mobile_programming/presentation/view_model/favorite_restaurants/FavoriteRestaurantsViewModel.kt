@@ -6,11 +6,13 @@ import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user_restaurant.UserRestaurantRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,6 +25,9 @@ class FavoriteRestaurantsViewModel @Inject constructor(
     private val _uiState =
         MutableStateFlow<FavoriteRestaurantsUiState>(FavoriteRestaurantsUiState.Init)
     val uiState: StateFlow<FavoriteRestaurantsUiState> = _uiState.asStateFlow()
+
+    private val _navigationEvent = Channel<FavoriteRestaurantsNavigationEvent>(Channel.BUFFERED)
+    val navigationEvent = _navigationEvent.receiveAsFlow()
 
     init {
         loadFavorites()
