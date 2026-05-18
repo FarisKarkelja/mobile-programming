@@ -1,11 +1,11 @@
-package com.example.mobile_programming.model.data.local.entity
+package com.example.mobile_programming.model.datasource.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.example.mobile_programming.model.data.local.util.Allergens
+import com.example.mobile_programming.model.datasource.local.util.Allergens
 
 @Entity(
     tableName = "food_dishes",

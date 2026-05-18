@@ -1,6 +1,6 @@
 package com.example.mobile_programming.model.repository.mappers
 
-import com.example.mobile_programming.model.data.local.entity.DrinkEntity
+import com.example.mobile_programming.model.datasource.local.entity.DrinkEntity
 import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
 
 fun DrinkEntity.toDomain(): Drink {

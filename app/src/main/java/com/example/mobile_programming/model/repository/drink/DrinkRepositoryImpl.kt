@@ -1,7 +1,7 @@
 package com.example.mobile_programming.model.repository.drink
 
-import com.example.mobile_programming.model.data.local.dao.DrinkDao
-import com.example.mobile_programming.model.data.local.entity.DrinkEntity
+import com.example.mobile_programming.model.datasource.local.dao.DrinkDao
+import com.example.mobile_programming.model.datasource.local.entity.DrinkEntity
 import javax.inject.Inject
 
 class DrinkRepositoryImpl @Inject constructor(

@@ -1,7 +1,7 @@
 package com.example.mobile_programming.model.repository.food_dish
 
-import com.example.mobile_programming.model.data.local.dao.FoodDishDao
-import com.example.mobile_programming.model.data.local.entity.FoodDishEntity
+import com.example.mobile_programming.model.datasource.local.dao.FoodDishDao
+import com.example.mobile_programming.model.datasource.local.entity.FoodDishEntity
 import javax.inject.Inject
 
 class FoodDishRepositoryImpl @Inject constructor(

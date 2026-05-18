@@ -1,6 +1,6 @@
 package com.example.mobile_programming.model.repository.mappers
 
-import com.example.mobile_programming.model.data.local.entity.UserEntity
+import com.example.mobile_programming.model.datasource.local.entity.UserEntity
 import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 
 fun UserEntity.toDomain(): User {

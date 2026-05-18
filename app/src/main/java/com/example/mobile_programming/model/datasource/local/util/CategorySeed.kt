@@ -1,7 +1,7 @@
-package com.example.mobile_programming.model.data.local.util
+package com.example.mobile_programming.model.datasource.local.util
 
 import com.example.mobile_programming.R
-import com.example.mobile_programming.model.data.local.entity.CategoryEntity
+import com.example.mobile_programming.model.datasource.local.entity.CategoryEntity
 
 object CategorySeed {
     val defaultCategories = listOf(

@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.mobile_programming.model.data.local.util.DatabaseSeed
+import com.example.mobile_programming.model.datasource.local.util.DatabaseSeed
 import com.example.mobile_programming.presentation.navigation.NavGraph
 import com.example.mobile_programming.presentation.navigation.Screen
 import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationComponent

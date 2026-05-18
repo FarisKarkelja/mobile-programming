@@ -1,7 +1,7 @@
 package com.example.mobile_programming.model.repository.category
 
-import com.example.mobile_programming.model.data.local.dao.CategoryDao
-import com.example.mobile_programming.model.data.local.entity.CategoryEntity
+import com.example.mobile_programming.model.datasource.local.dao.CategoryDao
+import com.example.mobile_programming.model.datasource.local.entity.CategoryEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

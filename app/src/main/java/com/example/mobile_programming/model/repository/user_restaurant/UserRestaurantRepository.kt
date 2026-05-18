@@ -1,6 +1,6 @@
 package com.example.mobile_programming.model.repository.user_restaurant
 
-import com.example.mobile_programming.model.data.local.util.RestaurantWithFavorite
+import com.example.mobile_programming.model.datasource.local.util.RestaurantWithFavorite
 import kotlinx.coroutines.flow.Flow
 
 interface UserRestaurantRepository {

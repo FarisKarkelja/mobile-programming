@@ -1,7 +1,7 @@
 package com.example.mobile_programming.model.repository.mappers
 
-import com.example.mobile_programming.model.data.local.entity.RestaurantEntity
-import com.example.mobile_programming.model.data.local.util.RestaurantWithFavorite
+import com.example.mobile_programming.model.datasource.local.entity.RestaurantEntity
+import com.example.mobile_programming.model.datasource.local.util.RestaurantWithFavorite
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 
 fun RestaurantEntity.toDomain(): Restaurant {

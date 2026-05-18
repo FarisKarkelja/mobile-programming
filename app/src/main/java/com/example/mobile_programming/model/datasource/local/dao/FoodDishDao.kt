@@ -1,7 +1,7 @@
-package com.example.mobile_programming.model.data.local.dao
+package com.example.mobile_programming.model.datasource.local.dao
 
 import androidx.room.*
-import com.example.mobile_programming.model.data.local.entity.FoodDishEntity
+import com.example.mobile_programming.model.datasource.local.entity.FoodDishEntity
 
 @Dao
 interface FoodDishDao {

@@ -1,4 +1,4 @@
-package com.example.mobile_programming.model.data.local.dao
+package com.example.mobile_programming.model.datasource.local.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.mobile_programming.model.data.local.entity.RestaurantEntity
-import com.example.mobile_programming.model.data.local.util.RestaurantWithFavorite
+import com.example.mobile_programming.model.datasource.local.entity.RestaurantEntity
+import com.example.mobile_programming.model.datasource.local.util.RestaurantWithFavorite
 import kotlinx.coroutines.flow.Flow
 
 @Dao

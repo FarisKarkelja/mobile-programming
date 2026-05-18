@@ -1,7 +1,7 @@
-package com.example.mobile_programming.model.data.local.util
+package com.example.mobile_programming.model.datasource.local.util
 
 import com.example.mobile_programming.R
-import com.example.mobile_programming.model.data.local.entity.DrinkEntity
+import com.example.mobile_programming.model.datasource.local.entity.DrinkEntity
 
 object DrinkSeed {
     val defaultDrinks = listOf(

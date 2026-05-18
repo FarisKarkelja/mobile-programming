@@ -1,9 +1,9 @@
-package com.example.mobile_programming.model.data.local.util
+package com.example.mobile_programming.model.datasource.local.util
 
-import com.example.mobile_programming.model.data.local.dao.CategoryDao
-import com.example.mobile_programming.model.data.local.dao.DrinkDao
-import com.example.mobile_programming.model.data.local.dao.FoodDishDao
-import com.example.mobile_programming.model.data.local.dao.RestaurantDao
+import com.example.mobile_programming.model.datasource.local.dao.CategoryDao
+import com.example.mobile_programming.model.datasource.local.dao.DrinkDao
+import com.example.mobile_programming.model.datasource.local.dao.FoodDishDao
+import com.example.mobile_programming.model.datasource.local.dao.RestaurantDao
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 

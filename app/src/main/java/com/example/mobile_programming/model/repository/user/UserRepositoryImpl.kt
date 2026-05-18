@@ -1,7 +1,7 @@
 package com.example.mobile_programming.model.repository.user
 
-import com.example.mobile_programming.model.data.local.dao.UserDao
-import com.example.mobile_programming.model.data.local.entity.UserEntity
+import com.example.mobile_programming.model.datasource.local.dao.UserDao
+import com.example.mobile_programming.model.datasource.local.entity.UserEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.example.mobile_programming.model.data.local.util
+package com.example.mobile_programming.model.datasource.local.util
 
 enum class Allergens {
     GLUTEN_FREE,
