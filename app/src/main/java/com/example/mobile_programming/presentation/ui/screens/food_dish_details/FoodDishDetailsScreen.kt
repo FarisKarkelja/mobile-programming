@@ -7,6 +7,8 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,28 +19,47 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.presentation.ui.screens.drink_details.components.DetailBadge
+import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.components.InfoTag
-import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.ALLERGENS
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.Allergen
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
+import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
+import com.example.mobile_programming.presentation.view_model.food_dish_details.FoodDishDetailsUiState
+import com.example.mobile_programming.presentation.view_model.food_dish_details.FoodDishDetailsViewModel
 
 @Composable
 fun FoodDishDetailsScreen(
     dishId: String,
+    viewModel: FoodDishDetailsViewModel,
     onBackClick: () -> Unit
 ) {
-    val dish = HardcodedData.foodDishes.find { it.id == dishId }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    FoodDishDetailsScreen(
-        dish = dish,
-        onBackClick = onBackClick
-    )
+    LaunchedEffect(dishId) {
+        viewModel.loadDish(dishId)
+    }
+
+    when (val state = uiState) {
+        is FoodDishDetailsUiState.Loading -> LoadingScreen()
+        is FoodDishDetailsUiState.Error -> ErrorScreen(
+            state.message,
+            onRetry = { viewModel.resetUiState() })
+
+        is FoodDishDetailsUiState.Success -> FoodDishDetailsScreen(
+            dish = state.dish,
+            onBackClick = onBackClick
+        )
+
+        else -> Unit
+    }
 }
 
 @Composable
@@ -99,11 +120,11 @@ private fun FoodDishDetailsScreen(
                 Row(horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_8))) {
                     dish.allergens.forEach { allergen ->
                         val label = when (allergen) {
-                            ALLERGENS.GLUTEN_FREE -> "Gluten Free"
-                            ALLERGENS.LACTOSE_FREE -> "Lactose Free"
-                            ALLERGENS.VEGETARIAN -> "Vegetarian"
-                            ALLERGENS.VEGAN -> "Vegan"
-                            ALLERGENS.HALAL -> "Halal"
+                            Allergen.GLUTEN_FREE -> "Gluten Free"
+                            Allergen.LACTOSE_FREE -> "Lactose Free"
+                            Allergen.VEGETARIAN -> "Vegetarian"
+                            Allergen.VEGAN -> "Vegan"
+                            Allergen.HALAL -> "Halal"
                         }
                         DetailBadge(text = label)
                     }

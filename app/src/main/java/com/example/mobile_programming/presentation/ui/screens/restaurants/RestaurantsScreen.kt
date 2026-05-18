@@ -21,28 +21,31 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.screens.restaurants.components.RestaurantCard
 import com.example.mobile_programming.presentation.theme.WarmCream
+import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
+import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.ui.screens.restaurants.components.RestaurantSearchBar
 import com.example.mobile_programming.presentation.ui.screens.restaurants.components.SortOptionsRow
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
-import com.example.mobile_programming.presentation.ui.screens.restaurants.util.isWithinBudget
+import com.example.mobile_programming.presentation.view_model.restaurants.RestaurantUiState
+import com.example.mobile_programming.presentation.view_model.restaurants.RestaurantViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -51,90 +54,43 @@ fun RestaurantsScreen(
     location: String,
     budget: String,
     minRating: Float,
-    allRestaurants: List<Restaurant>,
-    onToggleFavorite: (String) -> Unit,
+    viewModel: RestaurantViewModel,
     onNavigateToDetails: (String) -> Unit
 ) {
-    var restaurants by remember {
-        mutableStateOf(
-            allRestaurants.filter { restaurant ->
-                restaurant.categoryId == categoryId &&
-                        restaurant.location == location &&
-                        restaurant.rating >= minRating &&
-                        isWithinBudget(restaurant.avgPrice, budget)
-            }
-        )
-    }
-    var searchQuery by remember { mutableStateOf("") }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val queryRestaurants by remember {
-        derivedStateOf {
-            if (searchQuery.isBlank()) {
-                restaurants
-            } else {
-                restaurants.filter { restaurant ->
-                    restaurant.name.contains(
-                        searchQuery,
-                        ignoreCase = true
-                    )
-                }
-            }
-        }
+    LaunchedEffect(categoryId, location, budget, minRating) {
+        viewModel.loadRestaurants(categoryId, location, budget, minRating)
     }
-
-    val isRestaurantListEmpty by remember { derivedStateOf { queryRestaurants.isEmpty() } }
 
     val listState = rememberLazyListState()
     val showScrollToTop by remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
     val coroutineScope = rememberCoroutineScope()
 
-    val onSearchQueryChange: (String) -> Unit = { searchQuery = it }
+    when (val state = uiState) {
+        is RestaurantUiState.Loading -> LoadingScreen()
+        is RestaurantUiState.Error -> ErrorScreen(
+            state.message,
+            onRetry = { viewModel.resetUiState() })
 
-    val onFavoriteClick: (String) -> Unit = { id ->
-        onToggleFavorite(id)
+        is RestaurantUiState.Success -> RestaurantsScreen(
+            restaurants = state.restaurants,
+            isRestaurantListEmpty = state.restaurants.isEmpty(),
+            searchQuery = state.searchQuery,
+            onSearchQueryChange = viewModel::onSearchQueryChange,
+            listState = listState,
+            showScrollToTop = showScrollToTop,
+            onFavoriteClick = { viewModel.toggleFavorite(it) },
+            onDetailsClick = onNavigateToDetails,
+            onScrollToTopClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
+            onSortAZClick = { viewModel.onSortAZ() },
+            onSortZAClick = { viewModel.onSortZA() },
+            onSortRatingLowClick = { viewModel.onSortRatingLow() },
+            onSortRatingHighClick = { viewModel.onSortRatingHigh() }
+        )
+
+        else -> Unit
     }
-
-    val onDetailsClick: (String) -> Unit = { id ->
-        onNavigateToDetails(id)
-    }
-
-    val onSortAZClick: () -> Unit = {
-        restaurants = restaurants.sortedBy { it.name }
-    }
-
-    val onSortZAClick: () -> Unit = {
-        restaurants = restaurants.sortedByDescending { it.name }
-    }
-
-    val onSortRatingLowClick: () -> Unit = {
-        restaurants = restaurants.sortedBy { it.rating }
-    }
-
-    val onSortRatingHighClick: () -> Unit = {
-        restaurants = restaurants.sortedByDescending { it.rating }
-    }
-
-    val onScrollToTopClick: () -> Unit = {
-        coroutineScope.launch {
-            listState.animateScrollToItem(index = 0)
-        }
-    }
-
-    RestaurantsScreen(
-        restaurants = queryRestaurants,
-        isRestaurantListEmpty = isRestaurantListEmpty,
-        searchQuery = searchQuery,
-        onSearchQueryChange = onSearchQueryChange,
-        listState = listState,
-        showScrollToTop = showScrollToTop,
-        onFavoriteClick = onFavoriteClick,
-        onDetailsClick = onDetailsClick,
-        onScrollToTopClick = onScrollToTopClick,
-        onSortAZClick = onSortAZClick,
-        onSortZAClick = onSortZAClick,
-        onSortRatingLowClick = onSortRatingLowClick,
-        onSortRatingHighClick = onSortRatingHighClick
-    )
 }
 
 @Composable

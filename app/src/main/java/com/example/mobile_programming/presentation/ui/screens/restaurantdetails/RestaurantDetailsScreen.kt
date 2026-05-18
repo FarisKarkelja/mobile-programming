@@ -11,10 +11,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,8 +23,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
 import com.example.mobile_programming.presentation.theme.*
 import com.example.mobile_programming.presentation.ui.components.RestaurantLocation
 import com.example.mobile_programming.presentation.ui.components.RestaurantRating
@@ -34,56 +33,48 @@ import com.example.mobile_programming.presentation.ui.components.RestaurantTitle
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
+import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
+import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.FoodDishCard
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.RestaurantDetailsTitle
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.DrinkCard
+import com.example.mobile_programming.presentation.view_model.restaurant_details.RestaurantDetailsUiState
+import com.example.mobile_programming.presentation.view_model.restaurant_details.RestaurantDetailsViewModel
 
 @Composable
 fun RestaurantDetailsScreen(
     restaurantId: String,
-    allRestaurants: List<Restaurant>,
+    viewModel: RestaurantDetailsViewModel,
     onBackClick: () -> Unit,
     onNavigateToDish: (String) -> Unit,
     onNavigateToDrink: (String) -> Unit
 ) {
-    val restaurant = allRestaurants.find { it.id == restaurantId }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    if (restaurant == null) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text(text = stringResource(R.string.restaurant_not_found))
-        }
-    } else {
-        val topDishes by remember {
-            mutableStateOf(HardcodedData.foodDishes.filter { it.restaurantId == restaurantId })
-        }
+    LaunchedEffect(restaurantId) {
+        viewModel.loadRestaurantDetails(restaurantId)
+    }
 
-        val topDrinks by remember {
-            mutableStateOf(HardcodedData.drinks.filter { it.restaurantId == restaurantId })
-        }
+    when (val state = uiState) {
+        is RestaurantDetailsUiState.Loading -> LoadingScreen()
+        is RestaurantDetailsUiState.Error -> ErrorScreen(
+            state.message,
+            onRetry = { viewModel.resetUiState() })
 
-        val hasTopDishes by remember { derivedStateOf { topDishes.isNotEmpty() } }
-        val hasTopDrinks by remember { derivedStateOf { topDrinks.isNotEmpty() } }
-
-        val onDishClick: (FoodDish) -> Unit = { dish ->
-            onNavigateToDish(dish.id)
-        }
-
-        val onDrinkClick: (Drink) -> Unit = { drink ->
-            onNavigateToDrink(drink.id)
-        }
-
-        RestaurantDetailsScreen(
-            restaurant = restaurant,
-            topDishes = topDishes,
-            topDrinks = topDrinks,
-            hasTopDishes = hasTopDishes,
-            hasTopDrinks = hasTopDrinks,
-            onDishClick = onDishClick,
-            onDrinkClick = onDrinkClick,
+        is RestaurantDetailsUiState.Success -> RestaurantDetailsScreen(
+            restaurant = state.restaurant,
+            topDishes = state.topDishes,
+            topDrinks = state.topDrinks,
+            hasTopDishes = state.topDishes.isNotEmpty(),
+            hasTopDrinks = state.topDrinks.isNotEmpty(),
+            onDishClick = { onNavigateToDish(it.id) },
+            onDrinkClick = { onNavigateToDrink(it.id) },
             onBackClick = onBackClick
         )
+
+        else -> Unit
     }
 }
 

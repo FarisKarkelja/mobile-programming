@@ -4,17 +4,13 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.mobile_programming.data.HardcodedData
 import com.example.mobile_programming.presentation.ui.screens.categories.CategoriesScreen
 import com.example.mobile_programming.presentation.ui.screens.favorite_restaurants.FavoriteRestaurantsScreen
 import com.example.mobile_programming.presentation.ui.screens.filters.FiltersScreen
@@ -32,18 +28,6 @@ fun NavGraph(
     startDestination: String,
     modifier: Modifier = Modifier
 ) {
-    var allRestaurants by remember { mutableStateOf(HardcodedData.restaurants) }
-
-    val onToggleFavorite: (String) -> Unit = { restaurantId ->
-        allRestaurants = allRestaurants.map { restaurant ->
-            if (restaurant.id == restaurantId) {
-                restaurant.copy(isFavorite = !restaurant.isFavorite)
-            } else {
-                restaurant
-            }
-        }
-    }
-
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -57,6 +41,7 @@ fun NavGraph(
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
             LoginScreen(
+                viewModel = hiltViewModel(),
                 onLoginSuccess = {
                     navController.navigate(Screen.Categories.route) {
                         popUpTo(Screen.Login.route) { inclusive = true }
@@ -76,6 +61,7 @@ fun NavGraph(
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
             RegistrationScreen(
+                viewModel = hiltViewModel(),
                 onRegisterSuccess = {
                     navController.navigate(Screen.Login.route) {
                         popUpTo(Screen.Registration.route) { inclusive = true }
@@ -95,6 +81,7 @@ fun NavGraph(
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
             CategoriesScreen(
+                viewModel = hiltViewModel(),
                 onNavigateToFilters = { categoryId ->
                     navController.navigate(Screen.Filters.createRoute(categoryId))
                 }
@@ -117,6 +104,7 @@ fun NavGraph(
 
             FiltersScreen(
                 categoryId = categoryId,
+                viewModel = hiltViewModel(),
                 onNavigateToRestaurants = { selectedCategoryId, location, budget, rating ->
                     navController.navigate(
                         Screen.Restaurants.createRoute(selectedCategoryId, location, budget, rating)
@@ -148,8 +136,7 @@ fun NavGraph(
                 location = location,
                 budget = budget,
                 minRating = minRating,
-                allRestaurants = allRestaurants,
-                onToggleFavorite = onToggleFavorite,
+                viewModel = hiltViewModel(),
                 onNavigateToDetails = { restaurantId ->
                     navController.navigate(Screen.RestaurantDetails.createRoute(restaurantId))
                 }
@@ -171,7 +158,7 @@ fun NavGraph(
             val restaurantId = backStackEntry.arguments?.getString("restaurantId").orEmpty()
             RestaurantDetailsScreen(
                 restaurantId = restaurantId,
-                allRestaurants = allRestaurants,
+                viewModel = hiltViewModel(),
                 onNavigateToDish = { dishId ->
                     navController.navigate(Screen.FoodDishDetails.createRoute(dishId))
                 },
@@ -189,8 +176,7 @@ fun NavGraph(
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
             FavoriteRestaurantsScreen(
-                allRestaurants = allRestaurants,
-                onToggleFavorite = onToggleFavorite,
+                viewModel = hiltViewModel(),
                 onNavigateToDetails = { restaurantId ->
                     navController.navigate(Screen.RestaurantDetails.createRoute(restaurantId))
                 }
@@ -205,6 +191,7 @@ fun NavGraph(
             popExitTransition = { fadeOut(animationSpec = tween(300)) }
         ) {
             ProfileScreen(
+                viewModel = hiltViewModel(),
                 onNavigateToLogin = {
                     navController.navigate(Screen.Login.route) {
                         popUpTo(0) { inclusive = true }
@@ -222,7 +209,10 @@ fun NavGraph(
             arguments = listOf(navArgument("dishId") { type = NavType.StringType })
         ) { backStackEntry ->
             val dishId = backStackEntry.arguments?.getString("dishId").orEmpty()
-            FoodDishDetailsScreen(dishId = dishId, onBackClick = { navController.popBackStack() })
+            FoodDishDetailsScreen(
+                dishId = dishId,
+                viewModel = hiltViewModel(),
+                onBackClick = { navController.popBackStack() })
         }
 
         composable(
@@ -234,7 +224,10 @@ fun NavGraph(
             arguments = listOf(navArgument("drinkId") { type = NavType.StringType })
         ) { backStackEntry ->
             val drinkId = backStackEntry.arguments?.getString("drinkId").orEmpty()
-            DrinkDetailsScreen(drinkId = drinkId, onBackClick = { navController.popBackStack() })
+            DrinkDetailsScreen(
+                drinkId = drinkId,
+                viewModel = hiltViewModel(),
+                onBackClick = { navController.popBackStack() })
         }
     }
 }

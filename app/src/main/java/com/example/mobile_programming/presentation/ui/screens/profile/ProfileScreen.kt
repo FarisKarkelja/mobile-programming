@@ -6,9 +6,8 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -17,26 +16,52 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.presentation.theme.*
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
 import com.example.mobile_programming.R
-import com.example.mobile_programming.data.HardcodedData
+import com.example.mobile_programming.model.HardcodedData
+import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
+import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.ui.screens.profile.components.LogoutButton
 import com.example.mobile_programming.presentation.ui.screens.profile.components.ProfileAvatar
 import com.example.mobile_programming.presentation.ui.screens.profile.components.ProfileTextField
 import com.example.mobile_programming.presentation.ui.screens.profile.util.User
+import com.example.mobile_programming.presentation.view_model.profile.ProfileNavigationEvent
+import com.example.mobile_programming.presentation.view_model.profile.ProfileUiState
+import com.example.mobile_programming.presentation.view_model.profile.ProfileViewModel
 
 @Composable
 fun ProfileScreen(
+    viewModel: ProfileViewModel,
     onNavigateToLogin: () -> Unit
 ) {
-    val user by remember { mutableStateOf(HardcodedData.users.first()) }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    ProfileScreen(
-        user = user,
-        onLogoutClick = onNavigateToLogin
-    )
+    LaunchedEffect(Unit) {
+        viewModel.navigationEvent.collect { event ->
+            when (event) {
+                is ProfileNavigationEvent.NavigateBack -> onNavigateToLogin()
+                else -> Unit
+            }
+        }
+    }
+
+    when (val state = uiState) {
+        is ProfileUiState.Loading -> LoadingScreen()
+        is ProfileUiState.Error -> ErrorScreen(
+            message = state.message,
+            onRetry = { viewModel.resetUiState() }
+        )
+
+        is ProfileUiState.Success -> ProfileScreen(
+            user = state.profileData,
+            onLogoutClick = { viewModel.logout() }
+        )
+
+        else -> Unit
+    }
 }
 
 @Composable
