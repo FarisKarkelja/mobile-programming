@@ -1,12 +1,17 @@
 package com.example.mobile_programming.presentation.ui.components
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -15,12 +20,16 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -176,6 +185,74 @@ fun AuthPrimaryButton(
             .height(dimensionResource(id = R.dimen.height_50))
     ) {
         Text(text = text)
+    }
+}
+
+@Composable
+fun AuthDivider(
+    modifier: Modifier = Modifier,
+    text: String = "OR"
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .height(dimensionResource(R.dimen.height_1))
+                .background(SunsetTangerine.copy(alpha = 0.4f))
+        )
+        Text(
+            text = text,
+            modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_12)),
+            color = SunsetTangerine,
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .height(dimensionResource(R.dimen.height_1))
+                .background(SunsetTangerine.copy(alpha = 0.4f))
+        )
+    }
+}
+
+@Composable
+fun SocialSignInButton(
+    text: String,
+    onClick: () -> Unit,
+    icon: Int,
+    modifier: Modifier = Modifier
+) {
+    OutlinedButton(
+        onClick = onClick,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(dimensionResource(R.dimen.height_54)),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.size_16)),
+        border = BorderStroke(
+            dimensionResource(R.dimen.width_1),
+            SunsetTangerine.copy(alpha = 0.5f)
+        )
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                painter = painterResource(id = icon),
+                contentDescription = "Social Login Logo",
+                tint = Color.Unspecified,
+                modifier = Modifier.size(dimensionResource(R.dimen.size_24))
+            )
+            Spacer(modifier = Modifier.size(dimensionResource(R.dimen.height_8)))
+            Text(
+                text = text,
+                color = TextPrimary,
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
     }
 }
 
