@@ -23,7 +23,7 @@ import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.ui.screens.recipe_details.components.RecipeActionDialog
-import com.example.mobile_programming.presentation.ui.screens.recipe_details.components.RecipeGridCard
+import com.example.mobile_programming.presentation.ui.screens.recipe_details.components.RecipeRowItem
 import com.example.mobile_programming.presentation.ui.screens.recipes.util.Recipe
 import com.example.mobile_programming.presentation.view_model.recipes.RecipeUiState
 import com.example.mobile_programming.presentation.view_model.recipes.RecipeViewModel
@@ -32,16 +32,11 @@ import com.example.mobile_programming.presentation.view_model.recipes.RecipeView
 fun RecipesScreen(
     viewModel: RecipeViewModel,
     onNavigateToDetails: (String) -> Unit,
-    onBackClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     var showAddModal by remember { mutableStateOf(false) }
     var recipeToEdit by remember { mutableStateOf<Recipe?>(null) }
-
-    LaunchedEffect(Unit) {
-        viewModel.loadRecipes()
-    }
 
     when (val state = uiState) {
         is RecipeUiState.Loading -> LoadingScreen()
@@ -53,7 +48,6 @@ fun RecipesScreen(
         is RecipeUiState.Success -> {
             RecipesScreen(
                 recipes = state.recipes,
-                onBackClick = onBackClick,
                 onViewClick = { onNavigateToDetails(it.id) },
                 onEditClick = { recipeToEdit = it },
                 onDeleteClick = { viewModel.deleteRecipe(it.id) },
@@ -68,8 +62,8 @@ fun RecipesScreen(
         RecipeActionDialog(
             title = "Add New Recipe",
             onDismiss = { showAddModal = false },
-            onConfirm = { name, img, ing, inst, time ->
-                viewModel.insertRecipe(name, img, ing, inst, time)
+            onConfirm = { name, ing, inst, time ->
+                viewModel.insertRecipe(name, ing, inst, time)
                 showAddModal = false
             }
         )
@@ -79,13 +73,12 @@ fun RecipesScreen(
         RecipeActionDialog(
             title = "Edit Recipe",
             initialName = recipe.name,
-            initialImageUrl = recipe.imageUrl,
             initialIngredients = recipe.ingredients,
             initialInstructions = recipe.instructions,
             initialCookingTime = recipe.cookingTime,
             onDismiss = { recipeToEdit = null },
-            onConfirm = { name, img, ing, inst, time ->
-                viewModel.updateRecipe(recipe.id, name, img, ing, inst, time)
+            onConfirm = { name, ing, inst, time ->
+                viewModel.updateRecipe(recipe.id, name, ing, inst, time)
                 recipeToEdit = null
             }
         )
@@ -95,16 +88,13 @@ fun RecipesScreen(
 @Composable
 private fun RecipesScreen(
     recipes: List<Recipe>,
-    onBackClick: () -> Unit,
     onViewClick: (Recipe) -> Unit,
     onEditClick: (Recipe) -> Unit,
     onDeleteClick: (Recipe) -> Unit,
     onAddClick: () -> Unit
 ) {
     Scaffold(
-        topBar = {
-            TopBar(onBackClick = onBackClick)
-        },
+        topBar = { TopBar() },
         containerColor = WarmCream,
         floatingActionButton = {
             FloatingActionButton(
@@ -129,7 +119,7 @@ private fun RecipesScreen(
                     .padding(paddingValues),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = "No custom recipes found. Click + to add one!", color = Color.Gray)
+                Text(text = "No custom recipes found.", color = Color.Gray)
             }
         } else {
             LazyColumn(
@@ -137,32 +127,16 @@ private fun RecipesScreen(
                     .fillMaxSize()
                     .padding(paddingValues)
                     .padding(horizontal = dimensionResource(id = R.dimen.padding_16)),
-                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_16)),
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_8)),
                 contentPadding = PaddingValues(bottom = 80.dp, top = 16.dp)
             ) {
-                val chunkedRecipes = recipes.chunked(2)
-
-                items(chunkedRecipes) { rowRecipes ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_16))
-                    ) {
-                        for (recipe in rowRecipes) {
-                            Box(
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                RecipeGridCard(
-                                    recipe = recipe,
-                                    onViewClick = { onViewClick(recipe) },
-                                    onEditClick = { onEditClick(recipe) },
-                                    onDeleteClick = { onDeleteClick(recipe) }
-                                )
-                            }
-                        }
-                        if (rowRecipes.size == 1) {
-                            Spacer(modifier = Modifier.weight(1f))
-                        }
-                    }
+                items(recipes) { recipe ->
+                    RecipeRowItem(
+                        recipe = recipe,
+                        onViewClick = { onViewClick(recipe) },
+                        onEditClick = { onEditClick(recipe) },
+                        onDeleteClick = { onDeleteClick(recipe) }
+                    )
                 }
             }
         }
@@ -175,9 +149,8 @@ fun RecipesScreenPreview() {
     val sampleRecipes = listOf(
         Recipe(
             id = "1",
-            name = "Burek sa mesom",
+            name = "Burek",
             userId = "10",
-            imageUrl = "https://example.com/burek.jpg",
             ingredients = "Meso, luk, jufke, ulje, sol",
             instructions = "Razvući jufku, ispeći meso s lukom, umotati i peći na 200 stepeni.",
             cookingTime = "45"
@@ -186,7 +159,6 @@ fun RecipesScreenPreview() {
             id = "2",
             name = "Palačinke",
             userId = "10",
-            imageUrl = "https://example.com/palacinke.jpg",
             ingredients = "Brašno, mlijeko, jaja, šećer, ulje",
             instructions = "Umutiti smjesu, peći na tavi, namazati eurokremom.",
             cookingTime = "15"
@@ -195,7 +167,6 @@ fun RecipesScreenPreview() {
 
     RecipesScreen(
         recipes = sampleRecipes,
-        onBackClick = {},
         onViewClick = {},
         onEditClick = {},
         onDeleteClick = {},
@@ -208,7 +179,6 @@ fun RecipesScreenPreview() {
 fun RecipesScreenEmptyPreview() {
     RecipesScreen(
         recipes = emptyList(),
-        onBackClick = {},
         onViewClick = {},
         onEditClick = {},
         onDeleteClick = {},

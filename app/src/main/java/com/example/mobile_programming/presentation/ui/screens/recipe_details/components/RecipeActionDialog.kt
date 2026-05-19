@@ -25,15 +25,13 @@ import com.example.mobile_programming.presentation.theme.White
 fun RecipeActionDialog(
     title: String,
     initialName: String = "",
-    initialImageUrl: String = "",
     initialIngredients: String = "",
     initialInstructions: String = "",
     initialCookingTime: String = "",
     onDismiss: () -> Unit,
-    onConfirm: (String, String, String, String, String) -> Unit
+    onConfirm: (String, String, String, String) -> Unit
 ) {
     var name by remember { mutableStateOf(initialName) }
-    var imageUrl by remember { mutableStateOf(initialImageUrl) }
     var ingredients by remember { mutableStateOf(initialIngredients) }
     var instructions by remember { mutableStateOf(initialInstructions) }
     var cookingTime by remember { mutableStateOf(initialCookingTime) }
@@ -51,14 +49,6 @@ fun RecipeActionDialog(
                         value = name,
                         onValueChange = { name = it },
                         label = { Text("Recipe Name") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                item {
-                    OutlinedTextField(
-                        value = imageUrl,
-                        onValueChange = { imageUrl = it },
-                        label = { Text("Image URL") },
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -92,7 +82,7 @@ fun RecipeActionDialog(
         },
         confirmButton = {
             Button(
-                onClick = { onConfirm(name, imageUrl, ingredients, instructions, cookingTime) },
+                onClick = { onConfirm(name, ingredients, instructions, cookingTime) },
                 colors = ButtonDefaults.buttonColors(containerColor = SunsetTangerine)
             ) {
                 Text("Save", color = White)

@@ -65,7 +65,6 @@ class RecipeViewModel @Inject constructor(
 
     fun insertRecipe(
         name: String,
-        imageUrl: String,
         ingredients: String,
         instructions: String,
         cookingTime: String
@@ -77,7 +76,6 @@ class RecipeViewModel @Inject constructor(
                 val createRecipeDto = CreateRecipeDto(
                     name = name,
                     userId = userId.toInt(),
-                    imageUrl = imageUrl,
                     ingredients = ingredients,
                     instructions = instructions,
                     cookingTime = cookingTime
@@ -95,7 +93,6 @@ class RecipeViewModel @Inject constructor(
     fun updateRecipe(
         recipeId: String,
         name: String,
-        imageUrl: String,
         ingredients: String,
         instructions: String,
         cookingTime: String
@@ -107,7 +104,6 @@ class RecipeViewModel @Inject constructor(
                 val updatedData = UpdateRecipeDto(
                     userId = userId.toInt(),
                     name = name,
-                    imageUrl = imageUrl,
                     ingredients = ingredients,
                     instructions = instructions,
                     cookingTime = cookingTime

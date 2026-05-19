@@ -49,7 +49,8 @@ class MainActivity : ComponentActivity() {
                             val selectedIndex = when {
                                 currentRoute.startsWith("restaurants_screen") -> 0
                                 currentRoute == Screen.FavoriteRestaurants.route -> 1
-                                currentRoute == Screen.Profile.route -> 2
+                                currentRoute == Screen.Recipes.route -> 2
+                                currentRoute == Screen.Profile.route -> 3
                                 else -> 0
                             }
 

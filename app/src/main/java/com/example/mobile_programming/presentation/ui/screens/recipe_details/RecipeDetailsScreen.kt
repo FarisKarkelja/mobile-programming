@@ -1,9 +1,7 @@
 package com.example.mobile_programming.presentation.ui.screens.recipe_details
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -11,17 +9,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.compose.SubcomposeAsyncImage
 import com.example.mobile_programming.R
-import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.components.TopBar
@@ -87,31 +80,6 @@ private fun RecipeDetailsScreen(
                     .padding(dimensionResource(id = R.dimen.padding_16))
                     .verticalScroll(rememberScrollState())
             ) {
-                SubcomposeAsyncImage(
-                    model = recipe.imageUrl,
-                    loading = {
-                        Box(
-                            Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) { CircularProgressIndicator(color = SunsetTangerine) }
-                    },
-                    error = {
-                        Box(
-                            Modifier
-                                .background(Color.LightGray)
-                                .fillMaxSize()
-                        )
-                    },
-                    contentDescription = recipe.name,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(dimensionResource(id = R.dimen.height_250))
-                        .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_12))),
-                    contentScale = ContentScale.Crop
-                )
-
-                VerticalSpace(height = dimensionResource(R.dimen.height_20))
-
                 Text(
                     text = recipe.name,
                     fontSize = 24.sp,
@@ -183,7 +151,6 @@ fun RecipeDetailsPreview() {
         id = "1",
         name = "Grah sa suhim mesom",
         userId = "10",
-        imageUrl = "https://example.com/grah.jpg",
         ingredients = "Grah, suho meso, mrkva, luk, zaprška, začini",
         instructions = "Grah potopiti preko noći. Kuhati sa suhim mesom i povrćem nekoliko sati. Na kraju dodati zapršku.",
         cookingTime = "120"

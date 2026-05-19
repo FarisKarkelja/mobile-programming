@@ -8,7 +8,6 @@ fun RecipeDto.toDomain(): Recipe {
         id = this.id.toString(),
         name = this.name,
         userId = this.userId.toString(),
-        imageUrl = this.imageUrl,
         ingredients = this.ingredients,
         instructions = this.instructions,
         cookingTime = this.cookingTime

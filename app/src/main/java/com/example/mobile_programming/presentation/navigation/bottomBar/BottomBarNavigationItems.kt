@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Explore
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.RestaurantMenu
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.navigation.Screen
 
@@ -18,6 +19,11 @@ object BottomBarNavigationItems {
             titleId = R.string.favorites,
             icon = Icons.Outlined.FavoriteBorder,
             route = Screen.FavoriteRestaurants.route
+        ),
+        BottomBarNavigationItem(
+            titleId = R.string.recipes,
+            icon = Icons.Outlined.RestaurantMenu,
+            route = Screen.Recipes.route
         ),
         BottomBarNavigationItem(
             titleId = R.string.profile,

@@ -29,6 +29,15 @@ sealed class Screen(val route: String) {
     }
 
     data object FavoriteRestaurants : Screen("favorite_restaurants_screen")
+
+    data object Recipes : Screen("recipes_screen")
+
+    data object RecipeDetails : Screen("recipe_details_screen/{recipeId}") {
+        fun createRoute(recipeId: String): String {
+            return "recipe_details_screen/$recipeId"
+        }
+    }
+
     data object Profile : Screen("profile_screen")
 
     data object FoodDishDetails : Screen("food_dish_details_screen/{dishId}") {
@@ -48,6 +57,7 @@ sealed class Screen(val route: String) {
             return listOf(
                 "restaurants_screen",
                 FavoriteRestaurants.route,
+                Recipes.route,
                 Profile.route
             )
         }
