@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
 class RestaurantViewModel @Inject constructor(
@@ -45,7 +46,7 @@ class RestaurantViewModel @Inject constructor(
                 location = location,
                 minRating = minRating
             ).catch { e ->
-                _uiState.value = RestaurantUiState.Error(e.message ?: "Failed to load restaurants")
+                _uiState.value = RestaurantUiState.Error(e.message ?: "Failed to load restaurants.")
             }.collect { restaurantsWithFavorite ->
                 val restaurants = restaurantsWithFavorite.map { it.toDomain() }
                 filteredRestaurants = restaurants
@@ -111,26 +112,35 @@ class RestaurantViewModel @Inject constructor(
 
     fun toggleFavorite(restaurantId: String) {
         viewModelScope.launch {
-            val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
-            when (val current = _uiState.value) {
-                is RestaurantUiState.Success -> {
-                    val restaurant = current.restaurants.find { it.id == restaurantId }
-                    if (restaurant != null) {
-                        if (restaurant.isFavorite) {
-                            userRestaurantRepository.deleteFavoriteRestaurant(
-                                userId = userId,
-                                restaurantId = restaurantId.toLong()
-                            )
-                        } else {
-                            userRestaurantRepository.insertFavoriteRestaurant(
-                                restaurantId = restaurantId.toLong(),
-                                userId = userId
-                            )
+            try {
+                val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
+                when (val current = _uiState.value) {
+                    is RestaurantUiState.Success -> {
+                        val restaurant = current.restaurants.find { it.id == restaurantId }
+                        if (restaurant != null) {
+                            if (restaurant.isFavorite) {
+                                userRestaurantRepository.deleteFavoriteRestaurant(
+                                    userId = userId,
+                                    restaurantId = restaurantId.toLong()
+                                )
+                            } else {
+                                userRestaurantRepository.insertFavoriteRestaurant(
+                                    restaurantId = restaurantId.toLong(),
+                                    userId = userId
+                                )
+                            }
                         }
                     }
-                }
 
-                else -> Unit
+                    else -> Unit
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                _uiState.value =
+                    RestaurantUiState.Error(
+                        e.message ?: "Failed to update favorite restaurant's state."
+                    )
             }
         }
     }

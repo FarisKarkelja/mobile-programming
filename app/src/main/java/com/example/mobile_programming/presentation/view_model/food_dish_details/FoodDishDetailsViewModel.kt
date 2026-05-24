@@ -34,7 +34,7 @@ class FoodDishDetailsViewModel @Inject constructor(
                 val dishEntity = foodDishRepository.getDishById(dishId.toLong())
 
                 if (dishEntity == null) {
-                    _uiState.value = FoodDishDetailsUiState.Error("Food dish not found")
+                    _uiState.value = FoodDishDetailsUiState.Error("Food dish not found.")
                 } else {
                     _uiState.value = FoodDishDetailsUiState.Success(dishEntity.toDomain())
                 }
@@ -42,7 +42,7 @@ class FoodDishDetailsViewModel @Inject constructor(
                 throw e
             } catch (e: Exception) {
                 _uiState.value =
-                    FoodDishDetailsUiState.Error(e.message ?: "Failed to load dish details")
+                    FoodDishDetailsUiState.Error(e.message ?: "Failed to load food dish details.")
             }
         }
     }

@@ -34,14 +34,14 @@ class DrinkDetailsViewModel @Inject constructor(
                 val drinkEntity = drinkRepository.getDrinkById(drinkId.toLong())
 
                 if (drinkEntity == null) {
-                    _uiState.value = DrinkDetailsUiState.Error("Drink not found")
+                    _uiState.value = DrinkDetailsUiState.Error("Drink not found.")
                 } else {
                     _uiState.value = DrinkDetailsUiState.Success(drinkEntity.toDomain())
                 }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _uiState.value = DrinkDetailsUiState.Error(e.message ?: "Failed to load drink")
+                _uiState.value = DrinkDetailsUiState.Error(e.message ?: "Failed to load drink.")
             }
         }
     }

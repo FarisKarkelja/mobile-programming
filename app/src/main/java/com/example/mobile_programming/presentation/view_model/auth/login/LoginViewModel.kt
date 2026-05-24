@@ -36,11 +36,11 @@ class LoginViewModel @Inject constructor(
             _uiState.value = LoginUiState.Loading
             try {
                 if (email.isBlank() || password.isBlank()) {
-                    _uiState.value = LoginUiState.Error("Please fill in all fields")
+                    _uiState.value = LoginUiState.Error("Please fill in all fields.")
                 } else {
                     val user = userRepository.getUserByEmailAndPassword(email, password)
                     if (user == null) {
-                        _uiState.value = LoginUiState.Error("Invalid credentials")
+                        _uiState.value = LoginUiState.Error("Invalid credentials.")
                     } else {
                         sessionRepository.saveLoggedInUserId(user.id)
                         _uiState.value = LoginUiState.Success(isLoggedIn = true)
@@ -50,7 +50,7 @@ class LoginViewModel @Inject constructor(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _uiState.value = LoginUiState.Error(e.message ?: "Login failed")
+                _uiState.value = LoginUiState.Error(e.message ?: "Login failed.")
             }
         }
     }

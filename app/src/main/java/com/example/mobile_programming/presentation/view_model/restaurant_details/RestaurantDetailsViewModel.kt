@@ -40,7 +40,7 @@ class RestaurantDetailsViewModel @Inject constructor(
             try {
                 val restaurant = restaurantRepository.getRestaurantById(restaurantId.toLong())
                 if (restaurant == null) {
-                    _uiState.value = RestaurantDetailsUiState.Error("Restaurant not found")
+                    _uiState.value = RestaurantDetailsUiState.Error("Restaurant not found.")
                 } else {
                     val topDishes =
                         foodDishRepository.getTopDishesByRestaurant(restaurantId.toLong())
@@ -58,7 +58,7 @@ class RestaurantDetailsViewModel @Inject constructor(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _uiState.value = RestaurantDetailsUiState.Error(e.message ?: "Failed to load")
+                _uiState.value = RestaurantDetailsUiState.Error(e.message ?: "Failed to load restaurant details.")
             }
         }
     }

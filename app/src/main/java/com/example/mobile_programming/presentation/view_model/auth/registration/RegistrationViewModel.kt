@@ -29,11 +29,11 @@ class RegistrationViewModel @Inject constructor(
             _uiState.value = RegistrationUiState.Loading
             try {
                 if (fullName.isBlank() || email.isBlank() || password.isBlank()) {
-                    _uiState.value = RegistrationUiState.Error("Please fill in all fields")
+                    _uiState.value = RegistrationUiState.Error("Please fill in all fields.")
                 } else {
                     val existingUser = userRepository.getUserByEmail(email)
                     if (existingUser != null) {
-                        _uiState.value = RegistrationUiState.Error("Email already in use")
+                        _uiState.value = RegistrationUiState.Error("Email already in use.")
                     } else {
                         userRepository.insertUser(
                             mapRegisterInputToEntity(
@@ -49,7 +49,7 @@ class RegistrationViewModel @Inject constructor(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _uiState.value = RegistrationUiState.Error(e.message ?: "Registration failed")
+                _uiState.value = RegistrationUiState.Error(e.message ?: "Registration failed.")
             }
         }
     }

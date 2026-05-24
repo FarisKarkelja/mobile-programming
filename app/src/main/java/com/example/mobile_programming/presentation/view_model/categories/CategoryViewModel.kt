@@ -37,7 +37,7 @@ class CategoryViewModel @Inject constructor(
 
             repository.getAllCategories()
                 .catch { e ->
-                    _uiState.value = CategoryUiState.Error(e.message ?: "Failed to load categories")
+                    _uiState.value = CategoryUiState.Error(e.message ?: "Failed to load categories.")
                 }
                 .collect { entities ->
                     val domainCategories = entities.map { it.toDomain() }

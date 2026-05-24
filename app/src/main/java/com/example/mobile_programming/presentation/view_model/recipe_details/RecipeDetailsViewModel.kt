@@ -27,8 +27,8 @@ class RecipeDetailsViewModel @Inject constructor(
             _uiState.value = RecipeDetailsUiState.Loading
             try {
                 val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
-                val recipeDto = recipeRepository.getRecipeById(userId.toInt(), recipeId.toInt())
-                _uiState.value = RecipeDetailsUiState.Success(recipeDto.toDomain())
+                val recipe = recipeRepository.getRecipeById(userId.toInt(), recipeId.toInt())
+                _uiState.value = RecipeDetailsUiState.Success(recipe.toDomain())
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {

@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
 class FavoriteRestaurantsViewModel @Inject constructor(
@@ -44,7 +45,7 @@ class FavoriteRestaurantsViewModel @Inject constructor(
                     userRestaurantRepository.getFavoriteRestaurantsByUserId(userId = userId)
                         .catch { e ->
                             _uiState.value = FavoriteRestaurantsUiState.Error(
-                                e.message ?: "Failed to load favorites"
+                                e.message ?: "Failed to load favorite restaurants."
                             )
                         }
                         .collect { restaurantsWithFavorite ->
@@ -59,12 +60,19 @@ class FavoriteRestaurantsViewModel @Inject constructor(
 
     fun unfavoriteRestaurant(restaurantId: String) {
         viewModelScope.launch {
-            val userId = sessionRepository.observeLoggedInUserId().first()
-            if (userId != null) {
-                userRestaurantRepository.deleteFavoriteRestaurant(
-                    userId = userId,
-                    restaurantId = restaurantId.toLong()
-                )
+            try {
+                val userId = sessionRepository.observeLoggedInUserId().first()
+                if (userId != null) {
+                    userRestaurantRepository.deleteFavoriteRestaurant(
+                        userId = userId,
+                        restaurantId = restaurantId.toLong()
+                    )
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                _uiState.value =
+                    FavoriteRestaurantsUiState.Error(e.message ?: "Failed to remove favorite restaurant.")
             }
         }
     }

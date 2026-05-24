@@ -70,7 +70,7 @@ class RecipeViewModel @Inject constructor(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _uiState.value = RecipeUiState.Error(e.message ?: "Failed to insert recipe.")
+                _uiState.value = RecipeUiState.Error(e.message ?: "Failed to add recipe.")
             }
         }
     }
