@@ -2,6 +2,8 @@ package com.example.mobile_programming.model.di
 
 import com.example.mobile_programming.model.repository.auth.AuthRepository
 import com.example.mobile_programming.model.repository.auth.AuthRepositoryImpl
+import com.example.mobile_programming.model.repository.review.ReviewRepository
+import com.example.mobile_programming.model.repository.review.ReviewRepositoryImpl
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -29,5 +31,11 @@ object FirebaseModule {
     @Singleton
     fun provideAuthRepository(firebaseAuth: FirebaseAuth): AuthRepository {
         return AuthRepositoryImpl(firebaseAuth)
+    }
+
+    @Provides
+    @Singleton
+    fun provideReviewRepository(firestore: FirebaseFirestore): ReviewRepository {
+        return ReviewRepositoryImpl(firestore)
     }
 }

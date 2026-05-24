@@ -23,9 +23,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
 import com.example.mobile_programming.model.HardcodedData
+import com.example.mobile_programming.model.datasource.remote.dto.ReviewDto
 import com.example.mobile_programming.presentation.theme.*
 import com.example.mobile_programming.presentation.ui.components.RestaurantLocation
 import com.example.mobile_programming.presentation.ui.components.RestaurantRating
@@ -40,6 +43,7 @@ import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.RestaurantDetailsTitle
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.DrinkCard
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.ReviewSection
 import com.example.mobile_programming.presentation.view_model.restaurant_details.RestaurantDetailsUiState
 import com.example.mobile_programming.presentation.view_model.restaurant_details.RestaurantDetailsViewModel
 
@@ -57,6 +61,10 @@ fun RestaurantDetailsScreen(
         viewModel.loadRestaurantDetails(restaurantId)
     }
 
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        viewModel.loadRestaurantDetails(restaurantId)
+    }
+
     when (val state = uiState) {
         is RestaurantDetailsUiState.Loading -> LoadingScreen()
         is RestaurantDetailsUiState.Error -> ErrorScreen(
@@ -69,6 +77,10 @@ fun RestaurantDetailsScreen(
             topDrinks = state.topDrinks,
             hasTopDishes = state.topDishes.isNotEmpty(),
             hasTopDrinks = state.topDrinks.isNotEmpty(),
+            reviews = state.reviews,
+            onAddReview = { comment, rating ->
+                viewModel.addReview(restaurantId, comment, rating)
+            },
             onDishClick = { onNavigateToDish(it.id) },
             onDrinkClick = { onNavigateToDrink(it.id) },
             onBackClick = onBackClick
@@ -85,6 +97,8 @@ private fun RestaurantDetailsScreen(
     topDrinks: List<Drink>,
     hasTopDishes: Boolean,
     hasTopDrinks: Boolean,
+    reviews: List<ReviewDto>,
+    onAddReview: (comment: String, rating: Float) -> Unit,
     onDishClick: (FoodDish) -> Unit,
     onDrinkClick: (Drink) -> Unit,
     onBackClick: () -> Unit
@@ -206,6 +220,14 @@ private fun RestaurantDetailsScreen(
                     }
                 }
             }
+            VerticalSpace(dimensionResource(id = R.dimen.height_24))
+            RestaurantDetailsTitle("Reviews")
+            VerticalSpace(dimensionResource(id = R.dimen.height_12))
+            ReviewSection(
+                reviews = reviews,
+                onAddReview = onAddReview
+            )
+            VerticalSpace(dimensionResource(id = R.dimen.height_16))
             VerticalSpace(dimensionResource(id = R.dimen.height_16))
         }
     }
@@ -224,6 +246,8 @@ fun PreviewDetailsScreenWithDishes() {
         topDrinks = topDrinks,
         hasTopDishes = topDishes.isNotEmpty(),
         hasTopDrinks = topDrinks.isNotEmpty(),
+        reviews = emptyList(),
+        onAddReview = { _, _ -> },
         onDishClick = {},
         onDrinkClick = {},
         onBackClick = {}
@@ -241,6 +265,8 @@ fun PreviewDetailsScreenWithoutDishes() {
         topDrinks = emptyList(),
         hasTopDishes = false,
         hasTopDrinks = false,
+        reviews = emptyList(),
+        onAddReview = { _, _ -> },
         onDishClick = {},
         onDrinkClick = {},
         onBackClick = {}
