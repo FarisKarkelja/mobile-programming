@@ -48,21 +48,6 @@ class RecipeViewModel @Inject constructor(
         }
     }
 
-    fun loadRecipe(recipeId: String) {
-        viewModelScope.launch {
-            _uiState.value = RecipeUiState.Loading
-            try {
-                val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
-                val recipeDto = recipeRepository.getRecipeById(userId.toInt(), recipeId.toInt())
-                _uiState.value = RecipeUiState.Success(listOf(recipeDto.toDomain()))
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                _uiState.value = RecipeUiState.Error(e.message ?: "Failed to load recipe details.")
-            }
-        }
-    }
-
     fun insertRecipe(
         name: String,
         ingredients: String,

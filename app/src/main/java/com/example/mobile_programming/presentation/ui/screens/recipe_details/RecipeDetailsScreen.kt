@@ -23,13 +23,13 @@ import com.example.mobile_programming.presentation.ui.screens.drink_details.comp
 import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.ui.screens.recipes.util.Recipe
-import com.example.mobile_programming.presentation.view_model.recipes.RecipeUiState
-import com.example.mobile_programming.presentation.view_model.recipes.RecipeViewModel
+import com.example.mobile_programming.presentation.view_model.recipe_details.RecipeDetailsUiState
+import com.example.mobile_programming.presentation.view_model.recipe_details.RecipeDetailsViewModel
 
 @Composable
 fun RecipeDetailsScreen(
     recipeId: String,
-    viewModel: RecipeViewModel,
+    viewModel: RecipeDetailsViewModel,
     onBackClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -39,14 +39,14 @@ fun RecipeDetailsScreen(
     }
 
     when (val state = uiState) {
-        is RecipeUiState.Loading -> LoadingScreen()
-        is RecipeUiState.Error -> ErrorScreen(
+        is RecipeDetailsUiState.Loading -> LoadingScreen()
+        is RecipeDetailsUiState.Error -> ErrorScreen(
             message = state.message,
             onRetry = { viewModel.resetUiState() }
         )
 
-        is RecipeUiState.Success -> {
-            val currentRecipe = state.recipes.firstOrNull()
+        is RecipeDetailsUiState.Success -> {
+            val currentRecipe = state.recipe
             RecipeDetailsScreen(
                 recipe = currentRecipe,
                 onBackClick = onBackClick
