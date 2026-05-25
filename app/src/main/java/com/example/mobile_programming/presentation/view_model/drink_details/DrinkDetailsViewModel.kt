@@ -32,7 +32,6 @@ class DrinkDetailsViewModel @Inject constructor(
             _uiState.value = DrinkDetailsUiState.Loading
             try {
                 val drinkEntity = drinkRepository.getDrinkById(drinkId.toLong())
-
                 if (drinkEntity == null) {
                     _uiState.value = DrinkDetailsUiState.Error("Drink not found.")
                 } else {

@@ -21,13 +21,14 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.White
-import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDishData
 
 @Composable
-fun FoodDishCard(dish: FoodDish, onClick: () -> Unit) {
+fun FoodDishCard(dish: FoodDishData, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .width(dimensionResource(id = R.dimen.width_140))
@@ -65,4 +66,26 @@ fun FoodDishCard(dish: FoodDish, onClick: () -> Unit) {
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun FoodDishCardPreview() {
+    val sampleDish = FoodDishData(
+        id = "fd_1",
+        restaurantId = "r_10",
+        name = "Chicken Tortilla",
+        imageResId = R.drawable.meal_3,
+        price = 8.50,
+        description = "Grilled chicken with peppers and onions wrapped in a soft tortilla.",
+        cookingTime = "15 mins",
+        servingSize = "350g",
+        calories = "450 kcal",
+        allergens = emptyList()
+    )
+
+    FoodDishCard(
+        dish = sampleDish,
+        onClick = {}
+    )
 }

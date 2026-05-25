@@ -51,7 +51,7 @@ class RestaurantDetailsViewModel @Inject constructor(
                     _uiState.value = RestaurantDetailsUiState.Success(
                         restaurant = restaurant.toDomain(),
                         topDishes = topDishes,
-                        topDrinks = topDrinks,
+                        topDrinkData = topDrinks,
                         reviews = reviews
                     )
                 }

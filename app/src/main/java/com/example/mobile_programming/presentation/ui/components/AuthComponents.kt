@@ -35,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.ErrorColor
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
@@ -273,4 +274,102 @@ fun AuthFooterText(
             modifier = Modifier.clickable { onActionClick() }
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AuthHeaderPreview() {
+    AuthHeader(
+        title = "Dobrodošli nazad",
+        subtitle = "Prijavite se da nastavite sa korištenjem aplikacije"
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AuthTextFieldNormalPreview() {
+    AuthTextField(
+        value = "korisnik@email.com",
+        onValueChange = {},
+        label = "Email adresa"
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AuthTextFieldErrorPreview() {
+    AuthTextField(
+        value = "pogresan-email",
+        onValueChange = {},
+        label = "Email adresa",
+        isError = true,
+        errorMessage = "Format email adrese nije ispravan"
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PasswordTextFieldHiddenPreview() {
+    PasswordTextField(
+        value = "tajnalozinka",
+        onValueChange = {},
+        passwordVisible = false,
+        onPasswordVisibilityChange = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PasswordTextFieldVisiblePreview() {
+    PasswordTextField(
+        value = "tajnalozinka",
+        onValueChange = {},
+        passwordVisible = true,
+        onPasswordVisibilityChange = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AuthPrimaryButtonEnabledPreview() {
+    AuthPrimaryButton(
+        text = "Prijavi se",
+        onClick = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AuthPrimaryButtonDisabledPreview() {
+    AuthPrimaryButton(
+        text = "Prijavi se",
+        onClick = {},
+        enabled = false
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AuthDividerPreview() {
+    AuthDivider()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SocialSignInButtonPreview() {
+    SocialSignInButton(
+        text = "Nastavi sa Google-om",
+        onClick = {},
+        icon = R.drawable.google
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AuthFooterTextPreview() {
+    AuthFooterText(
+        normalText = "Nemate nalog?",
+        actionText = "Registrujte se",
+        onActionClick = {}
+    )
 }

@@ -89,7 +89,6 @@ private fun RecipeDetailsScreen(
                 )
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_12))
-
                 Row {
                     DetailBadge(text = "Ready in: ${recipe.cookingTime} mins")
                 }
@@ -137,23 +136,22 @@ private fun RecipeDetailsScreen(
                     color = TextPrimary.copy(alpha = 0.7f),
                     lineHeight = 22.sp,
                 )
-
                 VerticalSpace(height = dimensionResource(id = R.dimen.height_24))
             }
         }
     }
 }
 
-@Preview(showBackground = true, name = "Detalji Recepta")
+@Preview(showBackground = true)
 @Composable
 fun RecipeDetailsPreview() {
     val sampleRecipe = Recipe(
         id = "1",
-        name = "Grah sa suhim mesom",
+        name = "Chicken Tortilla",
         userId = "10",
-        ingredients = "Grah, suho meso, mrkva, luk, zaprška, začini",
-        instructions = "Grah potopiti preko noći. Kuhati sa suhim mesom i povrćem nekoliko sati. Na kraju dodati zapršku.",
-        cookingTime = "120"
+        ingredients = "Tortillas, chicken, bell peppers, onions, shredded cheese, taco seasoning, sour cream",
+        instructions = "Dice the chicken and vegetables. Sauté the chicken with taco seasoning until cooked through, then add the vegetables. Warm the tortillas, fill them with the mixture, top with cheese and sour cream, then roll them up.",
+        cookingTime = "25"
     )
 
     RecipeDetailsScreen(

@@ -1,6 +1,6 @@
 package com.example.mobile_programming.presentation.ui.screens.food_dish_details.util
 
-data class FoodDish(
+data class FoodDishData(
     val id: String,
     val restaurantId: String,
     val name: String,

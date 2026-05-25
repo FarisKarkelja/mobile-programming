@@ -3,9 +3,9 @@ package com.example.mobile_programming.model
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.ui.screens.categories.util.Category
-import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
+import com.example.mobile_programming.presentation.ui.screens.drink_details.util.DrinkData
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.Allergen
-import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDishData
 import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 
 object HardcodedData {
@@ -30,6 +30,7 @@ object HardcodedData {
             password = "pass321"
         )
     )
+
     val categories = listOf(
         Category(
             id = "1",
@@ -191,8 +192,8 @@ object HardcodedData {
         )
     )
 
-    val foodDishes = listOf(
-        FoodDish(
+    val foodDishData = listOf(
+        FoodDishData(
             id = "1",
             restaurantId = "1",
             name = "Bey's Soup",
@@ -204,7 +205,7 @@ object HardcodedData {
             calories = "320 kcal",
             allergens = listOf(Allergen.HALAL)
         ),
-        FoodDish(
+        FoodDishData(
             id = "2",
             restaurantId = "2",
             name = "Klepe",
@@ -216,7 +217,7 @@ object HardcodedData {
             calories = "680 kcal",
             allergens = listOf(Allergen.HALAL)
         ),
-        FoodDish(
+        FoodDishData(
             id = "3",
             restaurantId = "5",
             name = "Sarajevski Ćevapi",
@@ -228,7 +229,7 @@ object HardcodedData {
             calories = "850 kcal",
             allergens = listOf(Allergen.HALAL, Allergen.LACTOSE_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "4",
             restaurantId = "4",
             name = "Baked Veal with Potatoes",
@@ -240,7 +241,7 @@ object HardcodedData {
             calories = "920 kcal",
             allergens = listOf(Allergen.GLUTEN_FREE, Allergen.HALAL)
         ),
-        FoodDish(
+        FoodDishData(
             id = "5",
             restaurantId = "8",
             name = "Vegan Quinoa Bowl",
@@ -252,7 +253,7 @@ object HardcodedData {
             calories = "410 kcal",
             allergens = listOf(Allergen.VEGAN, Allergen.VEGETARIAN, Allergen.GLUTEN_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "6",
             restaurantId = "6",
             name = "Truffle Pasta",
@@ -264,7 +265,7 @@ object HardcodedData {
             calories = "720 kcal",
             allergens = listOf(Allergen.VEGETARIAN)
         ),
-        FoodDish(
+        FoodDishData(
             id = "7",
             restaurantId = "10",
             name = "Tomahawk Steak",
@@ -276,7 +277,7 @@ object HardcodedData {
             calories = "1200 kcal",
             allergens = listOf(Allergen.GLUTEN_FREE, Allergen.HALAL)
         ),
-        FoodDish(
+        FoodDishData(
             id = "8",
             restaurantId = "9",
             name = "Stuffed Peppers",
@@ -288,7 +289,7 @@ object HardcodedData {
             calories = "540 kcal",
             allergens = listOf(Allergen.HALAL, Allergen.GLUTEN_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "9",
             restaurantId = "3",
             name = "Grilled Salmon",
@@ -300,7 +301,7 @@ object HardcodedData {
             calories = "480 kcal",
             allergens = listOf(Allergen.GLUTEN_FREE, Allergen.LACTOSE_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "10",
             restaurantId = "1",
             name = "Sogan Dolma",
@@ -312,7 +313,7 @@ object HardcodedData {
             calories = "460 kcal",
             allergens = listOf(Allergen.HALAL)
         ),
-        FoodDish(
+        FoodDishData(
             id = "11",
             restaurantId = "7",
             name = "Platter for Two",
@@ -324,7 +325,7 @@ object HardcodedData {
             calories = "1800 kcal",
             allergens = listOf(Allergen.HALAL)
         ),
-        FoodDish(
+        FoodDishData(
             id = "12",
             restaurantId = "8",
             name = "Sweet Potato Curry",
@@ -336,7 +337,7 @@ object HardcodedData {
             calories = "390 kcal",
             allergens = listOf(Allergen.VEGAN, Allergen.VEGETARIAN, Allergen.GLUTEN_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "13",
             restaurantId = "4",
             name = "Rustic Pizza",
@@ -348,7 +349,7 @@ object HardcodedData {
             calories = "950 kcal",
             allergens = listOf(Allergen.HALAL)
         ),
-        FoodDish(
+        FoodDishData(
             id = "14",
             restaurantId = "6",
             name = "Duck Confit",
@@ -360,7 +361,7 @@ object HardcodedData {
             calories = "820 kcal",
             allergens = listOf(Allergen.GLUTEN_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "15",
             restaurantId = "5",
             name = "Sudžukice in Somun",
@@ -372,7 +373,7 @@ object HardcodedData {
             calories = "710 kcal",
             allergens = listOf(Allergen.HALAL, Allergen.LACTOSE_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "16",
             restaurantId = "9",
             name = "Bosnian Pot (Bosanski Lonac)",
@@ -384,7 +385,7 @@ object HardcodedData {
             calories = "600 kcal",
             allergens = listOf(Allergen.HALAL, Allergen.GLUTEN_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "17",
             restaurantId = "2",
             name = "Japrak",
@@ -396,7 +397,7 @@ object HardcodedData {
             calories = "430 kcal",
             allergens = listOf(Allergen.HALAL, Allergen.GLUTEN_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "18",
             restaurantId = "3",
             name = "Mushroom Risotto",
@@ -408,7 +409,7 @@ object HardcodedData {
             calories = "520 kcal",
             allergens = listOf(Allergen.VEGETARIAN, Allergen.GLUTEN_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "19",
             restaurantId = "10",
             name = "Lamb Chops",
@@ -420,7 +421,7 @@ object HardcodedData {
             calories = "780 kcal",
             allergens = listOf(Allergen.HALAL, Allergen.GLUTEN_FREE)
         ),
-        FoodDish(
+        FoodDishData(
             id = "20",
             restaurantId = "7",
             name = "Baklava Duo",
@@ -434,8 +435,8 @@ object HardcodedData {
         )
     )
 
-    val drinks = listOf(
-        Drink(
+    val drinkData = listOf(
+        DrinkData(
             id = "1",
             restaurantId = "1",
             name = "Bosnian Coffee",
@@ -445,7 +446,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "2",
             restaurantId = "5",
             name = "Cold Ayran",
@@ -455,7 +456,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "3",
             restaurantId = "7",
             name = "Elderberry Juice",
@@ -465,7 +466,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = false
         ),
-        Drink(
+        DrinkData(
             id = "4",
             restaurantId = "10",
             name = "Sarajevsko Beer",
@@ -475,7 +476,7 @@ object HardcodedData {
             isAlcoholic = true,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "5",
             restaurantId = "6",
             name = "Chardonnay",
@@ -485,7 +486,7 @@ object HardcodedData {
             isAlcoholic = true,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "6",
             restaurantId = "3",
             name = "Virgin Mojito",
@@ -495,7 +496,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = false
         ),
-        Drink(
+        DrinkData(
             id = "7",
             restaurantId = "8",
             name = "Green Detox Juice",
@@ -505,7 +506,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "8",
             restaurantId = "2",
             name = "Turkish Tea",
@@ -515,7 +516,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "9",
             restaurantId = "4",
             name = "Hot Chocolate",
@@ -525,7 +526,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = false
         ),
-        Drink(
+        DrinkData(
             id = "10",
             restaurantId = "9",
             name = "Rose Sherbet",
@@ -535,7 +536,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = false
         ),
-        Drink(
+        DrinkData(
             id = "11",
             restaurantId = "1",
             name = "Rakija (Plum)",
@@ -545,7 +546,7 @@ object HardcodedData {
             isAlcoholic = true,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "12",
             restaurantId = "6",
             name = "Espresso Martini",
@@ -555,7 +556,7 @@ object HardcodedData {
             isAlcoholic = true,
             isSugarFree = false
         ),
-        Drink(
+        DrinkData(
             id = "13",
             restaurantId = "5",
             name = "Sparkling Water",
@@ -565,7 +566,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "14",
             restaurantId = "7",
             name = "Blueberry Smoothie",
@@ -575,7 +576,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = false
         ),
-        Drink(
+        DrinkData(
             id = "15",
             restaurantId = "3",
             name = "Cabernet Sauvignon",
@@ -585,7 +586,7 @@ object HardcodedData {
             isAlcoholic = true,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "16",
             restaurantId = "8",
             name = "Iced Matcha Latte",
@@ -595,7 +596,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "17",
             restaurantId = "10",
             name = "Old Fashioned",
@@ -605,7 +606,7 @@ object HardcodedData {
             isAlcoholic = true,
             isSugarFree = false
         ),
-        Drink(
+        DrinkData(
             id = "18",
             restaurantId = "4",
             name = "Lemonade with Ginger",
@@ -615,7 +616,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = false
         ),
-        Drink(
+        DrinkData(
             id = "19",
             restaurantId = "9",
             name = "Earl Grey Tea",
@@ -625,7 +626,7 @@ object HardcodedData {
             isAlcoholic = false,
             isSugarFree = true
         ),
-        Drink(
+        DrinkData(
             id = "20",
             restaurantId = "2",
             name = "Pomegranate Juice",

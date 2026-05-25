@@ -7,8 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
 import com.example.mobile_programming.model.datasource.remote.dto.ReviewDto
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
@@ -45,7 +44,13 @@ fun ReviewSection(
         onValueChange = { comment = it },
         label = { Text("Comment") },
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(dimensionResource(R.dimen.corner_12))
+        shape = RoundedCornerShape(dimensionResource(R.dimen.corner_12)),
+        colors = TextFieldDefaults.colors(
+            focusedTextColor = TextPrimary,
+            unfocusedTextColor = TextPrimary,
+            focusedContainerColor = White,
+            unfocusedContainerColor = White
+        )
     )
 
     VerticalSpace(height = dimensionResource(R.dimen.height_8))
@@ -64,7 +69,6 @@ fun ReviewSection(
     )
 
     VerticalSpace(height = dimensionResource(R.dimen.height_8))
-
     Button(
         onClick = {
             if (comment.isNotBlank()) {
@@ -84,21 +88,37 @@ fun ReviewSection(
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-private fun ReviewItem(review: ReviewDto) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(dimensionResource(R.dimen.corner_12)),
-        colors = CardDefaults.cardColors(containerColor = White)
-    ) {
-        Column(modifier = Modifier.padding(dimensionResource(R.dimen.padding_12))) {
-            Text(
-                text = "★ ${"%.1f".format(review.rating)}",
-                color = SunsetTangerine,
-                fontWeight = FontWeight.Bold
-            )
-            VerticalSpace(height = 4.dp)
-            Text(text = review.comment, color = TextPrimary, fontSize = 14.sp)
-        }
-    }
+fun ReviewSectionEmptyPreview() {
+    ReviewSection(
+        reviews = emptyList(),
+        onAddReview = { _, _ -> }
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ReviewSectionWithReviewsPreview() {
+    val sampleReviews = listOf(
+        ReviewDto(
+            id = "rev_1",
+            restaurantId = "r_10",
+            userId = "u_1",
+            rating = 5.0f,
+            comment = "Amazing food! The chicken tortilla was packed with flavor."
+        ),
+        ReviewDto(
+            id = "rev_2",
+            restaurantId = "r_10",
+            userId = "u_2",
+            rating = 4.0f,
+            comment = "Really good service, but the food took a bit long to arrive."
+        )
+    )
+
+    ReviewSection(
+        reviews = sampleReviews,
+        onAddReview = { _, _ -> }
+    )
 }

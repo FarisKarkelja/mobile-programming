@@ -21,13 +21,14 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.White
-import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
+import com.example.mobile_programming.presentation.ui.screens.drink_details.util.DrinkData
 
 @Composable
-fun DrinkCard(drink: Drink, onClick: () -> Unit) {
+fun DrinkCard(drinkData: DrinkData, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .width(dimensionResource(id = R.dimen.width_140))
@@ -40,8 +41,8 @@ fun DrinkCard(drink: Drink, onClick: () -> Unit) {
             modifier = Modifier.fillMaxSize()
         ) {
             Image(
-                painter = painterResource(id = drink.imageResId),
-                contentDescription = drink.name,
+                painter = painterResource(id = drinkData.imageResId),
+                contentDescription = drinkData.name,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
@@ -53,7 +54,7 @@ fun DrinkCard(drink: Drink, onClick: () -> Unit) {
             )
 
             Text(
-                text = drink.name,
+                text = drinkData.name,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
                 color = White,
@@ -65,4 +66,24 @@ fun DrinkCard(drink: Drink, onClick: () -> Unit) {
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DrinkCardPreview() {
+    val sampleDrink = DrinkData(
+        id = "d_1",
+        restaurantId = "r_10",
+        name = "Fresh Lemonade",
+        imageResId = R.drawable.drink_4,
+        price = 3.50,
+        description = "Freshly squeezed lemons with a touch of mint.",
+        isAlcoholic = false,
+        isSugarFree = true
+    )
+
+    DrinkCard(
+        drinkData = sampleDrink,
+        onClick = {}
+    )
 }

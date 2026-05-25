@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
@@ -93,5 +94,29 @@ fun RecipeActionDialog(
                 Text("Cancel", color = TextPrimary)
             }
         }
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RecipeActionDialogAddPreview() {
+    RecipeActionDialog(
+        title = "Add New Recipe",
+        onDismiss = {},
+        onConfirm = { _, _, _, _ -> }
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RecipeActionDialogEditPreview() {
+    RecipeActionDialog(
+        title = "Edit Recipe",
+        initialName = "Chicken Tortilla",
+        initialCookingTime = "25",
+        initialIngredients = "Tortillas, chicken, bell peppers, onions, cheese",
+        initialInstructions = "Cook chicken, sauté veggies, fill tortillas and roll them up.",
+        onDismiss = {},
+        onConfirm = { _, _, _, _ -> }
     )
 }

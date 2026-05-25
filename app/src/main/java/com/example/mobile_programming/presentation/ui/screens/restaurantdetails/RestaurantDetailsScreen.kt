@@ -35,9 +35,9 @@ import com.example.mobile_programming.presentation.ui.components.RestaurantRatin
 import com.example.mobile_programming.presentation.ui.components.RestaurantTitle
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
-import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
+import com.example.mobile_programming.presentation.ui.screens.drink_details.util.DrinkData
 import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
-import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDishData
 import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.FoodDishCard
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.RestaurantDetailsTitle
@@ -74,9 +74,9 @@ fun RestaurantDetailsScreen(
         is RestaurantDetailsUiState.Success -> RestaurantDetailsScreen(
             restaurant = state.restaurant,
             topDishes = state.topDishes,
-            topDrinks = state.topDrinks,
+            topDrinkData = state.topDrinkData,
             hasTopDishes = state.topDishes.isNotEmpty(),
-            hasTopDrinks = state.topDrinks.isNotEmpty(),
+            hasTopDrinks = state.topDrinkData.isNotEmpty(),
             reviews = state.reviews,
             onAddReview = { comment, rating ->
                 viewModel.addReview(restaurantId, comment, rating)
@@ -93,14 +93,14 @@ fun RestaurantDetailsScreen(
 @Composable
 private fun RestaurantDetailsScreen(
     restaurant: Restaurant,
-    topDishes: List<FoodDish>,
-    topDrinks: List<Drink>,
+    topDishes: List<FoodDishData>,
+    topDrinkData: List<DrinkData>,
     hasTopDishes: Boolean,
     hasTopDrinks: Boolean,
     reviews: List<ReviewDto>,
     onAddReview: (comment: String, rating: Float) -> Unit,
-    onDishClick: (FoodDish) -> Unit,
-    onDrinkClick: (Drink) -> Unit,
+    onDishClick: (FoodDishData) -> Unit,
+    onDrinkClick: (DrinkData) -> Unit,
     onBackClick: () -> Unit
 ) {
     Scaffold(
@@ -213,8 +213,8 @@ private fun RestaurantDetailsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_8))
                 ) {
-                    items(topDrinks) { drink ->
-                        DrinkCard(drink = drink) {
+                    items(topDrinkData) { drink ->
+                        DrinkCard(drinkData = drink) {
                             onDrinkClick(drink)
                         }
                     }
@@ -237,13 +237,13 @@ private fun RestaurantDetailsScreen(
 @Composable
 fun PreviewDetailsScreenWithDishes() {
     val restaurant = HardcodedData.restaurants[0]
-    val topDishes = HardcodedData.foodDishes.filter { it.restaurantId == restaurant.id }
-    val topDrinks = HardcodedData.drinks.filter { it.restaurantId == restaurant.id }
+    val topDishes = HardcodedData.foodDishData.filter { it.restaurantId == restaurant.id }
+    val topDrinks = HardcodedData.drinkData.filter { it.restaurantId == restaurant.id }
 
     RestaurantDetailsScreen(
         restaurant = restaurant,
         topDishes = topDishes,
-        topDrinks = topDrinks,
+        topDrinkData = topDrinks,
         hasTopDishes = topDishes.isNotEmpty(),
         hasTopDrinks = topDrinks.isNotEmpty(),
         reviews = emptyList(),
@@ -262,7 +262,7 @@ fun PreviewDetailsScreenWithoutDishes() {
     RestaurantDetailsScreen(
         restaurant = restaurant,
         topDishes = emptyList(),
-        topDrinks = emptyList(),
+        topDrinkData = emptyList(),
         hasTopDishes = false,
         hasTopDrinks = false,
         reviews = emptyList(),

@@ -32,7 +32,6 @@ class FoodDishDetailsViewModel @Inject constructor(
             _uiState.value = FoodDishDetailsUiState.Loading
             try {
                 val dishEntity = foodDishRepository.getDishById(dishId.toLong())
-
                 if (dishEntity == null) {
                     _uiState.value = FoodDishDetailsUiState.Error("Food dish not found.")
                 } else {

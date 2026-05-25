@@ -1,5 +1,6 @@
 package com.example.mobile_programming.presentation.ui.screens.recipe_details.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
@@ -37,6 +39,7 @@ fun RecipeRowItem(
             .clickable { onViewClick() },
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_12)),
         colors = CardDefaults.cardColors(containerColor = White),
+        border = BorderStroke(2.dp, TextPrimary),
         elevation = CardDefaults.cardElevation(1.dp)
     ) {
         Row(
@@ -83,4 +86,24 @@ fun RecipeRowItem(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RecipeRowItemPreview() {
+    val sampleRecipe = Recipe(
+        id = "1",
+        name = "Chicken Tortilla",
+        userId = "10",
+        ingredients = "Tortillas, chicken, bell peppers, onions, shredded cheese",
+        instructions = "Cook chicken with seasoning, warm tortillas, fill and roll.",
+        cookingTime = "25"
+    )
+
+    RecipeRowItem(
+        recipe = sampleRecipe,
+        onViewClick = {},
+        onEditClick = {},
+        onDeleteClick = {}
+    )
 }

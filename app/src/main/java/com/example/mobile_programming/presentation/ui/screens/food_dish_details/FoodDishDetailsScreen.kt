@@ -30,7 +30,7 @@ import com.example.mobile_programming.presentation.ui.screens.drink_details.comp
 import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.components.InfoTag
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.Allergen
-import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDish
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDishData
 import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.view_model.food_dish_details.FoodDishDetailsUiState
 import com.example.mobile_programming.presentation.view_model.food_dish_details.FoodDishDetailsViewModel
@@ -64,7 +64,7 @@ fun FoodDishDetailsScreen(
 
 @Composable
 private fun FoodDishDetailsScreen(
-    dish: FoodDish?,
+    dish: FoodDishData?,
     onBackClick: () -> Unit
 ) {
     if (dish == null) {
@@ -166,7 +166,7 @@ private fun FoodDishDetailsScreen(
 @Preview(showBackground = true)
 @Composable
 fun FoodDishDetailsPreview() {
-    val sampleDish = HardcodedData.foodDishes[0]
+    val sampleDish = HardcodedData.foodDishData[0]
 
     FoodDishDetailsScreen(
         dish = sampleDish,

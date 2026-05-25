@@ -143,7 +143,7 @@ private fun RecipesScreen(
     }
 }
 
-@Preview(showBackground = true, name = "Glavni Ekran sa Receptima")
+@Preview(showBackground = true)
 @Composable
 fun RecipesScreenPreview() {
     val sampleRecipes = listOf(
@@ -174,7 +174,7 @@ fun RecipesScreenPreview() {
     )
 }
 
-@Preview(showBackground = true, name = "Prazan Ekran (Nema recepata)")
+@Preview(showBackground = true)
 @Composable
 fun RecipesScreenEmptyPreview() {
     RecipesScreen(

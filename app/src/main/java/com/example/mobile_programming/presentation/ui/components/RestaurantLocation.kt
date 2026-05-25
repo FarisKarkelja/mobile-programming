@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
@@ -41,4 +42,21 @@ fun RestaurantLocation(
             color = textColor
         )
     }
+}
+
+@Preview(showBackground = false)
+@Composable
+fun RestaurantLocationDefaultPreview() {
+    RestaurantLocation(location = "Bulevar Kralja Tvrtka 12")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RestaurantLocationCustomPreview() {
+    RestaurantLocation(
+        location = "Centar Grada",
+        iconTint = Color.Red,
+        textColor = Color.Blue,
+        fontSize = 16.sp
+    )
 }

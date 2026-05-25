@@ -55,7 +55,6 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-
     fun onGoogleLoginClick(context: Context) {
         viewModelScope.launch {
             _uiState.value = LoginUiState.Loading
@@ -67,12 +66,10 @@ class LoginViewModel @Inject constructor(
                     _uiState.value = LoginUiState.Error("Google sign-in failed.")
                     return@launch
                 }
-
                 val email = firebaseUser.email.orEmpty()
                 val fullName = firebaseUser.displayName ?: "Google User"
 
                 var localUser = userRepository.getUserByEmail(email)
-
                 if (localUser == null) {
                     userRepository.insertUser(
                         mapRegisterInputToEntity(

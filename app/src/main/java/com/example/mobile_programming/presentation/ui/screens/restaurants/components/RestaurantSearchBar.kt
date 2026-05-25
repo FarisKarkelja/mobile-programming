@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.WarmCream
 import androidx.compose.material3.Icon
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.presentation.theme.TextPrimary
 
 @Composable
@@ -65,5 +66,23 @@ fun RestaurantSearchBar(
             focusedTextColor = WarmCream,
             unfocusedTextColor = WarmCream
         )
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RestaurantSearchBarEmptyPreview() {
+    RestaurantSearchBar(
+        searchQuery = "",
+        onSearchQueryChange = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RestaurantSearchBarWithTextPreview() {
+    RestaurantSearchBar(
+        searchQuery = "Taco",
+        onSearchQueryChange = {}
     )
 }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
@@ -41,4 +42,24 @@ fun LogoutButton(
             color = textColor
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LogoutButtonDefaultPreview() {
+    LogoutButton(
+        text = "Odjavi se",
+        onClick = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LogoutButtonDestructivePreview() {
+    LogoutButton(
+        text = "Zatvori nalog",
+        onClick = {},
+        containerColor = Color.Red,
+        textColor = Color.White
+    )
 }

@@ -34,7 +34,6 @@ class CategoryViewModel @Inject constructor(
     fun loadCategories() {
         viewModelScope.launch {
             _uiState.value = CategoryUiState.Loading
-
             repository.getAllCategories()
                 .catch { e ->
                     _uiState.value = CategoryUiState.Error(e.message ?: "Failed to load categories.")

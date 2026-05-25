@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.presentation.theme.Black
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
@@ -71,4 +72,15 @@ fun FilterDropdownMenu(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun FilterDropdownMenuPreview() {
+    FilterDropdownMenu(
+        label = "Izaberi kuhinju",
+        options = listOf("Italijanska", "Tradicionalna", "Azijska", "Američka"),
+        selectedOption = "Italijanska",
+        onOptionSelected = {}
+    )
 }
