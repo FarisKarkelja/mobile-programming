@@ -3,11 +3,13 @@ package com.example.mobile_programming
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -18,6 +20,7 @@ import com.example.mobile_programming.presentation.navigation.Screen
 import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationComponent
 import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationItems
 import com.example.mobile_programming.presentation.theme.MobileprogrammingTheme
+import com.example.mobile_programming.presentation.view_model.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,6 +29,8 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     @Inject
     lateinit var databaseSeed: DatabaseSeed
+    private val mainViewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch {
@@ -33,6 +38,8 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             MobileprogrammingTheme {
+                val uiState by mainViewModel.uiState.collectAsStateWithLifecycle()
+
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
