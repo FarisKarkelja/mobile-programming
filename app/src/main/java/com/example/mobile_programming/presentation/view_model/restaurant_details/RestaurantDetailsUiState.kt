@@ -1,8 +1,8 @@
 package com.example.mobile_programming.presentation.view_model.restaurant_details
 
-import com.example.mobile_programming.model.datasource.remote.dto.ReviewDto
 import com.example.mobile_programming.presentation.ui.screens.drink_details.util.DrinkData
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDishData
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Review
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 
 sealed interface RestaurantDetailsUiState {
@@ -12,7 +12,7 @@ sealed interface RestaurantDetailsUiState {
         val restaurant: Restaurant,
         val topDishes: List<FoodDishData>,
         val topDrinkData: List<DrinkData>,
-        val reviews: List<ReviewDto>
+        val reviews: List<Review>
     ) : RestaurantDetailsUiState
 
     data class Error(val message: String) : RestaurantDetailsUiState

@@ -1,28 +1,44 @@
 package com.example.mobile_programming.model.repository.recipe
 
 import com.example.mobile_programming.model.datasource.network.service.RecipeApiService
-import com.example.mobile_programming.model.datasource.network.dto.CreateRecipeDto
-import com.example.mobile_programming.model.datasource.network.dto.RecipeDto
-import com.example.mobile_programming.model.datasource.network.dto.UpdateRecipeDto
+import com.example.mobile_programming.model.datasource.network.mapper.toDomain
+import com.example.mobile_programming.model.repository.mappers.mapToCreateRecipeDto
+import com.example.mobile_programming.model.repository.mappers.mapToUpdateRecipeDto
+import com.example.mobile_programming.presentation.ui.screens.recipes.util.Recipe
 import javax.inject.Inject
 
 class RecipeRepositoryImpl @Inject constructor(
     private val api: RecipeApiService
 ) : RecipeRepository {
-    override suspend fun getRecipes(userId: Int): List<RecipeDto> {
-        return api.getRecipes(userId)
+    override suspend fun getRecipes(userId: Int): List<Recipe> {
+        return api.getRecipes(userId).map { it.toDomain() }
     }
 
-    override suspend fun getRecipeById(userId: Int, recipeId: Int): RecipeDto {
-        return api.getRecipeById(userId, recipeId)
+    override suspend fun getRecipeById(userId: Int, recipeId: Int): Recipe {
+        return api.getRecipeById(userId, recipeId).toDomain()
     }
 
-    override suspend fun insertRecipe(recipe: CreateRecipeDto) {
-        api.insertRecipe(recipe)
+    override suspend fun insertRecipe(
+        name: String,
+        userId: Int,
+        ingredients: String,
+        instructions: String,
+        cookingTime: String
+    ) {
+        val dto = mapToCreateRecipeDto(name, userId, ingredients, instructions, cookingTime)
+        api.insertRecipe(dto)
     }
 
-    override suspend fun updateRecipe(recipeId: Int, recipe: UpdateRecipeDto) {
-        api.updateRecipe(recipeId, recipe)
+    override suspend fun updateRecipe(
+        recipeId: Int,
+        name: String,
+        userId: Int,
+        ingredients: String,
+        instructions: String,
+        cookingTime: String
+    ) {
+        val dto = mapToUpdateRecipeDto(name, userId, ingredients, instructions, cookingTime)
+        api.updateRecipe(recipeId, dto)
     }
 
     override suspend fun deleteRecipe(recipeId: Int) {

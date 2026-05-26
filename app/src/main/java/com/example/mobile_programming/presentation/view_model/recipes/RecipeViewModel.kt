@@ -2,9 +2,6 @@ package com.example.mobile_programming.presentation.view_model.recipes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.datasource.network.dto.CreateRecipeDto
-import com.example.mobile_programming.model.datasource.network.dto.UpdateRecipeDto
-import com.example.mobile_programming.model.datasource.network.mapper.toDomain
 import com.example.mobile_programming.model.repository.recipe.RecipeRepository
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,7 +35,7 @@ class RecipeViewModel @Inject constructor(
             _uiState.value = RecipeUiState.Loading
             try {
                 val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
-                val recipes = recipeRepository.getRecipes(userId.toInt()).map { it.toDomain() }
+                val recipes = recipeRepository.getRecipes(userId.toInt())
                 _uiState.value = RecipeUiState.Success(recipes)
             } catch (e: CancellationException) {
                 throw e
@@ -58,14 +55,13 @@ class RecipeViewModel @Inject constructor(
             _uiState.value = RecipeUiState.Loading
             try {
                 val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
-                val recipeDto = CreateRecipeDto(
-                    name = name,
-                    userId = userId.toInt(),
-                    ingredients = ingredients,
-                    instructions = instructions,
-                    cookingTime = cookingTime
+                recipeRepository.insertRecipe(
+                    name,
+                    userId.toInt(),
+                    ingredients,
+                    instructions,
+                    cookingTime
                 )
-                recipeRepository.insertRecipe(recipeDto)
                 loadRecipes()
             } catch (e: CancellationException) {
                 throw e
@@ -86,14 +82,14 @@ class RecipeViewModel @Inject constructor(
             _uiState.value = RecipeUiState.Loading
             try {
                 val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
-                val updatedData = UpdateRecipeDto(
-                    userId = userId.toInt(),
-                    name = name,
-                    ingredients = ingredients,
-                    instructions = instructions,
-                    cookingTime = cookingTime
+                recipeRepository.updateRecipe(
+                    recipeId.toInt(),
+                    name,
+                    userId.toInt(),
+                    ingredients,
+                    instructions,
+                    cookingTime
                 )
-                recipeRepository.updateRecipe(recipeId.toInt(), updatedData)
                 loadRecipes()
             } catch (e: CancellationException) {
                 throw e

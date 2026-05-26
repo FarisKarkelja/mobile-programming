@@ -2,13 +2,13 @@ package com.example.mobile_programming.presentation.view_model.restaurant_detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.datasource.remote.dto.ReviewDto
 import com.example.mobile_programming.model.repository.drink.DrinkRepository
 import com.example.mobile_programming.model.repository.food_dish.FoodDishRepository
 import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.model.repository.restaurant.RestaurantRepository
 import com.example.mobile_programming.model.repository.review.ReviewRepository
 import com.example.mobile_programming.model.repository.user.SessionRepository
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Review
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,7 +58,9 @@ class RestaurantDetailsViewModel @Inject constructor(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _uiState.value = RestaurantDetailsUiState.Error(e.message ?: "Failed to load restaurant details.")
+                _uiState.value = RestaurantDetailsUiState.Error(
+                    e.message ?: "Failed to load restaurant details."
+                )
             }
         }
     }
@@ -67,7 +69,8 @@ class RestaurantDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val userId = sessionRepository.observeLoggedInUserId().first()?.toString() ?: ""
-                val review = ReviewDto(
+                val review = Review(
+                    id = "",
                     userId = userId,
                     restaurantId = restaurantId,
                     comment = comment,

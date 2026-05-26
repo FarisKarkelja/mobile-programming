@@ -2,7 +2,6 @@ package com.example.mobile_programming.presentation.view_model.recipe_details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.datasource.network.mapper.toDomain
 import com.example.mobile_programming.model.repository.recipe.RecipeRepository
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,7 +27,7 @@ class RecipeDetailsViewModel @Inject constructor(
             try {
                 val userId = sessionRepository.observeLoggedInUserId().first() ?: 0L
                 val recipe = recipeRepository.getRecipeById(userId.toInt(), recipeId.toInt())
-                _uiState.value = RecipeDetailsUiState.Success(recipe.toDomain())
+                _uiState.value = RecipeDetailsUiState.Success(recipe)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
