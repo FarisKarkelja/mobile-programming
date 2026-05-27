@@ -9,15 +9,15 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
-import com.example.mobile_programming.model.datasource.remote.dto.ReviewDto
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.White
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Review
 
 @Composable
 fun ReviewSection(
-    reviews: List<ReviewDto>,
+    reviews: List<Review>,
     onAddReview: (comment: String, rating: Float) -> Unit
 ) {
     var comment by remember { mutableStateOf("") }
@@ -101,19 +101,21 @@ fun ReviewSectionEmptyPreview() {
 @Composable
 fun ReviewSectionWithReviewsPreview() {
     val sampleReviews = listOf(
-        ReviewDto(
+        Review(
             id = "rev_1",
             restaurantId = "r_10",
             userId = "u_1",
             rating = 5.0f,
-            comment = "Amazing food! The chicken tortilla was packed with flavor."
+            comment = "Amazing food! The chicken tortilla was packed with flavor.",
+            createdAt = System.currentTimeMillis()
         ),
-        ReviewDto(
+        Review(
             id = "rev_2",
             restaurantId = "r_10",
             userId = "u_2",
             rating = 4.0f,
-            comment = "Really good service, but the food took a bit long to arrive."
+            comment = "Really good service, but the food took a bit long to arrive.",
+            createdAt = System.currentTimeMillis()
         )
     )
 

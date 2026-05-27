@@ -1,4 +1,4 @@
-package com.example.mobile_programming.model.repository.mappers
+package com.example.mobile_programming.model.datasource.remote.mapper
 
 import com.example.mobile_programming.model.datasource.remote.dto.ReviewDto
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Review

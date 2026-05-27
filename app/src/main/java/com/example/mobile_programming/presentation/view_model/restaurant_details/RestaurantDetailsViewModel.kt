@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_programming.model.repository.drink.DrinkRepository
 import com.example.mobile_programming.model.repository.food_dish.FoodDishRepository
-import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.model.repository.restaurant.RestaurantRepository
 import com.example.mobile_programming.model.repository.review.ReviewRepository
 import com.example.mobile_programming.model.repository.user.SessionRepository
@@ -44,12 +43,10 @@ class RestaurantDetailsViewModel @Inject constructor(
                 } else {
                     val topDishes =
                         foodDishRepository.getTopDishesByRestaurant(restaurantId.toLong())
-                            .map { it.toDomain() }
                     val topDrinks = drinkRepository.getTopDrinksByRestaurant(restaurantId.toLong())
-                        .map { it.toDomain() }
                     val reviews = reviewRepository.getReviewsForRestaurant(restaurantId)
                     _uiState.value = RestaurantDetailsUiState.Success(
-                        restaurant = restaurant.toDomain(),
+                        restaurant = restaurant,
                         topDishes = topDishes,
                         topDrinkData = topDrinks,
                         reviews = reviews

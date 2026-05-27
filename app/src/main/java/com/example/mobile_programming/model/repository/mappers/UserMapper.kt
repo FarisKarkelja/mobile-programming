@@ -12,6 +12,15 @@ fun UserEntity.toDomain(): User {
     )
 }
 
+fun User.toEntity(): UserEntity {
+    return UserEntity(
+        id = this.id.toLongOrNull() ?: 0L,
+        fullName = this.fullName,
+        email = this.email,
+        password = this.password
+    )
+}
+
 fun mapRegisterInputToEntity(fullName: String, email: String, password: String): UserEntity {
     return UserEntity(
         fullName = fullName,

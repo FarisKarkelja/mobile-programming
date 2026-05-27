@@ -21,15 +21,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
-import com.example.mobile_programming.model.datasource.remote.dto.ReviewDto
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
 import com.example.mobile_programming.presentation.theme.White
 import com.example.mobile_programming.presentation.ui.components.HorizontalSpace
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Review
 
 @Composable
-fun ReviewItem(review: ReviewDto) {
+fun ReviewItem(review: Review) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(dimensionResource(R.dimen.corner_12)),
@@ -63,12 +63,13 @@ fun ReviewItem(review: ReviewDto) {
 @Preview(showBackground = true)
 @Composable
 fun ReviewItemPreview() {
-    val singleReview = ReviewDto(
+    val singleReview = Review(
         id = "rev_1",
         restaurantId = "r_10",
         userId = "u_1",
         rating = 4.5f,
-        comment = "The handmade tortillas were absolute perfection! Highly recommend."
+        comment = "The handmade tortillas were absolute perfection! Highly recommend.",
+        createdAt = System.currentTimeMillis()
     )
     ReviewItem(review = singleReview)
 }

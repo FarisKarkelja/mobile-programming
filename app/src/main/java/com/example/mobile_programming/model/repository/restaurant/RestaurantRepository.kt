@@ -1,7 +1,6 @@
 package com.example.mobile_programming.model.repository.restaurant
 
-import com.example.mobile_programming.model.datasource.local.entity.RestaurantEntity
-import com.example.mobile_programming.model.datasource.local.util.RestaurantWithFavorite
+import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import kotlinx.coroutines.flow.Flow
 
 interface RestaurantRepository {
@@ -12,10 +11,10 @@ interface RestaurantRepository {
         endValue: Int,
         location: String,
         minRating: Float
-    ): Flow<List<RestaurantWithFavorite>>
+    ): Flow<List<Restaurant>>
 
-    suspend fun getRestaurantById(restaurantId: Long): RestaurantEntity?
-    suspend fun insertRestaurant(restaurant: RestaurantEntity)
-    suspend fun updateRestaurant(restaurant: RestaurantEntity)
-    suspend fun deleteRestaurant(restaurant: RestaurantEntity)
+    suspend fun getRestaurantById(restaurantId: Long): Restaurant?
+    suspend fun insertRestaurant(restaurant: Restaurant)
+    suspend fun updateRestaurant(restaurant: Restaurant)
+    suspend fun deleteRestaurant(restaurant: Restaurant)
 }

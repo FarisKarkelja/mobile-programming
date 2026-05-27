@@ -2,7 +2,6 @@ package com.example.mobile_programming.presentation.view_model.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -48,7 +47,7 @@ class ProfileViewModel @Inject constructor(
                         if (user == null) {
                             _uiState.value = ProfileUiState.Error("User not found.")
                         } else {
-                            _uiState.value = ProfileUiState.Success(user.toDomain())
+                            _uiState.value = ProfileUiState.Success(user)
                         }
                     }
             }

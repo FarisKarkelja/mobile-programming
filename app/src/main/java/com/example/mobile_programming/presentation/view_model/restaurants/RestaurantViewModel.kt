@@ -2,7 +2,6 @@ package com.example.mobile_programming.presentation.view_model.restaurants
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.model.repository.restaurant.RestaurantRepository
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user_restaurant.UserRestaurantRepository
@@ -47,8 +46,7 @@ class RestaurantViewModel @Inject constructor(
                 minRating = minRating
             ).catch { e ->
                 _uiState.value = RestaurantUiState.Error(e.message ?: "Failed to load restaurants.")
-            }.collect { restaurantsWithFavorite ->
-                val restaurants = restaurantsWithFavorite.map { it.toDomain() }
+            }.collect { restaurants ->
                 filteredRestaurants = restaurants
                 _uiState.value = RestaurantUiState.Success(searchQuery = "", restaurants)
             }

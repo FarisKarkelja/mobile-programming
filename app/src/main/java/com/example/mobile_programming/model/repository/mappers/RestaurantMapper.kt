@@ -35,3 +35,18 @@ fun RestaurantWithFavorite.toDomain(): Restaurant {
         isFavorite = this.isFavorite
     )
 }
+
+fun Restaurant.toEntity(): RestaurantEntity {
+    return RestaurantEntity(
+        id = this.id.toLongOrNull() ?: 0L,
+        name = this.name,
+        cuisine = this.cuisine,
+        categoryId = this.categoryId.toLongOrNull() ?: 0L,
+        description = this.description,
+        imageResId = this.imageResId,
+        location = this.location,
+        address = this.address,
+        avgPrice = this.avgPrice,
+        rating = this.rating
+    )
+}

@@ -3,7 +3,6 @@ package com.example.mobile_programming.presentation.view_model.favorite_restaura
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_programming.model.repository.category.CategoryRepository
-import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user_restaurant.UserRestaurantRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,7 +38,7 @@ class FavoriteRestaurantsViewModel @Inject constructor(
     private fun loadFavorites() {
         viewModelScope.launch {
             _uiState.value = FavoriteRestaurantsUiState.Loading
-            val categories = categoryRepository.getAllCategories().first().map { it.toDomain() }
+            val categories = categoryRepository.getAllCategories().first()
             sessionRepository.observeLoggedInUserId().collect { userId ->
                 if (userId != null) {
                     userRestaurantRepository.getFavoriteRestaurantsByUserId(userId = userId)
@@ -48,8 +47,7 @@ class FavoriteRestaurantsViewModel @Inject constructor(
                                 e.message ?: "Failed to load favorite restaurants."
                             )
                         }
-                        .collect { restaurantsWithFavorite ->
-                            val restaurants = restaurantsWithFavorite.map { it.toDomain() }
+                        .collect { restaurants ->
                             _uiState.value =
                                 FavoriteRestaurantsUiState.Success(restaurants, categories)
                         }
@@ -72,7 +70,9 @@ class FavoriteRestaurantsViewModel @Inject constructor(
                 throw e
             } catch (e: Exception) {
                 _uiState.value =
-                    FavoriteRestaurantsUiState.Error(e.message ?: "Failed to remove favorite restaurant.")
+                    FavoriteRestaurantsUiState.Error(
+                        e.message ?: "Failed to remove favorite restaurant."
+                    )
             }
         }
     }

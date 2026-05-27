@@ -2,8 +2,8 @@ package com.example.mobile_programming.model.repository.recipe
 
 import com.example.mobile_programming.model.datasource.network.service.RecipeApiService
 import com.example.mobile_programming.model.datasource.network.mapper.toDomain
-import com.example.mobile_programming.model.repository.mappers.mapToCreateRecipeDto
-import com.example.mobile_programming.model.repository.mappers.mapToUpdateRecipeDto
+import com.example.mobile_programming.model.datasource.network.mapper.mapToCreateRecipeDto
+import com.example.mobile_programming.model.datasource.network.mapper.mapToUpdateRecipeDto
 import com.example.mobile_programming.presentation.ui.screens.recipes.util.Recipe
 import javax.inject.Inject
 

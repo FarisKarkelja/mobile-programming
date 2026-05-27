@@ -3,7 +3,6 @@ package com.example.mobile_programming.presentation.view_model.categories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_programming.model.repository.category.CategoryRepository
-import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.presentation.ui.screens.categories.util.formatCategories
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -36,10 +35,10 @@ class CategoryViewModel @Inject constructor(
             _uiState.value = CategoryUiState.Loading
             repository.getAllCategories()
                 .catch { e ->
-                    _uiState.value = CategoryUiState.Error(e.message ?: "Failed to load categories.")
+                    _uiState.value =
+                        CategoryUiState.Error(e.message ?: "Failed to load categories.")
                 }
-                .collect { entities ->
-                    val domainCategories = entities.map { it.toDomain() }
+                .collect { domainCategories ->
                     val formatted = formatCategories(domainCategories, pattern)
                     _uiState.value = CategoryUiState.Success(formatted)
                 }

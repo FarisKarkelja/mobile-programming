@@ -10,3 +10,11 @@ fun CategoryEntity.toDomain(): Category {
         iconResId = this.imageResId
     )
 }
+
+fun Category.toEntity(): CategoryEntity {
+    return CategoryEntity(
+        id = this.id.toLongOrNull() ?: 0L,
+        name = this.name,
+        imageResId = this.iconResId
+    )
+}

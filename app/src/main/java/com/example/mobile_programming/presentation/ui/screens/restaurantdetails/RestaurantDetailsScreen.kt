@@ -28,7 +28,6 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobile_programming.R
 import com.example.mobile_programming.model.HardcodedData
-import com.example.mobile_programming.model.datasource.remote.dto.ReviewDto
 import com.example.mobile_programming.presentation.theme.*
 import com.example.mobile_programming.presentation.ui.components.RestaurantLocation
 import com.example.mobile_programming.presentation.ui.components.RestaurantRating
@@ -44,6 +43,7 @@ import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.DrinkCard
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.ReviewSection
+import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Review
 import com.example.mobile_programming.presentation.view_model.restaurant_details.RestaurantDetailsUiState
 import com.example.mobile_programming.presentation.view_model.restaurant_details.RestaurantDetailsViewModel
 
@@ -97,7 +97,7 @@ private fun RestaurantDetailsScreen(
     topDrinkData: List<DrinkData>,
     hasTopDishes: Boolean,
     hasTopDrinks: Boolean,
-    reviews: List<ReviewDto>,
+    reviews: List<Review>,
     onAddReview: (comment: String, rating: Float) -> Unit,
     onDishClick: (FoodDishData) -> Unit,
     onDrinkClick: (DrinkData) -> Unit,

@@ -15,3 +15,16 @@ fun DrinkEntity.toDomain(): DrinkData {
         isSugarFree = this.isSugarFree
     )
 }
+
+fun DrinkData.toEntity(): DrinkEntity {
+    return DrinkEntity(
+        id = this.id.toLongOrNull() ?: 0L,
+        restaurantId = this.restaurantId.toLongOrNull() ?: 0L,
+        name = this.name,
+        imageResId = this.imageResId,
+        price = this.price,
+        description = this.description,
+        isAlcoholic = this.isAlcoholic,
+        isSugarFree = this.isSugarFree
+    )
+}

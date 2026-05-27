@@ -1,8 +1,8 @@
 package com.example.mobile_programming.model.repository.review
 
 import com.example.mobile_programming.model.datasource.remote.dto.ReviewDto
-import com.example.mobile_programming.model.repository.mappers.toDomain
-import com.example.mobile_programming.model.repository.mappers.toDto
+import com.example.mobile_programming.model.datasource.remote.mapper.toDomain
+import com.example.mobile_programming.model.datasource.remote.mapper.toDto
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Review
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await

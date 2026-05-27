@@ -1,11 +1,11 @@
 package com.example.mobile_programming.model.repository.drink
 
-import com.example.mobile_programming.model.datasource.local.entity.DrinkEntity
+import com.example.mobile_programming.presentation.ui.screens.drink_details.util.DrinkData
 
 interface DrinkRepository {
-    suspend fun getTopDrinksByRestaurant(restaurantId: Long): List<DrinkEntity>
-    suspend fun getDrinkById(id: Long): DrinkEntity?
-    suspend fun insertDrink(drink: DrinkEntity)
-    suspend fun updateDrink(drink: DrinkEntity)
-    suspend fun deleteDrink(drink: DrinkEntity)
+    suspend fun getTopDrinksByRestaurant(restaurantId: Long): List<DrinkData>
+    suspend fun getDrinkById(id: Long): DrinkData?
+    suspend fun insertDrink(drink: DrinkData)
+    suspend fun updateDrink(drink: DrinkData)
+    suspend fun deleteDrink(drink: DrinkData)
 }

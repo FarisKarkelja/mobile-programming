@@ -3,7 +3,6 @@ package com.example.mobile_programming.presentation.view_model.drink_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_programming.model.repository.drink.DrinkRepository
-import com.example.mobile_programming.model.repository.mappers.toDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,11 +30,11 @@ class DrinkDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = DrinkDetailsUiState.Loading
             try {
-                val drinkEntity = drinkRepository.getDrinkById(drinkId.toLong())
-                if (drinkEntity == null) {
+                val drinkData = drinkRepository.getDrinkById(drinkId.toLong())
+                if (drinkData == null) {
                     _uiState.value = DrinkDetailsUiState.Error("Drink not found.")
                 } else {
-                    _uiState.value = DrinkDetailsUiState.Success(drinkEntity.toDomain())
+                    _uiState.value = DrinkDetailsUiState.Success(drinkData)
                 }
             } catch (e: CancellationException) {
                 throw e
