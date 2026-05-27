@@ -20,6 +20,9 @@ import com.example.mobile_programming.presentation.navigation.Screen
 import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationComponent
 import com.example.mobile_programming.presentation.navigation.bottomBar.BottomBarNavigationItems
 import com.example.mobile_programming.presentation.theme.MobileprogrammingTheme
+import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
+import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
+import com.example.mobile_programming.presentation.view_model.main.MainUiState
 import com.example.mobile_programming.presentation.view_model.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -49,41 +52,56 @@ class MainActivity : ComponentActivity() {
                         currentRoute == route || currentRoute.startsWith("$route/")
                     }
 
-                Scaffold(
-                    bottomBar = {
-                        if (showBottomBar) {
-                            val items = BottomBarNavigationItems.items
-                            val selectedIndex = when {
-                                currentRoute.startsWith("restaurants_screen") -> 0
-                                currentRoute == Screen.FavoriteRestaurants.route -> 1
-                                currentRoute == Screen.Recipes.route -> 2
-                                currentRoute == Screen.Profile.route -> 3
-                                else -> 0
-                            }
+                when (val state = uiState) {
+                    is MainUiState.Loading, MainUiState.Init -> {
+                        LoadingScreen()
+                    }
 
-                            BottomBarNavigationComponent(
-                                items = items,
-                                selectedItemIndex = selectedIndex,
-                                onItemSelected = { index ->
-                                    val destination = items[index].route
-
-                                    navController.navigate(destination) {
-                                        popUpTo(navController.graph.findStartDestination().id) {
-                                            saveState = true
-                                        }
-                                        launchSingleTop = true
-                                        restoreState = true
+                    is MainUiState.Success -> {
+                        Scaffold(
+                            bottomBar = {
+                                if (showBottomBar) {
+                                    val items = BottomBarNavigationItems.items
+                                    val selectedIndex = when {
+                                        currentRoute.startsWith("restaurants_screen") -> 0
+                                        currentRoute == Screen.FavoriteRestaurants.route -> 1
+                                        currentRoute == Screen.Recipes.route -> 2
+                                        currentRoute == Screen.Profile.route -> 3
+                                        else -> 0
                                     }
+
+                                    BottomBarNavigationComponent(
+                                        items = items,
+                                        selectedItemIndex = selectedIndex,
+                                        onItemSelected = { index ->
+                                            val destination = items[index].route
+
+                                            navController.navigate(destination) {
+                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                    saveState = true
+                                                }
+                                                launchSingleTop = true
+                                                restoreState = true
+                                            }
+                                        }
+                                    )
                                 }
-                            )
+                            }
+                        ) { innerPadding ->
+                            Surface(modifier = Modifier.fillMaxSize()) {
+                                NavGraph(
+                                    navController = navController,
+                                    startDestination = state.route,
+                                    modifier = Modifier.padding(innerPadding)
+                                )
+                            }
                         }
                     }
-                ) { innerPadding ->
-                    Surface(modifier = Modifier.fillMaxSize()) {
-                        NavGraph(
-                            navController = navController,
-                            startDestination = Screen.Login.route,
-                            modifier = Modifier.padding(innerPadding)
+
+                    is MainUiState.Error -> {
+                        ErrorScreen(
+                            message = state.message,
+                            onRetry = { mainViewModel.resetUiState() }
                         )
                     }
                 }

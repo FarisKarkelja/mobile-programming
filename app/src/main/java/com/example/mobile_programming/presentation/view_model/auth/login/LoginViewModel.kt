@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_programming.model.repository.auth.AuthRepository
-import com.example.mobile_programming.model.repository.mappers.mapRegisterInputToEntity
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user.UserRepository
+import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 import com.example.mobile_programming.presentation.util.GoogleAuthClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -42,7 +42,8 @@ class LoginViewModel @Inject constructor(
                     if (user == null) {
                         _uiState.value = LoginUiState.Error("Invalid credentials.")
                     } else {
-                        sessionRepository.saveLoggedInUserId(user.id)
+                        val userIdLong = user.id.toLongOrNull() ?: 0L
+                        sessionRepository.saveLoggedInUserId(userIdLong)
                         _uiState.value = LoginUiState.Success(isLoggedIn = true)
                         _navigationEvent.send(LoginNavigationEvent.Navigate)
                     }
@@ -71,18 +72,19 @@ class LoginViewModel @Inject constructor(
 
                 var localUser = userRepository.getUserByEmail(email)
                 if (localUser == null) {
-                    userRepository.insertUser(
-                        mapRegisterInputToEntity(
-                            fullName = fullName,
-                            email = email,
-                            password = "GOOGLE_SIGN_IN"
-                        )
+                    val newGoogleUser = User(
+                        id = "0",
+                        fullName = fullName,
+                        email = email,
+                        password = "GOOGLE_SIGN_IN"
                     )
+                    userRepository.insertUser(newGoogleUser)
                     localUser = userRepository.getUserByEmail(email)
                 }
 
                 if (localUser != null) {
-                    sessionRepository.saveLoggedInUserId(localUser.id)
+                    val userIdLong = localUser.id.toLongOrNull() ?: 0L
+                    sessionRepository.saveLoggedInUserId(userIdLong)
                     _uiState.value = LoginUiState.Success(isLoggedIn = true)
                     _navigationEvent.send(LoginNavigationEvent.Navigate)
                 } else {

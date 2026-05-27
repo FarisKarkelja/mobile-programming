@@ -20,11 +20,3 @@ fun User.toEntity(): UserEntity {
         password = this.password
     )
 }
-
-fun mapRegisterInputToEntity(fullName: String, email: String, password: String): UserEntity {
-    return UserEntity(
-        fullName = fullName,
-        email = email,
-        password = password
-    )
-}

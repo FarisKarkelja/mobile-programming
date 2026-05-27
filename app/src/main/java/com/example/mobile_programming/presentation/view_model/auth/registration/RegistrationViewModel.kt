@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_programming.model.repository.auth.AuthRepository
-import com.example.mobile_programming.model.repository.mappers.mapRegisterInputToEntity
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user.UserRepository
+import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 import com.example.mobile_programming.presentation.util.GoogleAuthClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -42,13 +42,13 @@ class RegistrationViewModel @Inject constructor(
                     if (existingUser != null) {
                         _uiState.value = RegistrationUiState.Error("Email already in use.")
                     } else {
-                        userRepository.insertUser(
-                            mapRegisterInputToEntity(
-                                fullName,
-                                email,
-                                password
-                            )
+                        val newUser = User(
+                            id = "0",
+                            fullName = fullName,
+                            email = email,
+                            password = password
                         )
+                        userRepository.insertUser(newUser)
                         _uiState.value = RegistrationUiState.Success
                         _navigationEvent.send(RegistrationNavigationEvent.Navigate)
                     }
@@ -77,18 +77,19 @@ class RegistrationViewModel @Inject constructor(
 
                 var localUser = userRepository.getUserByEmail(email)
                 if (localUser == null) {
-                    userRepository.insertUser(
-                        mapRegisterInputToEntity(
-                            fullName = fullName,
-                            email = email,
-                            password = "GOOGLE_SIGN_IN"
-                        )
+                    val newGoogleUser = User(
+                        id = "0",
+                        fullName = fullName,
+                        email = email,
+                        password = "GOOGLE_SIGN_IN"
                     )
+                    userRepository.insertUser(newGoogleUser)
                     localUser = userRepository.getUserByEmail(email)
                 }
 
                 if (localUser != null) {
-                    sessionRepository.saveLoggedInUserId(localUser.id)
+                    val userIdLong = localUser.id.toLongOrNull() ?: 0L
+                    sessionRepository.saveLoggedInUserId(userIdLong)
                     _uiState.value = RegistrationUiState.Success
                     _navigationEvent.send(RegistrationNavigationEvent.Navigate)
                 } else {
