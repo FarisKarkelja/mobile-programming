@@ -1,5 +1,6 @@
 package com.example.mobile_programming.presentation.ui.screens.restaurantdetails
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -44,6 +46,7 @@ import com.example.mobile_programming.presentation.ui.screens.restaurants.util.R
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.DrinkCard
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.components.ReviewSection
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.util.Review
+import com.example.mobile_programming.presentation.view_model.restaurant_details.RestaurantDetailsUiEvent
 import com.example.mobile_programming.presentation.view_model.restaurant_details.RestaurantDetailsUiState
 import com.example.mobile_programming.presentation.view_model.restaurant_details.RestaurantDetailsViewModel
 
@@ -56,6 +59,18 @@ fun RestaurantDetailsScreen(
     onNavigateToDrink: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    val context = LocalContext.current
+
+    LaunchedEffect(viewModel.uiEvent) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is RestaurantDetailsUiEvent.ShowToast -> {
+                    Toast.makeText(context, event.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
 
     LaunchedEffect(restaurantId) {
         viewModel.loadRestaurantDetails(restaurantId)

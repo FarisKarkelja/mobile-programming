@@ -33,6 +33,9 @@ class RestaurantDetailsViewModel @Inject constructor(
     private val _navigationEvent = Channel<RestaurantDetailsNavigationEvent>(Channel.BUFFERED)
     val navigationEvent = _navigationEvent.receiveAsFlow()
 
+    private val _uiEvent = Channel<RestaurantDetailsUiEvent>(Channel.BUFFERED)
+    val uiEvent = _uiEvent.receiveAsFlow()
+
     fun loadRestaurantDetails(restaurantId: String) {
         viewModelScope.launch {
             _uiState.value = RestaurantDetailsUiState.Loading
@@ -71,8 +74,7 @@ class RestaurantDetailsViewModel @Inject constructor(
                 if (currentState is RestaurantDetailsUiState.Success) {
                     val alreadyReviewed = currentState.reviews.any { it.userId == userId }
                     if (alreadyReviewed) {
-                        _uiState.value =
-                            RestaurantDetailsUiState.Error("You have already submitted a review for this restaurant.")
+                        _uiEvent.send(RestaurantDetailsUiEvent.ShowToast("You have already submitted a review for this restaurant."))
                         return@launch
                     }
                 }
