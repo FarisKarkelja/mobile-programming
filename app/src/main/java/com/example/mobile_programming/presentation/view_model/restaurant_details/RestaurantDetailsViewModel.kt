@@ -66,6 +66,17 @@ class RestaurantDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val userId = sessionRepository.observeLoggedInUserId().first()?.toString() ?: ""
+
+                val currentState = _uiState.value
+                if (currentState is RestaurantDetailsUiState.Success) {
+                    val alreadyReviewed = currentState.reviews.any { it.userId == userId }
+                    if (alreadyReviewed) {
+                        _uiState.value =
+                            RestaurantDetailsUiState.Error("You have already submitted a review for this restaurant.")
+                        return@launch
+                    }
+                }
+
                 val review = Review(
                     id = "",
                     userId = userId,
