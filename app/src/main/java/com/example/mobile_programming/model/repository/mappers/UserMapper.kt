@@ -1,6 +1,6 @@
 package com.example.mobile_programming.model.repository.mappers
 
-import com.example.mobile_programming.model.data.local.entity.UserEntity
+import com.example.mobile_programming.model.datasource.local.entity.UserEntity
 import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 
 fun UserEntity.toDomain(): User {
@@ -12,10 +12,11 @@ fun UserEntity.toDomain(): User {
     )
 }
 
-fun mapRegisterInputToEntity(fullName: String, email: String, password: String): UserEntity {
+fun User.toEntity(): UserEntity {
     return UserEntity(
-        fullName = fullName,
-        email = email,
-        password = password
+        id = this.id.toLongOrNull() ?: 0L,
+        fullName = this.fullName,
+        email = this.email,
+        password = this.password
     )
 }

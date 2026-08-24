@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
 
 @Composable
@@ -15,4 +16,10 @@ fun ApplicationLogo() {
         contentDescription = "Logo",
         modifier = Modifier.size(dimensionResource(id = R.dimen.size_420))
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ApplicationLogoPreview() {
+    ApplicationLogo()
 }

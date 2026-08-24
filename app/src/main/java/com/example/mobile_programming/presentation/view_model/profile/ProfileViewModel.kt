@@ -2,7 +2,6 @@ package com.example.mobile_programming.presentation.view_model.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +14,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
@@ -36,17 +36,18 @@ class ProfileViewModel @Inject constructor(
             _uiState.value = ProfileUiState.Loading
             val userId = sessionRepository.observeLoggedInUserId().first()
             if (userId == null) {
-                _uiState.value = ProfileUiState.Error("No active session")
+                _uiState.value = ProfileUiState.Error("No active session.")
             } else {
                 userRepository.observeUserById(userId)
                     .catch { e ->
-                        _uiState.value = ProfileUiState.Error(e.message ?: "Failed to load profile")
+                        _uiState.value =
+                            ProfileUiState.Error(e.message ?: "Failed to load user profile.")
                     }
                     .collect { user ->
                         if (user == null) {
-                            _uiState.value = ProfileUiState.Error("User not found")
+                            _uiState.value = ProfileUiState.Error("User not found.")
                         } else {
-                            _uiState.value = ProfileUiState.Success(user.toDomain())
+                            _uiState.value = ProfileUiState.Success(user)
                         }
                     }
             }
@@ -55,8 +56,14 @@ class ProfileViewModel @Inject constructor(
 
     fun logout() {
         viewModelScope.launch {
-            sessionRepository.clearSession()
-            _navigationEvent.send(ProfileNavigationEvent.NavigateBack)
+            try {
+                sessionRepository.clearSession()
+                _navigationEvent.send(ProfileNavigationEvent.NavigateBack)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                _uiState.value = ProfileUiState.Error(e.message ?: "Logout process failed.")
+            }
         }
     }
 

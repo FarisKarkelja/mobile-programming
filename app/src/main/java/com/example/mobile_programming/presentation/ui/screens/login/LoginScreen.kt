@@ -8,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -38,6 +39,7 @@ fun LoginScreen(
 
     val emailError = AuthValidators.validateEmail(email)
     val passwordError = AuthValidators.validatePassword(password)
+    val context = LocalContext.current
 
     val isLoginEnabled =
         emailError == null && passwordError == null && email.isNotBlank() && password.isNotBlank()
@@ -70,7 +72,8 @@ fun LoginScreen(
             onPasswordChange = { password = it },
             onLoginClick = { viewModel.onLoginClick(email, password) },
             onRegisterClick = onNavigateToRegister,
-            modifier = Modifier
+            onGoogleClick = { viewModel.onGoogleLoginClick(context) },
+            modifier = Modifier,
         )
     }
 }
@@ -88,6 +91,7 @@ private fun LoginScreen(
     onPasswordChange: (String) -> Unit,
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit,
+    onGoogleClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -137,6 +141,16 @@ private fun LoginScreen(
         )
 
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
+        AuthDivider()
+
+        VerticalSpace(dimensionResource(id = R.dimen.height_24))
+        SocialSignInButton(
+            text = stringResource(R.string.google_sign_in),
+            onClick = onGoogleClick,
+            icon = R.drawable.google
+        )
+
+        VerticalSpace(dimensionResource(id = R.dimen.height_24))
         AuthFooterText(
             normalText = stringResource(R.string.register_redirect),
             actionText = stringResource(R.string.register_action),
@@ -160,5 +174,6 @@ fun LoginScreenPreview() {
         onPasswordChange = {},
         onLoginClick = {},
         onRegisterClick = {},
+        onGoogleClick = {}
     )
 }

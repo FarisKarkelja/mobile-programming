@@ -18,6 +18,8 @@ import com.example.mobile_programming.presentation.ui.screens.drink_details.Drin
 import com.example.mobile_programming.presentation.ui.screens.food_dish_details.FoodDishDetailsScreen
 import com.example.mobile_programming.presentation.ui.screens.login.LoginScreen
 import com.example.mobile_programming.presentation.ui.screens.profile.ProfileScreen
+import com.example.mobile_programming.presentation.ui.screens.recipe_details.RecipeDetailsScreen
+import com.example.mobile_programming.presentation.ui.screens.recipes.RecipesScreen
 import com.example.mobile_programming.presentation.ui.screens.registration.RegistrationScreen
 import com.example.mobile_programming.presentation.ui.screens.restaurantdetails.RestaurantDetailsScreen
 import com.example.mobile_programming.presentation.ui.screens.restaurants.RestaurantsScreen
@@ -179,6 +181,41 @@ fun NavGraph(
                 viewModel = hiltViewModel(),
                 onNavigateToDetails = { restaurantId ->
                     navController.navigate(Screen.RestaurantDetails.createRoute(restaurantId))
+                }
+            )
+        }
+
+        composable(
+            route = Screen.Recipes.route,
+            enterTransition = { fadeIn(animationSpec = tween(300)) },
+            exitTransition = { fadeOut(animationSpec = tween(300)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(300)) },
+            popExitTransition = { fadeOut(animationSpec = tween(300)) }
+        ) {
+            RecipesScreen(
+                viewModel = hiltViewModel(),
+                onNavigateToDetails = { recipeId ->
+                    navController.navigate(Screen.RecipeDetails.createRoute(recipeId))
+                },
+            )
+        }
+
+        composable(
+            route = Screen.RecipeDetails.route,
+            enterTransition = { fadeIn(animationSpec = tween(300)) },
+            exitTransition = { fadeOut(animationSpec = tween(300)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(300)) },
+            popExitTransition = { fadeOut(animationSpec = tween(300)) },
+            arguments = listOf(
+                navArgument("recipeId") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val recipeId = backStackEntry.arguments?.getString("recipeId").orEmpty()
+            RecipeDetailsScreen(
+                recipeId = recipeId,
+                viewModel = hiltViewModel(),
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }

@@ -28,6 +28,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
 import com.example.mobile_programming.presentation.theme.TextPrimary
@@ -120,4 +121,28 @@ fun FavoriteRestaurantCard(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun FavoriteRestaurantCardPreview() {
+    val mockRestaurant = Restaurant(
+        id = "1",
+        name = "Fantazija Restoran",
+        cuisine = "Italijanska",
+        categoryId = "cat_1",
+        description = "Najbolja pasta u gradu.",
+        imageResId = R.drawable.restaurant_placeholder_2,
+        location = "Sarajevo",
+        address = "Bulevar Mehmeda Spahe 12",
+        avgPrice = 25.0,
+        rating = 4.8,
+        isFavorite = true
+    )
+
+    FavoriteRestaurantCard(
+        restaurant = mockRestaurant,
+        onUnfavoriteClick = {},
+        onDetailsClick = {}
+    )
 }

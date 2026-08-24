@@ -27,7 +27,7 @@ import com.example.mobile_programming.presentation.theme.WarmCream
 import com.example.mobile_programming.presentation.ui.screens.drink_details.components.DetailBadge
 import com.example.mobile_programming.presentation.ui.components.TopBar
 import com.example.mobile_programming.presentation.ui.components.VerticalSpace
-import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
+import com.example.mobile_programming.presentation.ui.screens.drink_details.util.DrinkData
 import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.view_model.drink_details.DrinkDetailsViewModel
@@ -52,7 +52,7 @@ fun DrinkDetailsScreen(
             onRetry = { viewModel.resetUiState() })
 
         is DrinkDetailsUiState.Success -> DrinkDetailsScreen(
-            drink = state.drink,
+            drinkData = state.drinkData,
             onBackClick = onBackClick
         )
 
@@ -62,10 +62,10 @@ fun DrinkDetailsScreen(
 
 @Composable
 private fun DrinkDetailsScreen(
-    drink: Drink?,
+    drinkData: DrinkData?,
     onBackClick: () -> Unit
 ) {
-    if (drink == null) {
+    if (drinkData == null) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Text(text = stringResource(R.string.drink_not_found))
         }
@@ -85,8 +85,8 @@ private fun DrinkDetailsScreen(
                     .padding(dimensionResource(id = R.dimen.padding_16))
             ) {
                 Image(
-                    painter = painterResource(id = drink.imageResId),
-                    contentDescription = drink.name,
+                    painter = painterResource(id = drinkData.imageResId),
+                    contentDescription = drinkData.name,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(dimensionResource(id = R.dimen.height_250))
@@ -100,14 +100,14 @@ private fun DrinkDetailsScreen(
                     verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_4))
                 ) {
                     Text(
-                        text = drink.name,
+                        text = drinkData.name,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary,
                         lineHeight = 28.sp
                     )
                     Text(
-                        text = "${drink.price} BAM",
+                        text = "${drinkData.price} BAM",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = TextPrimary
@@ -116,8 +116,8 @@ private fun DrinkDetailsScreen(
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_12))
                 Row(horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.height_8))) {
-                    DetailBadge(text = if (drink.isAlcoholic) "Alcoholic" else "Non-Alcoholic")
-                    DetailBadge(text = if (drink.isSugarFree) "Sugar Free" else "Contains Sugar")
+                    DetailBadge(text = if (drinkData.isAlcoholic) "Alcoholic" else "Non-Alcoholic")
+                    DetailBadge(text = if (drinkData.isSugarFree) "Sugar Free" else "Contains Sugar")
                 }
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_20))
@@ -136,7 +136,7 @@ private fun DrinkDetailsScreen(
 
                 VerticalSpace(height = dimensionResource(R.dimen.height_8))
                 Text(
-                    text = drink.description,
+                    text = drinkData.description,
                     fontSize = 15.sp,
                     color = TextPrimary.copy(alpha = 0.7f),
                     lineHeight = 22.sp,
@@ -149,10 +149,10 @@ private fun DrinkDetailsScreen(
 @Preview(showBackground = true)
 @Composable
 fun DrinkDetailsPreview() {
-    val sampleDrink = HardcodedData.drinks[0]
+    val sampleDrink = HardcodedData.drinkData[0]
 
     DrinkDetailsScreen(
-        drink = sampleDrink,
+        drinkData = sampleDrink,
         onBackClick = {}
     )
 }

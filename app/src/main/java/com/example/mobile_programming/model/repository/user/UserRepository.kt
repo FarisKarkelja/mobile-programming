@@ -1,14 +1,14 @@
 package com.example.mobile_programming.model.repository.user
 
-import com.example.mobile_programming.model.data.local.entity.UserEntity
+import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
-    suspend fun insertUser(user: UserEntity): Long
-    suspend fun getUserByEmailAndPassword(email: String, password: String): UserEntity?
-    suspend fun getUserByEmail(email: String): UserEntity?
-    suspend fun getUserById(id: Long): UserEntity?
-    fun observeUserById(id: Long): Flow<UserEntity?>
-    suspend fun updateUser(user: UserEntity)
-    suspend fun deleteUser(user: UserEntity)
+    suspend fun insertUser(user: User): Long
+    suspend fun getUserByEmailAndPassword(email: String, password: String): User?
+    suspend fun getUserByEmail(email: String): User?
+    suspend fun getUserById(id: Long): User?
+    fun observeUserById(id: Long): Flow<User?>
+    suspend fun updateUser(user: User)
+    suspend fun deleteUser(user: User)
 }

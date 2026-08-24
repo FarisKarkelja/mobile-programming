@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -22,6 +23,7 @@ import com.example.mobile_programming.presentation.ui.components.*
 import com.example.mobile_programming.presentation.ui.screens.error.ErrorScreen
 import com.example.mobile_programming.presentation.ui.screens.loading.LoadingScreen
 import com.example.mobile_programming.presentation.util.AuthValidators
+import com.example.mobile_programming.presentation.view_model.auth.login.LoginViewModel
 import com.example.mobile_programming.presentation.view_model.auth.registration.RegistrationNavigationEvent
 import com.example.mobile_programming.presentation.view_model.auth.registration.RegistrationUiState
 import com.example.mobile_programming.presentation.view_model.auth.registration.RegistrationViewModel
@@ -54,6 +56,8 @@ fun RegistrationScreen(
         password,
         confirmPassword
     )
+
+    val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         viewModel.navigationEvent.collect { event ->
@@ -92,6 +96,7 @@ fun RegistrationScreen(
                 confirmPasswordVisible = !confirmPasswordVisible
             },
             onRegisterClick = { viewModel.onRegisterClick(fullName, email, password) },
+            onGoogleClick = { viewModel.onGoogleRegisterClick(context) },
             onLoginClick = onNavigateToLogin,
             modifier = Modifier
         )
@@ -118,6 +123,7 @@ private fun RegistrationScreen(
     onPasswordVisibilityChange: () -> Unit,
     onConfirmPasswordVisibilityChange: () -> Unit,
     onRegisterClick: () -> Unit,
+    onGoogleClick: () -> Unit,
     onLoginClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -196,6 +202,16 @@ private fun RegistrationScreen(
         )
 
         VerticalSpace(dimensionResource(id = R.dimen.height_24))
+        AuthDivider()
+
+        VerticalSpace(dimensionResource(id = R.dimen.height_24))
+        SocialSignInButton(
+            text = stringResource(R.string.google_sign_up),
+            onClick = onGoogleClick,
+            icon = R.drawable.google
+        )
+
+        VerticalSpace(dimensionResource(id = R.dimen.height_24))
         AuthFooterText(
             normalText = stringResource(R.string.login_redirect),
             actionText = stringResource(R.string.login_action),
@@ -226,6 +242,7 @@ fun RegistrationScreenPreview() {
         onPasswordChange = {},
         onConfirmPasswordChange = {},
         onLoginClick = {},
+        onGoogleClick = {},
         onRegisterClick = {},
     )
 }

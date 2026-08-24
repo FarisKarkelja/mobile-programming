@@ -1,12 +1,25 @@
 package com.example.mobile_programming.model.repository.mappers
 
-import com.example.mobile_programming.model.data.local.entity.DrinkEntity
-import com.example.mobile_programming.presentation.ui.screens.drink_details.util.Drink
+import com.example.mobile_programming.model.datasource.local.entity.DrinkEntity
+import com.example.mobile_programming.presentation.ui.screens.drink_details.util.DrinkData
 
-fun DrinkEntity.toDomain(): Drink {
-    return Drink(
+fun DrinkEntity.toDomain(): DrinkData {
+    return DrinkData(
         id = this.id.toString(),
         restaurantId = this.restaurantId.toString(),
+        name = this.name,
+        imageResId = this.imageResId,
+        price = this.price,
+        description = this.description,
+        isAlcoholic = this.isAlcoholic,
+        isSugarFree = this.isSugarFree
+    )
+}
+
+fun DrinkData.toEntity(): DrinkEntity {
+    return DrinkEntity(
+        id = this.id.toLongOrNull() ?: 0L,
+        restaurantId = this.restaurantId.toLongOrNull() ?: 0L,
         name = this.name,
         imageResId = this.imageResId,
         price = this.price,

@@ -1,7 +1,7 @@
 package com.example.mobile_programming.model.repository.mappers
 
-import com.example.mobile_programming.model.data.local.entity.RestaurantEntity
-import com.example.mobile_programming.model.data.local.util.RestaurantWithFavorite
+import com.example.mobile_programming.model.datasource.local.entity.RestaurantEntity
+import com.example.mobile_programming.model.datasource.local.util.RestaurantWithFavorite
 import com.example.mobile_programming.presentation.ui.screens.restaurants.util.Restaurant
 
 fun RestaurantEntity.toDomain(): Restaurant {
@@ -33,5 +33,20 @@ fun RestaurantWithFavorite.toDomain(): Restaurant {
         avgPrice = this.restaurant.avgPrice,
         rating = this.restaurant.rating,
         isFavorite = this.isFavorite
+    )
+}
+
+fun Restaurant.toEntity(): RestaurantEntity {
+    return RestaurantEntity(
+        id = this.id.toLongOrNull() ?: 0L,
+        name = this.name,
+        cuisine = this.cuisine,
+        categoryId = this.categoryId.toLongOrNull() ?: 0L,
+        description = this.description,
+        imageResId = this.imageResId,
+        location = this.location,
+        address = this.address,
+        avgPrice = this.avgPrice,
+        rating = this.rating
     )
 }

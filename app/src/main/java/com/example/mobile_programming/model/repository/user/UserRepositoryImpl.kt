@@ -1,41 +1,47 @@
 package com.example.mobile_programming.model.repository.user
 
-import com.example.mobile_programming.model.data.local.dao.UserDao
-import com.example.mobile_programming.model.data.local.entity.UserEntity
+import com.example.mobile_programming.model.datasource.local.dao.UserDao
+import com.example.mobile_programming.model.repository.mappers.toDomain
+import com.example.mobile_programming.model.repository.mappers.toEntity
+import com.example.mobile_programming.presentation.ui.screens.profile.util.User
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao
 ) : UserRepository {
-    override suspend fun insertUser(user: UserEntity): Long {
-        return userDao.insertUser(user)
+
+    override suspend fun insertUser(user: User): Long {
+        return userDao.insertUser(user.toEntity())
     }
 
     override suspend fun getUserByEmailAndPassword(
         email: String,
         password: String
-    ): UserEntity? {
-        return userDao.getUserByEmailAndPassword(email, password)
+    ): User? {
+        return userDao.getUserByEmailAndPassword(email, password)?.toDomain()
     }
 
-    override suspend fun getUserByEmail(email: String): UserEntity? {
-        return userDao.getUserByEmail(email)
+    override suspend fun getUserByEmail(email: String): User? {
+        return userDao.getUserByEmail(email)?.toDomain()
     }
 
-    override suspend fun getUserById(id: Long): UserEntity? {
-        return userDao.getUserById(id)
+    override suspend fun getUserById(id: Long): User? {
+        return userDao.getUserById(id)?.toDomain()
     }
 
-    override fun observeUserById(id: Long): Flow<UserEntity?> {
-        return userDao.observeUserById(id)
+    override fun observeUserById(id: Long): Flow<User?> {
+        return userDao.observeUserById(id).map { userEntity ->
+            userEntity?.toDomain()
+        }
     }
 
-    override suspend fun updateUser(user: UserEntity) {
-        userDao.updateUser(user)
+    override suspend fun updateUser(user: User) {
+        userDao.updateUser(user.toEntity())
     }
 
-    override suspend fun deleteUser(user: UserEntity) {
-        userDao.deleteUser(user)
+    override suspend fun deleteUser(user: User) {
+        userDao.deleteUser(user.toEntity())
     }
 }

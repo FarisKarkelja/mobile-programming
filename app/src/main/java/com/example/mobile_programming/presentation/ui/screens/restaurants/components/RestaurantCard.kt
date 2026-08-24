@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
@@ -132,4 +133,52 @@ fun RestaurantCard(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RestaurantCardNotFavoritePreview() {
+    val sampleRestaurant = Restaurant(
+        id = "r_10",
+        name = "Taco & Tortilla Cantina",
+        cuisine = "Mexican",
+        categoryId = "cat_1",
+        description = "Authentic Mexican street food, famous for handmade corn and flour tortillas.",
+        imageResId = R.drawable.restaurant_placeholder_2,
+        location = "Los Angeles",
+        address = "123 Sunset Blvd, LA",
+        avgPrice = 15.50,
+        rating = 4.7,
+        isFavorite = false
+    )
+
+    RestaurantCard(
+        restaurant = sampleRestaurant,
+        onFavoriteClick = {},
+        onDetailsClick = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RestaurantCardFavoritePreview() {
+    val sampleRestaurant = Restaurant(
+        id = "r_10",
+        name = "Taco & Tortilla Cantina",
+        cuisine = "Mexican",
+        categoryId = "cat_1",
+        description = "Authentic Mexican street food, famous for handmade corn and flour tortillas.",
+        imageResId = R.drawable.restaurant_placeholder_3,
+        location = "Los Angeles",
+        address = "123 Sunset Blvd, LA",
+        avgPrice = 15.50,
+        rating = 4.7,
+        isFavorite = true
+    )
+
+    RestaurantCard(
+        restaurant = sampleRestaurant,
+        onFavoriteClick = {},
+        onDetailsClick = {}
+    )
 }

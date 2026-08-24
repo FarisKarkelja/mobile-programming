@@ -1,11 +1,11 @@
 package com.example.mobile_programming.model.repository.food_dish
 
-import com.example.mobile_programming.model.data.local.entity.FoodDishEntity
+import com.example.mobile_programming.presentation.ui.screens.food_dish_details.util.FoodDishData
 
 interface FoodDishRepository {
-    suspend fun getTopDishesByRestaurant(restaurantId: Long): List<FoodDishEntity>
-    suspend fun getDishById(id: Long): FoodDishEntity?
-    suspend fun insertDish(dish: FoodDishEntity)
-    suspend fun updateDish(dish: FoodDishEntity)
-    suspend fun deleteDish(dish: FoodDishEntity)
+    suspend fun getTopDishesByRestaurant(restaurantId: Long): List<FoodDishData>
+    suspend fun getDishById(id: Long): FoodDishData?
+    suspend fun insertDish(dish: FoodDishData)
+    suspend fun updateDish(dish: FoodDishData)
+    suspend fun deleteDish(dish: FoodDishData)
 }

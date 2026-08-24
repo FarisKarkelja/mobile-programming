@@ -2,9 +2,9 @@ package com.example.mobile_programming.model.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.mobile_programming.model.data.local.dao.*
-import com.example.mobile_programming.model.data.local.db.GricDatabase
-import com.example.mobile_programming.model.data.local.util.DatabaseSeed
+import com.example.mobile_programming.model.datasource.local.dao.*
+import com.example.mobile_programming.model.datasource.local.db.GricDatabase
+import com.example.mobile_programming.model.datasource.local.util.DatabaseSeed
 import com.example.mobile_programming.model.repository.category.CategoryRepository
 import com.example.mobile_programming.model.repository.category.CategoryRepositoryImpl
 import com.example.mobile_programming.model.repository.drink.DrinkRepository

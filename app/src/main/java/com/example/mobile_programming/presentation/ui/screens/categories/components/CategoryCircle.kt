@@ -19,6 +19,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.mobile_programming.R
 import com.example.mobile_programming.presentation.theme.SunsetTangerine
@@ -62,4 +63,14 @@ fun CategoryCircle(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CategoryCirclePreview() {
+    CategoryCircle(
+        title = "BBQ",
+        iconResource = R.drawable.category_3,
+        onClick = {}
+    )
 }

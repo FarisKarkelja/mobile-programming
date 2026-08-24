@@ -3,7 +3,6 @@ package com.example.mobile_programming.presentation.view_model.favorite_restaura
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_programming.model.repository.category.CategoryRepository
-import com.example.mobile_programming.model.repository.mappers.toDomain
 import com.example.mobile_programming.model.repository.user.SessionRepository
 import com.example.mobile_programming.model.repository.user_restaurant.UserRestaurantRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
 class FavoriteRestaurantsViewModel @Inject constructor(
@@ -38,17 +38,16 @@ class FavoriteRestaurantsViewModel @Inject constructor(
     private fun loadFavorites() {
         viewModelScope.launch {
             _uiState.value = FavoriteRestaurantsUiState.Loading
-            val categories = categoryRepository.getAllCategories().first().map { it.toDomain() }
+            val categories = categoryRepository.getAllCategories().first()
             sessionRepository.observeLoggedInUserId().collect { userId ->
                 if (userId != null) {
                     userRestaurantRepository.getFavoriteRestaurantsByUserId(userId = userId)
                         .catch { e ->
                             _uiState.value = FavoriteRestaurantsUiState.Error(
-                                e.message ?: "Failed to load favorites"
+                                e.message ?: "Failed to load favorite restaurants."
                             )
                         }
-                        .collect { restaurantsWithFavorite ->
-                            val restaurants = restaurantsWithFavorite.map { it.toDomain() }
+                        .collect { restaurants ->
                             _uiState.value =
                                 FavoriteRestaurantsUiState.Success(restaurants, categories)
                         }
@@ -59,12 +58,21 @@ class FavoriteRestaurantsViewModel @Inject constructor(
 
     fun unfavoriteRestaurant(restaurantId: String) {
         viewModelScope.launch {
-            val userId = sessionRepository.observeLoggedInUserId().first()
-            if (userId != null) {
-                userRestaurantRepository.deleteFavoriteRestaurant(
-                    userId = userId,
-                    restaurantId = restaurantId.toLong()
-                )
+            try {
+                val userId = sessionRepository.observeLoggedInUserId().first()
+                if (userId != null) {
+                    userRestaurantRepository.deleteFavoriteRestaurant(
+                        userId = userId,
+                        restaurantId = restaurantId.toLong()
+                    )
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                _uiState.value =
+                    FavoriteRestaurantsUiState.Error(
+                        e.message ?: "Failed to remove favorite restaurant."
+                    )
             }
         }
     }

@@ -37,6 +37,7 @@
     <string name="login_subtitle">Log in to your account to continue.</string>
     <string name="login_button">Login</string>
     <string name="google_sign_in">Sign in with Google</string>
+    <string name="google_sign_up">Sign up with Google</string>
     <string name="apple_sign_in">Sign in with Apple</string>
     <string name="register_redirect">Don\'t have an account?</string>
     <string name="register_action">Register</string>
@@ -70,6 +71,7 @@
     <string name="favorites">Favorites</string>
     <string name="profile">Profile</string>
     <string name="explore">Explore</string>
+    <string name="recipes">Recipes</string>
     <string name="restaurant_details">Restaurant</string>
     <string name="food_dish">Food Dish</string>
     <string name="drink">Drink</string>

@@ -3,7 +3,6 @@ package com.example.mobile_programming.presentation.view_model.food_dish_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_programming.model.repository.food_dish.FoodDishRepository
-import com.example.mobile_programming.model.repository.mappers.toDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,18 +30,17 @@ class FoodDishDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = FoodDishDetailsUiState.Loading
             try {
-                val dishEntity = foodDishRepository.getDishById(dishId.toLong())
-
-                if (dishEntity == null) {
-                    _uiState.value = FoodDishDetailsUiState.Error("Food dish not found")
+                val dishData = foodDishRepository.getDishById(dishId.toLong())
+                if (dishData == null) {
+                    _uiState.value = FoodDishDetailsUiState.Error("Food dish not found.")
                 } else {
-                    _uiState.value = FoodDishDetailsUiState.Success(dishEntity.toDomain())
+                    _uiState.value = FoodDishDetailsUiState.Success(dishData)
                 }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
                 _uiState.value =
-                    FoodDishDetailsUiState.Error(e.message ?: "Failed to load dish details")
+                    FoodDishDetailsUiState.Error(e.message ?: "Failed to load food dish details.")
             }
         }
     }
