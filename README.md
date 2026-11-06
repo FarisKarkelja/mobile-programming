@@ -25,7 +25,7 @@ Gric is a native Android application built for the Introduction to Mobile Progra
 ## Features
 1. **Authentication:**
    - Email/password login and registration
-   - Google Sign-In and Apple Sign-In support via Firebase Auth
+   - Google Sign-In support via Firebase Auth
 2. **Restaurant Discovery:**
    - Browse restaurants with filtering and search
    - View detailed restaurant pages with ratings, cuisine type, and location
@@ -47,7 +47,7 @@ Gric is a native Android application built for the Introduction to Mobile Progra
 ## Installation
 1. Clone the repository:
 ```bash
-   git clone https://github.com/FarisKarkelja/mobile-programming-labs.git
+   git clone https://github.com/FarisKarkelja/mobile-programming.git
 ```
 2. Open the project in **Android Studio**.
 3. Let Gradle sync and download all dependencies.
@@ -55,7 +55,7 @@ Gric is a native Android application built for the Introduction to Mobile Progra
 
 ## Usage
 1. Build and run the app on an emulator or physical device (min SDK 24, target SDK 36).
-2. Register a new account or sign in with Google/Apple.
+2. Register a new account or sign in with Google.
 3. Browse restaurants, view menus, and add items to your favorites.
 4. Explore the Recipes tab for additional content outside restaurant menus.
 5. Manage your account from the Profile tab.
