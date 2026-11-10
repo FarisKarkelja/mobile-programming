@@ -43,10 +43,11 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace
 
-      - name: Print SHA-1 (add this in Firebase if Google Sign-In fails)
-        run: keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android | grep -E "SHA1|SHA256"
-
       - uses: actions/upload-artifact@v4
         with:
           name: gric-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Print SHA-1 (add this in Firebase if Google Sign-In fails)
+        continue-on-error: true
+        run: ./gradlew signingReport | grep -E "SHA1|SHA-256|Variant: debug" | head -6
