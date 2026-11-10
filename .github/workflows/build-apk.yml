@@ -50,4 +50,5 @@ jobs:
 
       - name: Print SHA-1 (add this in Firebase if Google Sign-In fails)
         continue-on-error: true
-        run: ./gradlew signingReport | grep -E "SHA1|SHA-256|Variant: debug" | head -6
+        run: |
+          ./gradlew signingReport | grep -E "SHA1|SHA-256|Variant: debug" | head -6
